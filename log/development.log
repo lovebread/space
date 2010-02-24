@@ -1,0 +1,2002 @@
+# Logfile created on Wed Feb 24 16:52:58 +0800 2010  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::VideosController#accept (for 127.0.0.1 at 2010-02-24 17:00:01) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (5.7ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (6.9ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.4ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mVideo Load (0.5ms)[0m   [0mSELECT * FROM `videos` WHERE (`videos`.`verified` = 1) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/videos/accept
+  [4;36;1mVideo Columns (6.3ms)[0m   [0;1mSHOW FIELDS FROM `videos`[0m
+Rendered admin/videos/_videos (15.9ms)
+Completed in 132ms (View: 51, DB: 22) | 200 OK [http://0.0.0.0/admin/videos/accept?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PollsController#show (for 127.0.0.1 at 2010-02-24 17:00:11) [GET]
+  Parameters: {"id"=>"3"}
+  [4;35;1mUser Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPoll Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `polls`[0m
+  [4;36;1mPoll Load (0.9ms)[0m   [0;1mSELECT * FROM `polls` WHERE (`polls`.`id` = 3) [0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mVote Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `votes`[0m
+  [4;35;1mVote Load (0.9ms)[0m   [0mSELECT * FROM `votes` WHERE (`votes`.`voter_id` = 1) AND (`votes`.poll_id = 3) LIMIT 1[0m
+  [4;36;1mFeedDelivery Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `feed_deliveries`[0m
+  [4;35;1mFeedItem Load (2.5ms)[0m   [0mSELECT `feed_items`.* FROM `feed_items` INNER JOIN `feed_deliveries` ON `feed_items`.id = `feed_deliveries`.feed_item_id WHERE ((`feed_deliveries`.recipient_type = 'User') AND (`feed_deliveries`.recipient_id = 1) AND ((`feed_deliveries`.`item_type` = 'Vote'))) ORDER BY created_at DESC[0m
+Rendering template within layouts/app
+Rendering user/polls/show
+  [4;36;1mGame Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mGame Load (2.7ms)[0m   [0mSELECT * FROM `games` WHERE (`games`.`id` = 318) [0m
+  [4;36;1mPollAnswer Load (0.5ms)[0m   [0;1mSELECT * FROM `poll_answers` WHERE (`poll_answers`.poll_id = 3) [0m
+  [4;35;1mPollAnswer Columns (5.3ms)[0m   [0mSHOW FIELDS FROM `poll_answers`[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM `polls` [0m
+  [4;35;1mPoll Load (1.0ms)[0m   [0mSELECT * FROM `polls` [0m
+  [4;36;1mComment Load (0.6ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 3 AND `comments`.commentable_type = 'Poll') ORDER BY created_at ASC[0m
+  [4;35;1mProfile Load (1.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.8ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (18.9ms)
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` IS NULL) LIMIT 1[0m
+  [4;36;1mNotification Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 415ms (View: 134, DB: 29) | 200 OK [http://0.0.0.0/polls/3]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::UsersController#index (for 127.0.0.1 at 2010-02-24 17:00:21) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.2ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`activation_code` IS NULL) LIMIT 0, 20[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM `users` WHERE (`users`.`activation_code` IS NULL) [0m
+Rendering template within layouts/admin
+Rendering admin/users/index
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM `users` [0m
+  [4;36;1mProfile Load (2.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mProfile Load (0.4ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 2) LIMIT 1[0m
+  [4;35;1mProfile Load (3.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 3) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 4) LIMIT 1[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 5) LIMIT 1[0m
+  [4;36;1mProfile Load (4.7ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 6) LIMIT 1[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 7) LIMIT 1[0m
+  [4;36;1mProfile Load (1.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 8) LIMIT 1[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 9) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 10) LIMIT 1[0m
+  [4;35;1mProfile Load (5.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 11) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 12) LIMIT 1[0m
+  [4;35;1mProfile Load (5.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 13) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 14) LIMIT 1[0m
+  [4;35;1mProfile Load (1.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 15) LIMIT 1[0m
+  [4;36;1mProfile Load (2.3ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 16) LIMIT 1[0m
+  [4;35;1mProfile Load (0.9ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 17) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 18) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 19) LIMIT 1[0m
+  [4;36;1mProfile Load (1.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 20) LIMIT 1[0m
+Rendered admin/users/_users (296.2ms)
+Completed in 381ms (View: 288, DB: 39) | 200 OK [http://0.0.0.0/admin/users?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::ProfilesController#show (for 127.0.0.1 at 2010-02-24 17:00:41) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.5ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 1) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mBlog Load (0.7ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC[0m
+  [4;35;1mAlbum Load (0.9ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1 AND (uploaded_at IS NOT NULL AND (type = 'AvatarAlbum' OR type = 'PersonalAlbum'))) ORDER BY uploaded_at DESC[0m
+  [4;36;1mFeedDelivery Load (1.7ms)[0m   [0;1mSELECT * FROM `feed_deliveries` WHERE (`feed_deliveries`.recipient_id = 1 AND `feed_deliveries`.recipient_type = 'Profile') ORDER BY created_at DESC LIMIT 5[0m
+Rendering template within layouts/app2
+Rendering user/profiles/show
+Rendered user/profiles/_operations (2.7ms)
+
+ActionView::TemplateError (undefined method `games_count' for "#<User:0xb5abc72c>":User) on line #5 of app/views/user/profiles/_menu.html.erb:
+2: <ul>
+3: 	<li><span class='icon-data'></span><%= link_to "#{subject}的档案", edit_profile_url(@profile) %></li>
+4:   <li><span class='icon-state'></span><%= link_to "#{subject}的状态", statuses_url(:id => @user.id) %><span>(<%= @user.statuses_count %>)</span></li>
+5:   <li><span class='icon-game'></span><%= link_to "#{subject}的游戏", games_url(:id => @user.id) %><span>(<%= @user.games_count %>)</span></li>
+6:   <li><span class='icon-photo'></span><%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %><span>(<%= @user.albums_count%>)</span></li>
+7:   <li><span class='icon-blog'></span><%= link_to "#{subject}的博客", blogs_url(:id => @user.id) %><span>(<%= @user.blogs_count%>)</span></li>
+8:   <li><span class='icon-video'></span><%= link_to "#{subject}的视频", videos_url(:id => @user.id) %><span>(<%= @user.videos_count%>)</span></li>
+
+    app/views/user/profiles/_menu.html.erb:5
+    app/views/user/profiles/show.html.erb:19
+    app/views/user/profiles/show.html.erb:7
+    -e:2:in `load'
+    -e:2
+
+Rendered rescues/_trace (73.0ms)
+Rendered rescues/_request_and_response (2.0ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-02-24 17:01:03) [GET]
+Rendering sessions/new
+Completed in 181ms (View: 161, DB: 0) | 200 OK [http://0.0.0.0/login]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-02-24 17:01:18) [POST]
+  Parameters: {"remember_me"=>"1", "commit"=>"", "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "password"=>"111111", "email"=>"gaoxh04@gmail.com"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'gaoxh04@gmail.com') LIMIT 1[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM `users` WHERE (email = 'gaoxh04@gmail.com' and activated_at IS NOT NULL) LIMIT 1[0m
+  [4;36;1mSQL (16.7ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mUser Update (0.6ms)[0m   [0mUPDATE `users` SET `updated_at` = '2010-02-24 09:01:18', `remember_token_expires_at` = '2010-03-10 09:01:18', `remember_token` = '94fac64123507f8f127ee8fa39a7deace1c48b3c' WHERE `id` = 1[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Redirected to http://0.0.0.0:3002/profiles/1
+Completed in 167ms (DB: 24) | 302 Found [http://0.0.0.0/sessions]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::ProfilesController#show (for 127.0.0.1 at 2010-02-24 17:01:25) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (11.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (6.2ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 1) [0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mBlog Load (11.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC[0m
+  [4;35;1mAlbum Load (0.2ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1 AND (uploaded_at IS NOT NULL AND (type = 'AvatarAlbum' OR type = 'PersonalAlbum'))) ORDER BY uploaded_at DESC[0m
+  [4;36;1mFeedDelivery Load (0.1ms)[0m   [0;1mSELECT * FROM `feed_deliveries` WHERE (`feed_deliveries`.recipient_id = 1 AND `feed_deliveries`.recipient_type = 'Profile') ORDER BY created_at DESC LIMIT 5[0m
+Rendering template within layouts/app2
+Rendering user/profiles/show
+Rendered user/profiles/_operations (0.8ms)
+
+ActionView::TemplateError (undefined method `games_count' for "#<User:0xb5a96158>":User) on line #5 of app/views/user/profiles/_menu.html.erb:
+2: <ul>
+3: 	<li><span class='icon-data'></span><%= link_to "#{subject}的档案", edit_profile_url(@profile) %></li>
+4:   <li><span class='icon-state'></span><%= link_to "#{subject}的状态", statuses_url(:id => @user.id) %><span>(<%= @user.statuses_count %>)</span></li>
+5:   <li><span class='icon-game'></span><%= link_to "#{subject}的游戏", games_url(:id => @user.id) %><span>(<%= @user.games_count %>)</span></li>
+6:   <li><span class='icon-photo'></span><%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %><span>(<%= @user.albums_count%>)</span></li>
+7:   <li><span class='icon-blog'></span><%= link_to "#{subject}的博客", blogs_url(:id => @user.id) %><span>(<%= @user.blogs_count%>)</span></li>
+8:   <li><span class='icon-video'></span><%= link_to "#{subject}的视频", videos_url(:id => @user.id) %><span>(<%= @user.videos_count%>)</span></li>
+
+    app/views/user/profiles/_menu.html.erb:5
+    app/views/user/profiles/show.html.erb:19
+    app/views/user/profiles/show.html.erb:7
+    -e:2:in `load'
+    -e:2
+
+Rendered rescues/_trace (147.1ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::ProfilesController#show (for 127.0.0.1 at 2010-02-24 17:03:56) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (2.9ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 1) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mBlog Load (0.2ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC[0m
+  [4;35;1mAlbum Load (0.1ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1 AND (uploaded_at IS NOT NULL AND (type = 'AvatarAlbum' OR type = 'PersonalAlbum'))) ORDER BY uploaded_at DESC[0m
+  [4;36;1mFeedDelivery Load (0.2ms)[0m   [0;1mSELECT * FROM `feed_deliveries` WHERE (`feed_deliveries`.recipient_id = 1 AND `feed_deliveries`.recipient_type = 'Profile') ORDER BY created_at DESC LIMIT 5[0m
+Rendering template within layouts/app2
+Rendering user/profiles/show
+Rendered user/profiles/_operations (0.9ms)
+
+ActionView::TemplateError (undefined method `sharings_count' for "#<User:0xb5937d70>":User) on line #9 of app/views/user/profiles/_menu.html.erb:
+6:   <li><span class='icon-photo'></span><%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %><span>(<%= @user.albums_count%>)</span></li>
+7:   <li><span class='icon-blog'></span><%= link_to "#{subject}的博客", blogs_url(:id => @user.id) %><span>(<%= @user.blogs_count%>)</span></li>
+8:   <li><span class='icon-video'></span><%= link_to "#{subject}的视频", videos_url(:id => @user.id) %><span>(<%= @user.videos_count%>)</span></li>
+9:   <li><span class='icon-share'></span><%= link_to "#{subject}的分享", sharings_url(:id => @user.id) %><span>(<%= @user.sharings_count%>)</span></li>
+10:   <li><span class='icon-vote'></span><%= link_to "#{subject}的投票", polls_url(:id => @user.id) %><span>(<%= @user.polls_count%>)</span></li>
+11:   <li><span class='icon-act'></span><%= link_to "#{subject}的活动", events_url(:id => @user.id) %><span>(<%= @user.events_count%>)</span></li>
+12:   <li><span class='icon-cons'></span><%= link_to "#{subject}的工会", guilds_url(:id => @user.id) %><span>(<%= @user.guilds_count%>)</span></li>
+
+    app/views/user/profiles/_menu.html.erb:9
+    app/views/user/profiles/show.html.erb:19
+    app/views/user/profiles/show.html.erb:7
+    -e:2:in `load'
+    -e:2
+
+Rendered rescues/_trace (73.5ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (3.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::ProfilesController#show (for 127.0.0.1 at 2010-02-24 17:05:11) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 1) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mBlog Load (0.2ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC[0m
+  [4;35;1mAlbum Load (0.2ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1 AND (uploaded_at IS NOT NULL AND (type = 'AvatarAlbum' OR type = 'PersonalAlbum'))) ORDER BY uploaded_at DESC[0m
+  [4;36;1mFeedDelivery Load (0.2ms)[0m   [0;1mSELECT * FROM `feed_deliveries` WHERE (`feed_deliveries`.recipient_id = 1 AND `feed_deliveries`.recipient_type = 'Profile') ORDER BY created_at DESC LIMIT 5[0m
+Rendering template within layouts/app2
+Rendering user/profiles/show
+Rendered user/profiles/_operations (0.8ms)
+Rendered user/profiles/_menu (3.7ms)
+  [4;35;1mGameCharacter Load (2.4ms)[0m   [0mSELECT * FROM `game_characters` WHERE (`game_characters`.user_id = 1) [0m
+  [4;36;1mGameCharacter Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `game_characters`[0m
+  [4;35;1mGame Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mGame Load (1.7ms)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 318) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `games` WHERE (`games`.`id` = 318) [0m
+  [4;36;1mGame Load (0.6ms)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 319) [0m
+  [4;35;1mTagging Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `taggings`[0m
+  [4;36;1mTag Load (2.8ms)[0m   [0;1mSELECT DISTINCT `tags`.* FROM `tags` INNER JOIN `taggings` ON `tags`.id = `taggings`.tag_id WHERE ((`taggings`.taggable_id = 1) AND (`taggings`.taggable_type = 'Profile')) [0m
+Rendered user/profiles/tags/_tag_cloud (9.2ms)
+  [4;35;1mViewing Load (0.5ms)[0m   [0mSELECT * FROM `viewings` WHERE (`viewings`.viewable_id = 1 AND `viewings`.viewable_type = 'Profile') ORDER BY viewed_at DESC[0m
+  [4;36;1mViewing Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `viewings`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mBlog Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+  [4;36;1mFeedDelivery Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `feed_deliveries`[0m
+  [4;35;1mFeedItem Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `feed_items`[0m
+  [4;36;1mFeedItem Load (0.4ms)[0m   [0;1mSELECT * FROM `feed_items` WHERE (`feed_items`.`id` = 57) [0m
+  [4;35;1mPoll Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `polls`[0m
+  [4;36;1mPoll Load (0.2ms)[0m   [0;1mSELECT * FROM `polls` WHERE (`polls`.`id` = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mPollAnswer Load (0.1ms)[0m   [0mSELECT * FROM `poll_answers` WHERE (`poll_answers`.poll_id = 3) [0m
+  [4;36;1mPollAnswer Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `poll_answers`[0m
+  [4;35;1mComment Load (0.2ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 3 AND `comments`.commentable_type = 'Poll') ORDER BY created_at ASC[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+Rendered user/comments/_folded_comment_box (13.5ms)
+Rendered user/profiles/_poll_feed_delivery (45.3ms)
+  [4;35;1mFeedItem Load (0.4ms)[0m   [0mSELECT * FROM `feed_items` WHERE (`feed_items`.`id` = 55) [0m
+  [4;36;1mVote Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `votes`[0m
+  [4;35;1mVote Load (0.4ms)[0m   [0mSELECT * FROM `votes` WHERE (`votes`.`id` = 2) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mPoll Load (2.0ms)[0m   [0;1mSELECT * FROM `polls` WHERE (`polls`.`id` = 2) [0m
+
+ActionView::TemplateError (You have a nil object when you didn't expect it!
+The error occurred while evaluating nil.name) on line #7 of app/views/user/profiles/_vote_feed_delivery.html.erb:
+4: <div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+5: 	<div class='feed-icon icon-vote'></div>
+6: 	<% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %><% end %> 
+7:   <p><%= profile_link vote.voter %> 参与了投票 <%= poll_link vote.poll, :class => "shine" %></p>
+8: 	<p class="gray"><%= ftime delivery.created_at %></p>
+9: </div>
+10: </div>
+
+    app/helpers/application_helper.rb:153:in `poll_link'
+    app/views/user/profiles/_vote_feed_delivery.html.erb:7
+    app/views/user/profiles/_feed_deliveries.html.erb:3
+    app/views/user/profiles/_feed_deliveries.html.erb:2:in `each'
+    app/views/user/profiles/_feed_deliveries.html.erb:2
+    app/views/user/profiles/_feed_deliveries.html.erb:1
+    app/views/user/profiles/show.html.erb:158
+    -e:2:in `load'
+    -e:2
+
+Rendered rescues/_trace (252.3ms)
+Rendered rescues/_request_and_response (0.6ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::BlogsController#show (for 127.0.0.1 at 2010-02-24 17:06:38) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (3.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.9ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mBlog Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+  [4;36;1mBlog Load (2.8ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 1) [0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendering template within layouts/app
+Rendering user/blogs/show
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT count(*) AS count_all FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) [0m
+  [4;35;1mBlog Load (0.5ms)[0m   [0mSELECT * FROM `blogs` WHERE (poster_id = 1 AND created_at < '2010-02-04 07:48:51' AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC LIMIT 1[0m
+  [4;36;1mBlog Load (0.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (poster_id = 1 AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC LIMIT 1[0m
+  [4;35;1mBlog Load (0.5ms)[0m   [0mSELECT * FROM `blogs` WHERE (poster_id = 1 AND created_at > '2010-02-04 07:48:51' AND (`blogs`.`draft` = 0)) ORDER BY created_at ASC LIMIT 1[0m
+  [4;36;1mComment Load (0.8ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 1 AND `comments`.commentable_type = 'Blog') ORDER BY created_at ASC[0m
+  [4;35;1mProfile Load (1.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (15.8ms)
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` IS NULL) LIMIT 1[0m
+  [4;36;1mNotification Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 1) [0m
+  [4;35;1mViewing Load (0.5ms)[0m   [0mSELECT * FROM `viewings` WHERE (`viewings`.viewable_id = 1 AND `viewings`.viewable_type = 'Blog' AND (`viewings`.`user_id` = 1)) ORDER BY viewed_at DESC LIMIT 1[0m
+  [4;36;1mViewing Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `viewings`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mBEGIN[0m
+  [4;36;1mViewing Update (0.5ms)[0m   [0;1mUPDATE `viewings` SET `viewed_at` = '2010-02-24 17:06:38' WHERE `id` = 2[0m
+  [4;35;1mSQL (1.3ms)[0m   [0mCOMMIT[0m
+Completed in 130ms (View: 53, DB: 20) | 200 OK [http://0.0.0.0/blogs/1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#index (for 127.0.0.1 at 2010-02-24 17:06:49) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.7ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mBlog Load (0.5ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/index
+  [4;36;1mBlog Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (12.5ms)
+Completed in 89ms (View: 37, DB: 6) | 200 OK [http://0.0.0.0/admin/blogs?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#accept (for 127.0.0.1 at 2010-02-24 17:06:55) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.4ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.2ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mBlog Load (0.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 1) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/accept
+  [4;35;1mBlog Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (9.2ms)
+Completed in 75ms (View: 25, DB: 6) | 200 OK [http://0.0.0.0/admin/blogs/accept?id=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#reject (for 127.0.0.1 at 2010-02-24 17:07:01) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (3.7ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.3ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mBlog Load (0.5ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 2) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/reject
+  [4;36;1mBlog Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (12.1ms)
+Completed in 223ms (View: 170, DB: 7) | 200 OK [http://0.0.0.0/admin/blogs/reject?id=1]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::BlogsController#index (for 127.0.0.1 at 2010-02-24 17:07:23) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mBlog Load (0.2ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC[0m
+Rendering template within layouts/app
+Rendering user/blogs/index
+Rendered _app_menu (3.9ms)
+  [4;35;1mGame Load (1.5ms)[0m   [0mSELECT DISTINCT `games`.* FROM `games` INNER JOIN `game_characters` ON `games`.id = `game_characters`.game_id WHERE ((`game_characters`.user_id = 1)) [0m
+  [4;36;1mGame Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mBlog Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+Rendered user/blogs/_blog_item (150.2ms)
+Rendered user/blogs/_blog_item (2.3ms)
+Rendered user/blogs/_blog_item (2.3ms)
+Rendered user/blogs/_blog_item (2.2ms)
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mNotification Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 318ms (View: 277, DB: 10) | 200 OK [http://0.0.0.0/blogs?id=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::BlogsController#show (for 127.0.0.1 at 2010-02-24 17:07:41) [GET]
+  Parameters: {"id"=>"3"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mBlog Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `blogs`[0m
+  [4;35;1mBlog Load (0.4ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendering template within layouts/app
+Rendering user/blogs/show
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) [0m
+  [4;36;1mBlog Load (0.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (poster_id = 1 AND created_at < '2010-02-05 07:46:10' AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC LIMIT 1[0m
+  [4;35;1mBlog Load (1.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (poster_id = 1 AND created_at > '2010-02-05 07:46:10' AND (`blogs`.`draft` = 0)) ORDER BY created_at ASC LIMIT 1[0m
+  [4;36;1mFriendTag Load (0.7ms)[0m   [0;1mSELECT * FROM `friend_tags` WHERE (`friend_tags`.taggable_id = 3 AND `friend_tags`.taggable_type = 'Blog') [0m
+  [4;35;1mFriendTag Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `friend_tags`[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 3) [0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 3) LIMIT 1[0m
+  [4;36;1mProfile Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mProfile Load (0.4ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 2) LIMIT 1[0m
+  [4;35;1mComment Load (0.6ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 3 AND `comments`.commentable_type = 'Blog') ORDER BY created_at ASC[0m
+  [4;36;1mComment Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `comments`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (8.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (6.0ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (5.3ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+Rendered user/comments/_comment_box (35.4ms)
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mViewing Load (0.5ms)[0m   [0;1mSELECT * FROM `viewings` WHERE (`viewings`.viewable_id = 3 AND `viewings`.viewable_type = 'Blog' AND (`viewings`.`user_id` = 1)) ORDER BY viewed_at DESC LIMIT 1[0m
+  [4;35;1mViewing Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `viewings`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mViewing Update (0.4ms)[0m   [0mUPDATE `viewings` SET `viewed_at` = '2010-02-24 17:07:41' WHERE `id` = 4[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mCOMMIT[0m
+Completed in 159ms (View: 86, DB: 19) | 200 OK [http://0.0.0.0/blogs/3]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::BlogsController#edit (for 127.0.0.1 at 2010-02-24 17:07:48) [GET]
+  Parameters: {"id"=>"3"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mBlog Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+  [4;36;1mBlog Load (0.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3 AND (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0))) ORDER BY created_at DESC[0m
+Rendering template within layouts/app
+Rendering user/blogs/edit
+  [4;35;1mGame Load (0.2ms)[0m   [0mSELECT DISTINCT `games`.* FROM `games` INNER JOIN `game_characters` ON `games`.id = `game_characters`.game_id WHERE ((`game_characters`.user_id = 1)) [0m
+  [4;36;1mGame Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mUser Load (2.0ms)[0m   [0mSELECT `users`.* FROM `users` INNER JOIN `friendships` ON `users`.id = `friendships`.friend_id WHERE ((`friendships`.user_id = 1) AND ((`friendships`.`status` = 1))) ORDER BY pinyin ASC[0m
+  [4;36;1mProfile Load (0.6ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 3) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 2) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 4) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 5) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 14) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 15) LIMIT 1[0m
+  [4;35;1mProfile Load (0.4ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 16) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 17) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 18) LIMIT 1[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 19) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 20) LIMIT 1[0m
+  [4;36;1mProfile Load (0.8ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 21) LIMIT 1[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 22) LIMIT 1[0m
+  [4;36;1mProfile Load (0.6ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 23) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 6) LIMIT 1[0m
+  [4;36;1mProfile Load (0.6ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 24) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 25) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 26) LIMIT 1[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 27) LIMIT 1[0m
+  [4;36;1mProfile Load (0.6ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 28) LIMIT 1[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 29) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 30) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 31) LIMIT 1[0m
+  [4;36;1mProfile Load (0.5ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 32) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 33) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 7) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 8) LIMIT 1[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 9) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 10) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 11) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 12) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 13) LIMIT 1[0m
+Rendered user/friend_tags/_friend_table (74.0ms)
+Rendered user/friend_tags/_control_panel (83.1ms)
+  [4;35;1mFriendTag Load (1.3ms)[0m   [0mSELECT * FROM `friend_tags` WHERE (`friend_tags`.taggable_id = 3 AND `friend_tags`.taggable_type = 'Blog') [0m
+  [4;36;1mFriendTag Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `friend_tags`[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT `users`.* FROM `users` INNER JOIN `friend_tags` ON `users`.id = `friend_tags`.tagged_user_id WHERE ((`friend_tags`.taggable_id = 3) AND (`friend_tags`.taggable_type = 'Blog')) [0m
+  [4;36;1mProfile Load (0.3ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 370ms (View: 319, DB: 25) | 200 OK [http://0.0.0.0/blogs/3/edit]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:07:53) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/test.css" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::BlogsController#update (for 127.0.0.1 at 2010-02-24 17:08:03) [PUT]
+  Parameters: {"blog"=>{"title"=>"uuuuuuuuuuuu", "content"=>"sdfsdfsdfsdf<br><br>eqwrweqr<br>", "privilege"=>"1", "game_id"=>"318"}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"3", "value"=>["3", "2"], "friend"=>{"login"=>""}}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mBlog Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+  [4;36;1mBlog Load (0.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3 AND (`blogs`.poster_id = 1)) ORDER BY created_at DESC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mBlog Update (0.7ms)[0m   [0;1mUPDATE `blogs` SET `updated_at` = '2010-02-24 09:08:03', `title` = 'uuuuuuuuuuuu', `verified` = 0 WHERE `id` = 3[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mCOMMIT[0m
+Completed in 43ms (View: 3, DB: 8) | 200 OK [http://0.0.0.0/blogs/3]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::BlogsController#show (for 127.0.0.1 at 2010-02-24 17:08:07) [GET]
+  Parameters: {"id"=>"3"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mBlog Columns (2.8ms)[0m   [0;1mSHOW FIELDS FROM `blogs`[0m
+  [4;35;1mBlog Load (0.6ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendering template within layouts/app
+Rendering user/blogs/show
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM `blogs` WHERE (`blogs`.poster_id = 1 AND (`blogs`.`draft` = 0)) [0m
+  [4;36;1mBlog Load (0.5ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (poster_id = 1 AND created_at < '2010-02-05 07:46:10' AND (`blogs`.`draft` = 0)) ORDER BY created_at DESC LIMIT 1[0m
+  [4;35;1mBlog Load (0.5ms)[0m   [0mSELECT * FROM `blogs` WHERE (poster_id = 1 AND created_at > '2010-02-05 07:46:10' AND (`blogs`.`draft` = 0)) ORDER BY created_at ASC LIMIT 1[0m
+  [4;36;1mFriendTag Load (0.1ms)[0m   [0;1mSELECT * FROM `friend_tags` WHERE (`friend_tags`.taggable_id = 3 AND `friend_tags`.taggable_type = 'Blog') [0m
+  [4;35;1mFriendTag Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `friend_tags`[0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 3) [0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 3) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 2) LIMIT 1[0m
+  [4;35;1mComment Load (0.1ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 3 AND `comments`.commentable_type = 'Blog') ORDER BY created_at ASC[0m
+  [4;36;1mComment Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `comments`[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mProfile Load (1.7ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (7.7ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (5.6ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (5.4ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+Rendered user/comments/_comment_box (28.4ms)
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mNotification Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`id` = 3) [0m
+  [4;36;1mViewing Load (0.5ms)[0m   [0;1mSELECT * FROM `viewings` WHERE (`viewings`.viewable_id = 3 AND `viewings`.viewable_type = 'Blog' AND (`viewings`.`user_id` = 1)) ORDER BY viewed_at DESC LIMIT 1[0m
+  [4;35;1mViewing Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `viewings`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mViewing Update (0.6ms)[0m   [0mUPDATE `viewings` SET `viewed_at` = '2010-02-24 17:08:08' WHERE `id` = 4[0m
+  [4;36;1mSQL (1.7ms)[0m   [0;1mCOMMIT[0m
+Completed in 291ms (View: 227, DB: 19) | 200 OK [http://0.0.0.0/blogs/3]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#index (for 127.0.0.1 at 2010-02-24 17:08:16) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (3.7ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mBlog Load (14.4ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/index
+  [4;35;1mBlog Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (11.4ms)
+Completed in 122ms (View: 29, DB: 21) | 200 OK [http://0.0.0.0/admin/blogs?id=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#reject (for 127.0.0.1 at 2010-02-24 17:08:21) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.8ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mBlog Load (0.6ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 2) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/reject
+  [4;36;1mBlog Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (13.2ms)
+Completed in 78ms (View: 21, DB: 9) | 200 OK [http://0.0.0.0/admin/blogs/reject?id=1]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotoTagsController#index (for 127.0.0.1 at 2010-02-24 17:08:31) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (3.7ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+
+LoadError (Expected /home/kk/Aptana RadRails Workspace/space/app/models/photo_tag.rb to define Photo_tag):
+  app/controllers/admin/photo_tags_controller.rb:4:in `index'
+  -e:2:in `load'
+  -e:2
+
+Rendered rescues/_trace (52.2ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#index (for 127.0.0.1 at 2010-02-24 17:12:42) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.9ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mPersonalAlbum Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (1.0ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+  [4;35;1mAvatarAlbum Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.4ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+Rendering template within layouts/app
+Rendering user/albums/index
+  [4;35;1mPersonalPhoto Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPersonalPhoto Load (0.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 59) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) ORDER BY created_at DESC[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (16.7ms)
+  [4;36;1mAvatar Columns (2.8ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.5ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (13.0ms)
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 314ms (View: 91, DB: 17) | 200 OK [http://0.0.0.0/personal_albums?id=1]
+  [4;35;1mSQL (4.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#reject (for 127.0.0.1 at 2010-02-24 17:13:51) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (2.3ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mBlog Load (0.3ms)[0m   [0;1mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 2) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/reject
+  [4;35;1mBlog Columns (3.6ms)[0m   [0mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (13.6ms)
+
+ActionView::TemplateError (undefined method `admin_photos_url' for #<ActionView::Base:0xb5ad8620>) on line #57 of app/views/layouts/admin.html.erb:
+54:           <ul>
+55:             <li><%= link_to "用户", admin_users_url(:id => current_user.id), :class => 'app-photo' %></li>
+56: 						<li><%= link_to "日志", admin_blogs_url(:id => current_user.id), :class => 'app-log' %></li>
+57: 						<li><%= link_to "照片", admin_photos_url(:id => current_user.id), :class => 'app-log' %></li>
+58: 						<li><%= link_to "视频", admin_videos_url(:id => current_user.id), :class => 'app-log' %></li>
+59: 						<li><%= link_to "状态", admin_statuses_url(:id => current_user.id), :class => 'app-log' %></li>
+60: 						<li><%= link_to "活动", admin_events_url(:id => current_user.id), :class => 'app-log' %></li>
+
+    app/views/layouts/admin.html.erb:57
+    -e:2:in `load'
+    -e:2
+
+Rendered rescues/_trace (64.9ms)
+Rendered rescues/_request_and_response (0.8ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::BlogsController#reject (for 127.0.0.1 at 2010-02-24 17:14:48) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (10.2ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.8ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (1.8ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.2ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mBlog Load (0.1ms)[0m   [0mSELECT * FROM `blogs` WHERE (`blogs`.`verified` = 2) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/blogs/reject
+  [4;36;1mBlog Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `blogs`[0m
+Rendered admin/blogs/_blogs (10.9ms)
+Completed in 97ms (View: 20, DB: 17) | 200 OK [http://0.0.0.0/admin/blogs/reject?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#index (for 127.0.0.1 at 2010-02-24 17:14:57) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (5.3ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Load (0.6ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/photos/index
+Rendered admin/photos/_photos (1.6ms)
+Completed in 98ms (View: 30, DB: 11) | 200 OK [http://0.0.0.0/admin/photos?id=1]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#select (for 127.0.0.1 at 2010-02-24 17:15:09) [GET]
+  [4;35;1mUser Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/app
+Rendering user/albums/select
+  [4;35;1mPersonalAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (6.6ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 91ms (View: 40, DB: 15) | 200 OK [http://0.0.0.0/personal_albums/select]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PhotosController#new (for 127.0.0.1 at 2010-02-24 17:15:17) [GET]
+  Parameters: {"album_id"=>"59"}
+  [4;35;1mUser Columns (3.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPersonalAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (1.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 59 AND (`albums`.owner_id = 1)) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+Rendering template within layouts/app
+Rendering user/photos/new
+Rendered shared/_swfupload_form (8.4ms)
+  [4;35;1mProfile Load (1.3ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 108ms (View: 65, DB: 13) | 200 OK [http://0.0.0.0/personal_photos/new?album_id=59]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#select (for 127.0.0.1 at 2010-02-24 17:15:36) [GET]
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.6ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+Rendering template within layouts/app
+Rendering user/albums/select
+  [4;35;1mPersonalAlbum Columns (3.0ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 70ms (View: 33, DB: 10) | 200 OK [http://0.0.0.0/personal_albums/select]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#new (for 127.0.0.1 at 2010-02-24 17:15:44) [GET]
+  Parameters: {"show"=>"select"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (5.9ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPersonalAlbum Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+Rendering user/albums/new
+  [4;36;1mGame Load (0.8ms)[0m   [0;1mSELECT DISTINCT `games`.* FROM `games` INNER JOIN `game_characters` ON `games`.id = `game_characters`.game_id WHERE ((`game_characters`.user_id = 1)) [0m
+  [4;35;1mGame Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+Completed in 287ms (View: 249, DB: 12) | 200 OK [http://0.0.0.0/personal_albums/new?show=select]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#create (for 127.0.0.1 at 2010-02-24 17:15:56) [POST]
+  Parameters: {"authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "album"=>{"title"=>"aa", "privilege"=>"1", "game_id"=>"319", "description"=>"aaaa"}, "show"=>"select"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mPersonalAlbum Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `albums`[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mBEGIN[0m
+  [4;36;1mGame Exists (5.2ms)[0m   [0;1mSELECT `games`.id FROM `games` WHERE (`games`.`id` = 319) LIMIT 1[0m
+  [4;35;1mUser Load (13.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mGameCharacter Load (0.5ms)[0m   [0;1mSELECT * FROM `game_characters` WHERE (`game_characters`.user_id = 1) [0m
+  [4;35;1mGameCharacter Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `game_characters`[0m
+  [4;36;1mPersonalAlbum Create (0.4ms)[0m   [0;1mINSERT INTO `albums` (`created_at`, `poster_id`, `title`, `owner_id`, `type`, `cover_id`, `uploaded_at`, `game_id`, `privilege`, `description`, `comments_count`, `sharings_count`, `photos_count`) VALUES('2010-02-24 09:15:56', 1, 'aa', 1, 'PersonalAlbum', NULL, NULL, 319, 1, 'aaaa', 0, 0, 0)[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mUPDATE users SET albums_count = albums_count + 1 WHERE id = 1[0m
+  [4;35;1mSQL (6.3ms)[0m   [0mCOMMIT[0m
+Rendering user/albums/create
+Completed in 278ms (View: 6, DB: 33) | 200 OK [http://0.0.0.0/personal_albums?show=select]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#index (for 127.0.0.1 at 2010-02-24 17:16:01) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (1.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mPersonalAlbum Columns (5.4ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (0.7ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+  [4;35;1mAvatarAlbum Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.8ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+Rendering template within layouts/app
+Rendering user/albums/index
+  [4;35;1mPersonalPhoto Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPersonalPhoto Load (0.8ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 59) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) ORDER BY created_at DESC[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (13.3ms)
+  [4;36;1mPersonalPhoto Load (0.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 60) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) ORDER BY created_at DESC[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (4.7ms)
+  [4;36;1mAvatar Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.1ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (13.3ms)
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 144ms (View: 84, DB: 21) | 200 OK [http://0.0.0.0/personal_albums?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#show (for 127.0.0.1 at 2010-02-24 17:16:10) [GET]
+  Parameters: {"id"=>"60"}
+  [4;35;1mUser Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPersonalAlbum Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (0.5ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 60) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) [0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mPersonalPhoto Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPersonalPhoto Load (0.5ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 60) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) ORDER BY created_at DESC LIMIT 0, 12[0m
+Rendering template within layouts/app
+Rendering user/albums/show
+  [4;36;1mComment Load (0.5ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 60 AND `comments`.commentable_type = 'Album') ORDER BY created_at ASC[0m
+  [4;35;1mProfile Load (5.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (18.8ms)
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 108ms (View: 49, DB: 16) | 200 OK [http://0.0.0.0/personal_albums/60]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PhotosController#new (for 127.0.0.1 at 2010-02-24 17:16:26) [GET]
+  Parameters: {"album_id"=>"60"}
+  [4;35;1mUser Columns (2.7ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPersonalAlbum Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (0.6ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 60 AND (`albums`.owner_id = 1)) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+Rendering template within layouts/app
+Rendering user/photos/new
+Rendered shared/_swfupload_form (0.5ms)
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 76ms (View: 34, DB: 9) | 200 OK [http://0.0.0.0/personal_photos/new?album_id=60]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::StatusesController#index (for 127.0.0.1 at 2010-02-24 17:17:10) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mStatus Load (1.1ms)[0m   [0;1mSELECT * FROM `statuses` WHERE (`statuses`.poster_id = 1) ORDER BY created_at DESC LIMIT 0, 5[0m
+Rendering template within layouts/app
+Rendering user/statuses/index
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.9ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mStatus Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `statuses`[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mComment Load (1.1ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 2 AND `comments`.commentable_type = 'Status') ORDER BY created_at ASC[0m
+  [4;35;1mComment Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `comments`[0m
+  [4;36;1mStatus Load (0.4ms)[0m   [0;1mSELECT * FROM `statuses` WHERE (`statuses`.`id` = 2) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/comments/_comment (9.1ms)
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+Rendered user/comments/_folded_comment_box (20.2ms)
+Rendered user/statuses/_status (47.7ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mComment Load (0.5ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 1 AND `comments`.commentable_type = 'Status') ORDER BY created_at ASC[0m
+Rendered user/comments/_folded_comment_box (7.7ms)
+Rendered user/statuses/_status (11.7ms)
+  [4;36;1mNotification Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (5.4ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 149ms (View: 103, DB: 18) | 200 OK [http://0.0.0.0/statuses?id=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::StatusesController#create (for 127.0.0.1 at 2010-02-24 17:17:22) [POST]
+  Parameters: {"authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "home"=>"0", "status"=>{"content"=>"aaaaaaaaa"}}
+  [4;36;1mUser Columns (2.9ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mStatus Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `statuses`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mStatus Create (0.3ms)[0m   [0;1mINSERT INTO `statuses` (`created_at`, `poster_id`, `updated_at`, `content`, `comments_count`, `verified`) VALUES('2010-02-24 09:17:22', 1, '2010-02-24 09:17:22', 'aaaaaaaaa', 0, 0)[0m
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mUPDATE users SET statuses_count = statuses_count + 1 WHERE id = 1[0m
+  [4;35;1mProfile Load (1.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mUser Load (2.0ms)[0m   [0;1mSELECT `users`.* FROM `users` INNER JOIN `friendships` ON `users`.id = `friendships`.friend_id WHERE ((`friendships`.user_id = 1) AND ((`friendships`.`status` = 1))) ORDER BY pinyin ASC[0m
+  [4;35;1mFeedItem Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `feed_items`[0m
+  [4;36;1mFeedItem Create (0.4ms)[0m   [0;1mINSERT INTO `feed_items` (`data`, `created_at`, `originator_id`, `originator_type`) VALUES(NULL, '2010-02-24 09:17:22', 3, 'Status')[0m
+  [4;35;1mProfile Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1minsert into feed_deliveries values (NULL, 1, 'Profile', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 3, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 2, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 4, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 5, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 14, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 15, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 16, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 17, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 18, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 19, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 20, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 21, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 22, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 23, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 6, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 24, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 25, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 26, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 27, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 28, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 29, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 30, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 31, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 32, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 33, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 7, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 8, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 9, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 10, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 11, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 12, 'User', 60, 'Status', '2010-02-24 17:17:22'),(NULL, 13, 'User', 60, 'Status', '2010-02-24 17:17:22')[0m
+  [4;35;1mSQL (1.5ms)[0m   [0mCOMMIT[0m
+Rendering user/statuses/create
+  [4;36;1mComment Load (0.5ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 3 AND `comments`.commentable_type = 'Status') ORDER BY created_at ASC[0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+Rendered user/comments/_folded_comment_box (12.4ms)
+Rendered user/statuses/_status (36.7ms)
+Completed in 132ms (View: 45, DB: 16) | 200 OK [http://0.0.0.0/statuses]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::AlbumsController#index (for 127.0.0.1 at 2010-02-24 17:17:42) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (4.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (3.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (1.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mPersonalAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mPersonalAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'PersonalAlbum' ) ) ORDER BY uploaded_at DESC[0m
+  [4;35;1mAvatarAlbum Columns (3.7ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+Rendering template within layouts/app
+Rendering user/albums/index
+  [4;35;1mPersonalPhoto Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPersonalPhoto Load (0.4ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 59) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) ORDER BY created_at DESC[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (13.3ms)
+  [4;36;1mPersonalPhoto Load (0.1ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 60) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) ORDER BY created_at DESC[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (5.2ms)
+  [4;36;1mAvatar Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.1ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendered user/albums/_album_item (17.5ms)
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (5.1ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 149ms (View: 75, DB: 26) | 200 OK [http://0.0.0.0/personal_albums?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::AlbumsController#show (for 127.0.0.1 at 2010-02-24 17:17:49) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.4ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mAvatar Columns (3.9ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.6ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC LIMIT 0, 16[0m
+Rendering template within layouts/app
+Rendering user/avatars/albums/show
+  [4;36;1mComment Load (5.7ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 1 AND `comments`.commentable_type = 'Album') ORDER BY created_at ASC[0m
+  [4;35;1mProfile Load (0.3ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (20.9ms)
+  [4;35;1mNotification Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 102ms (View: 51, DB: 19) | 200 OK [http://0.0.0.0/avatar_albums/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#new (for 127.0.0.1 at 2010-02-24 17:17:56) [GET]
+  Parameters: {"album_id"=>"1", "album"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (2.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.6ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+Rendering user/avatars/photos/new
+Completed in 48ms (View: 11, DB: 7) | 200 OK [http://0.0.0.0/avatars/new?album=1&album_id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::AlbumsController#show (for 127.0.0.1 at 2010-02-24 17:19:16) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (2.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (3.1ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mAvatar Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.1ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC LIMIT 0, 16[0m
+Rendering template within layouts/app
+Rendering user/avatars/albums/show
+  [4;36;1mComment Load (1.2ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 1 AND `comments`.commentable_type = 'Album') ORDER BY created_at ASC[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (12.6ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (23.9ms)
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 295ms (View: 36, DB: 26) | 200 OK [http://0.0.0.0/avatar_albums/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#index (for 127.0.0.1 at 2010-02-24 17:19:24) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (8.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (10.2ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Load (9.9ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/photos/index
+Rendered admin/photos/_photos (0.2ms)
+Completed in 160ms (View: 21, DB: 32) | 200 OK [http://0.0.0.0/admin/photos?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#new (for 127.0.0.1 at 2010-02-24 17:19:40) [GET]
+  Parameters: {"album_id"=>"1", "album"=>"1"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (2.6ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+Rendering user/avatars/photos/new
+Completed in 42ms (View: 2, DB: 5) | 200 OK [http://0.0.0.0/avatars/new?album=1&album_id=1]
+  [4;35;1mSQL (1.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#create (for 127.0.0.1 at 2010-02-24 17:20:15) [POST]
+  Parameters: {"photo"=>{"uploaded_data"=>#<File:/tmp/RackMultipart3393-1>}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "album"=>"1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.1ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+  [4;35;1mAvatar Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAlbum Load (2.2ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 1) [0m
+  [4;35;1mAvatar Create (1.7ms)[0m   [0mINSERT INTO `photos` (`size`, `created_at`, `album_id`, `poster_id`, `notation`, `content_type`, `digs_count`, `thumbnail`, `updated_at`, `type`, `parent_id`, `filename`, `height`, `comments_count`, `game_id`, `privilege`, `verified`, `tags_count`, `sharings_count`, `width`) VALUES(3957, '2010-02-24 09:20:15', 1, 1, NULL, 'image/jpeg', 0, NULL, '2010-02-24 09:20:15', 'Avatar', NULL, 'head_1162g70.jpg', NULL, 0, NULL, 2, 0, 0, 0, NULL)[0m
+  [4;36;1mAvatarAlbum Update (0.9ms)[0m   [0;1mUPDATE `albums` SET `cover_id` = 1 WHERE `id` = 1[0m
+  [4;35;1mAvatarAlbum Update (2.5ms)[0m   [0mUPDATE `albums` SET `uploaded_at` = '2010-02-24 09:20:15' WHERE `id` = 1[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mUser Update (2.4ms)[0m   [0mUPDATE `users` SET `updated_at` = '2010-02-24 09:20:15', `avatar_id` = 1 WHERE `id` = 1[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mUPDATE users SET photos_count = photos_count + 1 WHERE id = 1[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mUPDATE albums SET photos_count = photos_count + 1 WHERE id = 1[0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mUser Load (6.3ms)[0m   [0mSELECT `users`.* FROM `users` INNER JOIN `friendships` ON `users`.id = `friendships`.friend_id WHERE ((`friendships`.user_id = 1) AND ((`friendships`.`status` = 1))) ORDER BY pinyin ASC[0m
+  [4;36;1mFeedItem Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `feed_items`[0m
+  [4;35;1mFeedItem Create (0.8ms)[0m   [0mINSERT INTO `feed_items` (`data`, `created_at`, `originator_id`, `originator_type`) VALUES(NULL, '2010-02-24 09:20:15', 1, 'Photo')[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1minsert into feed_deliveries values (NULL, 3, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 2, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 4, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 5, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 14, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 15, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 16, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 17, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 18, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 19, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 20, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 21, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 22, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 23, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 6, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 24, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 25, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 26, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 27, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 28, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 29, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 30, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 31, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 32, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 33, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 7, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 8, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 9, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 10, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 11, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 12, 'User', 61, 'Avatar', '2010-02-24 17:20:15'),(NULL, 13, 'User', 61, 'Avatar', '2010-02-24 17:20:15')[0m
+  [4;35;1mSQL (6.6ms)[0m   [0mCOMMIT[0m
+Completed in 360ms (View: 1, DB: 0) | 200 OK [http://0.0.0.0/avatars?album=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::AlbumsController#show (for 127.0.0.1 at 2010-02-24 17:20:20) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mAvatarAlbum Columns (1.2ms)[0m   [0;1mSHOW FIELDS FROM `albums`[0m
+  [4;35;1mAvatarAlbum Load (0.6ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.`id` = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) [0m
+  [4;36;1mUser Load (0.8ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mAvatar Columns (3.6ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mAvatar Load (1.0ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC LIMIT 0, 16[0m
+Rendering template within layouts/app
+Rendering user/avatars/albums/show
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mAvatar Load (0.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+  [4;35;1mComment Load (0.2ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 1 AND `comments`.commentable_type = 'Album') ORDER BY created_at ASC[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+  [4;35;1mProfile Load (0.2ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (13.4ms)
+  [4;35;1mNotification Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 106ms (View: 51, DB: 15) | 200 OK [http://0.0.0.0/avatar_albums/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:20:24) [GET]
+
+ActionController::RoutingError (No route matches "/photos/0000/0001/head_1162g70_large.jpg" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:20:29) [GET]
+
+ActionController::RoutingError (No route matches "/photos/0000/0001/head_1162g70_small.jpg" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#show (for 127.0.0.1 at 2010-02-24 17:20:33) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (2.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatar Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mAvatar Load (0.2ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+  [4;35;1mAlbum Columns (2.3ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAlbum Load (1.5ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.`id` = 1) [0m
+  [4;35;1mAvatarAlbum Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mPhotoTag Load (1.4ms)[0m   [0mSELECT * FROM `photo_tags` WHERE (`photo_tags`.photo_id = 1) [0m
+Rendering template within layouts/app
+Rendering user/avatars/photos/show
+  [4;36;1mComment Load (0.5ms)[0m   [0;1mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 1 AND `comments`.commentable_type = 'Photo') ORDER BY created_at ASC[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (20.0ms)
+  [4;36;1mGame Load (0.2ms)[0m   [0;1mSELECT DISTINCT `games`.* FROM `games` INNER JOIN `game_characters` ON `games`.id = `game_characters`.game_id WHERE ((`game_characters`.user_id = 1)) [0m
+  [4;35;1mGame Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mUser Load (5.3ms)[0m   [0;1mSELECT `users`.* FROM `users` INNER JOIN `friendships` ON `users`.id = `friendships`.friend_id WHERE ((`friendships`.user_id = 1) AND ((`friendships`.`status` = 1))) ORDER BY pinyin ASC[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 3) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 2) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 4) LIMIT 1[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 5) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 14) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 15) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 16) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 17) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 18) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 19) LIMIT 1[0m
+  [4;35;1mProfile Load (0.9ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 20) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 21) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 22) LIMIT 1[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 23) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 6) LIMIT 1[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 24) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 25) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 26) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 27) LIMIT 1[0m
+  [4;36;1mProfile Load (0.4ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 28) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 29) LIMIT 1[0m
+  [4;36;1mProfile Load (0.1ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 30) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 31) LIMIT 1[0m
+  [4;36;1mProfile Load (0.8ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 32) LIMIT 1[0m
+  [4;35;1mProfile Load (0.7ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 33) LIMIT 1[0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 7) LIMIT 1[0m
+  [4;35;1mProfile Load (0.1ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 8) LIMIT 1[0m
+  [4;36;1mProfile Load (1.9ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 9) LIMIT 1[0m
+  [4;35;1mProfile Load (0.5ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 10) LIMIT 1[0m
+  [4;36;1mProfile Load (0.3ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 11) LIMIT 1[0m
+  [4;35;1mProfile Load (0.6ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 12) LIMIT 1[0m
+  [4;36;1mProfile Load (0.3ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 13) LIMIT 1[0m
+Rendered user/photo_tags/_friend_table (76.4ms)
+Rendered user/photo_tags/_control_panel (335.3ms)
+  [4;35;1mAvatar Load (0.5ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.album_id = 1) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC[0m
+  [4;36;1mNotification Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 479ms (View: 400, DB: 36) | 200 OK [http://0.0.0.0/avatars/1]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:20:38) [GET]
+
+ActionController::RoutingError (No route matches "/stylesheets/test.css" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:20:44) [GET]
+
+ActionController::RoutingError (No route matches "/photos/0000/0001/head_1162g70_small.jpg" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#show (for 127.0.0.1 at 2010-02-24 17:20:48) [GET]
+  Parameters: {"id"=>"undefined"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mAvatar Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.6ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 0) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+Rendering template within layouts/app
+Rendering not_found
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mNotification Columns (6.8ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Filter chain halted as [:setup] rendered_or_redirected.
+Completed in 48ms (View: 24, DB: 13) | 200 OK [http://0.0.0.0/avatars/undefined]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PhotosController#update to json (for 127.0.0.1 at 2010-02-24 17:21:09) [PUT]
+  Parameters: {"photo"=>{"notation"=>"第一章头像\n"}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1", "editorId"=>"avatar_notation_1"}
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mPersonalPhoto Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPersonalPhoto Load (2.5ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) [0m
+Rendering not_found
+
+ActionView::MissingTemplate (Missing template not_found.erb in view path app/views:vendor/plugins/swfupload_fu/app/views):
+  lib/privilege_system.rb:41:in `not_found'
+  app/controllers/user/photos_controller.rb:116:in `setup'
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#index (for 127.0.0.1 at 2010-02-24 17:21:15) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (7.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.2ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mPhoto Load (1.2ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+  [4;36;1mPhoto Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+Rendering template within layouts/admin
+Rendering admin/photos/index
+  [4;35;1mAvatar Columns (8.4ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+Rendered admin/photos/_photos (23.3ms)
+Completed in 391ms (View: 37, DB: 22) | 200 OK [http://0.0.0.0/admin/photos?id=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#show (for 127.0.0.1 at 2010-02-24 17:21:29) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.6ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mPhoto Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPhoto Load (0.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+Rendering template within layouts/admin
+Rendering admin/photos/show
+  [4;35;1mAvatar Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+Completed in 104ms (View: 37, DB: 9) | 200 OK [http://0.0.0.0/admin/photos/1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PhotosController#update to json (for 127.0.0.1 at 2010-02-24 17:21:46) [PUT]
+  Parameters: {"photo"=>{"notation"=>"正在更新..."}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1", "editorId"=>"avatar_notation_1"}
+  [4;36;1mUser Columns (2.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mPersonalPhoto Columns (3.3ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPersonalPhoto Load (0.2ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) [0m
+Rendering not_found
+
+ActionView::MissingTemplate (Missing template not_found.erb in view path app/views:vendor/plugins/swfupload_fu/app/views):
+  lib/privilege_system.rb:41:in `not_found'
+  app/controllers/user/photos_controller.rb:116:in `setup'
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#verify (for 127.0.0.1 at 2010-02-24 17:21:56) [PUT]
+  Parameters: {"authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1"}
+  [4;36;1mUser Columns (4.5ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.9ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mPhoto Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPhoto Load (0.2ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;35;1mAvatar Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAvatar Update (0.4ms)[0m   [0mUPDATE `photos` SET `updated_at` = '2010-02-24 09:21:56', `verified` = 1 WHERE `id` = 1[0m
+  [4;36;1mSQL (3.8ms)[0m   [0;1mCOMMIT[0m
+
+NameError (undefined local variable or method `succ' for #<Admin::PhotosController:0xb59f0618>):
+  app/controllers/admin/photos_controller.rb:25:in `verify'
+  -e:2:in `load'
+  -e:2
+
+Rendered rescues/_trace (56.1ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#verify (for 127.0.0.1 at 2010-02-24 17:22:26) [PUT]
+  Parameters: {"authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1"}
+  [4;35;1mUser Columns (4.5ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.2ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPhoto Load (1.0ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;36;1mAvatar Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mCOMMIT[0m
+
+NameError (undefined local variable or method `succ' for #<Admin::PhotosController:0xb657d0e4>):
+  app/controllers/admin/photos_controller.rb:25:in `verify'
+  -e:2:in `load'
+  -e:2
+
+Rendered rescues/_trace (55.9ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#verify (for 127.0.0.1 at 2010-02-24 17:23:34) [PUT]
+  Parameters: {"authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1"}
+  [4;35;1mUser Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.6ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Columns (2.0ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPhoto Load (0.1ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;36;1mAvatar Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCOMMIT[0m
+Completed in 83ms (View: 3, DB: 10) | 200 OK [http://0.0.0.0/admin/photos/1/verify]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#index (for 127.0.0.1 at 2010-02-24 17:23:39) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (6.9ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (1.7ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Load (1.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/photos/index
+Rendered admin/photos/_photos (0.2ms)
+Completed in 74ms (View: 12, DB: 12) | 200 OK [http://0.0.0.0/admin/photos?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#edit (for 127.0.0.1 at 2010-02-24 17:24:08) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (3.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (1.2ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.6ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+  [4;35;1mAvatar Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mAvatar Load (0.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1 AND (`photos`.album_id = 1)) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC[0m
+Rendering user/avatars/photos/edit
+Completed in 224ms (View: 183, DB: 7) | 200 OK [http://0.0.0.0/avatars/1/edit]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Avatars::PhotosController#update (for 127.0.0.1 at 2010-02-24 17:24:22) [PUT]
+  Parameters: {"photo"=>{"album_id"=>"1", "notation"=>"黑黑"}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1"}
+  [4;35;1mUser Columns (6.5ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mAvatarAlbum Columns (2.5ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mAvatarAlbum Load (0.6ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'AvatarAlbum' ) ) LIMIT 1[0m
+  [4;35;1mAvatar Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mAvatar Load (0.1ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1 AND (`photos`.album_id = 1)) AND ( (`photos`.`type` = 'Avatar' ) ) ORDER BY created_at DESC[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mAvatar Update (0.6ms)[0m   [0;1mUPDATE `photos` SET `updated_at` = '2010-02-24 09:24:22', `verified` = 0, `notation` = '黑黑' WHERE `id` = 1[0m
+  [4;35;1mSQL (4.0ms)[0m   [0mCOMMIT[0m
+Completed in 69ms (View: 1, DB: 16) | 200 OK [http://0.0.0.0/avatars/1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#index (for 127.0.0.1 at 2010-02-24 17:24:38) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mPhoto Load (3.4ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+  [4;36;1mPhoto Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+Rendering template within layouts/admin
+Rendering admin/photos/index
+  [4;35;1mAvatar Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+Rendered admin/photos/_photos (22.5ms)
+Completed in 113ms (View: 35, DB: 14) | 200 OK [http://0.0.0.0/admin/photos?id=1]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#show (for 127.0.0.1 at 2010-02-24 17:24:48) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.8ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mPhoto Columns (2.0ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPhoto Load (0.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+Rendering template within layouts/admin
+Rendering admin/photos/show
+  [4;35;1mAvatar Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+Completed in 83ms (View: 22, DB: 8) | 200 OK [http://0.0.0.0/admin/photos/1]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#unverify (for 127.0.0.1 at 2010-02-24 17:24:57) [PUT]
+  Parameters: {"authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1"}
+  [4;36;1mUser Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.7ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mPhoto Columns (6.9ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPhoto Load (0.1ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;35;1mAvatar Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mAvatar Update (0.5ms)[0m   [0mUPDATE `photos` SET `updated_at` = '2010-02-24 09:24:57', `verified` = 2 WHERE `id` = 1[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCOMMIT[0m
+Completed in 84ms (View: 2, DB: 17) | 200 OK [http://0.0.0.0/admin/photos/1/unverify]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#show (for 127.0.0.1 at 2010-02-24 17:25:02) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (4.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.2ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPhoto Load (0.8ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+Rendering template within layouts/admin
+Rendering admin/photos/show
+  [4;36;1mAvatar Columns (2.9ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+Completed in 268ms (View: 20, DB: 13) | 200 OK [http://0.0.0.0/admin/photos/1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::PhotosController#index (for 127.0.0.1 at 2010-02-24 17:25:12) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Columns (9.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mRole Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `roles`[0m
+  [4;36;1mRole Load (2.0ms)[0m   [0;1mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;36;1mPhoto Load (0.8ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+Rendering template within layouts/admin
+Rendering admin/photos/index
+Rendered admin/photos/_photos (0.2ms)
+Completed in 90ms (View: 17, DB: 13) | 200 OK [http://0.0.0.0/admin/photos?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PhotosController#update to json (for 127.0.0.1 at 2010-02-24 17:25:26) [PUT]
+  Parameters: {"photo"=>{"notation"=>"好哦好哦好\n"}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1", "editorId"=>"avatar_notation_1"}
+  [4;35;1mUser Columns (2.1ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPersonalPhoto Columns (10.5ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPersonalPhoto Load (2.5ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) [0m
+Rendering not_found
+
+ActionView::MissingTemplate (Missing template not_found.erb in view path app/views:vendor/plugins/swfupload_fu/app/views):
+  lib/privilege_system.rb:41:in `not_found'
+  app/controllers/user/photos_controller.rb:116:in `setup'
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::PhotosController#update to json (for 127.0.0.1 at 2010-02-24 17:25:40) [PUT]
+  Parameters: {"photo"=>{"notation"=>"奥阿阿"}, "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "id"=>"1", "editorId"=>"avatar_notation_1"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPersonalPhoto Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPersonalPhoto Load (0.2ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'PersonalPhoto' ) ) [0m
+Rendering not_found
+
+ActionView::MissingTemplate (Missing template not_found.erb in view path app/views:vendor/plugins/swfupload_fu/app/views):
+  lib/privilege_system.rb:41:in `not_found'
+  app/controllers/user/photos_controller.rb:116:in `setup'
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::SharingsController#new (for 127.0.0.1 at 2010-02-24 17:26:45) [GET]
+  Parameters: {"shareable_type"=>"Photo", "shareable_id"=>"1"}
+  [4;35;1mUser Columns (2.2ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPhoto Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPhoto Load (0.3ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;35;1mSharing Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `sharings`[0m
+Rendering user/sharings/new
+Completed in 62ms (View: 14, DB: 6) | 200 OK [http://0.0.0.0/sharings/new?shareable_id=1&shareable_type=Photo]
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::SharingsController#create (for 127.0.0.1 at 2010-02-24 17:26:57) [POST]
+  Parameters: {"shareable_type"=>"Photo", "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "shareable_id"=>"1", "sharing"=>{"title"=>"头像1", "reason"=>"啊啊啊啊啊啊啊啊"}}
+  [4;36;1mUser Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mPhoto Columns (2.7ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mPhoto Load (1.3ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;36;1mAvatar Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mSharing Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `sharings`[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;36;1mUser Load (2.8ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mSharing Load (0.5ms)[0m   [0mSELECT * FROM `sharings` WHERE (`sharings`.`poster_id` = 1) AND (`sharings`.shareable_id = 1 AND `sharings`.shareable_type = 'Photo') LIMIT 1[0m
+  [4;36;1mSharing Create (0.4ms)[0m   [0;1mINSERT INTO `sharings` (`shareable_type`, `created_at`, `title`, `poster_id`, `digs_count`, `shareable_id`, `reason`, `comments_count`, `verified`) VALUES('Photo', '2010-02-24 09:26:57', '头像1', 1, 0, 1, '啊啊啊啊啊啊啊啊', 0, 0)[0m
+  [4;35;1mPhoto Load (1.2ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mUPDATE photos SET sharings_count = sharings_count + 1 WHERE id = 1[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mMysql::Error: Unknown column 'sharings_count' in 'field list': UPDATE users SET sharings_count = sharings_count + 1 WHERE id = 1[0m
+  [4;36;1mSQL (3.2ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Unknown column 'sharings_count' in 'field list': UPDATE users SET sharings_count = sharings_count + 1 WHERE id = 1):
+  app/observers/sharing_observer.rb:6:in `after_create'
+  /usr/lib/ruby/1.8/observer.rb:185:in `notify_observers'
+  /usr/lib/ruby/1.8/observer.rb:184:in `each'
+  /usr/lib/ruby/1.8/observer.rb:184:in `notify_observers'
+  app/controllers/user/sharings_controller.rb:106:in `create'
+  -e:2:in `load'
+  -e:2
+
+Rendered rescues/_trace (74.5ms)
+Rendered rescues/_request_and_response (12.9ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (4.1ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateChineseCharacters (20090707071656)
+Migrating to CreateGames (20090810061507)
+Migrating to CreateTaggings (20090907150009)
+Migrating to CreateTags (20090907150010)
+Migrating to AddRatings (20090907150011)
+Migrating to CreateGameAttentions (20090908080440)
+Migrating to AddGames (20090908085732)
+Migrating to CreateGameAreas (20090908085733)
+Migrating to CreateGameRaces (20090908085734)
+Migrating to CreateGameServers (20090908085735)
+Migrating to CreateGameProfessions (20090908085736)
+Migrating to AddWowServers (20090923074604)
+Migrating to AddYonghengzhitaData (20090926131653)
+Migrating to CreateUsers (20091011080154)
+Migrating to CreateProfiles (20091011080155)
+Migrating to CreateEmails (20091011090317)
+Migrating to CreatePhotos (20091011143225)
+Migrating to CreateAlbums (20091011143229)
+Migrating to CreateComments (20091011145912)
+Migrating to CreateDigs (20091011145915)
+Migrating to AddUsers (20091011145936)
+Migrating to CreatePhotoTags (20091011151443)
+Migrating to CreateGameCharacters (20091012071828)
+Migrating to CreateBlogs (20091012124341)
+Migrating to CreateFriendships (20091013051812)
+Migrating to AddFriends (20091013054354)
+Migrating to CreateStatuses (20091013180753)
+Migrating to CreateVideos (20091015045738)
+Migrating to CreateFriendTags (20091015052124)
+Migrating to CreateEvents (20091017050836)
+Migrating to CreateParticipations (20091017050844)
+Migrating to AddJianxia2freeData (20091017140927)
+Migrating to CreatePolls (20091017141104)
+Migrating to CreatePollAnswers (20091017141152)
+Migrating to CreateVotes (20091017141157)
+Migrating to AddTiantang2Data (20091017150453)
+Migrating to CreateGuilds (20091017152153)
+Migrating to CreateMemberships (20091017152158)
+Migrating to CreateGuildFriendships (20091017152230)
+Migrating to CreateForums (20091017152252)
+Migrating to CreatePosts (20091017152256)
+Migrating to CreateTopics (20091017152300)
+Migrating to AddFenghuozhilvData (20091018031453)
+Migrating to AddLunaData (20091018031635)
+Migrating to AddJianxia2chargeData (20091018031744)
+Migrating to AddChuanqiguilaiData (20091018042250)
+Migrating to AddQiannian3Data (20091018044631)
+Migrating to AddJianxia3Data (20091018045613)
+Migrating to AddChaojiwuzheData (20091018052901)
+Migrating to AddZhengfuData (20091018062701)
+Migrating to AddTunshitiandiData (20091018065040)
+Migrating to AddGtjinwutuan2Data (20091018070856)
+Migrating to AddRewupaidui2Data (20091018071001)
+Migrating to AddJietoulanqiuData (20091018071923)
+Migrating to AddShenqiData (20091018073722)
+Migrating to AddChuanqishijieData (20091018075806)
+Migrating to AddRexuechuanqiData (20091018080718)
+Migrating to AddZhuoyuezhijianData (20091018081056)
+Migrating to AddTianjiaoData (20091018085001)
+Migrating to AddKuailexiyouData (20091018090800)
+Migrating to AddWulinqunxiaonlineData (20091018140307)
+Migrating to AddPaopaokartData (20091018141042)
+Migrating to AddXiwangonlineData (20091018142154)
+Migrating to AddR2Data (20091018144600)
+Migrating to AddSanguoceData (20091018145653)
+Migrating to AddJianxiaonlinechargeData (20091018150528)
+Migrating to AddDatanghaoxiaData (20091018151510)
+Migrating to AddEveData (20091018153527)
+Migrating to AddZhuxian2Data (20091018154736)
+Migrating to AddXunxianData (20091018162131)
+Migrating to AddMenghuanzhuxianData (20091018163613)
+Migrating to AddMoyuData (20091018165725)
+Migrating to AddWendaoData (20091018170924)
+Migrating to AddMaoxiandaoonlineData (20091018171744)
+Migrating to AddJurenData (20091018180705)
+Migrating to AddRexuejianghuData (20091018183318)
+Migrating to AddWanmeishijieData (20091019040729)
+Migrating to AddSdgandaData (20091019050738)
+Migrating to AddDahuaxiyouwaizhuanData (20091019051530)
+Migrating to AddTianxiaerData (20091019060606)
+Migrating to AddPiaoliuhuanjingData (20091019061651)
+Migrating to AddDahuaxiyouData (20091019064836)
+Migrating to AddKoudaixiyouData (20091019070020)
+Migrating to AddChibiData (20091019072002)
+Migrating to AddDnfData (20091019073452)
+Migrating to AddCaihongdaoonlineData (20091019074526)
+Migrating to AddXinqijishijieData (20091019081000)
+Migrating to AddJinwutuanData (20091019140345)
+Migrating to AddShenguichuanqiData (20091019140638)
+Migrating to AddMenghuanxiyouData (20091019142541)
+Migrating to AddFifaonline2Data (20091019143330)
+Migrating to AddShumenData (20091019143942)
+Migrating to AddTianlongbabuData (20091019145058)
+Migrating to AddDaojianyingxiongData (20091019155720)
+Migrating to AddZhengtuData (20091019160632)
+Migrating to AddJianxiaqingyuanfreeData (20091019162049)
+Migrating to AddFengshenbang2Data (20091019165144)
+Migrating to AddQijiData (20091019170700)
+Migrating to AddGongfushijieData (20091019172728)
+Migrating to AddYaoguaiamengData (20091019173615)
+Migrating to AddShouxuefeitengData (20091021082133)
+Migrating to AddYingxiongwudionlineData (20091021083842)
+Migrating to AddBawang2Data (20091021084925)
+Migrating to AddLuoqiData (20091021090224)
+Migrating to AddShengdafuwengData (20091021091959)
+Migrating to AddDahaizhan2Data (20091021092556)
+Migrating to AddChaojiyuezheData (20091021093722)
+Migrating to AddTianziData (20091021094308)
+Migrating to AddYuyanonlineData (20091021100306)
+Migrating to AddWulinwaizhuan2Data (20091021102637)
+Migrating to AddXinfeifeiData (20091021103718)
+Migrating to AddBaobeitankeData (20091021133805)
+Migrating to AddTianshenshijieData (20091021135522)
+Migrating to AddJianxiashijieData (20091021141244)
+Migrating to AddJijiashijiData (20091021141627)
+Migrating to AddPaopaotangData (20091021143414)
+Migrating to AddMofazhimenData (20091021143647)
+Migrating to AddXianjianonlineData (20091021151040)
+Migrating to AddZhensanguowushuangData (20091021151724)
+Migrating to AddKaixinonlineData (20091021152300)
+Migrating to AddHanghaishijiData (20091021155256)
+Migrating to AddTiantangData (20091021160320)
+Migrating to AddShiqishijieData (20091021161723)
+Migrating to AddXiyouqjiData (20091021162928)
+Migrating to AddJinwushijieData (20091021163442)
+Migrating to AddShuihuqzhuanData (20091021164431)
+Migrating to AddHuaxia2Data (20091021165635)
+Migrating to AddWangzheshijieData (20091021170538)
+Migrating to AddFengkuangsaicheData (20091021171139)
+Migrating to AddJiewuquData (20091021172045)
+Migrating to AddDahuaxiyou3Data (20091021172512)
+Migrating to AddYongqionlineData (20091021173649)
+Migrating to AddChongfengdaoData (20091021174640)
+Migrating to AddMolibaobei2Data (20091021175618)
+Migrating to AddDaojianyingxiong2Data (20091021180937)
+Migrating to AddYingxionglianonlineData (20091021181652)
+Migrating to AddDahanghaishidaionlineData (20091021181748)
+Migrating to AddZhuangzhilingyunData (20091021182951)
+Migrating to CreateFeedItems (20091023115905)
+Migrating to CreateFeedDeliveries (20091023120028)
+Migrating to CreateNotifications (20091024063451)
+Migrating to CreatePollInvitations (20091024095604)
+Migrating to CreateModeratorForums (20091024154002)
+Migrating to AddNoserversGames (20091025065902)
+Migrating to AddNoserversGamesData (20091025071857)
+Migrating to CreatePokes (20091026125709)
+Migrating to CreatePokeDeliveries (20091027095356)
+Migrating to AddPokes (20091027102142)
+Migrating to CreateMails (20091028083324)
+Migrating to CreateSharings (20091028084336)
+Migrating to AddGameCharacters (20091028163643)
+Migrating to CreateNotices (20091105063746)
+Migrating to CreateRegions (20091108132556)
+Migrating to CreateCities (20091108132557)
+Migrating to CreateDistricts (20091108132558)
+Migrating to CreateFriendSuggestions (20091120074431)
+Migrating to CreateComradeSuggestions (20091121151424)
+Migrating to CreateViewings (20091223160309)
+Migrating to CreateLinks (20091225062455)
+Migrating to CreateRoles (20091228153228)
+Migrating to CreateRoleUsers (20091228153258)
+Migrating to CreateGears (20100119074251)
+Migrating to CreateBosses (20100119074257)
+Migrating to CreateGuildRules (20100119075038)
+Migrating to CreateNews (20100120122907)
+  [4;36;1mSQL (8.9ms)[0m   [0;1mCREATE TABLE `news` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `game_id` int(11), `poster_id` int(11), `news_type` varchar(255), `data` text, `comments_count` int(11) DEFAULT 0, `viewings_count` int(11) DEFAULT 0, `sharings_count` int(11) DEFAULT 0, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100120122907')[0m
+Migrating to CreateApplications (20100201024834)
+Migrating to AddApps (20100201030347)
+Migrating to AddAdmin (20100201033652)
+Migrating to AddTitleToNews (20100204123215)
+  [4;36;1mSQL (13.8ms)[0m   [0;1mALTER TABLE `news` ADD `title` varchar(64)[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100204123215')[0m
+Migrating to CreateSignupInvitations (20100204133656)
+  [4;36;1mSQL (15.0ms)[0m   [0;1mCREATE TABLE `signup_invitations` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `sender_id` int(11), `recipient_email` varchar(255), `token` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (4.8ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100204133656')[0m
+Migrating to AddOrginAddressToNews (20100205101928)
+  [4;36;1mSQL (6.3ms)[0m   [0;1mALTER TABLE `news` ADD `origin_addr` varchar(256)[0m
+  [4;35;1mSQL (4.8ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100205101928')[0m
+Migrating to AddDigsCountToNews (20100205101954)
+  [4;36;1mSQL (21.5ms)[0m   [0;1mALTER TABLE `news` ADD `digs_count` int(11) DEFAULT 0[0m
+  [4;35;1mSQL (1.9ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100205101954')[0m
+Migrating to AddVerifiedColumnToModels (20100224085559)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mMysql::Error: Duplicate column name 'verified': ALTER TABLE `videos` ADD `verified` int(11) DEFAULT 0[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::SharingsController#create (for 127.0.0.1 at 2010-02-24 17:28:37) [POST]
+  Parameters: {"shareable_type"=>"Photo", "authenticity_token"=>"UbSqC7SM4hpSlS0pFxtCdr+zVv9+COTfg9bTUKsZOGo=", "shareable_id"=>"1", "sharing"=>{"title"=>"头像1", "reason"=>"啊啊啊啊啊啊啊啊"}}
+  [4;35;1mUser Columns (2.9ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.6ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mPhoto Columns (1.5ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mPhoto Load (1.1ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;35;1mAvatar Columns (6.1ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mSharing Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `sharings`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mBEGIN[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mSharing Load (0.6ms)[0m   [0;1mSELECT * FROM `sharings` WHERE (`sharings`.`poster_id` = 1) AND (`sharings`.shareable_id = 1 AND `sharings`.shareable_type = 'Photo') LIMIT 1[0m
+  [4;35;1mSharing Create (0.4ms)[0m   [0mINSERT INTO `sharings` (`shareable_type`, `created_at`, `title`, `poster_id`, `digs_count`, `shareable_id`, `reason`, `comments_count`, `verified`) VALUES('Photo', '2010-02-24 09:28:37', '头像1', 1, 0, 1, '啊啊啊啊啊啊啊啊', 0, 0)[0m
+  [4;36;1mPhoto Load (0.4ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mUPDATE photos SET sharings_count = sharings_count + 1 WHERE id = 1[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mMysql::Error: Unknown column 'sharings_count' in 'field list': UPDATE users SET sharings_count = sharings_count + 1 WHERE id = 1[0m
+  [4;35;1mSQL (2.6ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Unknown column 'sharings_count' in 'field list': UPDATE users SET sharings_count = sharings_count + 1 WHERE id = 1):
+  app/observers/sharing_observer.rb:6:in `after_create'
+  /usr/lib/ruby/1.8/observer.rb:185:in `notify_observers'
+  /usr/lib/ruby/1.8/observer.rb:184:in `each'
+  /usr/lib/ruby/1.8/observer.rb:184:in `notify_observers'
+  app/controllers/user/sharings_controller.rb:106:in `create'
+  -e:2:in `load'
+  -e:2
+
+Rendered rescues/_trace (75.3ms)
+Rendered rescues/_request_and_response (0.6ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing Admin::TagsController#index (for 127.0.0.1 at 2010-02-24 17:28:54) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (2.8ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mRole Columns (1.7ms)[0m   [0;1mSHOW FIELDS FROM `roles`[0m
+  [4;35;1mRole Load (0.1ms)[0m   [0mSELECT * FROM `roles` WHERE (`roles`.`name` = 'admin') LIMIT 1[0m
+  [4;36;1mRole Load (0.1ms)[0m   [0;1mSELECT `roles`.* FROM `roles` INNER JOIN `role_users` ON `roles`.id = `role_users`.role_id WHERE ((`role_users`.user_id = 1)) [0m
+  [4;35;1mTag Load (0.7ms)[0m   [0mSELECT * FROM `tags` WHERE (`tags`.`verified` = 0) ORDER BY created_at DESC LIMIT 0, 20[0m
+  [4;36;1mTag Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `tags`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM `tags` WHERE (`tags`.`verified` = 0) [0m
+Rendering template within layouts/admin
+Rendering admin/tags/index
+Rendered admin/tags/_tags (51.4ms)
+Completed in 140ms (View: 81, DB: 8) | 200 OK [http://0.0.0.0/admin/tags?id=1]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::VideosController#index (for 127.0.0.1 at 2010-02-24 17:29:13) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (3.4ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (1.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mVideo Load (1.1ms)[0m   [0mSELECT * FROM `videos` WHERE (`videos`.poster_id = 1) ORDER BY created_at DESC[0m
+Rendering template within layouts/app
+Rendering user/videos/index
+Rendered _app_menu (2.4ms)
+  [4;36;1mGame Load (2.9ms)[0m   [0;1mSELECT DISTINCT `games`.* FROM `games` INNER JOIN `game_characters` ON `games`.id = `game_characters`.game_id WHERE ((`game_characters`.user_id = 1)) [0m
+  [4;35;1mGame Columns (2.8ms)[0m   [0mSHOW FIELDS FROM `games`[0m
+  [4;36;1mVideo Columns (4.2ms)[0m   [0;1mSHOW FIELDS FROM `videos`[0m
+Rendered user/videos/_video_item (14.7ms)
+Rendered user/videos/_video_item (2.2ms)
+Rendered user/videos/_video_item (2.4ms)
+  [4;35;1mProfile Load (5.3ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 434ms (View: 377, DB: 25) | 200 OK [http://0.0.0.0/videos?id=1]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::VideosController#show (for 127.0.0.1 at 2010-02-24 17:29:22) [GET]
+  Parameters: {"id"=>"2"}
+  [4;35;1mUser Columns (4.5ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mUser Load (1.8ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;35;1mVideo Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `videos`[0m
+  [4;36;1mVideo Load (2.3ms)[0m   [0;1mSELECT * FROM `videos` WHERE (`videos`.`id` = 2) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+Rendering template within layouts/app
+Rendering user/videos/show
+  [4;36;1mSQL (2.8ms)[0m   [0;1mSELECT count(*) AS count_all FROM `videos` WHERE (`videos`.poster_id = 1) [0m
+  [4;35;1mVideo Load (0.5ms)[0m   [0mSELECT * FROM `videos` WHERE (poster_id = 1 AND created_at < '2010-02-05 14:59:27' ) ORDER BY created_at DESC LIMIT 1[0m
+  [4;36;1mVideo Load (0.5ms)[0m   [0;1mSELECT * FROM `videos` WHERE (poster_id = 1 AND created_at > '2010-02-05 14:59:27' ) ORDER BY created_at ASC LIMIT 1[0m
+  [4;35;1mComment Load (0.5ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 2 AND `comments`.commentable_type = 'Video') ORDER BY created_at ASC[0m
+  [4;36;1mAvatar Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.5ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.8ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (212.2ms)
+  [4;36;1mNotification Columns (2.9ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 309ms (View: 255, DB: 22) | 200 OK [http://0.0.0.0/videos/2]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:29:29) [GET]
+
+ActionController::RoutingError (No route matches "/photos/0000/0001/head_1162g70_small.jpg" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::GuildsController#index (for 127.0.0.1 at 2010-02-24 17:29:36) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mUser Columns (4.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (2.5ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mGuild Load (0.8ms)[0m   [0mSELECT * FROM `guilds` WHERE (`guilds`.president_id = 1) [0m
+Rendering template within layouts/app
+Rendering user/guilds/index
+  [4;36;1mGuild Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `guilds`[0m
+  [4;35;1mMembership Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `memberships`[0m
+  [4;36;1mMembership Load (0.4ms)[0m   [0;1mSELECT * FROM `memberships` WHERE (`memberships`.`user_id` = 1) AND (`memberships`.guild_id = 1) LIMIT 1[0m
+  [4;35;1mGuildAlbum Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `albums`[0m
+  [4;36;1mGuildAlbum Load (1.2ms)[0m   [0;1mSELECT * FROM `albums` WHERE (`albums`.owner_id = 1) AND ( (`albums`.`type` = 'GuildAlbum' ) ) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+  [4;36;1mGame Columns (1.6ms)[0m   [0;1mSHOW FIELDS FROM `games`[0m
+  [4;35;1mGame Load (0.2ms)[0m   [0mSELECT * FROM `games` WHERE (`games`.`id` = 318) [0m
+  [4;36;1mMembership Load (0.4ms)[0m   [0;1mSELECT * FROM `memberships` WHERE (`memberships`.`user_id` = 1) AND (`memberships`.guild_id = 2) LIMIT 1[0m
+  [4;35;1mGuildAlbum Load (2.3ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.owner_id = 2) AND ( (`albums`.`type` = 'GuildAlbum' ) ) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `games` WHERE (`games`.`id` = 318) [0m
+Rendered user/guilds/_guild_items (107.9ms)
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mNotification Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 227ms (View: 171, DB: 21) | 200 OK [http://0.0.0.0/guilds?id=1]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Guilds::AlbumsController#show (for 127.0.0.1 at 2010-02-24 17:29:48) [GET]
+  Parameters: {"id"=>"57"}
+  [4;36;1mUser Columns (3.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mGuildAlbum Columns (2.4ms)[0m   [0;1mSHOW FIELDS FROM `albums`[0m
+  [4;35;1mGuildAlbum Load (1.1ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.`id` = 57) AND ( (`albums`.`type` = 'GuildAlbum' ) ) [0m
+  [4;36;1mGuild Columns (1.3ms)[0m   [0;1mSHOW FIELDS FROM `guilds`[0m
+  [4;35;1mGuild Load (0.4ms)[0m   [0mSELECT * FROM `guilds` WHERE (`guilds`.`id` = 1) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mMembership Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `memberships`[0m
+  [4;36;1mMembership Load (0.2ms)[0m   [0;1mSELECT * FROM `memberships` WHERE (`memberships`.`user_id` = 1) AND (`memberships`.guild_id = 1) LIMIT 1[0m
+  [4;35;1mGuildPhoto Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `photos`[0m
+  [4;36;1mGuildPhoto Load (1.0ms)[0m   [0;1mSELECT * FROM `photos` WHERE (`photos`.album_id = 57) AND ( (`photos`.`type` = 'GuildPhoto' ) ) ORDER BY created_at DESC LIMIT 0, 12[0m
+Rendering template within layouts/app
+Rendering user/guilds/albums/show
+  [4;35;1mComment Load (0.5ms)[0m   [0mSELECT * FROM `comments` WHERE (`comments`.commentable_id = 57 AND `comments`.commentable_type = 'Album') ORDER BY created_at ASC[0m
+  [4;36;1mAvatar Columns (5.6ms)[0m   [0;1mSHOW FIELDS FROM `photos`[0m
+  [4;35;1mAvatar Load (0.1ms)[0m   [0mSELECT * FROM `photos` WHERE (`photos`.`id` = 1) AND ( (`photos`.`type` = 'Avatar' ) ) [0m
+  [4;36;1mProfile Load (0.2ms)[0m   [0;1mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;35;1mProfile Columns (4.2ms)[0m   [0mSHOW FIELDS FROM `profiles`[0m
+Rendered user/comments/_comment_box (30.4ms)
+  [4;36;1mNotification Columns (2.2ms)[0m   [0;1mSHOW FIELDS FROM `notifications`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 128ms (View: 64, DB: 26) | 200 OK [http://0.0.0.0/guild_albums/57]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-02-24 17:29:53) [GET]
+
+ActionController::RoutingError (No route matches "/photos/0000/0001/head_1162g70_small.jpg" with {:method=>:get}):
+  -e:2:in `load'
+  -e:2
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing User::Guilds::PhotosController#new (for 127.0.0.1 at 2010-02-24 17:30:04) [GET]
+  Parameters: {"album_id"=>"57"}
+  [4;36;1mUser Columns (4.5ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) LIMIT 1[0m
+  [4;36;1mGuildAlbum Columns (2.5ms)[0m   [0;1mSHOW FIELDS FROM `albums`[0m
+  [4;35;1mGuildAlbum Load (0.2ms)[0m   [0mSELECT * FROM `albums` WHERE (`albums`.`id` = 57) AND ( (`albums`.`type` = 'GuildAlbum' ) ) [0m
+  [4;36;1mGuild Columns (3.7ms)[0m   [0;1mSHOW FIELDS FROM `guilds`[0m
+  [4;35;1mGuild Load (0.1ms)[0m   [0mSELECT * FROM `guilds` WHERE (`guilds`.`id` = 1) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mMembership Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `memberships`[0m
+  [4;36;1mMembership Load (0.1ms)[0m   [0;1mSELECT * FROM `memberships` WHERE (`memberships`.`user_id` = 1) AND (`memberships`.guild_id = 1) LIMIT 1[0m
+Rendering template within layouts/app
+Rendering user/guilds/photos/new
+Rendered shared/_swfupload_form (11.0ms)
+  [4;35;1mProfile Load (2.0ms)[0m   [0mSELECT * FROM `profiles` WHERE (`profiles`.user_id = 1) LIMIT 1[0m
+  [4;36;1mProfile Columns (5.0ms)[0m   [0;1mSHOW FIELDS FROM `profiles`[0m
+  [4;35;1mNotification Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `notifications`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT count(*) AS count_all FROM `notifications` WHERE (((`notifications`.`read` = 0) AND (`notifications`.user_id = 1)) AND (`notifications`.user_id = 1)) [0m
+Completed in 132ms (View: 67, DB: 22) | 200 OK [http://0.0.0.0/guild_photos/new?album_id=57]

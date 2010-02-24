@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理页面</title>
+  <%= stylesheet_link_tag 'common' %>
+	<%= stylesheet_link_tag 'home' %>
+  <%= stylesheet_link_tag 'rating' %>
+  <%= stylesheet_link_tag 'autocomplete' %>
+  <%= stylesheet_link_tag 'pagination' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'facebox' %>
+  <%= javascript_include_tag 'util' %>
+  <%= javascript_include_tag 'iyxzone' %>
+  <%= javascript_include_tag 'menu' %>
+  <%= calendar_date_select_includes "silver" %>
+</head>
+<body>
+
+<div id="header">
+	<div id="navbar">
+		<div id="navwrap">
+			<div id="navmid">
+				<div id="navmain">
+					<%= link_to '<span id="navhome">资源审核</span>', "" %>
+        </div>
+				<div id="navsearch">
+					<% form_tag search_users_url do %>
+						<div class="textfield"><%= text_field_tag 'key', "搜索游戏或游戏达人", :onfocus => "this.clear()" %></div>
+						<input type="submit" class="gobtn" value="" />
+          <% end %>
+        </div>
+				<div id="navextra">
+					<ul>
+            <li><%= link_to "退出", logout_url %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page" class="page_side_wrap s_clear">
+	<!--sidebar-->
+	<div class="sidebar">
+		<div id="appbar" class="round_title_r_t"><div class="round_title_l_t"><div class="round_r_b"><div class="round_l_b">
+			<h1 class="round_title">资源</h1>
+			<div class="round_m"><div class="round_body">
+        <div class="applist">
+          <ul>
+            <li><%= link_to "用户", admin_users_url(:id => current_user.id), :class => 'app-photo' %></li>
+						<li><%= link_to "日志", admin_blogs_url(:id => current_user.id), :class => 'app-log' %></li>
+          </ul>
+        </div>
+			</div></div>
+    </div></div></div></div>
+  </div>
+    
+	<div class="main">
+		<div class="content">
+		  <% if flash[:notice] %>
+				<%= flash[:notice] %>
+			<% end %>
+			<% if flash[:error] %>
+				<%= flash[:error] %>
+			<% end %>
+			<%= yield %>
+		</div>
+	</div>
+
+</div>
+
+<div id="footer">
+	<p>Copyright &copy; 1998-2009 Tencent. All Rights Reserved</p>
+	<p><a href="#">网游公司 版权所有</a></p>
+</div>
+
+</body>
+
+</html>
+

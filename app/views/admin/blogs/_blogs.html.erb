@@ -1,0 +1,19 @@
+<table cellpadding="0">
+  <% unless @blogs.blank? %>
+  <% @blogs.each do |blog| %>
+  <tr id='blog <%= blog.id %>'>
+	<td><div><%= link_to blog.title, admin_blog_url(:id => blog.id) %></div></td>
+    <td><%= blog.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_blog_url(blog), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_blog_url(blog), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @blogs, :renderer => "RemoteLinkRenderer", :remote => @remote %>

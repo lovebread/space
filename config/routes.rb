@@ -42,7 +42,27 @@ ActionController::Routing::Routes.draw do |map|
   
     admin.resources :users, :member => {:enable => :put, :disable => :put, :activate => :put}, :collection => {:search => :get}
 
-    admin.resources :blogs
+    admin.resources :blogs, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :videos, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :statuses, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :comments, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :events, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :guilds, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :polls, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :sharings, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :tags, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :photos, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
+    
+    admin.resources :photo_tags, :member => {:verify => :put, :unverify => :put }, :collection => {:search => :get, :accept => :get, :reject => :get}
 
     admin.resources :applications
 

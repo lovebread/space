@@ -36,6 +36,12 @@ class GuildObserver < ActiveRecord::Observer
     guild.deliver_feeds :recipients => recipients
   end
 
+  def before_update guild 
+    if guild.name_changed? or guild.description_changed?
+      guild.verified = 0
+    end
+  end
+  
   def after_update(guild)
     if guild.name_changed?
       guild.veterans_and_members.each do |member|

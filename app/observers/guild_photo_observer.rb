@@ -21,6 +21,12 @@ class GuildPhotoObserver < ActiveRecord::Observer
     photo.album.raw_increment :photos_count
 	end
 
+  def before_update photo 
+    if photo.notation_changed?
+      photo.verified = 0
+    end
+  end
+  
   def after_destroy photo
     return unless photo.thumbnail.blank?
     

@@ -1,0 +1,18 @@
+<h1>评论内容：</h1>
+
+<div style="padding: 20px 0 20px 20px;">
+<%= @comment.content %>
+</div>
+
+<tr id='comment <%= @comment.id %>'>
+<td>
+	<% if @comment.verified == 0 || @comment.verified == 2 %>
+		<%= link_to_remote '审核通过', :url => verify_admin_comment_url(@comment), :method => :put %>
+	<% end %>
+</td>
+<td>
+	<% if @comment.verified == 0 || @comment.verified == 1 %>
+		<%= link_to_remote '屏蔽', :url => unverify_admin_comment_url(@comment), :method => :put %>
+	<% end %>
+</td>
+</tr> 

@@ -33,6 +33,12 @@ class AvatarObserver < ActiveRecord::Observer
 		avatar.deliver_feeds :recipients => recipients
 	end
 
+  def before_update avatar 
+    if avatar.notation_changed?
+      avatar.verified = 0
+    end
+  end
+  
   def before_destroy avatar
     return false
     #return unless avatar.thumbnail.blank?

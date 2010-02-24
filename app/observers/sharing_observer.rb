@@ -11,6 +11,13 @@ class SharingObserver < ActiveRecord::Observer
     sharing.deliver_feeds :recipients => recipients, :data => {:type => sharing.shareable_type}
   end
 
+  # update verified column
+  def before_update sharing 
+    if sharing.title_changed?
+      sharing.verified = 0
+    end
+  end
+  
   def after_destroy sharing
     sharing.shareable.raw_decrement :sharings_count
 		sharing.poster.raw_decrement :sharings_count

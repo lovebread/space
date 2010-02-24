@@ -1,0 +1,20 @@
+<table cellpadding="0">
+  <% unless @tags.blank? %>
+  <% @tags.each do |tag| %>
+  <tr id='tag <%= tag.id %>'>
+	<td><div><%= link_to tag.name, admin_tag_url(:id => tag.id) %></div></td>
+	<td><%= tag.taggable_type %></td>
+	<td><%= tag.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_tag_url(tag), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_tag_url(tag), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+  <% end %>
+</table>
+<%= will_paginate @tags, :renderer => "RemoteLinkRenderer", :remote => @remote %>
+

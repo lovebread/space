@@ -1,0 +1,21 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <div class="canvas-status"></div>
+    <h1 class="app-setting">所有应用</h1>
+    <div class="box02 canvas_int">
+      <div class="app-list-box">
+        <div class="app-header">
+          共有 <%= @applications.count %> 个应用
+        </div>
+        <% @applications.each do |app| %>
+        <div class="app-list">
+          <div class="link">
+            <%= link_to "编辑关于", edit_admin_application_url(app) %>
+          </div>
+          <h2 class='app-log'><%= app.name %></h2>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

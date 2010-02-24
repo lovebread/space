@@ -1,0 +1,19 @@
+<table cellpadding="0">
+  <% unless @photo_tags.blank? %>
+  <% @photo_tags.each do |photo_tag| %>
+  <tr id='photo_tag <%= photo_tag.id %>'>
+    <td><%= photo_tag.content %></td>
+	<td><%= photo_tag.created_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_photo_tag_url(photo_tag), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_photo_tag_url(photo_tag), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @photo_tags, :renderer => "RemoteLinkRenderer", :remote => @remote %>

@@ -1,0 +1,36 @@
+<h1>视频标题：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<%= @video.title %>
+</div>
+
+<h1>视频描述：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<% if @video.description and @video.description != '' %>
+  <%= @video.description %>
+<% else %>
+  <%= 'nil'%>
+<% end %>
+</div>
+
+<div class='con' id='video_<%= @video.id %>'>
+  <%= video_thumbnail @video %>
+</div>
+
+<h1>视频地址：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<a href=<%= @video.video_url %>><%= @video.video_url %></a>
+</div><br>
+
+
+<tr id='video <%= @video.id %>'>
+<td>
+	<% if @video.verified == 0 || @video.verified == 2 %>
+		<%= link_to_remote '审核通过', :url => verify_admin_video_url(@video), :method => :put %>
+	<% end %>
+</td>
+<td>
+	<% if @video.verified == 0 || @video.verified == 1 %>
+		<%= link_to_remote '屏蔽', :url => unverify_admin_video_url(@video), :method => :put %>
+	<% end %>
+</td>
+</tr> 

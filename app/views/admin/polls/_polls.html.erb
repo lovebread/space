@@ -1,0 +1,21 @@
+<table cellpadding="0">
+  <% unless @polls.blank? %>
+  <% @polls.each do |poll| %>
+  <tr id='poll <%= poll.id %>'>
+	<td><div><%= link_to poll.name, admin_poll_url(:id => poll.id) %></div></td>
+    <td><%= poll.explanation %></td>
+	<td><%= poll.description %></td>
+	<td><%= poll.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_poll_url(poll), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_poll_url(poll), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @polls, :renderer => "RemoteLinkRenderer", :remote => @remote %>

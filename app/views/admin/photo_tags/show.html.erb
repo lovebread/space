@@ -1,0 +1,17 @@
+<h1>照片描述：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<%= @photo_tag.content %>
+</div>
+
+<tr id='photo_tag <%= @photo_tag.id %>'>
+<td>
+	<% if @photo_tag.verified == 0 || @photo_tag.verified == 2 %>
+		<%= link_to_remote '审核通过', :url => verify_admin_photo_tag_url(@photo_tag), :method => :put %>
+	<% end %>
+</td>
+<td>
+	<% if @photo_tag.verified == 0 || @photo_tag.verified == 1 %>
+		<%= link_to_remote '屏蔽', :url => unverify_admin_photo_tag_url(@photo_tag), :method => :put %>
+	<% end %>
+</td>
+</tr> 

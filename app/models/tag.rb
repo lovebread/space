@@ -6,6 +6,12 @@ class Tag < ActiveRecord::Base
 
 	named_scope :profile_tags, :conditions => {:taggable_type => 'Profile'}
 
+  named_scope :unverified, :conditions => {:verified => 0}, :order => "created_at DESC"
+  named_scope :accept, :conditions => {:verified => 1}, :order => "created_at DESC"
+  named_scope :reject, :conditions => {:verified => 2}, :order => "created_at DESC"
+
+  attr_protected :verified
+  
   acts_as_pinyin :name => "pinyin"
 
   searcher_column :pinyin, :name

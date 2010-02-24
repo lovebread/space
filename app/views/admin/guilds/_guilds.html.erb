@@ -1,0 +1,20 @@
+<table cellpadding="0">
+  <% unless @guilds.blank? %>
+  <% @guilds.each do |guild| %>
+  <tr id='guild <%= guild.id %>'>
+	<td><div><%= link_to guild.name, admin_guild_url(:id => guild.id) %></div></td>
+    <td><%= guild.description %></td>
+	<td><%= guild.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_guild_url(guild), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_guild_url(guild), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @guilds, :renderer => "RemoteLinkRenderer", :remote => @remote %>

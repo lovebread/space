@@ -1,0 +1,20 @@
+<table cellpadding="0">
+  <% unless @comments.blank? %>
+  <% @comments.each do |comment| %>
+  <tr id='comment <%= comment.id %>'>
+	<td><div><%= link_to comment.content, admin_comment_url(:id => comment.id) %></div></td>
+	<td><%= comment.commentable_type %></td>
+    <td><%= comment.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_comment_url(comment), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_comment_url(comment), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @comments, :renderer => "RemoteLinkRenderer", :remote => @remote %>

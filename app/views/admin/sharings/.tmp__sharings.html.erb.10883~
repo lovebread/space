@@ -1,0 +1,21 @@
+<table cellpadding="0">
+  <% unless @sharings.blank? %>
+  <% @sharings.each do |sharing| %>
+  <tr id='sharing <%= sharing.id %>'>
+	<td><div><%= link_to sharing.title, admin_sharing_url(:id => sharing.id) %></div></td>
+	<td><%= sharing.reason %></td>
+    <td><%= sharing.shareable_type %></td>
+	<td><%= sharing.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_sharing_url(sharing), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_sharing_url(sharing), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+

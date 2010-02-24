@@ -16,8 +16,15 @@ class BlogObserver < ActiveRecord::Observer
     recipients = [].concat blog.poster.guilds
     recipients.concat blog.poster.friends.find_all{|f| f.application_setting.recv_blog_feed}
     blog.deliver_feeds :recipients => recipients
+    
   end
 
+  def before_update blog 
+    if blog.title_changed? or blog.content_changed? # only title or content changed must update column 'verified'
+      blog.verified = 0
+    end
+  end
+  
   def after_update blog
     # update counter if necessary
 		if blog.draft_was and !blog.draft

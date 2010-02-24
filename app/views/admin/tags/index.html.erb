@@ -1,0 +1,33 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-log">标签</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class='right'>
+          <%= text_field_tag 'search', params[:key] %>
+          <%= observe_field :search,
+                            :complete  => "facebox.watchClickEvents();",
+                            :update    => "sharings",
+                            :frequency => 1,
+                            :url       => search_admin_tags_url,
+                            :with      => "'key='+$('search').value",
+                            :method    => :get  %>
+        </div>
+		<ul>
+          <li class='hover'><span><%= link_to "未审核", admin_tags_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "已通过", accept_admin_tags_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "已屏蔽", reject_admin_tags_url(:id => current_user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="appcontent05">
+        <div class="myblog">
+          <h4 class="gray">共<%= @tags.count %>个标签</h4>
+          <div class="myblog-table" id='users'>
+            <%= render :partial => 'tags', :object => @tags %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+

@@ -1,0 +1,24 @@
+<h1>活动标题：</h1>
+
+<div style="padding: 20px 0 20px 20px;">
+<%= @event.title %>
+</div>
+
+<h1>活动内容：</h1>
+
+<div style="padding: 20px 0 20px 20px;">
+<%= @event.description %>
+</div>
+
+<tr id='event <%= @event.id %>'>
+<td>
+	<% if @event.verified == 0 || @event.verified == 2 %>
+		<%= link_to_remote '审核通过', :url => verify_admin_event_url(@event), :method => :put %>
+	<% end %>
+</td>
+<td>
+	<% if @event.verified == 0 || @event.verified == 1 %>
+		<%= link_to_remote '屏蔽', :url => unverify_admin_event_url(@event), :method => :put %>
+	<% end %>
+</td>
+</tr> 

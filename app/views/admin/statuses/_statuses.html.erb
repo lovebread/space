@@ -1,0 +1,19 @@
+<table cellpadding="0">
+  <% unless @statuses.blank? %>
+  <% @statuses.each do |status| %>
+  <tr id='status <%= status.id %>'>
+	<td><%= link_to status.content, admin_status_url(:id => status.id) %></td>
+    <td><%= status.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_status_url(status), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_status_url(status), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @statuses, :renderer => "RemoteLinkRenderer", :remote => @remote %>

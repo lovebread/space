@@ -1,0 +1,21 @@
+<table cellpadding="0">
+  <% unless @events.blank? %>
+  <% @events.each do |event| %>
+  <tr id='event <%= event.id %>'>
+	<td><div><%= link_to event.title, admin_event_url(:id => event.id) %></div></td>
+    <td><%= event.description %></td>
+	<td><%= event.updated_at %></td>
+    <td>
+      <%= link_to_remote '审查通过', :url => verify_admin_event_url(event), :method => :put %>
+    </td>
+	<td>
+      <%= link_to_remote '屏蔽', :url => unverify_admin_event_url(event), :method => :put %>
+    </td>
+    
+  </tr> 
+  <% end %>
+ 
+  <% end %>
+</table>
+<%= will_paginate @events, :renderer => "RemoteLinkRenderer", :remote => @remote %>
+

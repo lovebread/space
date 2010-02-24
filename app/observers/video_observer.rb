@@ -13,6 +13,12 @@ class VideoObserver < ActiveRecord::Observer
 		video.deliver_feeds :recipients => recipients
 	end
 
+  def before_update video 
+    if video.title_changed? or video.video_url_changed? # only title or url changed must update column 'verified'
+      video.verified = 0
+    end
+  end
+  
   def after_update video
     if video.privilege == 4 and video.privilege_was != 4
       video.destroy_feeds

@@ -16,6 +16,12 @@ class Poll < ActiveRecord::Base
 
   named_scope :recent, :conditions => ["created_at > ? AND ((no_deadline = 0 AND deadline > ?) OR no_deadline = 1)", 2.weeks.ago.to_s(:db), Date.today.to_s(:db)], :order => 'created_at DESC'
 
+  named_scope :unverified, :conditions => {:verified => 0}, :order => "created_at DESC"
+  named_scope :accept, :conditions => {:verified => 1}, :order => "created_at DESC"
+  named_scope :reject, :conditions => {:verified => 2}, :order => "created_at DESC"
+
+  attr_protected :verified
+  
   acts_as_diggable
 
   acts_as_shareable

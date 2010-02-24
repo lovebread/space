@@ -1,0 +1,46 @@
+<h1>投票名称：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<%= @poll.name %>
+</div>
+
+<h1>投票描述：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<% if @poll.description != '' %>
+  <%= @poll.description %>
+<% else %>
+  <%= 'nil'%>
+<% end %>
+</div>
+
+<h1>投票说明：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<% if @poll.explanation != ''%>
+  <%= @poll.explanation %>
+<% else %>
+  <%= 'nil'%>
+<% end %>
+</div>
+
+<h1>投票选项：</h1>
+<div style="padding: 20px 0 20px 20px;">
+<table class="vote-status-table" cellpadding="0">
+<% @poll.answers.each_with_index do |answer, i| %>
+<tr>
+  <td class="title"><%= answer.description %></td>
+</tr>
+<% end %>
+</table>
+</div>
+
+<tr id='poll <%= @poll.id %>'>
+<td>
+	<% if @poll.verified == 0 || @poll.verified == 2 %>
+		<%= link_to_remote '审核通过', :url => verify_admin_poll_url(@poll), :method => :put %>
+	<% end %>
+</td>
+<td>
+	<% if @poll.verified == 0 || @poll.verified == 1 %>
+		<%= link_to_remote '屏蔽', :url => unverify_admin_poll_url(@poll), :method => :put %>
+	<% end %>
+</td>
+</tr> 

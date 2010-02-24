@@ -37,6 +37,12 @@ class EventObserver < ActiveRecord::Observer
     event.deliver_feeds :recipients => recipients
   end
 
+  def before_update event 
+    if event.title_changed? or event.description_changed? # only title or url changed must update column 'verified'
+      event.verified = 0
+    end
+  end
+  
   def after_update event
     if event.time_changed?
       event.participants.each do |participant|

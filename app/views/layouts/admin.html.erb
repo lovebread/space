@@ -11,8 +11,11 @@
   <%= stylesheet_link_tag 'pagination' %>
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'facebox' %>
+	<%= javascript_include_tag 'in_place_editor_extension' %>
   <%= javascript_include_tag 'util' %>
   <%= javascript_include_tag 'iyxzone' %>
+	<%= javascript_include_tag 'emotion' %>
+	<%= javascript_include_tag 'video' %>
   <%= javascript_include_tag 'menu' %>
   <%= calendar_date_select_includes "silver" %>
 </head>
@@ -51,6 +54,15 @@
           <ul>
             <li><%= link_to "用户", admin_users_url(:id => current_user.id), :class => 'app-photo' %></li>
 						<li><%= link_to "日志", admin_blogs_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "照片", admin_photos_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "视频", admin_videos_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "状态", admin_statuses_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "活动", admin_events_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "工会", admin_guilds_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "投票", admin_polls_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "分享", admin_sharings_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "评论|留言", admin_comments_url(:id => current_user.id), :class => 'app-log' %></li>
+						<li><%= link_to "标签|印象", admin_tags_url(:id => current_user.id), :class => 'app-log' %></li>
           </ul>
         </div>
 			</div></div>

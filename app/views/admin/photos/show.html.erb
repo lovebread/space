@@ -1,0 +1,28 @@
+<h1>照片名称：</h1>
+
+<div style="padding: 20px 0 20px 20px;">
+<%= @photo.filename %>
+</div>
+
+<h1>照片注释：</h1>
+
+<div style="padding: 20px 0 20px 20px;">
+<%= @photo.notation %>
+</div>
+
+<div style="padding: 20px 0 20px 20px;">
+<p><%= image_tag @photo.public_filename, :id => "photo_#{@photo.id}" %></p>
+</div>
+
+<tr id='photo <%= @photo.id %>'>
+<td>
+	<% if @photo.verified == 0 || @photo.verified == 2 %>
+		<%= link_to_remote '审核通过', :url => verify_admin_photo_url(@photo), :method => :put %>
+	<% end %>
+</td>
+<td>
+	<% if @photo.verified == 0 || @photo.verified == 1 %>
+		<%= link_to_remote '屏蔽', :url => unverify_admin_photo_url(@photo), :method => :put %>
+	<% end %>
+</td>
+</tr> 

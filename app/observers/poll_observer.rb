@@ -18,6 +18,13 @@ class PollObserver < ActiveRecord::Observer
     poll.deliver_feeds :recipients => recipients
   end
 
+  # update verified column
+  def before_update poll 
+    if poll.name_changed? or poll.explanation_changed? or poll.description_changed? 
+      poll.verified = 0
+    end
+  end
+  
   def after_update poll
     if poll.summary_changed?
       poll.voters.each do |voter|
