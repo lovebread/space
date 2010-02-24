@@ -1,0 +1,57 @@
+<%= javascript_include_tag "password" %>
+
+    <div class="welcome-box02">
+      <div class="box-v2 space20">
+        <div class="t s_clear"><strong class="get-pws"></strong><span></span></div>
+          <div class="m rows">
+            <% form_tag url_for(:controller => 'passwords', :action => 'create'), :id => 'password_form' do %>
+              <div class="form-con" style="padding-left:40px">
+                    <div class="rows s_clear">
+                        <div class="f-id">&nbsp;</div>
+                        <div class="f-value">
+输入您的登录帐号(Email)
+                        </div>
+                    </div>
+                    <div class="rows s_clear space">
+                        <div class="f-id"><label for="mail">Email：</label></div>
+                        <div class="f-value">
+                            <%= text_field_tag 'email', '' %>
+                        </div>
+                    </div>
+                    <div class="rows s_clear space">
+                        <div class="f-id"><label for="code">验证码：</label></div>
+                        <div class="f-value">
+                           <%= text_field_tag 'validation_code', '', :size => 4 %>
+                        </div>
+                    </div>
+                    <div class="rows s_clear space">
+                        <div class="f-id">&nbsp;</div>
+                        <div class="f-value">
+                          请输入下图中字符，不区分大小写<br />
+                          <span id='validation'></span><%= link_to_function "看不清楚，换一张", "Iyxzone.Password.resetValidation()"%>
+                        </div>
+                    </div>
+                    <div class="rows s_clear space20">
+                        <div class="f-id">&nbsp;</div>
+                        <div class="f-value">
+                              <span class="button rows"><span>
+                                <%= button_to_function '发送邮件', "Iyxzone.Password.send(this, event)" %>
+                                </span></span>
+                        </div>
+                    </div>
+                  </div>
+                <% end %>
+                     <div class="jl-cutline" style="margin:0 auto;width:95%;">&nbsp;</div>
+                    <div class="foot space20 rows">
+                     <p class="gray" style="margin:0 auto;width:50%;">
+                    <strong>如何找回密码?</strong><br />
+        设置过密码保护的用户,可以通过回答密保问题或者使用密保手机来设置新密码；<br />
+        没有设置过密码保护的用户通过使用注册邮箱找回密码；<br />
+        忘记密码保护或者邮箱被盗的用户只能通过帐号申诉来找回密码。
+                    </p>
+                    </div>
+            </div>
+        <div class="b"><span></span></div>
+      </div>
+    </div>
+<%= javascript_tag "Iyxzone.Password.resetValidation();" %>

@@ -1,0 +1,4 @@
+commentable = @comment.commentable
+commentable_class = commentable.class.name.underscore
+page.insert_html :bottom, "#{commentable_class}_comments_#{commentable.id}", :partial => 'comment', :object => @comment
+page << "$('#{commentable_class}_comment_content_#{commentable.id}').value = '';"

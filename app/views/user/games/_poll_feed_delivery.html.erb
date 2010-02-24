@@ -1,0 +1,20 @@
+<% delivery = poll_feed_delivery %>
+<% poll = delivery.feed_item.originator %>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="img left">
+		<div class="imgbox01"><%= avatar poll.poster %></div>
+	</div>
+	<div class="jl-list-con jl-cutline">
+		<%= profile_link poll.poster %>发布了投票<%= poll_link poll, :class => "shine" %>
+		<% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html =>{ :class => "icon-active"} %><% end %> 
+		<ul class='gray jl-con s_clear'>
+      <% poll.answers[0..2].each do |a| %>
+        <li><%= check_box_tag '', '', false, :disabled => true %><%= (truncate a.description, :length => 20, :omission => "...") %></li>
+      <% end %>
+    </ul>
+		<p class="gray"><%= ftime delivery.created_at %> <%= link_to_function "评论", "Iyxzone.Comment.showForm('poll', #{poll.id}, null);", :class => "gray"%></p>
+		<%= render :partial => "user/comments/folded_comment_box", :locals => {:commentable => poll , :recipient => poll.poster} %>
+	</div>
+	</div>
+</div>

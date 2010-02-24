@@ -1,0 +1,28 @@
+  <table class="vote-table" cellpadding="0">
+  <% poll_items.each do |poll| %>
+    <tr>
+      <th class="img">
+        <div class="imgwrap"><%= avatar poll.poster, :class => 'imgbox01' %></div>
+        <p><%= profile_link poll.poster %></p>
+      </th>
+      <td class="vote-content">
+        <h5><%= poll_link poll %><span>  <%= distance_of_time_in_words_to_now(poll.created_at) %> ago</span></h5>
+        <div class="formcontent">
+          <% poll.answers[0..2].each_with_index do |a, i| %>
+          <div class="rows s_clear">
+            <div class="fldcb"><%= radio_button_tag '', '', false, :disabled => true%></div>
+            <div class="fldvalue"><label><%= (i+1) %>. <%= a.description %></label></div>
+          </div>
+          <% end %>
+        </div>
+        <p>...</p>
+      </td>
+      <td class="status">
+        <div class="vote-icon">
+          <h5><%= poll.votes_count %>人</h5>
+          <p>参与投票</p>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </table>

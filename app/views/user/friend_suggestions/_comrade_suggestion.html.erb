@@ -1,0 +1,8 @@
+<li id='comrade_suggestion_<%= comrade_suggestion.id %>' suggestion_id=<%= comrade_suggestion.id %>>
+<% f = comrade_suggestion.comrade %>
+<%= avatar f, :size => :medium, :class => "imgbox01" %>
+<p><strong class='red'><%= profile_link f %></strong></p>
+<%= link_to_function '', "Iyxzone.Comrade.Suggestor.newSuggestion(#{comrade_suggestion.server_id}, #{comrade_suggestion.id}, '#{form_authenticity_token}')", :class => 'right icon-active icon-active-del' %>
+<br/>
+<%= facebox_link "<span class='icon-friend02'></span>加为好友", new_friend_request_url(:friend_id => f.id), :class => "red" %>
+</li>

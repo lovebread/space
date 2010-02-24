@@ -1,0 +1,9 @@
+<div>
+<% fields_for "guild[new_rules][]", new_rule do |r| %>
+  <div><label>原因: </label></div>
+  <div><%= r.text_field :reason %></div>
+  <div><label>赏罚: </label></div>
+  <div><%= r.text_field :outcome %></div 
+<% end %>
+<%= link_to_function "x", "Iyxzone.Guild.Editor.removeNewBasicRule(this)" %>
+</div>

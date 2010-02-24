@@ -1,0 +1,40 @@
+ActsAsEmotionText
+=================
+
+用来对内容添加表情。
+
+Install
+=======
+
+cd /path/to/this/plugin
+
+ruby install
+
+Example
+=======
+
+如果blog的内容里需要增加表情支持（假设blog表里列content表示其内容）
+
+class Blog < ActiveRecord::Base
+
+	acts_as_emotion_text :columns => [:content] # you can specify multiple columns here 
+
+end
+
+然后在blog的view里，增加选择表情的连接：
+
+<% form_for :blog, blogs_url do |f| %>
+	...
+	<%= f.text_area :content, :id => 'blog_content' %>
+	...
+<% end %>
+
+<%= emotion_link 'blog_content' %>
+
+How to extend this plugin with my own expressions?
+=================================================
+
+很容易，打开/lib/acts_as_emotion_text，修改Symbols和ImagePaths这2个数组，
+然后到/assets/javascripts/emotion.js里修改那个symbol和path数组,最后复制新js文件到public/javascripts下
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

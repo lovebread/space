@@ -1,0 +1,16 @@
+<% delivery = avatar_feed_delivery %>
+<% avatar = delivery.feed_item.originator %>
+<% album = avatar.album %>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="feed-icon icon-photo"></div>
+  <% if delivery.is_deleteable_by? current_user %><%= link_to_remote "x", :url => feed_delivery_url(delivery), :method => :delete %><% end %>
+	<p><%= profile_link album.poster %> <span>更新了头像</span> </p>
+		<p class="gray s_clear">
+			<%= photo_link avatar, :size => :medium, :class => 'imgbox01' %>
+		</p>
+		<p class='gray'><%= ftime delivery.created_at %> <%= link_to_function "评论", "Iyxzone.Comment.showForm('avatar', #{avatar.id}, null);" %></p>
+	  <%= render :partial => "user/comments/folded_comment_box", :locals => {:commentable => avatar , :recipient => avatar.poster} %>
+  </div>
+</div>
+

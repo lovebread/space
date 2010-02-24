@@ -1,0 +1,30 @@
+PrivilegedResources
+===================
+
+对资源增加权限控制，这个插件默认的条件是：
+
+每个资源有４个权限：
+所有人
+好友及相同游戏的玩家
+仅好友
+自己
+
+只提供一个接口： viewable(relationship, conditions)
+
+Example
+=======
+
+比如app/model/blog.rb
+class Blog < ActiveRecord::Base
+
+	acts_as_privilege_resources
+
+end
+
+如果我要知道对于用户gaoxh，我的哪些博客是可见的，你可以使用
+current_user.blogs.viewable(gaoxh.id)
+
+如果你想更进一步知道我的哪些博客对gaoxh是可见的，而且是关于游戏wow的
+current_user.blogs.viewable(gaoxh.id, :conditions => {:game_id => wow.id})
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

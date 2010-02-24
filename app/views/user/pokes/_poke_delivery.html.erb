@@ -1,0 +1,14 @@
+<% poke = poke_delivery.poke %>
+<div class='poke' id="poke_delivery_<%= poke_delivery.id%>">
+  <div class='icon'>
+    <%= avatar poke_delivery.sender %>
+  </div>
+  <div class='content'>
+		<%= image_tag poke.path %>
+		<span><%= poke_action poke_delivery %></span>
+	</div>
+  <div class='operation'>
+    <%= link_to 'reply', new_poke_url(:id => poke_delivery.sender_id), :rel => 'facebox' %> |
+    <%= facebox_confirm 'delete', poke_url(poke_delivery), {:method => :delete, :msg => '你确定要删除这条招呼吗'} %> 
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<%= javascript_tag "new nicEditor({iconsPath:'/images/nicEditorIcons.gif'}).panelInstance('post_content');" %>
+
+<div class='new-post'>
+<%= error_messages_for :post, :header_message => '以下原因导致保存失败', :message => nil %>
+
+<% form_for :post, :url => forum_topic_posts_url(@forum, @topic), :html => {:onsubmit => 'return validate_post();'} do |f| %>
+  <%= f.text_area :content, :rows => 8, :cols => 60 %><br/>
+  <%= f.submit '提交', :class => 'confirm-button' %>
+<% end %>
+</div>

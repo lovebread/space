@@ -1,0 +1,79 @@
+one:
+  id: 1
+  level: 1
+  game_id: 1
+  area_id: 1
+  server_id: 1
+  user_id: 1
+  race_id: 1
+  profession_id: 1
+
+two:
+  id: 2
+  level: 1
+  game_id: 1
+  area_id: 1
+  server_id: 1
+  user_id: 1
+  race_id: 1
+  profession_id: 1
+
+three:
+  id: 3
+  level: 1
+  game_id: 1
+  area_id: 1
+  server_id: 1
+  user_id: 2
+  race_id: 1
+  profession_id: 1
+
+four:
+  id: 4
+  level: 1
+  game_id: 1
+  area_id: 1
+  server_id: 1
+  user_id: 2
+  race_id: 1
+  profession_id: 1
+
+five:
+  id: 5
+  level: 1
+  game_id: 1
+  area_id: 1
+  server_id: 1
+  user_id: 3
+  race_id: 1
+  profession_id: 1
+
+six:
+  id: 6
+  level: 1
+  game_id: 1
+  area_id: 2
+  server_id: 3
+  user_id: 3
+  race_id: 1
+  profession_id: 1
+
+seven:
+  id: 7
+  level: 1
+  game_id: 1
+  area_id: 1
+  server_id: 1
+  user_id: 4
+  race_id: 1
+  profession_id: 1
+
+eight:
+  id: 8
+  level: 1
+  game_id: 2
+  server_id: 4
+  user_id: 4
+  race_id: 2
+  profession_id: 2
+

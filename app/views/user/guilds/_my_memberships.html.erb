@@ -1,0 +1,26 @@
+<div class="multibox">
+  <div class="title">
+    <b>我在工会中的游戏角色</b>
+  </div>
+  <table class="data-table jl-data-table" cellpadding="0">
+    <tr>
+      <th class="name name02">游戏角色名称</th>
+      <th class="level level02">角色情况</th>
+    </tr>
+      <% @memberships.group_by(&:status).each do |status, memberships| %>
+        <% memberships.each do |m| %>
+          <% if status == Membership::President %>
+            <tr><td><%= m.character.name %></td><td>会长</td></tr>
+          <% elsif status == Membership::Veteran %>
+            <tr><td><%= m.character.name %></td><td>长老</td></tr>
+          <% elsif status == Membership::Member %>
+            <tr><td><%= m.character.name %></td><td>会员</td></tr>
+          <% elsif status == Membership::Invitation %>
+            <tr><td><%= m.character.name %></td><td><%= facebox_link "回复", edit_guild_invitation_url(@guild, m) %>]</td></tr>
+          <% elsif status == Membership::Request %>
+            <tr><td><%= m.character.name %></td><td><%= "请求加入.." %></td></tr>
+          <% end %>
+        <% end %>
+      <% end %>
+  </table>
+</div>

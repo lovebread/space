@@ -1,0 +1,20 @@
+ActsAsCommentable
+=================
+
+很简单的插件，不提供任何接口，因为实在想不出有啥接口是需要的
+
+Example
+=======
+
+class Blog < ActiveRecord::Base
+
+	acts_as_commentable 
+
+end
+
+如果想要指定order，使用
+
+acts_as_commentable :order => "created_at DESC"
+
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

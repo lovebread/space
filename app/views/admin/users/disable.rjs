@@ -1,0 +1,2 @@
+page << "$('user_#{@user.id}').innerHTML = '#{link_to_remote 'enable', enable_admin_user_url(@user)}';"
+

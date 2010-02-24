@@ -1,0 +1,19 @@
+<ul id='members'>
+<% memberships.each do |membership| %>
+  <% character = membership.character %>
+  <% user = membership.user %>
+  <li id='<%= "guild_request_#{membership.id}" %>' >
+    <%= avatar user, :class => 'imgbox01' %>
+    <p>
+      <%= profile_link user, :class => 'blk' %>
+      <span class='red blk'> <%= membership.character.name %></span>
+      <% if current_user == @guild.president %>
+      <span id='guild_request_option_<%= membership.id %>'>
+        <%= link_to_remote '接受', :url => accept_guild_request_url(@guild, membership), :method => 'put', :class => 'blk gray02' %>
+        <%= link_to_remote '拒绝', :url => decline_guild_request_url(@guild, membership), :method => 'delete' %>
+      </span>
+      <% end %>
+    </p>
+  </li>
+<% end %>
+</ul>

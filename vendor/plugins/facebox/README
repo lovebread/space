@@ -1,0 +1,32 @@
+Facebox
+=======
+
+一个类似于lightbox, redbox之类的弹出窗口插件，之所以不用已有的这2个，是出于2点考虑：
+
+1。 刚学javascript，练习下
+
+2。 自己写以后扩展容易
+
+Example
+=======
+
+<%= facebox_link url %>
+点击这个连接后，会直接弹出一个窗口
+
+<%= facebox_error message %>
+会调出一个红色窗口，上面显示message信息, 该窗口过２s后自动关闭
+
+<%= facebox_notice message %>
+和上面facebox_error基本一样，就是css不一样
+
+<%= facebox_confirm msg, url, msg_options, facebox_options %>
+弹出一个确认窗口，如果你按确认，会发请求至url，如果按取消，则该窗口消失
+
+<%= facebox_confirm_with_vaidation %>
+参数和上面facebox_confirm一致，就是需要输入验证
+
+Extension
+=========
+如果要修改css样式，到/assets/javascripts/facebox.js里去修改
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

@@ -1,0 +1,14 @@
+万能代码: <%= text_field_tag 'invite_code', invite_url(:token => current_user.invite_code), :enabled => false %>
+
+<% form_remote_for :invitation, @invitation, :url => signup_invitations_url do |f| %>
+<div id='qq_invite'></div>
+好友QQ: <%= f.text_field 'qq', :value => '输入你好友的QQ号码', :onfocus => "this.clear();" %>
+<%= f.submit '提交' %>
+<% end %>
+
+<% form_remote_for :invitation, @invitation, :url => signup_invitations_url do |f| %>
+<div id='email_invite'></div>
+好友邮件: <%= f.text_field 'recipient_email', :value => '输入你好友的邮件', :onfocus => "this.clear();" %>
+<%= f.submit '提交' %>
+<% end %>
+

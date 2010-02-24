@@ -1,0 +1,2 @@
+module User::DraftsHelper
+end

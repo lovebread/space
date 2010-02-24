@@ -1,0 +1,8 @@
+<ul>  
+  <% @friends.each do |friend| %>
+    <li class='icon' onmouseover="Iyxzone.Invitation.Builder.onMouseOver(this, <%= friend.id %>);" onmouseout="Iyxzone.Invitation.Builder.onMouseOut(this, <%= friend.id %>);" onclick="Iyxzone.Invitation.Builder.onClick(this, <%= friend.id %>);">
+      <%= avatar_image friend, :class=>'imgbox01' %>
+      <strong><%= friend.login %></strong>
+    </li>
+  <% end %>
+</ul>

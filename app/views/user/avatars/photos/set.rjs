@@ -1,0 +1,7 @@
+if params[:show].to_i == 0
+  flash[:notice] = "修改成功"
+  page.redirect_to avatar_album_url(@album)
+elsif params[:show].to_i == 1
+  flash[:notice] = "修改成功"
+  page.redirect_to avatar_url(@photo)
+end

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>邀请好友注册</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="css/home.css" rel="stylesheet" type="text/css" media="screen" />
+<style type="text/css">
+#canvas .canvas_wrap .canvas_l {width:200px;}
+#canvas .canvas_wrap .canvas_main .canvas_main_c {margin-left:200px;}
+#canvas .canvas_wrap .canvas_main {margin-left:-200px;}
+#canvas .canvas_wrap .canvas_m {margin-right:-260px;}
+#canvas .canvas_wrap .canvas_m .canvas_c {margin-right:260px;}
+#canvas .canvas_wrap .canvas_r {width:260px;}
+#leftsidebar .mcAvatar {width:150px;height:190px;margin-top:10px}
+.mcAvatar a {width:160px}
+a,.menu-icon-list li a span,.photolist-box li{color:#333}
+#navbar .top_link {line-height:39px;}
+.invite-reg h2{font-size:16px;font-weight:700;color:#333;margin:10px 0}
+.invite-reg p{font-size:14px;font-weight:700;line-height:24px;margin:10px 0 0 0;}
+.go-reg{text-align:center;line-height:30px;color:#666;margin:20px 0}
+.go-reg a{text-decoration:underline;color:#666;}
+.go-reg .btn{background:url(images/welcome/invite-reg.png) no-repeat;width:160px;height:27px;display:inline-block}
+.photolist-box li{width:80px}
+</style>
+</head>
+<body>
+<div id="header">
+  <!--navbar-->
+  <div id="navbar">
+    <div id="navwrap">
+      <div id="navmid">
+        <a href="#" class="logo-top png" title="17gaming"></a>
+        <p class="top_link right">
+          <%= link_to "登录", login_url, :class => "w-l" %> <%= link_to "17Gaming首页", login_url %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!--navbar-->
+</div>
+<div id="page">
+  <div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+    <div class="round_m"><div class="round_body canvas_wrap s_clear">
+      <div id="leftsidebar" class="canvas_l">
+        <div class="mcAvatar">
+          <a href="#"></a>
+          <div class="picwrap">
+            <div class="middle"><div class="middle-center"><div class="center">
+              <%= avatar_image @sender %>
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="canvas_main"><div class="canvas_main_c s_clear">
+        <div class="canvas_m">
+          <div class="canvas_c">
+            <div class="invite-reg canvas_con">
+              <h2>
+                我是<%= @sender.login %>，邀请你来17gaming.com
+              </h2>
+              <div class="profile-list menu-icon-list s_clear">
+                <ul>
+                  <li><a href="#"><span class="icon-game"></span>我的游戏<span>(<%= @sender.games_count %>)</span></a></li>
+                  <li><a href="#"><span class="icon-blog"></span>我的日志<span>(<%= @sender.blogs_count %>)</span></a></li>
+                  <li><a href="#"><span class="icon-photo"></span>我的照片<span>(<%= @sender.photos_count %>)</span></a></li>
+                  <li><a href="#"><span class="icon-video"></span>我的视频<span>(<%= @sender.videos_count %>)</span></a></li>
+                  <li><a href="#"><span class="icon-share"></span>我的分享<span>(<%= @sender.sharings_count %>)</span></a></li>
+                  <li><a href="#"><span class="icon-cons"></span>我的公会<span>(<%= @sender.guilds_count %>)</span></a></li>
+                </ul>
+              </div>
+              <p>一起游戏网(17gaming)是让网络游戏玩家分享游戏心情，共享心得体验,重拾昔日情意的社交平台。</p>
+              <p>我们期待您的加入，与我们共建网络游戏玩家的精神家园。</p>
+              <div class="go-reg">
+                <%= link_to "", signup_url(:token => params[:token]), :class => 'btn' %><br/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="rightsidebar" class="canvas_r">
+          <div class="multibox space">
+            <div class="title">
+              <b>我的游戏资料</b>
+            </div>
+            <table class="data-table jl-data-table" cellpadding="0">
+              <tr>
+                <th class="name">游戏名称</th>
+                <th class="id">玩家昵称</th>
+                <th class="level">等级</th>
+              </tr>
+              <% @sender.characters.each do |c| %>
+              <tr>
+                <td class="name"><a href="#"><%= c.game.name %></a></td>
+                <td class="id"><a href="#"><%= c.name %></a></td>
+                <td class="level"><%= c.level %>级</td>
+              </tr>
+              <% end %>
+            </table>
+          </div>
+          <div class="multibox">
+            <div class="title">
+              <b>我的 <%= @friends.count %> 位好友</b>
+            </div>
+            <div class="photolist-box">
+              <ul class="collection s_clear">
+                <% @friends.each do |f| %>
+                  <li>
+                    <div class="middle"><div class="middle-center"><div class="center"><%= avatar_image f, :class => "imgbox01" %></div></div></div>
+                    <p><%= f.login %></p>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div></div>
+  </div></div></div></div>
+</div>
+<div id="footer">
+  <p>Copyright &copy; 1998-2009 Tencent. All Rights Reserved</p>
+    <p><a href="#">网游公司 版权所有</a></p>
+</div>
+</body>
+</html>

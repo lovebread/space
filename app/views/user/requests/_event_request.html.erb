@@ -1,0 +1,14 @@
+<% request = event_request %>
+<div class="request-box" id='event_request_<%= request.id %>'>
+  <h4><span> <%= ftime request.created_at %> </span>好友</h4>
+  <div class="request-list s_clear">
+    <div class="img"><%= avatar request.participant %> </div>
+    <div class="info">
+      <p> <%= profile_link request.participant %> 请求加入你的活动 <%= event_link request.event %>, 是否同意？</p>
+      <div class="buttons" id='event_request_option_<%= request.id %>'>
+        <%= link_to_remote '<span>同意</span>', :url => accept_event_request_url(request.event, request), :method => :put, :html => {:class => "button"} %>
+        <%= facebox_confirm '<span>拒绝</span>', decline_event_request_url(request.event, request), {:msg => '你确定要拒绝吗?', :method => :delete}, {:class => "button button-gray"} %>
+      </div>
+    </div>
+  </div>
+</div>

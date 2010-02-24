@@ -1,0 +1,24 @@
+<%= javascript_include_tag "event" %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <div class="friend-head space s_clear">
+      <span class="left"><%= album_cover_image @event.album, :class => "imgbox01" %></span>
+      <p class="left">
+        <strong><%= @event.title %></strong><br />
+        <%= link_to "活动主页", event_url(@event), :class => "red" %>
+      </p>
+    </div>
+    <div class="box02 canvas_int space">
+      <% if params[:step].to_i == 1 %>
+        <%= render :partial => 'attendance' %>
+      <% elsif params[:step].to_i == 2 %>
+        <%= render :partial => 'boss' %>
+      <% elsif params[:step].to_i == 3 %>
+        <%= render :partial => 'gear' %>
+      <% elsif params[:step].to_i == 4 %>
+        <%= render :partial => 'reward' %>
+      <% end %>
+    </div>
+  </div></div>
+</div></div></div></div>

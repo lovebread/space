@@ -1,0 +1,34 @@
+<ul id='members'>
+  <% membership = memberships.first %>
+	<% user = membership.user %>
+  <li class='bg' id='<%= "membership_#{membership.id}" %>' >
+    <div class='card'>
+      <%= link_to_function '', "", :class => "icon-active right" %>
+      <div class='img'>
+        <div class='middle'><div class='middle-center'><div class='center'>
+          <%= avatar user, :class => 'imgbox01' %>
+        </div></div></div>
+      </div>
+      <div class='info member s_clear'>
+        <h4><%= profile_link user, :class => 'blk' %></h4>
+        <span class='red nowrap'><%= membership.character.name %></span>
+        <div class='selector01'>
+          <span>
+          <% if membership.is_veteran? %>
+            <a class='level-toggle blk'>长老</a>
+          <% else %>
+            <a class='level-toggle blk'>会员</a>
+          <% end %>
+          </span>
+          <div class='drop-wrap'>
+            <div class='wrap-bg'></div>
+            <dl>
+              <dd class='jl-cutline'></dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </li>
+</ul>
+

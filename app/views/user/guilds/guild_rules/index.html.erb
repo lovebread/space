@@ -1,0 +1,18 @@
+<%= javascript_include_tag 'guild_rule' %>
+
+<h3>出勤规定</h3>
+<div id='attendance_rule'>
+<%= render :partial => 'attendance_rule' %>
+</div>
+<h3>Boss得分</h3>
+<div id='boss_rule'>
+<%= render :partial => '/user/guilds/bosses/boss' %>
+</div>
+<h3>装备基本分</h3>
+<div id='gear_rule'>
+<%= render :partial => '/user/guilds/gears/gear' %>
+</div>
+<h3>基本规定</h3>
+<div id='basic_rule'>
+<%= render :partial => 'basic_rule' %>
+</div>

@@ -1,0 +1,4 @@
+if params[:at].to_i == 0
+  page.replace_html "game_attention_#{@game.id}", (link_to_remote "关注", :url => game_attentions_url(@game, :at => 0))
+elsif params[:at].to_i == 1
+end

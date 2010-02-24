@@ -1,0 +1,28 @@
+<% delivery = avatar_feed_delivery %>
+<% avatar = delivery.feed_item.originator %>
+<% album = avatar.album %>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="img left">
+		<div class="imgbox01"><%= avatar album.poster %></div>
+	</div>
+	<div class="jl-list-con jlcutline">
+	<%= profile_link album.poster %> <span>更新了<%= link_to "个人头像", avatar_albums_url(album), :class => "shine"%></span>
+  <% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %><% end %>
+  <p class="gray jl-con">
+		<div class="mcAvatar jl-gray-bd">
+			<div class="picwrap">
+				<div class="middle">
+					<div class="middle-center">
+						<div class="center">
+							<%= photo_link avatar, :size => :large %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</p>
+	<p class="gray"><%= ftime delivery.created_at %></p>
+  </div>
+</div>
+</div>

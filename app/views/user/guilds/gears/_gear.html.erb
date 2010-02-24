@@ -1,0 +1,8 @@
+<div class='gear_rule_div_rows'>
+<%= link_to_function '编辑', "Iyxzone.GuildRule.Editor.editGearRule(#{@guild.id})" %>
+<%= link_to_function '新增', "Iyxzone.GuildRule.Editor.addGearRule(#{@guild.id})" %>
+<br>
+<% @guild.gears.each do |gear| %>
+	<%= gear.name -%> <%= gear.cost %><br>
+<% end %>
+</div>

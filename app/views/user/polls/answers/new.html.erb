@@ -1,0 +1,24 @@
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h3>增加选项</h3>
+</div>
+
+<div id='error'></div>
+<% form_remote_tag :url => poll_answers_url(@poll) do %>
+<div class='formcontent'>
+<div class='content'>
+  <div id='poll_answers'>
+    <%= render :partial => 'user/polls/answer_input', :object => PollAnswer.new %>
+  </div>
+  <%= link_to_function '添加选项' do |page|
+        page.insert_html :bottom, :poll_answers, :partial => 'user/polls/answer_input', :object => PollAnswer.new
+      end %><br/>
+</div>
+</div>
+<div class="buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <span class="button"><span><button type="submit">完成</button></span></span>
+    <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+  </td></tr></table>
+</div>
+<% end %>

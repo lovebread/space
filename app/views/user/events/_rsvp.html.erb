@@ -1,0 +1,24 @@
+<div class='multibox'>
+  <div class='title'>
+    <b>状态</b>
+  </div>
+  <table class="data-table jl-data-table" cellpadding="0">
+    <tr>
+      <th class="name name02">游戏角色名称</th>
+      <th class="level level02">公会状态</th>
+    </tr>
+      <% @participations.group_by(&:status).each do |status, participations| %>
+        <% participations.each do |p| %>
+          <% if status == Participation::Confirmed %>
+            <tr><td><%= p.character.name %></td><td><%= facebox_link "一定去", edit_event_participation_url(@event, p) %></td></tr>
+          <% elsif status == Participation::Maybe %>
+            <tr><td><%= p.character.name %></td><td><%= facebox_link "可能去", edit_event_participation_url(@event, p) %></td></tr>
+          <% elsif status == Participation::Invitation %>
+            <tr><td><%= p.character.name %></td><td><%= facebox_link "回复", edit_event_invitation_url(@event, p) %></td></tr>
+          <% elsif status == Participation::Request %>
+            <tr><td><%= p.character.name %></td><td>已请求</td></tr>
+          <% end %>
+        <% end %>
+      <% end %>
+  </table>
+</div>

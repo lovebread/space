@@ -1,0 +1,30 @@
+<% content_for :left do %>
+	<div class='blog-right-bar'>
+    <h3>热门话题: </h3>
+    <% @forum.hot_topics[0..9].each do |topic| %>
+      <div class='part'>
+        <%= topic_link topic %>
+        <span style="color:grey;font-size:9px"> by</span> <%= profile_link topic.poster %><br/>
+      </div>
+    <% end %>
+	</div>
+<% end %>
+
+<div>
+	<%= forum_link @forum %> 
+</div>
+
+<%= link_to 'Post New Topic', new_forum_topic_url(@forum) %><br/>
+<br/>
+
+<div class='subject'>置顶帖子</div>
+<table class='topics' id='top_topics'>
+  <%= render :partial => 'topic', :collection => @top_topics %>
+</table>
+
+<div class='subject'>其他帖子</div>
+<table class='topics' id='topics'>
+  <%= render :partial => 'topic', :collection => @topics %>
+</table>
+
+<%= will_paginate @topics %>

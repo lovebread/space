@@ -1,0 +1,11 @@
+<% video = video_item2 %>
+<div class="feed-list">
+	<div class="feed-img">
+		<%= avatar video.poster, :class=>'imgbox'%>
+	</div>
+	<div class='feed-header'>
+		<p><%= profile_link video.poster%> 分享视频 <%= video_link video %></p>
+		<p class='space' id="video_<%=video.id%>"><%= video_thumbnail video, :class=>'imgbox01' %></p>
+	</div>
+  <div class='feeds'><%= link_to "评论(#{video.comments_count})", video_url(video) %> | <%= facebox_link "分享(#{video.sharings_count})", new_sharing_url(:shareable_type => 'Video', :shareable_id => video.id)%> | <%=link_to_remote '赞', :url => digs_url("dig[diggable_type]" => video.class.base_class.to_s, "dig[diggable_id]" => video), :html => {:id=> "digging_#{video.class.to_s.underscore}_#{video.id}", :class => "red"}%>(已经被<span id="dig_<%=video.class.to_s.underscore%>_<%=video.id%>" class='gray'><%= video.digs_count %></span>人赞过)</div>
+</div>

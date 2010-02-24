@@ -1,0 +1,100 @@
+<%= javascript_include_tag "game.js" %>
+<%= javascript_include_tag "search.js" %>
+<%= javascript_include_tag "friend.js" %>
+<%= javascript_include_tag "event.simulate" %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+		<h1 class="app-friend">好友</h1>
+    <div class="box02 canvas_int">
+			<div class="tab tab01">
+				<div class="right"><%= link_to "激请好友加入" %></div>
+				<ul>
+					<li><span><%= link_to '好友管理', friends_url %></span></li>
+					<li class='hover'><span><%= link_to '寻找好友', friends_url %></span></li>
+					<li><span><%= link_to '好友印象', friend_impressions_url %></span></li>
+				</ul>
+      </div>
+			<div class="friend-box">
+				<div class="box04 friend-one-search">
+					<% form_tag search_users_url, :class => "formcontent", :id => 'normal_form' do %>
+            <div class="rows s_clear">
+              <div class="fldvalue">
+                <div class="textfield"><%= text_field_tag 'key' %></div>
+              </div>
+              <div class="fldbtn"><span class="button"><span><button type="submit">查找</button></span></span></div>
+              <div class="link"><%= link_to_function "找战友", "Iyxzone.Search.showCharacterForm();" %></div>
+            </div>
+          <% end %>
+          <% form_tag search_users_url, :class => "formcontent", :id => 'character_form', :style => "display:none" do %>
+            <div class="rows s_clear">
+              <div class="fldvalue">
+                <div class="fldid"><%= label_tag '名字: ' %></div>
+                <div class='fldvalue'><%= text_field_tag 'key', params[:key] %></div>
+              </div>
+            </div>
+						<div class="rows s_clear">
+              <div class="fldid"><%= label_tag '游戏: ' %></div>
+              <div class='fldvalue'>
+              <%= collection_select :character, :game_id, Game.all, :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+						<div class="rows s_clear">
+              <div class="fldid"><%= label_tag '服务区: ' %></div>
+              <div class='fldvalue'>
+              <%= collection_select :character, :area_id, [], :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><%= label_tag '服务器: ' %></div>
+              <div class='fldvalue'>
+              <%= collection_select :character, :server_id, [], :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            <div class='rows s_clear'>
+              <div class="fldbtn"><span class="button"><span><button type="submit">查找</button></span></span></div>
+              <div class="link"><%= link_to_function "找所有的", "Iyxzone.user_searcher.show_normal_form();" %></div>
+            </div>
+          <% end %>
+        </div>
+				<div class="box02 appcontent01">
+					<h3>你在<%= server_location @server %>可能认识的人</h3>
+          <div class="piclist-rows cmt-space">
+            <table cellspacing='0' cellpadding='0'>
+              <% @comrade_suggestions.each do |suggestion| %>
+              <% f = suggestion.comrade %>
+              <tr>
+                <td>
+									<div class='imgwrap'>
+										<%= avatar f, :size => :mediumi, :class=>'imgbox01' %>
+									</div>
+									<div class='data jl-data'>
+										<p><%= profile_link f %></p>
+										<p><% f.characters.find(:all, :conditions=>{:server_id => @server.id}).each { |character| %>
+											<%= character.server.name %>,
+											<%= character.name %>;
+											<% } %>
+										</p>
+										<p class="space">
+											<%= facebox_link '', new_friend_request_url(:friend_id => f.id), :class => "friend-btn w-l" %>
+											<%= link_to '', new_mail_url(:recipient_id => f.id), :class => "msg-btn" %>
+										</p>
+									</div>
+								</td>
+              </tr>
+              <% end %>
+            </table>
+            <div class="pages">
+              <%= will_paginate @comrade_suggestions %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+  Iyxzone.Search.gameSelector = new Iyxzone.Game.PinyinSelector(#{array_or_string_for_javascript @games.map(&:pinyin).insert(0, '---')}, 'character_game_id', 'character_area_id', 'character_server_id', null, null, {});
+  Iyxzone.Search.gameSelector.setEvents();
+" %> 

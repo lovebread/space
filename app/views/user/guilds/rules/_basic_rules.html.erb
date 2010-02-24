@@ -1,0 +1,18 @@
+<div class="edit-toggle space">
+  <h3 class="s_clear">
+    <strong class="left">其他规则</strong>
+    <% if guild.president == current_user %>
+      <%= link_to_function "<span class='icon-active icon-active-edit w-l'></span>编辑", "Iyxzone.Guild.Editor.editBasicRules(#{guild.id})", :class => "right red"  %>
+    <% end %>
+  </h3>
+  <div class="formcontent con con2">
+    <div class="item space">
+      <% guild.basic_rules.each do |rule| %>
+      <div class="rows s_clear" id='rule_<%= rule.id %>'>
+        <div class="fldid"><label><%= rule.reason %>：</label></div>
+        <div class="fldvalue"><%= rule.outcome %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

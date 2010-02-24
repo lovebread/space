@@ -1,0 +1,19 @@
+<table class='recv-mail'>
+<% recv_mails.each do |mail| %>
+  <% sender = mail.sender %>
+  <% (mail.read_by_recipient)? style = "font-weight: light;" : style = "font-weight: bold;" %>
+  <tr>
+    <td class='checkbox'><%= check_box_tag "select_mail_#{mail.id}", "#{mail.id}-#{mail.read_by_recipient}" %></td>
+    <td class='icon'><%= avatar sender %></td>
+    <td class='name'>
+      <%= profile_link sender %><br/>
+      <span class='recv-mail-tiny'><%= ftime mail.created_at %></span>
+    </td>
+    <td class='title'>
+      <%= link_to mail.title, mail_url(mail, :type => 1), :id => "mail_#{mail.id}_title", :style => style %><br/>
+      <span class='mail-content-truncate'><%= mail.content %></span>
+    </td>
+    <td class='operation'><%= link_to_remote 'x', :url => mail_url(mail, :type => 1), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

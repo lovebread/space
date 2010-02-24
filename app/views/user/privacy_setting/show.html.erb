@@ -1,0 +1,40 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+    <h1 class="app-lock">隐私设置</h1>
+      <div class="box02 canvas_int">
+        <div class="box02 appcontent04" style="height:370px">
+				<h3>在一起游戏网，默认和你玩同样游戏的人或者你的朋友才能浏览你的个人主页</h3>
+          <ul class="private-set s_clear">
+            <li class="rows s_clear">
+							<span class="icon-private01 left"></span>
+							<p class="left">
+								<%= link_to '<strong>个人主页</strong>', edit_privacy_setting_url(:type => 0), :class=>"blk red" %>
+								<span>设置其他人对你个人主页和相关信息的浏览权限。</span>
+							</p>
+            </li>
+                                
+            <li class="rows s_clear">
+              <span class="icon-private02 left"></span>
+              <p class="left">
+                <%= link_to '<strong>操作</strong>', edit_privacy_setting_url(:type => 1), :class=>"blk red" %>
+                <span>设置其他人对你的好友请求，站内信等操作的权限。</span>
+              </p>
+            </li>
+
+            <li class="rows s_clear">
+              <span class="icon-private03 left"></span>
+              <p class="left">
+                <%= link_to '<strong>邮件设置</strong>', edit_mail_setting_url(), :class=>"blk red" %>
+                <span>设置系统对您发送邮件通知的类型和权限。</span>
+              </p>
+            </li>
+          </ul>
+
+<!--
+   <h3><%= link_to '站外搜索', edit_privacy_setting_url(:type => 2) %></h3>
+  <div class='edit'><%= link_to '编辑设置', edit_privacy_setting_url(:type => 2) %></div>
+  <div class='show' id='search_show'>设置不登录人人网的人是否可以在登录页上搜索到你的帐号</div>
+-->
+</div>
+</div></div></div>
+</div></div></div></div>

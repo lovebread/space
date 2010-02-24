@@ -1,0 +1,14 @@
+<% form_remote_for :rating, :url => ratings_url(:rateable_id => rateable.id, :rateable_type => rateable.class.name) do |f| %>
+  <%= hidden_field_tag 'rating[rateable_type]', rateable.class.name %>
+  <%= hidden_field_tag 'rating[rateable_id]', rateable.id %> 
+  <%= f.hidden_field :rating, :id => "#{rateable.class.name.underscore}_#{rateable.id}_rating"%>
+  <div class="star-ratings-block s_clear">
+  <% Rating::Default.times do |i| %>
+    <%= link_to_function '', "Iyxzone.Rating.set(#{i + 1}, #{rateable.id}, '#{rateable.class.name.underscore}', this)", :class => 'lit'%>
+  <% end %>
+  <% (Rating::Maximum - Rating::Default).times do |i| %>
+    <%= link_to_function '', "Iyxzone.Rating.set(#{Rating::Default + i + 1}, #{rateable.id}, '#{rateable.class.name.underscore}', this)"%>
+  <% end %>
+  </div>
+  <%= f.submit '提交' %>
+<% end %>

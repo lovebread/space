@@ -1,0 +1,14 @@
+<% blog = tag.blog %>
+<% if home_page %>
+<% link = "#{link_to_function blog.title, "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}');window.open('/blogs/#{blog.id}');"}" %>
+<% else %>
+<% link = "#{link_to_function blog.title, "window.open('/blogs/#{blog.id}');"}" %>
+<% end %>
+<li>
+  <div class="feed-message">
+    <% if home_page %>
+    <%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+    <% end %>
+    <%= profile_link tag.poster %> 在博客 <%= link %> 里标记了你
+  </div>
+</li>

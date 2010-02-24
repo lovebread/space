@@ -1,0 +1,17 @@
+InPlaceEditor
+=============
+
+封装了Ajax.InplaceEditor, 并对这玩意做了扩展，能够在没有内容的时候，显示一些你指定的内容
+
+Example
+=======
+
+使用很简单，看看/lib/in_place_editor_macros_helper里的说明吧
+
+
+TODO
+====
+
+目前有个bug
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

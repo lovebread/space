@@ -1,0 +1,31 @@
+<%= javascript_include_tag 'news' %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-news">每日十闻</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <%= render :partial => "columns" %>
+      </div>
+      <% if @news_list.length != 0 %>
+        <% @news_list.each do |n| %>
+          <div class="news10-list jl-cutline">
+            <h2><strong><%= link_to n.title, news_url(n, :type => params[:type]), :class => "shine"%></strong></h2>
+            <%=profile_link n.poster%> 发表在 <a href="#" class="w-xl">17gaming</a><span class="gray"><%=ftime n.created_at%></span>
+              <div class="con">
+                <div id="news-data">
+                  <%=truncate (n.data, :ommision => "......", :length => 70) %>
+                </div>
+                <%= link_to "查看全文 >>", {:action => :show, :id => n.id} %>
+              </div>
+              <strong class="gray"><span class="w-l">评论:<%=n.comments_count%></span><span class="w-l">|</span><span class="w-l">浏览:<%=n.viewings_count%></span><span class="w-l">|</span><span class="w-l">分享:<%=n.sharings_count%></span></strong>
+            </div>
+          <% end %>
+          <%= will_paginate @news_list %>
+        <% else %>
+          <div class="gray">
+            <strong><span class="w-l">今天没有什么新闻，看看其他的吧</span></strong>
+          </div>
+        <% end%>
+      </div>
+  </div></div> 
+</div></div></div></div>

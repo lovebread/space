@@ -1,0 +1,8 @@
+<div class="guild_rule_rows">
+<% form_remote_for :guild_rule, :url => { :action => "create"}, :html => {:id => 'add_basic_rule_form'} do |f| %>
+	<%= f.text_field 'reason' -%>
+	<%= f.text_field 'outcome' %>
+  <%= button_to_function "保存", "Iyxzone.GuildRule.Editor.createBasicRule(#{@guild.id}, this)" %>
+  <%= link_to_function "取消", "Iyxzone.GuildRule.Editor.cancelEditBasicRule()" %>
+<% end %>
+</div>

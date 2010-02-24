@@ -1,0 +1,59 @@
+<%= javascript_include_tag 'guild' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-cons">公会</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "新建工会", new_guild_url, :class => "icon-add-table" %>
+        </div>
+        <ul>
+          <li><span><%= link_to "热门工会", hot_guilds_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to '最新工会', recent_guilds_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "我的工会", guilds_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "好友工会", friends_guilds_url %></span></li>
+        </ul>
+      </div>
+      <div class="appcontent01">
+        <h3>新建活动</h3>
+        <div class="cons-form formcontent">
+          <% form_for :guild, :html => {:id => "guild_form", :multipart => true} do |f| %>  
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">公会名字：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= f.text_field :name %></div>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">会长游戏角色：</label></div>
+              <div class="fldvalue">
+                <%= collection_select :guild, :character_id, current_user.characters, :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">工会描述：</label></div>
+              <div class="fldvalue">
+                <%= f.text_area :description %>
+              </div>
+            </div>
+<!--
+            <div class="rows s_clear">
+            <% fields_for "photo" do |form| %>
+              <div class="fldid"><label for="fengmian">封面：</label></div>
+              <div class="fldfilevalue"><%= form.file_field :uploaded_data %></div>
+            <% end %>
+            </div>
+-->
+            <div class="rows s_clear">
+              <div class="fldid">&nbsp;</div>
+              <div class="fldvalue">
+                <span class="button"><span><button onclick="Iyxzone.Guild.Builder.save(event);">提交</button></span></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

@@ -1,0 +1,5 @@
+<%= link_to "长老", guild_memberships_url(@guild, :type => 0) %> |
+<%= link_to "普通会员", guild_memberships_url(@guild, :type => 1) %> |
+<%= link_to "被邀请加入的会员", guild_memberships_url(@guild, :type => 2) %> |
+<%= link_to "请求加入的会员", guild_memberships_url(@guild, :type => 3) %> |
+<%= link_to "返回工会", guild_url(@guild) %>

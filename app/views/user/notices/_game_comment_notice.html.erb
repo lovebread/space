@@ -1,0 +1,14 @@
+<% game = comment.commentable %>
+<% if home_page %>
+<% link = "#{link_to_function game.name, "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}'); window.open('/games/#{game.id}?reply_to=#{comment.poster_id}');"}" %>
+<% else %>
+<% link = "#{link_to_function game.name, "window.open('/games/#{game.id}?reply_to=#{comment.poster_id}');"}" %>
+<% end %>
+<li>
+  <div class="feed-message">
+    <% if home_page %>
+    <%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+    <% end %>
+    <%= profile_link comment.poster %> 在游戏 <%= link %> 中回复了你
+  </div>
+</li>

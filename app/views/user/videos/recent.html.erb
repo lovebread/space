@@ -1,0 +1,60 @@
+<%= javascript_include_tag 'video' %>
+
+<% content_for :left do %>
+  <%= render :partial => '/app_menu' %><br/>
+  <div class='video-right-bar'>
+    <div class='part'>
+      <h3>日志分类: </h3>
+      <% game_options = [['全部', nil]] %>
+      <% @user.games.each {|g| game_options << [g.name, g.id] } %>
+      <%= select_tag '', options_for_select(game_options, params[:game_id].to_i), :onchange => "window.location.href = '#{hot_videos_url(:id => @user.id)}&game_id='+this.value;" %> 
+    </div>
+  </div>
+<% end %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+	<% if @user==current_user %>
+    <h1 class="app-video">视频</h1>
+	<% else %>
+    <div class="friend-head space s_clear">
+      <span class="left"><%= avatar @user, :class=>"imgbox01"%></span>
+      <p class="left">
+        <strong><%= @user.login %>的视频</strong><br />
+        <%= link_to '个人主页', profile_url(@user.profile), :class=>'red'%>
+      </p>
+    </div>
+	<% end %>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <% subject = get_subject @user %>
+        <div class="right"><%= link_to "新视频", new_video_url %></div>
+        <ul>
+          <li class='hover'><span><%= link_to "热门视频", hot_videos_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "#{subject}的视频", videos_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "#{subject}的相关视频", relative_videos_url(:id => @user.id) %></span></li>
+          <% if @user == current_user %>
+            <li><span><%= link_to "好友的视频", friends_videos_url %>
+          <% end %>
+        </ul>
+      </div>
+      <div>
+        <div class="nav-link">
+          <ul class="s_clear">
+            <li><%= link_to "<span>人气最高</span>", hot_videos_url(:id => @user.id) %></li>
+            <li class='hover'><%= link_to "<span>最新创建</span>", recent_videos_url(:id => @user.id) %></li>
+          </ul>
+        </div>
+        <% if @videos.blank? %>
+          <div class='gray'>没有视频，你赶紧<%= link_to '弄一个', new_video_url %></div>
+        <% else %>
+          <div class='feed-img-list' id='videos'>
+            <%= render :partial => 'video_item2', :collection => @videos %>
+          </div>
+          <%= will_paginate @videos %>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+

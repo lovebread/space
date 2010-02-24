@@ -1,0 +1,45 @@
+<div class="edit-toggle space edit">
+  <h3 class="s_clear"><strong class="left">装备</strong><%= link_to_function "取消", "Iyxzone.Guild.Editor.cancelEditGears(#{@guild.id})", :class => 'right' %></h3>
+  <div class="formcontent con con2">
+    <% form_for :guild, :html => {:id => 'gears_form'} do |f| %>
+      <div class="item space" id='guild_gears'>
+        <% @guild.gears.each do |gear| %>
+          <div id='existing_gear_<%= gear.id %>'>
+            <% fields_for "guild[existing_gears][]", gear do |r| %>
+            <div class="rows s_clear" id='gear_<%= gear.id %>'>
+              <div class="fldid"><label>名字：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= r.text_field :name, :onblur => "Iyxzone.Guild.Editor.isGearNameValid(#{gear.id}, 0)" %></div>
+              </div>
+              <span class='red' id='existing_gear_<%= gear.id %>_name_error'></span>
+            </div>
+            <div class="rows s_clear" id='gear_<%= gear.id %>'>
+              <div class="fldid"><label>花费：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= r.text_field :cost, :onblur => "Iyxzone.Guild.Editor.isGearCostValid(#{gear.id}, 0)" %></div>
+              </div>
+              <span class='red' id='existing_gear_<%= gear.id %>_cost_error'></span>
+            </div>
+            <% end %>
+            <p class='foot s_clear'>
+              <%= link_to_function "删除装备", "Iyxzone.Guild.Editor.removeGear(#{gear.id}, 0, this)", :class => 'right red' %>
+            </p> 
+          </div>
+        <% end %>
+      </div>
+      <p class="foot s_clear"><%= link_to_function '增加新的Gear', "Iyxzone.Guild.Editor.newGear(#{@guild.id});", :class => "left red" %></p>
+      <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span>
+            <%= button_to_function '完成', "Iyxzone.Guild.Editor.updateGears(#{@guild.id}, event)" %>
+          </span></span>
+          <span class="button button-gray"><span>
+            <%= button_to_function '取消', "Iyxzone.Guild.Editor.cancelEditGears()" %>
+          </span></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

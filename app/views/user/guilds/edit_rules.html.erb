@@ -1,0 +1,21 @@
+<%= javascript_include_tag 'guild' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-archives">规则管理</h1>
+    <div class="box02 canvas_int">
+      <div id='attendance_rule_frame' class='archives-box'>
+        <%= render :partial => 'user/guilds/rules/attendance_rules', :locals => {:guild => @guild} %>
+      </div>
+      <div id='boss_frame' class='archives-box'>
+        <%= render :partial => 'user/guilds/bosses/bosses', :locals => {:guild => @guild}%>
+      </div>
+      <div id='gear_frame' class='archives-box'>
+        <%= render :partial => 'user/guilds/gears/gears', :locals => {:guild => @guild} %>
+      </div>
+      <div id='basic_rule_frame' class='archives-box'>
+        <%= render :partial => 'user/guilds/rules/basic_rules', :locals => {:guild => @guild} %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

@@ -1,0 +1,5 @@
+<%= link_to '增加侯选项', new_poll_answer_url(@poll), :rel => 'facebox' %>|
+<%= link_to '修改截至时间', edit_poll_url(@poll, :type => 0), :rel => 'facebox' %>|
+<%= link_to '邀请更多人', new_poll_invitation_url(@poll) %>|
+<%= facebox_confirm '删除本投票', poll_url(@poll), {:msg => '你确定要删除该投票吗?', :method => :delete} %>|
+<%= link_to '写写投票总结', edit_poll_url(@poll, :type => 1), :rel => 'facebox' %>|

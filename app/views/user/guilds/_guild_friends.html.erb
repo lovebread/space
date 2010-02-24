@@ -1,0 +1,25 @@
+<div class="multibox">
+  <div class="title">
+    <%= link_to "更多", guild_friends_url(@guild) %>
+		<b>友好工会</b>
+  </div>
+  <div class="piclist-rows">
+    <table class="small" cellpadding="0">
+		<% @guild.friends[0..2].each do |f| %>
+      <tr>
+        <td>
+          <div class="imgwrap">
+						<%= album_cover f.album, :size => :small %>
+					</div>
+          <div class="data">
+            <p>名称：<span><%= guild_link guild %></span></p>
+            <p>人数：<span><%= guild.all_count %></span></p>
+            <p>游戏: <span><%= guild.game.name %></span></p>
+          </div>
+        </td>
+			</tr>
+		<% end %>
+    </table>
+  </div>
+</div>
+

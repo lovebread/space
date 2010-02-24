@@ -1,0 +1,69 @@
+<%= stylesheet_link_tag 'test' %>
+<%= javascript_include_tag 'textboxlist' %>
+<%= javascript_include_tag 'mail' %>
+<%= javascript_include_tag 'friend' %>
+<%= javascript_include_tag 'emotion' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+  <h1 class="big-letter">站内信</h1>
+  <div class="box02 canvas_int">
+		<div class="tab tab01">
+      <ul>
+				<li><span><%= link_to "收件箱", mails_url(:type => 1) %></span></li>
+        <li><span><%= link_to "发件箱", mails_url(:type => 0) %></span></li>
+        <li class="nobg"><%= link_to "写站内信", new_mail_url %></li>
+			</ul>
+    </div>
+		<div class="appcontent01">
+			<h3>写站内信</h3>
+      <div class="inbox-form formcontent">
+			<% form_for :mail, :url => mails_url, :html => {:id => 'mail_form'}  do |f| %>
+				<div class="rows s_clear">
+					<div class="fldid"><%= f.label '收件人：' %></div>
+          <div class="fldvalue">
+            <%= render :partial => 'user/friend_tags/control_panel' %>
+          </div>
+        </div>
+        <div class='drop-menu' id='recipients_list' style="display:none"></div>
+        <div class="rows s_clear">
+					<div class="fldid"><%= f.label '标题：' %></div>
+          <div class="fldvalue">
+						<div class="textfield"><%= f.text_field 'title' %></div>
+          </div>
+        </div>
+        <div class="emptions s_clear">
+					<div class="fldid">&nbsp;</div>
+          <div class="fldvalue">
+						<%= emotion_link 'mail_content' %>
+          </div>
+        </div>
+        <div class="rows s_clear">
+					<div class="fldid"><%= f.label '内容：' %></div>
+          <div class="fldvalue">
+						<div class='bookbox'>
+							<%= f.text_area 'content' %>
+						</div>
+						<div class='buttons'>
+							<span class="button"><span><button onclick="Iyxzone.Mail.Builder.deliver(this);">发送</button></span></span>
+							<span class="button button-gray"><span><button type="reset">取消</button></span></span>
+						<%= emotion_link 'mail_content', :class => 'icon-face right', :align=>"absmiddle" %>
+						</div>
+					</div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+  Iyxzone.Mail.Builder.recipientBuilder = new Iyxzone.Friend.Tagger(10, [],[],[],'toggle_button', 'friend_login', 'friend_list', 'friend-wrap', 'friend_items', 'game_selector', 'confirm_btn', 'cancel_btn', null);
+" %>
+
+<% unless @recipient.blank? %>
+<%= javascript_tag "
+  Iyxzone.Mail.Builder.recipientBuilder.addTags([{id: #{@recipient.id}, profileID: #{@recipient.profile.id}, login: '#{@recipient.login}'}]);
+" %>
+<% end %>

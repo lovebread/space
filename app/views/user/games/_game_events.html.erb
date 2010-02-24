@@ -1,0 +1,25 @@
+<div class="multibox">
+  <div class="title">
+    <%= link_to '更多', game_events_url(@game) %>
+    <b>活动</b>
+  </div>
+  <div class="piclist-rows">
+	<table class="small" cellpadding="0">
+    <% @game.events[0..2].each do |event| %>
+      <tr>
+        <td>
+          <div class="imgwrap">
+            <%= album_cover event.album, :size => :medium %>
+          </div>
+          <div class="data">
+            <p>名称：<span><%= event_link event %></span></p>
+            <p>时间：<span><%= ftime2 event.created_at %></span></p>
+            <p>人数: <span><%= event.confirmed_count %></span></p>  
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
+

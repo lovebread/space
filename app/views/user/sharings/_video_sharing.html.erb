@@ -1,0 +1,19 @@
+<% video = video_sharing.shareable %>
+<div class="feed-list feed-share">
+  <%= dig_link video_sharing %>
+  <div class="feed-header">
+    <div class="right">
+      <%= ftime video_sharing.created_at %><br/>
+      首次分享人：<%= avatar video.first_sharer, :with => '27px', :height => '27px' %>
+    </div>
+    <h3><%= video_link video, :popup => true %></h3>
+    <p class="con">
+      <div id='video_<%= video.id %>'><%= video_thumbnail video %></div>
+      <%= truncate video_sharing.reason, :length => 100, :omission => '...' %>
+    </p>
+    <div class="feeds"><%= link_to_function "评论", "Iyxzone.Comment.toggleBox('sharing', #{video_sharing.id})" %>(<%= video_sharing.comments_count %>) | <%= facebox_link "我也分享", new_sharing_url(:shareable_type => 'Video', :shareable_id => video.id) %><span>(<%= video.sharings_count %>)</span></a> | <%= link_to "更多分享", sharings_url(:id => video.first_sharer.id) %></div>
+  </div>
+  <div id="sharing_comment_box_<%= video_sharing.id %>" style="display:none">
+    <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => video_sharing, :recipient => nil} %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+page.replace_html 'tag_cloud_head', "<b>玩家印象</b>"
+page.replace_html 'tag_cloud', :partial => 'tag_cloud', :locals => {:game => @taggable}

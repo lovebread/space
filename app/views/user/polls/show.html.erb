@@ -1,0 +1,124 @@
+<%= javascript_include_tag 'poll' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-vote">投票</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "新投票", new_poll_url %></a></div>
+        <ul>
+          <li><span><%= link_to "热门投票", hot_polls_url(:id => @user.id) %></span></li>
+          <li class='hover'><span><%= link_to "#{get_subject @user}的投票", polls_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "朋友的投票", friends_polls_url(:id => @user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="vote-box">
+          <% if !@poll.past and @user == current_user %>
+          <div class="vote-op left">
+            <span class="vote-op-add"></span><%= link_to '增加侯选项', new_poll_answer_url(@poll), :rel => 'facebox' %>
+            <% unless @poll.no_deadline %>
+            <span class=vote-op-time></span><%= link_to '修改截至时间', edit_poll_url(@poll, :type => 0), :rel => 'facebox' %>
+            <% end %>
+						<span></span><%= link_to '修改选项说明', edit_poll_url(@poll, :type => 1), :rel => 'facebox' %>
+            <span class="vote-op-invite"></span><%= link_to '邀请更多人', new_poll_invitation_url(@poll) %>
+            <span class="vote-op-del"></span><%= facebox_confirm '删除本投票', poll_url(@poll), {:msg => '你确定要删除该投票吗?', :method => :delete} %></li>
+          </div>
+          <% else %>
+          <div class='path-box'>
+            <label><%= link_to "#{@user.login}的投票", polls_url(:id => @user.id) %></label>
+            <span>投票</span>
+          </div>
+          <% end %>
+					<div class="vote-state right">
+						<div class="vote-icon left">
+						<h5><%= @poll.votes_count %>人</h5>
+						<p>参与投票</p>
+						</div>
+            <%= facebox_link '分享', new_sharing_url(:shareable_type => 'Poll', :shareable_id => @poll.id), :class => "left love-btn" %>
+					</div>
+					<div class='rows'></div>
+          <table class="vote-header-table" cellpadding="0">
+            <tr>
+              <td class="vote-content" align='center'>
+                <h5><%= @poll.name %> 
+                  <span>（限选<%= @poll.max_multiple %>项）<span><%= distance_of_time_in_words_to_now @poll.created_at %></span></span>
+                </h5>
+								<p>关于<%= @poll.game.name%></p>
+                <p><%= simple_format @poll.description %></p>
+              </td>
+            </tr>
+          </table>
+          <% form_tag poll_votes_url(@poll) do %>
+          <table class="vote-status-table" cellpadding="0">
+            <% @poll.answers.each_with_index do |answer, i| %>
+            <tr>
+              <td class="title"><%= answer.description %>：</td>
+              <%= generate_percentage_bar answer, @poll %>
+              <td class="cb">
+                <% if !@poll.past and !@vote and @poll.is_votable_by? current_user %>
+                  <%= check_box_tag "votes[]", answer.id, false, :onclick => "Iyxzone.Poll.checkMultipleSelection(#{@poll.max_multiple}, this);"%>
+                <% elsif @vote %>
+                  <%= check_box_tag "votes[]", answer.id, @vote.answer_ids.include?(answer.id), :disabled => true %>
+                <% end %>
+              </td>
+              <td class="btn">
+              <% if i == 0 and !@poll.past %>
+                <% if @vote %>
+                  你已经投过票了
+                <% elsif @poll.is_votable_by? current_user %>
+                  <span class="button"><span><button type="submit">投票</button></span></span>
+                <% else %>
+                  只有<%= get_subject @user %>才能投票
+                <% end %> 
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </table>
+        <% end %>
+        <div class='vote-detail gray'>
+          <h3 class='space'>投票选项说明：</h3>
+          <% if @poll.past %>
+            <p class='jl-cutline' id='poll_explanation'><%= @poll.explanation %></p>
+          <% elsif @vote %>
+            <p class='jl-cutline' id='poll_explanation'><%= @poll.explanation %></p>
+          <% else %>
+            <p class='jl-cutline'>投票后才能看</p>
+          <% end %>
+          <h3 class='space'>投票情况</h3>
+					<ul class='jl-cutline'>
+          <% if @vote %>
+            <li class='now'><%= profile_link current_user %> 投给了 <%= @vote.answers.map{|a| "\"#{truncate a.description, :length => 20, :omission => '...'}\""}.join(',') %><span class='time'></span></li>
+          <% end %>
+          <% @vote_feeds.each do |v| %>
+            <li class='now'><%= profile_link v.voter %> 投给了 <%= v.answers.map{|a| "\"#{truncate a.description, :length => 20, :omission => '...'}\""}.join(',') %><span class='time'></span></li>
+          <% end %>
+					</ul>
+        </div>
+        <div class="foot s_clear">
+          <div class="prompt-list-box">
+            <h5>随便看看</h5>
+            <div class="list-box box04">
+              <ul class="lister02">
+                <% Poll.random(:limit => 5, :except => [@poll]).each do |p|%>
+                <li><%= poll_link p %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="feed-list">
+            <h4>评论(<%= @poll.comments_count %>)</h4>
+            <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @poll, :recipient => @poll.poster} %> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+
+<% @reply_to =  User.find_by_id(params[:reply_to]) %>
+<% unless @reply_to.nil? %>
+<%= javascript_tag "
+  Iyxzone.Comment.set('poll', #{@poll.id}, '#{@reply_to.login}', #{@reply_to.id});
+" %>
+<% end %>

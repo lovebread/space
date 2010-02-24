@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>分享web连接页面</title>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'iyxzone' %>
+  <%= javascript_include_tag 'comment' %>
+  <%= javascript_include_tag 'facebox' %>
+  <%= stylesheet_link_tag "common.css" %>
+  <%= stylesheet_link_tag "home.css" %>
+</head>
+
+<body>
+  <div id="header" style="width:100%">
+  <!--navbar-->
+    <div id="navbar">
+      <div id="navwrap">
+        <div id="navmid">
+          <a href="#" class="logo-top png" title="17gaming"></a>
+          <div id="navmain">
+            <ul id="w-nav">
+              <li style="position:relative;">
+                <%= link_to_function "<span>评论</span>", "$('comments_form').toggle();", :id => 'cmt' %>
+                <div class="drop-box" style="display:none" id='comments_form'>
+                  <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @sharing, :recipient => nil} %>
+                </div>
+              </li>
+              <li>
+                <%= link_to_remote "<strong><span id='dig_sharing_#{@sharing.id}'>#{@sharing.digs_count}</span></strong>", :url => digs_url("dig[diggable_type]" => 'Sharing', "dig[diggable_id]" => @sharing.id, :at => 1), :html => {:class => 'praise'} %> 
+              </li>
+              <li>
+                <%= facebox_link "我也分享", new_sharing_url(:shareable_type => 'Link', :shareable_id => @shareable.id) %>(<%= @shareable.sharings_count %>)
+              </li>
+              <li style="_margin-top:6px">
+                <span>首次分享人：</span><%= avatar_image @shareable.first_sharer, :width => 27, :height => 27 %> <%= profile_link @shareable.first_sharer %></a>
+              </li>
+            </ul>
+          </div>
+          <div id="navextra">
+            <%= link_to_function "<span class='close w-l'></span>关闭顶栏", "window.location.href = '#{@shareable.url}'" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<iframe frameborder="0" width="100%" height="100%" id="ifr" src="<%= @shareable.url %>">
+</iframe>
+
+<%= javascript_tag "
+  $('ifr').setStyle({height: '768px'});
+" %>
+<div id="footer">
+  <p>Copyright &copy; 1998-2009 Tencent. All Rights Reserved</p>
+  <p><a href="#">网游公司 版权所有</a></p>
+</div>
+</body>
+</html>

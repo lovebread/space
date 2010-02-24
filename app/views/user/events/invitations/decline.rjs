@@ -1,0 +1,3 @@
+if params[:show].to_i == 1
+  page.redirect_to event_url(@event)
+end

@@ -1,0 +1,5 @@
+<%= collection_select :game, :id, Game.find(:all, :order => 'pinyin ASC'),  :id, :name, {}, {:id => 'game_selector'} %>
+<div id='info'></div>
+<%= javascript_tag "
+  gs = new GoodSelector('game_selector', #{array_or_string_for_javascript Game.find(:all, :order => 'pinyin ASC').map(&:pinyin)});
+" %>

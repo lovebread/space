@@ -1,0 +1,21 @@
+<div class='poll-item'>
+  <div class='avatar'>
+    <%= avatar poll_item.poster %><br/>
+    <%= profile_link poll_item.poster %>
+  </div>
+  <div class='poll-body'>
+    <div class='poll-title'>
+       <%= poll_link poll_item %><span class='meta'><br/><%= distance_of_time_in_words_to_now poll_item.created_at %> ago</span>
+    </div>
+    <div class='poll-content'>
+      <ul class='poll-sample'>
+        <% poll_item.answers[0..2].each do |a| %>
+          <li><%= check_box_tag '', '', false, :disabled => true %><%= (truncate a.description, :length => 20, :omission => "...") %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class='poll-vote'>
+    <%= poll_item.voters_count %>人参加了投票<br/>
+  </div>
+</div>

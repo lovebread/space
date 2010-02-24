@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="facebook">
+<head>
+  <title>type ahead!</title>
+  <%= stylesheet_link_tag 'cropper' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'slider' %>
+  <%= javascript_include_tag 'cropper' %>
+</head>
+<div id='imgWrap' class='imgCrop_previewWrap' >
+<p> 简单截取部分图片 </p>
+<image src='/images/castle.jpg' id='image' />
+</div>
+<div id='log'></div>
+<script text="javascript">
+var imgWrap = $('imgWrap');
+imgWrap.setStyle({
+  position: 'relative',
+  width: '200px',
+  height: '150px',
+  overflow: 'hidden'
+});
+var img = $('image');
+img.setStyle({
+position: 'absolute',
+width: '500px',
+height: '333px',
+left: '-100px',
+top: '-100px'
+});
+</script>
+<style type="text/css">
+  div.slider { width:256px; margin:10px 0; background-color:#ccc; height:10px; position: relative; }
+  div.slider div.handle { width:10px; height:15px; background-color:#f00; cursor:move; position: absolute; }
+
+  div#zoom_element { width:50px; height:50px; background:#2d86bd; position:relative; }
+</style>
+
+<div class="demo">
+  <p> 简单的重定义大小 </p>
+  <div id="zoom_slider" class="slider">
+    <div class="handle"></div>
+</div>
+
+<image src='/images/castle.jpg' id='image2' />
+
+<script type="text/javascript">
+    var zoom_slider = $('zoom_slider');
+
+    var img2 = $('image2');
+    
+    img2.setStyle({
+      width: '500px',
+      height: '333px',
+    });
+
+    new Control.Slider(zoom_slider.down('.handle'), zoom_slider, {
+      range: $R(100, 500),
+      sliderValue: 500,
+      onSlide: function(value) {
+        var ratio = 500.0/value; 
+        img2.setStyle({ width: value + 'px', height: Math.ceil(333/ratio) + 'px' });
+      },
+      onChange: function(value) {
+        var ratio = 500.0/value; 
+        img2.setStyle({ width: value + 'px', height: Math.ceil(333/ratio) + 'px' });
+      }
+    });
+
+</script>
+
+<div>
+  <p> 上面2个的合体, 图片大小大于显示区域时，只显示最中间部分，图片大小小于显示区域，放在最中间 </p>
+<div id="zoom_slider2" class="slider">
+    <div class="handle"></div>
+</div>
+
+<div id='imgWrap3'>
+<image src='/images/castle.jpg' id='image3' />
+</div>
+<script type="text/javascript">
+    var zoom_slider2 = $('zoom_slider2');
+
+    var img3 = $('image3');
+    
+    var imgWrap3 = $('imgWrap3');
+
+imgWrap3.setStyle({
+  position: 'relative',
+  marginLeft: '200px',
+  width: '250px',
+  height: '166px',
+  overflow: 'hidden',
+  background: 'red'
+});
+img3.setStyle({
+position: 'absolute',
+width: '500px',
+height: '333px',
+left: '-125px',
+top: '-83px'
+});
+
+    new Control.Slider(zoom_slider2.down('.handle'), zoom_slider2, {
+      range: $R(100, 500),
+      sliderValue: 500,
+      onSlide: function(value) {
+        var newWidth = value;
+        var ratio = 500.0/value;
+        var newHeight = Math.ceil(333/ratio);
+        var left = 0;
+        if(newWidth < 250)
+          left = Math.ceil((250 - newWidth)/2);
+        else
+          left = Math.ceil((newWidth - 250)/2);
+        var top = 0;
+        if(newHeight < 166)
+          top = Math.ceil((166 - newHeight)/2);
+        else
+          top = Math.ceil((newHeight - 166)/2);
+        if(value > 250) 
+          img3.setStyle({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: '-' + left + 'px', top: '-' + top + 'px'});
+        else
+          img3.setStyle({ position: 'absolute',width: value + 'px' , height: newHeight + 'px', left: left + 'px', top: top + 'px'});
+      },
+      onChange: function(value) {
+        var newWidth = value;
+        var ratio = 500.0/value;
+        var newHeight = Math.ceil(333/ratio);
+        var left = Math.ceil((250 - newWidth)/2);
+        $('log3').innerHTML += "( " + value + ',' + newHeight + ') ';
+        if(newWidth < 250)
+          left = Math.ceil((250 - newWidth)/2);
+        else
+          left = Math.ceil((newWidth - 250)/2);
+        var top = 0;
+        if(newHeight < 166)
+          top = Math.ceil((166 - newHeight)/2);
+        else
+          top = Math.ceil((newHeight - 166)/2); 
+        if(value > 250) 
+          img3.setStyle({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: '-' + left + 'px', top: '-' + top + 'px'});
+        else
+          img3.setStyle({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: left + 'px', top: top + 'px'});
+      }
+    });
+
+</script>
+
+<div>
+  <p> 整合3和jsCropper with preview </p>
+<div id="zoom_slider3" class="slider">
+    <div class="handle"></div>
+</div>
+
+<div id='imgWrap4'>
+<image src='/images/castle.jpg' id='image4' />
+</div>
+
+<div id="previewArea"></div>
+
+<script type="text/javascript">
+    var zoom_slider3 = $('zoom_slider3');
+
+    var img4 = $('image4');
+    
+    var imgWrap4 = $('imgWrap4');
+
+imgWrap4.setStyle({
+  position: 'relative',
+  width: '400px',
+  height: '253px',
+  overflow: 'hidden',
+  background: 'red'
+});
+img4.setStyle({
+position: 'absolute',
+width: '500px',
+height: '333px',
+left: '-50px',
+top: '-40px'
+});
+
+new Control.Slider(zoom_slider3.down('.handle'), zoom_slider3, {
+      range: $R(100, 500),
+      sliderValue: 500,
+      onSlide: function(value) {
+        var newWidth = value;
+        var ratio = 500.0/value;
+        var newHeight = Math.ceil(333/ratio);
+        var left = 0;
+        if(newWidth < 400)
+          left = Math.ceil((400 - newWidth)/2);
+        else
+          left = Math.ceil((newWidth - 400)/2);
+        var top = 0;
+        if(newHeight < 253)
+          top = Math.ceil((253 - newHeight)/2);
+        else
+          top = Math.ceil((newHeight - 253)/2);
+        if(value > 400){
+	  cropper.locateImage({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: '-' + left + 'px', top: '-' + top + 'px'});
+        }else
+	  cropper.locateImage({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: left + 'px', top: top + 'px'});
+          //img4.setStyle({ position: 'absolute',width: value + 'px' , height: newHeight + 'px', left: left + 'px', top: top + 'px'});
+	  //cropper.setWrapPos(newWidth, newHeight);
+      },
+      onChange: function(value) {
+        var newWidth = value;
+        var ratio = 500.0/value;
+        var newHeight = Math.ceil(333/ratio);
+        var left = 0;
+        if(newWidth < 400)
+          left = Math.ceil((400 - newWidth)/2);
+        else
+          left = Math.ceil((newWidth - 400)/2);
+        var top = 0;
+        if(newHeight < 253)
+          top = Math.ceil((253 - newHeight)/2);
+        else
+          top = Math.ceil((newHeight - 253)/2); 
+        if(value > 400)
+	  cropper.locateImage({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: '-' + left + 'px', top: '-' + top + 'px'});
+          //cropper.setWrapPos(newWidth, newHeight);//img4.setStyle({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: '-' + left + 'px', top: '-' + top + 'px'});
+        else
+	  cropper.locateImage({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: left + 'px', top: top + 'px'});
+          //cropper.setWrapPos(newWidth, newHeight);//img4.setStyle({ position: 'absolute', width: value + 'px', height: newHeight + 'px', left: left + 'px', top: top + 'px'});
+	//cropper.setParams();
+      }
+    });
+
+function onEndCrop( coords, dimensions ) {
+}
+
+var cropper = new Cropper.ImgWithPreview( 
+  'image4',
+  { 
+    minWidth: 200, 
+    minHeight: 120,
+    displayOnInit: true, 
+    onEndCrop: onEndCrop,
+    previewWrap: 'previewArea'
+  } 
+)   
+
+Event.observe(imgWrap4, 'mousemove', function(e){
+  $('pos').innerHTML = '(' + e.pointerX + ',' + e.pointerY +')'; 
+});
+
+</script>
+</body>
+</html>

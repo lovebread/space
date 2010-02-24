@@ -1,0 +1,41 @@
+<p class="z-h s_clear">
+  <strong class="left">编辑专辑</strong>
+  <%= link_to_function '', "facebox.close();", :class => "icon2-close right" %>
+</p>
+
+<div class="z-con">
+  <% form_remote_for :album, :url => personal_album_url(@album), :method => :put do |f| %>
+  <div class='formcontent'>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="name">相册名称：</label></div>
+      <div class="fldvalue">
+        <div class="textfield" style="width:190px"><%= f.text_field 'title' %></div>
+      </div>
+    </div>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="des">相册描述：</label></div>
+      <div class="fldvalue">
+        <%= f.text_area 'description'  %>
+      </div>
+    </div>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="des">游戏分类：</label></div>
+      <div class="fldvalue">
+        <%= f.collection_select :game_id, current_user.games, :id, :name, {:prompt => '---'} %>
+      </div>
+    </div>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="search">谁可以浏览：</label></div>
+      <div class="fldvalue">
+        <%= privilege_select_tag(:album) %>
+      </div>
+    </div>
+  </div>
+  <div class="z-submit s_clear space">
+    <table class="center" cellpadding="0"><tr><td>
+      <span class="button"><span><button type="submit">完成</button></span></span>
+      <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+    </td></tr></table>
+  </div>
+  <% end %>
+</div>

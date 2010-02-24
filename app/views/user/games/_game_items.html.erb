@@ -1,0 +1,27 @@
+<table class="table01" cellpadding="0" cellspacing="1">
+  <% game_items.each do |game| %>
+  <tr>
+    <td>
+      <div class="imgwrap">
+      </div>
+      <div class="data">
+        <p><%= label_tag '', '名称：' %><span><%= game_link game %></span></p>
+        <p><%= label_tag '', '打分：' %><span><%= game.average_rating %></span></p>
+				<p><%= label_tag '', '新增：' %><span><%= game.last_week_characters_count %></span></p>
+        <div id='game_<%= game.id %>_rating_form'>
+        <% if game.is_rateable_by? current_user %>
+          <%= render :partial => 'user/ratings/new', :locals => {:rateable => game} %>
+        <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<% if @remote %>
+  <%= will_paginate game_items, :renderer => :RemoteLinkRenderer, :remote => @remote %>
+<% else %>
+  <%= will_paginate game_items %>
+<% end %>
+

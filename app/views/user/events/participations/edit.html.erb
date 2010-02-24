@@ -1,0 +1,20 @@
+<div class="title01">
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h1>更新状态</h1>
+</div>
+
+<% form_remote_for :participation, :url => event_participation_url(@event, @participation, :show => 0), :html => {:method => :put} do |f| %>
+<div class='formcontent'>
+  <div class="rows s_clear">
+    <%= radio_button_tag 'status', 3 %><%= label_tag '', '肯定去' %><br/>
+    <%= radio_button_tag 'status', 4 %><%= label_tag '', '可能去' %><br/>
+    <%= radio_button_tag 'status', 5 %><%= label_tag '', '去他娘的' %><br/>
+  </div>
+</div>
+<div class="buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <span class="button"><span><button type="submit">完成</button></span></span>
+    <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+  </td></tr></table>
+</div>
+<% end %>

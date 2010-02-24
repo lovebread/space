@@ -1,0 +1,46 @@
+<%= javascript_include_tag 'mail' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+  <h1 class="big-mygame">站内信</h1>
+  <div class="box02 canvas_int">
+    <div class="tab tab01">
+    <ul>
+      <li><span><%= link_to "收件箱", mails_url(:type => 1) %></span></li>
+      <li class='hover'><span><%= link_to "发件箱", mails_url(:type => 0) %></span></li>
+      <li class="nobg"><%= link_to "写站内信", new_mail_url %></li>
+    </ul>
+  </div>
+	<div class="inbox-box">
+    <div class="inbox-topbar s_clear">
+			<%= mail_select_tag %>
+      <%= link_to_function "删除", "Iyxzone.Mail.Manager.destroy('#{form_authenticity_token}', 0);", :class => 'icon-inbox icon-clear' %>
+    </div>
+    <div class="inbox-content">
+      <div class="box02 index-list">
+        <table cellpadding="0">
+          <% @mails.each do |mail| %>
+          <tr>
+            <td class="status"><%= check_box_tag '', 1, false, :id => "mail_#{mail.id}_select", :mail_id => mail.id, :class => 'mail-check', :read => true %></td>
+            <td class="photo"><%= avatar mail.recipient %></td>
+            <td class="data">
+              <h3><%= profile_link mail.recipient %></h3>
+							<p><%= ftime mail.created_at %></p>
+            </td>
+            <td class="cont">
+              <%= mail_link mail %>
+              <p><%= truncate mail.content, 80 %></p>
+            </td>
+            <td class="end">
+              <%= facebox_confirm '', mail_url(mail, :type => 0), {:msg => '你确定要删除这个邮件吗?', :method => :delete}, {:class => 'icon-active'} %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div></div>
+</div></div></div></div>
+

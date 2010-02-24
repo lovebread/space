@@ -1,0 +1,52 @@
+<%= javascript_include_tag "friend_suggestor" %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+		<h1 class="app-friend">好友</h1>
+    <div class="box02 canvas_int">
+			<div class="tab tab01">
+				<div class="right"><%= link_to "激请好友加入" %></div>
+				<ul>
+					<li><span><%= link_to '好友管理', friends_url %></span></li>
+					<li class='hover'><span><%= link_to '寻找好友', friends_url %></span></li>
+					<li><span><%= link_to '好友印象', friend_impressions_url %></span></li>
+				</ul>
+      </div>
+			<div class="friend-box">
+				<div class="box04 friend-one-search">
+					<form class="formcontent" action="">
+						<div class="rows s_clear">
+              <div class="fldvalue">
+								<div class="textfield"><input /></div>
+              </div>
+              <div class="fldbtn"><span class="button"><span><button type="submit">查找</button></span></span></div>
+							<div class="link"><a href="#">找战友</a></div>
+            </div>
+          </form>
+        </div>
+          <div class="photolist-box">
+						<ul class="collection s_clear">
+							<% @friend_suggestions.each_with_index do |suggestion, i| %>
+							<% f = suggestion.suggested_friend %>
+							<li id='suggestion_<%= i %>'>
+								<div class="middle"><div class="middle-center"><div class="center"><%= avatar f, :size => :medium %></div></div></div>
+								<span> <%= profile_link f %></span>
+                <p class="btns">
+									<%= facebox_link '', new_friend_request_url(:friend_id => f.id), :class => "icon-active icon-active-add" %>
+									<%= link_to_function '', "friend_suggestor.destroy_suggestion(#{suggestion.id}, '#{form_authenticity_token}')", :class => "icon-active icon-active-del" %>
+								</p>
+              </li>
+							<% end %>
+						</ul>
+            <div class="pages">
+							<%= will_paginate @friend_suggestions %>
+						</div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+	var friend_suggestor = new FriendSuggestor(#{array_or_string_for_javascript @friend_suggestions.map(&:id)});
+" %>

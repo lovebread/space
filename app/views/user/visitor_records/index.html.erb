@@ -1,0 +1,27 @@
+<div id='visitor_records'>
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h1>最近访问的人</h1>
+</div>
+
+<div class='formcontent'>
+  <% unless @records.blank? %>
+  <ul class="collection s_clear">
+    <% @records.each do |r| %>
+      <li>
+        <div class="middle"><div class="middle-center"><div class="center"><a href="#"><%= avatar r.visitor, :class => 'imgbox01' %></a></div></div></div>
+        <p><%= profile_link r.visitor %></p>
+        <p class="btns"></p>
+      </li>
+    <% end %>
+  </ul>
+  <% else %>
+    还没有人访问你的个人主页
+  <% end %>
+</div>
+
+<div class="buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <%= will_paginate @records, :renderer => 'RemoteLinkRenderer', :remote => @remote %>
+  </td></tr></table>
+</div>

@@ -1,0 +1,10 @@
+<div class="rows s_clear">
+<% fields_for "guilds[new_bosses][]", new_boss do |b| %>
+  <div><label>名称: </label></div>
+  <div><%= b.text_field :name %></div>
+  <div><label>奖励: </label></div>
+  <div><%= b.text_field :reward %></div>
+<% end %>
+<%= link_to_function "x", "Iyxzone.Guild.Editor.removeNewBoss(this)" %>
+</div>
+

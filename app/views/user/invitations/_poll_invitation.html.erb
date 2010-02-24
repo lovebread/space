@@ -1,0 +1,10 @@
+<% poll = poll_invitation.poll %>
+<% invitation = poll_invitation %>
+<div class="request-box" id='poll_invitation_<%= invitation.id %>'>
+  <h4><span> <%= ftime invitation.created_at %> </span>投票</h4>
+  <div class="request-list s_clear">
+    <div class="img"><%= avatar invitation.poll.poster %> </div>
+    <div class="info">
+    <p> <%= profile_link poll.poster %>邀请你参加投票<%= link_to_remote (truncate poll.name, :length => 20, :omission => '...'), :url => poll_invitation_url(poll, poll_invitation), :method => :delete %>, 快去看看 </p>
+  </div>
+</div>

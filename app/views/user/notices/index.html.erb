@@ -1,0 +1,21 @@
+<% content_for :left do %>
+	<%= render :partial => '/app_menu' %>
+<% end %>
+
+<div>
+	<%= link_to "留言及评论", notifications_url %>
+</div>
+
+<div>
+<% @notices.each do |notice| %>
+  <% producer = notice.producer %>
+  <% if notice.producer_type == 'Comment' %>
+    <%= render :partial => "user/notices/#{producer.commentable_type.underscore}_comment_notice", :locals => {:notice => notice, :comment => producer, :home_page => false } %>
+  <% elsif notice.producer_type == 'FriendTag' %>
+    <%= render :partial => "user/notices/#{producer.taggable_type.underscore}_tag_notice", :locals => {:notice => notice, :tag => producer, :home_page => false } %>
+  <% elsif notice.producer_type == 'PhotoTag' %>
+    <%= render :partial => "user/notices/photo_tag_notice", :locals => {:notice => notice, :tag => producer, :home_page => false} %>
+  <% end %>
+<% end %>
+</div>
+

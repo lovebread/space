@@ -1,0 +1,60 @@
+<div class='visitors'>
+  <h3>其他邀请: <%= link_to_function 'fold', "$('other_invites').toggle();if(this.innerHTML == 'fold') this.update('unfold'); else this.update('fold');", :class => 'hide-all'%></h3>
+  <div id='other_invites'>
+    <span class='subtitle'>可能会去的人(<%= @event.maybe_count %>)<%= link_to '全部', event_participations_url(@event, :type => 1) %></span><br/>
+    <% i=0 %>
+    <table>
+    <% @event.maybe_participants[0..3].each do |p| %>
+      <% if i == 0 %>
+        <tr>
+      <% end %>
+      <td class='record'>
+      <%= avatar p %><br/>
+      <%= profile_link p %>
+      </td>
+      <% i = i + 1 %>
+      <% if i == 3 %>
+        </tr>
+        <% i = 0 %>
+      <% end %>
+    <% end %>
+    </table>
+    <span class='subtitle'>不去的人(<%= @event.declined_count %>)<%= link_to '全部', event_participations_url(@event, :type => 2) %></span><br/>
+    <% i=0 %>
+    <table>
+    <% @event.declined_participants[0..3].each do |p| %>
+      <% if i == 0 %>
+        <tr>
+      <% end %>
+      <td class='record'>
+      <%= avatar p %><br/>
+      <%= profile_link p %>
+      </td>
+      <% i = i + 1 %>
+      <% if i == 3 %>
+        </tr>
+        <% i = 0 %>
+      <% end %>
+    <% end %>
+    </table>
+    <span class='subtitle'>还没回复的人(<%= @event.invitees_count %>)<%= link_to '全部', event_participations_url(@event, :type => 3) %></span><br/>
+    <% i=0 %>
+    <table>
+    <% @event.invitees[0..3].each do |p| %>
+      <% if i == 0 %>
+        <tr>
+      <% end %>
+      <td class='record'>
+      <%= avatar p %><br/>
+      <%= profile_link p %>
+      </td>
+      <% i = i + 1 %>
+      <% if i == 3 %>
+        </tr>
+        <% i = 0 %>
+      <% end %>
+    <% end %>
+    </table>
+
+  </div>
+</div>

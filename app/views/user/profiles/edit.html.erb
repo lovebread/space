@@ -1,0 +1,44 @@
+<%= javascript_include_tag 'game' %>
+
+<%= javascript_include_tag 'chinese_region' %>
+<%= javascript_include_tag 'profile' %>
+<%= javascript_include_tag 'event.simulate' %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <% if @user == current_user %>
+    <h1 class="app-archives">档案</h1>
+    <% else %>
+    <div class='friend-head space s_clear'>
+      <span class="left"><%= avatar_image @user, :class => "imgbox01" %></span>
+      <p class="left">
+        <strong>档案</strong><br/>
+        <%= link_to "#{@user.login}的个人主页", profile_url(@user.profile), :class => 'red' %>
+      </p>
+    </div>
+    <% end %>
+    <div class="box02 canvas_int">
+      <div class="archives-box">
+        <div class="percent-box">
+          <h3>档案完成度：</h3>
+          <div class="percent">
+            <span style="width:43%"></span>
+          </div>
+          <div class="left">100%</div>
+          <div class="right">
+            <ul><li><%= link_to_function "编辑个人档案", "Iyxzone.Profile.Editor.edit(#{@profile.id})" %></li></ul>
+          </div>
+        </div>
+        <!--联系信息展示-->
+        <div id='basic_info_frame'>
+        <%= render :partial => 'basic_info', :locals => {:profile => @profile} %>
+        </div>
+        <div id='contact_info_frame'>
+        <%= render :partial => 'contact_info', :locals => {:profile => @profile, :setting => @profile.user.privacy_setting} %>
+        </div>
+        <div id='character_frame'>
+        <%= render :partial => 'characters', :locals => {:profile => @profile } %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

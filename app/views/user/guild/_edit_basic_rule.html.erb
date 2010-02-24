@@ -1,0 +1,6 @@
+<% form_for :profile, :html => {:id = 'basic_rule_form'} do |f| %>
+	<% @guild_rules.each do |rule|%>
+		<%= f.text_field rule.reason -%>
+		<%= f.text_filed rule.outcome %>
+	<% end %>
+<% end %>

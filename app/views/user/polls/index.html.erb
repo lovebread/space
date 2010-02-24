@@ -1,0 +1,35 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-vote">投票</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "新投票", new_poll_url %></a></div>
+        <ul>
+          <li><span><%= link_to "热门投票", hot_polls_url(:id => @user.id) %></span></li> 
+					<li class='hover'><span><%= link_to "#{get_subject @user}的投票", polls_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "朋友的投票", friends_polls_url(:id => @user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="vote-box">
+        <div class="nav-link">
+          <ul class="s_clear">
+            <li class='hover'><%= link_to "<span>#{get_subject @user}发起的投票(#{@user.polls_count})</span>", polls_url(:id => @user.id) %></li>
+            <li><%= link_to "<span>#{get_subject @user}参与的投票(#{@user.participated_polls_count})</span>", participated_polls_url(:id => @user.id) %></li>
+          </ul>
+        </div>
+        <% if @user.polls_count != 0 %>
+          <%= render :partial => 'poll_items', :object => @polls %>
+          <%= will_paginate @polls %>
+        <% else %>
+          <div class='gray'>
+          <% if @user == current_user %>
+            你还没发起任何投票，赶快<%= link_to '创建一个', new_poll_url %>吧
+          <% else %>
+            <%= get_subject @user %> 没创建过任何投票
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

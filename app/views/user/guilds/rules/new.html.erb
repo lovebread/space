@@ -1,0 +1,21 @@
+<div id='new_rule_<%= params[:id] %>'>
+  <% fields_for "guild[new_rules][#{params[:id]}]", @rule do |r| %>
+  <div class="rows s_clear">
+    <div class="fldid"><label>原因：</label></div>
+    <div class="fldvalue">
+      <div class="textfield"><%= r.text_field :reason, :onblur => "Iyxzone.Guild.Editor.isRuleReasonValid(#{params[:id]}, 1)" %></div>
+    </div>
+    <span class='red' id='new_rule_<%= params[:id] %>_reason_error' ></span>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><label>赏罚：</label></div>
+    <div class="fldvalue">
+      <div class="textfield"><%= r.text_field :outcome, :onblur => "Iyxzone.Guild.Editor.isRuleOutcomeValid(#{params[:id]}, 1)" %></div>
+    </div>
+    <span class='red' id='new_rule_<%= params[:id] %>_outcome_error' ></span>
+  </div>
+  <% end %>
+  <p class='foot s_clear'>
+    <%= link_to_function "删除角色", "Iyxzone.Guild.Editor.removeBasicRule(#{params[:id]}, 1, this)", :class => 'right red' %>
+  </p>
+</div>

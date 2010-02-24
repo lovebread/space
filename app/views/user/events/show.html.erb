@@ -1,0 +1,165 @@
+<%= javascript_include_tag "event" %>
+
+<% content_for :left do %>
+
+<div class="mcAvatar">
+	<a href="#"></a>
+  <div class="picwrap">
+		<div class="middle"><div class="middle-center"><div class="center">
+			<%= album_cover_image @event.album, :size => :large %>
+    </div></div></div>
+  </div>
+</div>
+
+<div class='info-list'>
+<div class="avatarbox">
+	<b>组织者：</b><span><%= profile_link @event.poster %></span>
+</div>
+
+<% if !@event.expired %>
+	<%= render :partial => 'operations' %>
+<% else %>
+  活动已经过期了
+<% end %>
+
+</div>
+
+<% end %>
+
+<% content_for :right do %>
+
+<%= render :partial => 'rsvp' %>
+
+<div class="multibox">
+	<div class="title">
+		<%= link_to "更多", event_participations_url(@event, :type => 1) %>
+    <b>可能参加的人(<%= @event.maybe_count %>)</b>
+  </div>
+  <div class="photolist-box">
+		<ul class="collection s_clear">
+			<% @event.maybe_characters[0..5].each do |c| %>
+			<li>
+				<div class="middle"><div class="middle-center"><div class="center"><%= avatar c.user, :class => 'imgbox01' %></div></div></div>
+        <p><%= profile_link c.user %></p>
+			</li>
+			<% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="multibox">
+  <div class="title">
+    <%= link_to "更多", event_participations_url(@event, :type => 2) %>
+    <b>被邀请的人(<%= @event.invitations_count %>)</b>
+  </div>
+  <div class="photolist-box">
+    <ul class="collection s_clear">
+      <% @event.invite_characters[0..5].each do |c| %>
+      <li>
+        <div class="middle"><div class="middle-center"><div class="center"><%= avatar c.user, :class => 'imgbox01' %></div></div></div>
+        <p><%= profile_link c.user %></p>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="multibox">
+  <div class="title">
+    <%= link_to "更多", event_participations_url(@event, :type => 3) %>
+    <b>请求加入的人(<%= @event.requests_count %>)</b>
+  </div>
+  <div class="photolist-box">
+    <ul class="collection s_clear">
+      <% @event.request_characters[0..5].each do |c| %>
+      <li>
+        <div class="middle"><div class="middle-center"><div class="center"><%= avatar c.user, :class => 'imgbox01' %></div></div></div>
+        <p><%= profile_link c.user %></p>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% end %>
+
+<div class='box02 canvas_con'>
+  <div class="formComposer">
+	  <h3 class="png">
+      名称：<b><%= @event.title %></b>
+      <% if @event.is_guild_event? %>
+        <span>   工会活动: </span><%= guild_link @event.guild %>
+      <% end %>
+    </h3>
+	  <div class="formcontent">
+  		<div class="rows s_clear">
+        <div class="fldid"><label for="server">游戏：</label></div>
+		  	<div class="fldvalue"><%= @event.game.name %></div>
+      </div>
+	  	<% unless @event.game.no_areas? %>
+		  <div class="rows s_clear">
+        <div class="fldid"><label for="server">游戏服务区：</label></div>
+        <div class="fldvalue"><%= @event.game_area.name %></div>
+      </div>
+	  	<% end %>
+		  <div class="rows s_clear">
+        <div class="fldid"><label for="server">游戏服务器：</label></div>
+        <div class="fldvalue"><%= @event.game_server.name %></div>
+      </div>
+	  	<div class="rows s_clear">
+        <div class="fldid"><label for="server">时间：</label></div>
+        <div class="fldvalue">从<%= ftime @event.start_time %>到<%= ftime @event.end_time %></div>
+      </div>
+  	</div>
+  </div>
+
+  <div class="multibox">
+    <div class="title"><b>描述</b></div>
+    <div class="photolist-big-box">
+			<%= @event.description %>
+		</div>
+  </div>
+
+	<div class="multibox">
+		<div class="title"><%= link_to "更多", event_album_url(@album) %><b>照片</b></div>
+    <div class="photolist-big-box">
+			<ul class="collection s_clear">
+				<% @album.photos[0..4].each do |p| %>
+					<li>
+						<div class="middle"><div class="middle-center"><div class="center"><%= photo_link p, :class => 'imgbox02' %></div></div></div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+	<div class="multibox">
+		<div class="title"><%= link_to "更多", event_participations_url(@event, :type => 0) %><b>参加的人</b></div>
+    <div class="photolist-box">
+			<ul class="collection s_clear">
+				<% @event.confirmed_characters[0..6].each do |c| %>
+					<li>
+						<div class="middle"><div class="middle-center"><div class="center"><%= avatar c.user, :class => 'imgbox01' %></div></div></div>
+            <p><%= profile_link c.user %></p>
+          </li>
+				<% end %>
+      </ul>
+    </div>
+  </div>
+
+  <% if @event.has_participant? current_user %>
+    <%= render :partial => 'user/wall_messages/wall_form', :locals => {:wall => @event, :recipient => @event.poster} %>
+  <% end %>
+
+  <div class='feed-box' id='comments'>
+    <%= javascript_tag "Iyxzone.WallMessage.fetch('Event', #{@event.id})" %>
+  </div>
+
+</div>
+
+<% unless @reply_to.blank? %>
+<%= javascript_tag "
+  Iyxzone.Wall.set('#{@reply_to.login}', #{@reply_to.id})
+" %> 
+<% end %>
+

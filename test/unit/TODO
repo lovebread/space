@@ -1,0 +1,34 @@
+avatar 无法取消删除
+
+friendship 不能直接创建
+friendship 如果删除的是用户，要怎么组织发notification
+
+event 创建的时候是否需要检查game_id, area_id, 而且如果game_id和area_id啥的不匹配如何
+
+participation 不能擅自直接创建
+过期的invitation和request怎么办
+如果user, event不存在？？
+
+blog 创建的时候游戏不存在
+
+video 创建的时候游戏不存在
+
+guild 创建安的时候是否要检查game_id
+event, guild删除的时候，地下的participation, membership怎么办
+
+membership, participation检查是否event_id, guild_id存在且合法
+
+poll 创建的时候游戏不存在
+
+vote answers如果不属于poll的话
+
+avatar album 无法创建和更新
+
+对于那些需要判断是否有权限创建的，是否都写在model里呢
+
+明天要作的
+poll	DONE
+vote	DONE
+album
+photo
+game related

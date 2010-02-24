@@ -1,0 +1,47 @@
+<% absence_rule = @guild.absence_rule %>
+<% presence_rule = @guild.presence_rule %>
+<div class="edit-toggle space edit">
+  <h3 class="s_clear"><strong class="left">出勤规则</strong><%= link_to_function "取消", "Iyxzone.Guild.Editor.cancelEditAttendanceRules(#{@guild.id})", :class => "right" %></h3>
+  <div class="formcontent con con2">
+    <% form_for :guild, :html => {:id => 'attendance_rules_form'} do |f| %>
+      <% fields_for "guild[existing_rules][]", absence_rule do |r| %>
+      <div class="item space">
+        <div class="rows s_clear">
+          <div class="fldid"><label><%= absence_rule.reason %>：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left w-l">
+              <%= r.text_field :outcome, :onblur => "Iyxzone.Guild.Editor.isAbsenceOutcomeValid()", :id => "absence_outcome" %>
+            </div>
+          </div>
+          <span class='red' id='absence_rule_error'></span>
+        </div>
+      </div>
+      <% end %>
+      <% fields_for "guild[existing_rules][]", presence_rule do |r| %>
+      <div class="item space">
+        <div class="rows s_clear">
+          <div class="fldid"><label><%= presence_rule.reason %>：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left w-l">
+              <%= r.text_field :outcome, :onblur => "Iyxzone.Guild.Editor.isPresenceOutcomeValid()", :id => "presence_outcome" %>
+            </div>
+          </div>
+          <span class='red' id='presence_rule_error'></span>
+        </div>
+      </div>
+      <% end %>
+      <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span>
+            <%= button_to_function '完成', "Iyxzone.Guild.Editor.updateAttendanceRules(#{@guild.id}, event)" %>
+          </span></span>
+          <span class="button button-gray"><span>
+            <%= button_to_function '取消', "Iyxzone.Guild.Editor.cancelEditAttendanceRules(#{@guild.id})" %>             
+          </span></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

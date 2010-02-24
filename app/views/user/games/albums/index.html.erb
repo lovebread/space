@@ -1,0 +1,37 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+		<h1 class="big-photo">照片</h1>
+		<div class="box02 canvas_int">
+			<div class="tab tab01">
+				<% if @user == current_user %>
+				<div class="right">
+					<%= link_to "上传照片", select_personal_albums_url(:id => @user.id) %>
+					<%= link_to "新建相册", new_personal_album_url, :rel => 'facebox' %>
+        </div>
+				<% end %>
+        <ul>
+					<% subject = get_subject @user %>
+          <li><span><%= link_to "热门照片", hot_personal_photos_url(:id => @user.id) %></span></li>
+					<li><span><%= link_to '最新照片', recent_personal_albums_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %></span></li>
+					<% if @user == current_user %>
+						<li><span><%= link_to '好友相册', friends_personal_albums_url(:id => @user.id) %></span></li>
+					<% end %>
+          <li><span><%= link_to "圈了#{subject}的照片", relative_personal_photos_url(:id => @user.id) %></span></li>
+        </ul>				
+			</div>
+      <div class="box02 appcontent01">
+        <div class='path-box'>
+          <label>游戏"<%= game_link @game %>"</label>
+          <span>相册</span>
+        </div>
+        <div class="piclist s_clear">
+					<%= render :partial => 'user/albums/album_item', :collection => @albums %>
+        </div>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>
+
+<%= will_paginate @albums %>
+

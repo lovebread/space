@@ -1,0 +1,10 @@
+<% delivery = membership_feed_delivery %>
+<% membership = membership_feed_delivery.feed_item.originator %>
+<div class='feed-list-box'>
+<div class='feed-list' id='feed_delivery_<%= delivery.id %>'>
+	<div class="s-img left">
+		<div class="imgbox01"><%= avatar membership.user, :size => "small" %></div>
+	</div>
+  <div class='jl-list-con jl-cutline'><%= profile_link membership.user %> 加入了工会 <%= guild_link membership.guild, :class=> 'shine' %> </div>
+</div>
+</div>

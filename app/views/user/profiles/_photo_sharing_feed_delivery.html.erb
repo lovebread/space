@@ -1,0 +1,16 @@
+<% delivery = photo_sharing_feed_delivery %>
+<% sharing = delivery.feed_item.originator %>
+<% user = sharing.poster %>
+<% photo = sharing.sharable%>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class='feed-icon icon-photo'></div>
+  <% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %><% end %>
+	<p><%= profile_link user %> 分享了<%= profile_link photo.poster%>的照片</p>
+  <p class="gray s_clear">
+		<%= photo_link photo, :size => :medium %>
+	</p>
+	<p class="gray"><%= ftime delivery.created_at %> <%= link_to_function "评论", "Iyxzone.Comment.showForm('avatar', #{avatar.id}, null);", :class => "gray"%></p>
+	<%= render :partial => "user/comments/folded_comment_box", :locals => {:commentable => avatar , :recipient => avatar.poster} %>
+</div>
+</div>

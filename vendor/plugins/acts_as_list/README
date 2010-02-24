@@ -1,0 +1,27 @@
+ActsAsList
+==========
+
+这个插件只提供4个最简单的接口，
+
+next
+prev
+first
+last
+
+最后2个貌似没啥需要的时候（囧）
+
+Example
+=======
+
+假设我们需要显示当前博客的下一篇博客和上一篇博客，那么
+
+class Blog < ActvieRecord::Base
+
+	acts_as_list :order => "created_at DESC", :scope => "poster_id" 
+
+end
+
+:order => "created_at DESC" 表示按照创建时间的降序
+:scope => "poster_id" 表示限制条件，这个条件让next, prev在所有poster_id都相同的博客里找下一篇
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

@@ -1,0 +1,29 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+                <div class="round_m"><div class="round_body">
+                    <h1 class="app-friend">好友</h1>
+                    <div class="box02 canvas_int">
+                        <div class="tab tab01">
+                        <ul>
+<li><span><%= link_to "#{@user.login}的好友", other_friends_url(:id => @user.id) %></span></li>
+<li class='hover'><span><%= link_to '共同好友', common_friends_url(:id => @user.id) %></span></li>
+</ul>
+												</div>
+                        <div class="friend-box">
+                            <div class="friend-wrap s_clear">
+                                <div class="friend-list">
+																	<div class="friend-content">
+                                        <div class="friend-list-header">
+																					所有共同好友
+                                        </div>
+                                        <div class="friend-list-body" id='friends'>
+																					<%= render :partial => 'friends', :object => @friends %>
+																				</div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+						</div></div>
+            </div></div></div></div>
+        </div>
+

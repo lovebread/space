@@ -1,0 +1,27 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-vgame">通知</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="icon">
+          <%= facebox_confirm '删除所有通知', destroy_all_notifications_url, {:method => :delete, :msg => '你确定要删除所有通知吗'} %>
+        </div>
+        <ul>
+          <li class="hover"><span><%= link_to "通知", notifications_url %></span></li>
+          <li><span><%= link_to "请求", requests_url %></span></li>
+          <li><span><%= link_to "邀请", invitations_url %></span></li>
+        </ul>
+      </div>
+      <div class="box02 appcontent02">
+      <% if @notifications.blank? %>
+        <%= "没有任何通知" %>
+      <% else %>  
+        <% group_notifications(@notifications).each do |range, notifications| %>
+          <%= render :partial => 'notification_box', :locals => {:notifications => notifications, :title => range} %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+

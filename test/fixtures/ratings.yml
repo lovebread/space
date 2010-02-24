@@ -1,0 +1,27 @@
+one:
+  id: 1
+  rating: 4
+  rateable_type: 'Game'
+  rateable_id: 1
+  user_id: 1
+
+two:
+  id: 2
+  rating: 3
+  rateable_type: 'Game'
+  rateable_id: 1
+  user_id: 2
+
+three:
+  id: 3
+  rating: 5
+  rateable_type: 'Game'
+  rateable_id: 1
+  user_id: 3
+
+four:
+  id: 4
+  rating: 3
+  rateable_type: 'Game'
+  rateable_id: 2
+  user_id: 4 

@@ -1,0 +1,9 @@
+<h2>New Post</h2>
+
+<%= error_messages_for :post, :header_message => '以下原因导致无法保存', :message => nil%>
+
+<h3>Topic: <%= @topic.name %></h3>
+<% form_for :post, :url => forum_topic_posts_url(@forum, @topic), :html => {:onsubmit => "return validate_post();"} do |f| %>
+  
+<% end %>
+

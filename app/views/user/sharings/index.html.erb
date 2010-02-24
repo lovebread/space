@@ -1,0 +1,89 @@
+<%= javascript_include_tag 'video' %>
+<%= javascript_include_tag 'share' %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-photo">照片</h1>
+      <label>输入url来分享连接</label>
+      <%= text_field_tag 'link[url]' %>
+      <%= button_to_function '分享', 'Iyxzone.Share.shareLink()' %>
+    <div class="box02 canvas_int">
+      <% if @user == current_user %>
+      <div class="tab tab01">
+        <div class="right gray"><a href="#">如何分享视频？</a> <a href="#">如何分享更方便？</a></div>
+        <ul>
+          <li><span><%= link_to "热门分享", hot_sharings_url(:type => 0) %></span></li>
+          <li><span><%= link_to "最新创建", recent_sharings_url(:type => 0) %></span></li>
+          <li class='hover'><span><%= link_to "我的分享", sharings_url(:id => @user.id, :type => 0) %></span></li>
+          <li><span><%= link_to "好友的分享", friends_sharings_url(:type => 0) %></span></li>
+        </ul>
+      </div>
+      <% end %>
+      <div class="feed-box01">
+        <div class="nav-link">
+          <ul class="s_clear">
+            <% if params[:type].to_i == 0 %>
+              <li class="hover"><%= link_to "<span>全部</span>", sharings_url(:id => @user.id, :type => 0) %></li>
+            <% else %>
+              <li><%= link_to "<span>全部</span>", sharings_url(:id => @user.id, :type => 0) %></li>
+            <% end %>
+            <% if params[:type].to_i == 1 %>
+              <li class="hover"><%= link_to "<span>博客</span>", sharings_url(:id => @user.id, :type => 1) %></li>
+            <% else %>
+              <li><%= link_to "<span>博客</span>", sharings_url(:id => @user.id, :type => 1) %></li>
+            <% end %>
+            <% if params[:type].to_i == 2 %>
+              <li class="hover"><%= link_to "<span>视频</span>", sharings_url(:id => @user.id, :type => 2) %></li>
+            <% else %>
+              <li><%= link_to "<span>视频</span>", sharings_url(:id => @user.id, :type => 2) %></li>
+            <% end %>
+            <% if params[:type].to_i == 3 %>
+              <li class="hover"><%= link_to "<span>连接</span>", sharings_url(:id => @user.id, :type => 3) %></li>
+            <% else %>
+              <li><%= link_to "<span>连接</span>", sharings_url(:id => @user.id, :type => 3) %></li>
+            <% end %>
+            <% if params[:type].to_i == 4 %>
+              <li class="hover"><%= link_to "<span>照片</span>", sharings_url(:id => @user.id, :type => 4) %></li>
+            <% else %>
+              <li><%= link_to "<span>照片</span>", sharings_url(:id => @user.id, :type => 4) %></li>
+            <% end %>
+            <% if params[:type].to_i == 5 %>
+              <li class="hover"><%= link_to "<span>相册</span>", sharings_url(:id => @user.id, :type => 5) %></li>
+            <% else %>
+              <li><%= link_to "<span>相册</span>", sharings_url(:id => @user.id, :type => 5) %></li>
+            <% end %>
+            <% if params[:type].to_i == 6 %>
+              <li class="hover"><%= link_to "<span>投票</span>", sharings_url(:id => @user.id, :type => 6) %></li>
+            <% else %>
+              <li><%= link_to "<span>投票</span>", sharings_url(:id => @user.id, :type => 6) %></li>
+            <% end %>
+            <% if params[:type].to_i == 7 %>
+              <li class="hover"><%= link_to "<span>游戏</span>", sharings_url(:id => @user.id, :type => 7) %></li>
+            <% else %>
+              <li><%= link_to "<span>游戏</span>", sharings_url(:id => @user.id, :type => 7) %></li>
+            <% end %>
+            <% if params[:type].to_i == 8 %>
+              <li class="hover"><%= link_to "<span>玩家</span>", sharings_url(:id => @user.id, :type => 8) %></li>
+            <% else %>
+              <li><%= link_to "<span>玩家</span>", sharings_url(:id => @user.id, :type => 8) %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="feed-img-list rows">
+        <% if @sharings.total_entries != 0 %>
+          <% @sharings.each do |sharing| %>
+            <%= render :partial => "#{sharing.shareable_type.underscore}_sharing", :object => sharing %>
+          <% end %>
+          <%= will_paginate @sharings %>
+        <% else %>
+          <% if @user == current_user %>
+            <div class='gray'>你啥都没分享，我日你!</div>
+          <% else %>
+            <div class='gray'><%= get_subject @user %>都没分享，一个2比 </div>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+        

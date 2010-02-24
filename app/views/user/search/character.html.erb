@@ -1,0 +1,53 @@
+<%= javascript_include_tag "game.js" %>
+<%= javascript_include_tag "search.js" %>
+<%= javascript_include_tag "friend.js" %>
+<%= javascript_include_tag "event.simulate" %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+		<h1 class="app-friend">寻找好友</h1>
+    <div class="box02 canvas_int">
+      <div class="nav-link jl-cutline friend-search-t">
+        <ul class="s_clear">
+          <!--<li><a href="#"><span>所有人</span></a></li>-->
+          <li><%= link_to "<span>按昵称(#{@others.size})</span>", search_users_url(:key => @key)%></li>
+          <li class='hover'><%= link_to "<span>按游戏角色(#{@total_users.size})</span>", search_characters_url(:key => @key)%></li>
+        </ul>
+      </div>
+			<div class='friend-box'>
+        <div class="box02 appcontent01">
+          <div class="piclist-rows cmt-space">
+            <table cellspacing='0' cellpadding='0'>
+              <% @users.each do |user_id, characters| %>
+              <% f = User.find(user_id) %>
+              <tr>
+                <td>
+									<div class='imgwrap'>
+										<%= avatar f, :size => :mediumi, :class=>'imgbox01' %>
+									</div>
+									<div class='data jl-data'>
+										<p><%= profile_link f %></p>
+										<p><% characters.each{ |character| %>
+											<%= character.game.name %>,
+											<%= character.server.name unless character.server.nil? %>,
+											<%= character.name %>;
+											<% } %>
+										</p>
+										<p class="space">
+											<%= facebox_link '', new_friend_request_url(:friend_id => f.id), :class => "friend-btn w-l" %>
+											<%= link_to '', new_mail_url(:recipient_id => f.id), :class => "msg-btn" %>
+										</p>
+									</div>
+								</td>
+              </tr>
+              <% end %>
+            </table>
+            <div class="pages">
+              <%= will_paginate @users %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>

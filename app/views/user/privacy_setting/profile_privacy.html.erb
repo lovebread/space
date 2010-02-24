@@ -1,0 +1,116 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-lock">隐私设置</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <ul>
+          <li class="hover"><span><%= link_to '个人主页', edit_privacy_setting_url(:type => 0) %></span></li>
+          <li><span><%= link_to '操作', edit_privacy_setting_url(:type => 1) %></span></li>
+          <li><span><%= link_to '站外搜索', edit_privacy_setting_url(:type => 2) %></span></li>
+          <li><span><%= link_to '邮件提醒', edit_mail_setting_url(:type => 6) %></span></li>
+        </ul>
+      </div>
+      <div class="box02 appcontent04">
+        <div class="path-box">
+        </div>
+        <div class="privacy-form formcontent">
+          <% form_for :setting, :url => privacy_setting_url(:type => 0), :html => {:method => :put} do |f| %>
+            <div class="form-group">
+              <h3>谁可以浏览你的个人主页？</h3>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="myhome">个人主页</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :personal %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <h3>谁可以看到你的个人档案？</h3>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="info"><b>基本信息</b></label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :basic_info %>
+                </div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="info"><b>角色信息</b></label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :character_info %>
+                </div>
+              </div>
+              <div class="rows s_clear">        
+                <div class="fldid"><label for="info"><b>留言版</b></label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :wall %>
+                </div>
+              </div>
+            </div>
+            <div class='form-group'>
+              <div class="rows s_clear">
+                <div class="fldid"><b>联系信息</b></div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="address">qq</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :qq %>
+                </div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="address">邮件地址</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :email %>
+                </div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="address">手机</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :phone %>
+                </div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="address">个人网站</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  <%= privacy_select_tag :setting, :website %>
+                </div>
+              </div>
+            </div> 
+            <div class="form-group">
+              <h3>个人主页上的应用</h3>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="myhome">日志</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  相关浏览权限需要在每个日志中单独设置
+                </div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label for="myhome">相册</label></div>
+                <div class="fldstatus fldstatus-lock"></div>
+                <div class="fldvalue">
+                  相关浏览权限需要在每个相册中单独设置
+                </div>
+              </div>
+            </div>
+            <div class="buttons s_clear">
+              <div class="fldid">&nbsp;</div>
+              <div class="fldstatus fldstatus-none"></div>
+              <div class="fldvalue">
+                <span class="button"><span><button type="submit">保存修改</button></span></span>
+                <span class="button button-gray"><span><%= link_to '取消', privacy_setting_url%></span></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+

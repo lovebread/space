@@ -1,0 +1,12 @@
+<% photo = photo_upload_form %>
+<div class="rows s_clear">
+<% fields_for "photos[]", photo do |form| %>
+  <div class="fldid">&nbsp;</div>
+	<div class="fldvalue">
+		<div class="textfield"><%= form.file_field :uploaded_data %></div>
+  </div>
+  <div class="fldbtn">
+		<span class="button"><span><%= link_to_function "delete", "$(this).up('.photo').remove();" %></span></span>
+  </div>
+<% end %>
+</div>

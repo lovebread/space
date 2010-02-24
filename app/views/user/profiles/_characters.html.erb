@@ -1,0 +1,32 @@
+<div class="edit-toggle space">
+  <h3 class="s_clear">
+    <strong class="left">游戏角色信息</strong>
+    <% if profile.user == current_user %>
+      <%= link_to_function '<span class="icon-active icon-active-edit w-l"></span>编辑', "Iyxzone.Profile.Editor.editCharacters(#{profile.id})", :class => 'right red' %>
+    <% end %>
+  </h3>
+  <div class="formcontent con con2">
+    <div class="item space">
+    <% profile.user.characters.each do |c| %>
+      <div class="rows s_clear">
+        <div class="fldid"><label><%= c.name %>：</label></div>
+        <div class="fldvalue">
+          <span class='red'><%= game_link c.game, :class => 'red' %> , </span>
+          <% unless c.game.no_areas %>
+          <span><%= c.area.name %> , </span>
+          <% end %>
+          <% unless c.game.no_servers %>
+          <span><%= c.server.name %> , </span>
+          <% end %>
+          <% unless c.game.no_races %>
+          <span><%= c.race.name %> , </span>
+          <% end %>
+          <% unless c.game.no_professions %>
+          <span><%= c.profession.name %></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

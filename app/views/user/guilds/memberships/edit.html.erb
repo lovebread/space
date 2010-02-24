@@ -1,0 +1,17 @@
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h3>更改职务</h3>
+</div>
+
+<% form_remote_for :membership, :url => guild_membership_url(@guild, @membership), :html => {:method => :put} do |f| %>
+<div class='formcontent'>
+  <%= radio_button_tag 'status', 4 %><%= label_tag '', '长老' %><br/>
+  <%= radio_button_tag 'status', 5 %><%= label_tag '', '普通会员' %><br/>
+</div>
+<div class="buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <span class="button"><span><button type="submit">完成</button></span></span>
+    <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+  </td></tr></table>
+</div>
+<% end %>

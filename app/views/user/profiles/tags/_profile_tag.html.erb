@@ -1,0 +1,13 @@
+<div class='impress-add s_clear space' id='tag_cloud'> 
+<ul class='holder' style="border: 0px">
+<% all_tags = Tag.profile_tags %>
+<% if all_tags.size > 6 %>
+<% tags = all_tags.sort_by{rand}[0..5] %>
+<% else %>
+<% tags = all_tags %>
+<% end %>
+<% tags.map(&:name).each do |name| %>
+	<li class='bit-box'><%= link_to_remote "<span>#{name}</span>", :url => profile_tags_url(profile, :tag_name => name),:html=>{:class=> "impress-btn-#{rand(4)}"} %></li>
+<% end %>
+</ul>
+</div>

@@ -1,0 +1,52 @@
+<%= javascript_include_tag "password" %>
+
+    <div class="welcome-box02">
+      <div class="box-v2 space20">
+        <div class="t s_clear"><strong class="get-pws"></strong><span></span></div>
+          <div class="m rows">
+            <% form_tag url_for(:controller => 'passwords', :action => 'update'), :id => 'password_form', :method => :put do |f| -%>
+              <%= hidden_field_tag 'password_reset_code', params[:password_reset_code] %>
+              <div class="form-con" style="padding-left:40px">
+                    <div class="rows s_clear">
+                        <div class="f-id">&nbsp;</div>
+                        <div class="f-value">
+输入您的新密码并确认
+                        </div>
+                    </div>
+                    <div class="rows s_clear space">
+                        <div class="f-id"><label for="mail">密码：</label></div>
+                        <div class="f-value">
+                            <%= password_field_tag 'password', '', :onblur => "Iyxzone.Password.validatePassword()" %>
+                        </div>
+                        <span class='' id='password_info'></span>
+                    </div>
+                    <div class="rows s_clear space">
+                        <div class="f-id"><label for="code">再次确认：</label></div>
+                        <div class="f-value">
+                           <%= password_field_tag 'password_confirmation', '', :onblur => "Iyxzone.Password.validatePasswordConfirmation()" %>
+                        </div>
+                        <span class='' id='password_confirmation_info'></span>
+                    </div>
+                    <div class="rows s_clear space20">
+                        <div class="f-id">&nbsp;</div>
+                        <div class="f-value">
+                              <span class="button rows"><span>
+                                <%= button_to_function '重置', "Iyxzone.Password.reset(this, event)" %>
+                                </span></span>
+                        </div>
+                    </div>
+                  </div>
+                <% end %>
+                     <div class="jl-cutline" style="margin:0 auto;width:95%;">&nbsp;</div>
+                    <div class="foot space20 rows">
+                     <p class="gray" style="margin:0 auto;width:50%;">
+                    <strong>如何找回密码?</strong><br />
+        设置过密码保护的用户,可以通过回答密保问题或者使用密保手机来设置新密码；<br />
+        没有设置过密码保护的用户通过使用注册邮箱找回密码；<br />
+        忘记密码保护或者邮箱被盗的用户只能通过帐号申诉来找回密码。
+                    </p>
+                    </div>
+            </div>
+        <div class="b"><span></span></div>
+      </div>
+    </div>

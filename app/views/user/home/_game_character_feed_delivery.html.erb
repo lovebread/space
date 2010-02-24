@@ -1,0 +1,23 @@
+<% delivery = game_character_feed_delivery %>
+<% item = delivery.feed_item %>
+<% character = item.originator %>
+
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="s-img left">
+		<div class="imgbox01"><%= avatar character.user, :size => "small" %></div>
+	</div>
+	<div class="jl-list-con jl-cutline">
+<% if item.data[:type] == 0 %>
+  <%= profile_link character.user %>创建了游戏角色<%= link_to character.name, edit_profile_url(character.user.profile), :class => "shine" %>
+<% elsif item.data[:type] == 1 %>
+  <%= profile_link character.user %>放弃了游戏角色<%= link_to character.name, edit_profile_url(character.user.profile), :class => "shine" %>
+<% elsif item.data[:type] == 2 %>
+  <%= profile_link character.user %>开始玩游戏角色<%= link_to character.name, edit_profile_url(character.user.profile), :class => "shine"%>
+<% end %>
+	<% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %><% end %> 
+	<span class='gray'><%= ftime delivery.created_at %></span>
+	</div>
+</div>
+</div>
+ 

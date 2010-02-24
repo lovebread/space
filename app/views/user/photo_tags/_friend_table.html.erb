@@ -1,0 +1,7 @@
+<% if friends.blank? %>
+  没有匹配的好友
+<% else %>
+  <% friends.each do |f| %>
+    <li><span><%= check_box_tag '', f.id, false, :profile_id => f.profile.id, :login => f.login %><%= f.login %></span></li>
+  <% end %>
+<% end %>

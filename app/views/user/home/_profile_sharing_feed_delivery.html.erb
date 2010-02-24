@@ -1,0 +1,15 @@
+<% delivery = profile_sharing_feed_delivery %>
+<% sharing = delivery.feed_item.originator %>
+<% profile = sharing.shareable %>
+
+<div class="feed-list-box">
+  <div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	  <div class="img left">
+		  <div class="imgbox01"><%= avatar sharing.poster %></div>
+	  </div>
+	  <div class="jl-list-con jl-cutline"><%= profile_link sharing.poster %> 分享了玩家 <%= profile_link profile.user %></div>
+	  <%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %>
+	  <p class="gray"><%= ftime delivery.created_at %> <%= link_to_function "回复", "Iyxzone.Comment.showForm('sharing', #{sharing.id}, null);", :class => "gray"%></p>
+	  <%= render :partial => "user/comments/folded_comment_box", :locals => {:commentable => sharing, :recipient => nil} %>
+	</div>
+</div>

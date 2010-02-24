@@ -1,0 +1,29 @@
+<div class="selector selector03 select-toggle s_clear">
+  <a href="#" id='toggle_button' class='toggle'></a>
+  <%= text_field_tag 'friend[login]', '' %>
+  <div id='friend_list' class='drop-menu' style="display:none"></div>
+  <div id="friend-wrap" class="drop-wrap" style="display:none"> 
+    <iframe src="" frameborder="0"></iframe>
+    <div class="wrap-bg"></div>
+    <div class="con">
+      <div class="head s_clear">
+        <h4 class="left"><span>限选20人</span></h4>
+        <div class="right">
+          <select class="select" id='game_selector'>
+            <option value="all">全部好友</option>
+            <% current_user.games.each do |game| %>           
+              <option value=<%= game.id %>><%= game.name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <ul class="checkboxes rows s_clear" id='friend_items'>
+        <%= render :partial => 'user/friend_tags/friend_table', :locals => {:friends => current_user.friends} %>
+      </ul>
+      <div class="foot rows">
+        <span class="button"><span><button type="submit" id='confirm_btn'>确定</button></span></span>
+        <span class="button"><span><button type="submit" id='cancel_btn'>取消</button></span></span>
+      </div>
+    </div>
+  </div>
+</div>

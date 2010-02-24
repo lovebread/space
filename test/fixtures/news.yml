@@ -1,0 +1,12 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+#valid_news:
+#  id: 1
+#  game_id: 1
+#  news_type: 文字
+#  data: <a href="http://info.tsinghua.edu.cn">sb</a>
+
+# one:
+#   column: value
+#
+# two:
+#   column: value

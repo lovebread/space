@@ -1,0 +1,135 @@
+<%= javascript_include_tag "game.js" %>
+<%= javascript_include_tag "search.js" %>
+<%= javascript_include_tag "friend.js" %>
+<%= javascript_include_tag "event.simulate" %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+		<h1 class="app-friend">好友</h1>
+    <div class="box02 canvas_int">
+			<div class="tab tab01">
+				<div class="right"><%= link_to "激请好友加入" %></div>
+				<ul>
+					<li><span><%= link_to '好友管理', friends_url %></span></li>
+					<li class='hover'><span><%= link_to '寻找好友', friend_suggestions_url %></span></li>
+					<li><span><%= link_to '好友印象', friend_impressions_url %></span></li>
+				</ul>
+      </div>
+			<div class="friend-box">
+				<div class="box02 appcontent01 jl-friend-search">
+					<div class='bd-bt'>
+						<h3><%= link_to_function '按昵称查找', "Iyxzone.Search.toggleUserForm()" %></h3>
+					<div id='search_panel'>
+					<% form_tag search_users_url, :class => "formcontent", :id => 'user_form', :onsumbit => "return user_searcher.validate_user();", :style => "display:none" do %>
+						<div class="rows s_clear">
+              <div class="fldvalue">
+								<div class="textfield"><%= text_field_tag 'key', '好友名字', :onclick => "this.clear();" %></div>
+              </div>
+              <div class="fldbtn">
+                <span class="button"><span><button type="submit" onclick="Iyxzone.Search.searchUsers(this)">查找</button></span></span>
+              </div>
+            </div>
+					<% end %>
+					</div>
+					</div>
+					<div class='bd-bt'>
+					<h3><%= link_to_function '按游戏角色查找', "Iyxzone.Search.toggleCharacterForm()" %></h3>
+					<% form_tag search_characters_url, :class => "formcontent", :id => 'character_form', :style => "display:none" do %>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="username">游戏角色名称：</label></div>
+                <div class='fldvalue'><div class='textfield'><%= text_field_tag 'key', params[:key], :onclick => "this.clear();" %></div></div>
+            </div>
+            <div id='character_options'>
+            <div class="rows s_clear">
+              <div class="fldid"><%= label_tag '游戏: ' %></div>
+              <div class='fldvalue'>
+              <%= collection_select :game, :id, @games, :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><%= label_tag '服务区: ' %></div>
+              <div class='fldvalue'>
+              <%= collection_select :area, :id, [], :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><%= label_tag '服务器: ' %></div>
+              <div class='fldvalue'>
+              <%= collection_select :server, :id, [], :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            </div>
+						<div class="rows s_clear">
+						<div class='fldid'>&nbsp;</div>
+            <div class="fldbtn">
+              <span class="button"><span><button type="submit" onclick="Iyxzone.Search.searchCharacters(this)">查找</button></span></span>
+            </div>
+						</div>
+          <% end %>
+				</div>
+					<h3><%= link_to_function '找MSN/EMAIL联系人', "Iyxzone.Search.toggleMSNForm()" %></h3>
+          <div class="formcontent" id="msnform" style="display:none">
+						<form action="">
+              <div class="rows s_clear">
+                <div class="fldid">&nbsp;</div>
+                <div class="fldrd"><input id="msn" name="contact" type="radio" /></div>
+								<div class="fldvalue"><label for="msn">msn</label></div>
+								<div class="fldrd"><input id="email" name="contact" type="radio" /></div>
+                <div class="fldvalue"><label for="email">email</label></div>
+              </div>
+              <div class="rows s_clear">
+								<div class="fldid"><label for="username">msn帐号：</label></div>
+                <div class="fldvalue">
+									<div class="textfield"><input id="username" /></div>
+                </div>
+              </div>
+              <div class="rows s_clear">
+								<div class="fldid"><label for="password">msn密码：</label></div>
+                <div class="fldvalue">
+									<div class="textfield"><input id="password" /></div>
+								</div>
+							</div>
+							<span class="remind">本站不会存储您的密码，请放心使用</span>
+              <div class="rows s_clear">
+								<div class="fldid">&nbsp;</div>
+								<div class="fldbtn"><span class="button"><span><button type="submit">查找</button></span></span></div>
+              </div>
+            </form>
+          </div>
+				</div>
+				<div class="box02 appcontent01">
+					<div class='d6-head'>
+					<strong class='gray'>你可能认识的人</strong>
+					<span><%= link_to '更多', {:controller => 'user/friend_suggestions', :action => 'friend'}, :class => 'right' %></span>
+					</div>
+          <div class="d6-list s_clear">
+						<ul id='friend_suggestions'>
+							<%= render :partial => 'nicer_friend_suggestion', :collection => @friend_suggestions %>
+						</ul>
+          </div>
+        </div>
+				<% @comrade_suggestions.each do |server_id, suggestions| %>
+					<% unless suggestions.count == 0 %>
+						<% server = GameServer.find(server_id) %>
+						<div class="box02 appcontent01">
+							<div class='d6-head'>
+								<strong>你在<%= server_location server %>可能认识: </strong>
+								<span><%= link_to '更多', {:controller => 'user/friend_suggestions', :action => 'comrade', :server_id => server_id}, :class => 'right' %></span>
+							</div>
+						  <div class="d6-list s_clear">
+						    <ul id='server_<%= server_id %>_suggestions'>
+									<%= render :partial => 'comrade_suggestion', :collection => suggestions %>
+						    </ul>
+						  </div>
+						</div>
+					<% end %>
+				<% end %>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+  Iyxzone.Search.gameSelector = new Iyxzone.Game.PinyinSelector(#{array_or_string_for_javascript @games.map(&:pinyin).insert(0, '---')}, 'game_id', 'area_id', 'server_id', null, null, {});
+  Iyxzone.Search.gameSelector.setEvents(); 
+" %>

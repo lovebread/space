@@ -1,0 +1,22 @@
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h3>隐私设置</h3>
+</div>
+
+<% form_remote_for :setting, :url => privacy_setting_url(@setting, :format => 'js'), :method => :put do |f| %>
+<div class='formcontent'>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="name">你想让谁看到：个人网页</label></div>
+    <div class="fldvalue"> 
+      <%= privacy_select_tag :setting, :website %>
+    </div>
+  </div>
+</div>
+<div class="foot buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <span class="button"><span><button type="submit">完成</button></span></span>
+    <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+  </td></tr></table>
+</div>
+<% end %>
+

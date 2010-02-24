@@ -1,0 +1,16 @@
+<%= poll_item = participated_poll_item %>
+<div class='poll-item'>
+  <div class='avatar'>
+    <%= avatar poll_item.poster %><br/>
+    <%= profile_link poll_item.poster %>
+  </div>
+  <div class='poll-body'>
+    <div class='poll-title'>
+       <%= poll_link poll_item %><span class='meta'><%= distance_of_time_in_words_to_now poll_item.created_at %></span>
+    </div>
+  </div>
+  <div class='poll-vote'>
+    <%= poll_item.voters_count %>人参加了投票<br/>
+  </div>
+</div>
+

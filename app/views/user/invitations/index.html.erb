@@ -1,0 +1,54 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-vgame">通知</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "删除所有通知", destroy_all_notifications_url, :confirm => '你确定要删除所有通知吗' %>
+        </div>
+        <ul>
+          <li><span><%= link_to "通知", notifications_url %></span></li>
+          <li><span><%= link_to "请求", requests_url %></span></li>
+          <li class='hover'><span><%= link_to "邀请", invitations_url %></span></li>
+        </ul>
+      </div>
+      <div class="box02 appcontent02">
+        <div class='nav-link'>
+          <ul class='s_clear'>
+            <% if params[:type].nil? %>
+              <li class='hover'><%= link_to "<span>所有邀请</span>", invitations_url %></li>
+            <% else %>
+              <li><%= link_to "所有邀请", invitations_url %></li>
+            <% end %>
+            <% if params[:type].to_i == 1 %>
+              <li class='hover'><%= link_to "<span>投票邀请</span>", invitations_url(:type => 1) %></li>
+            <% else %>
+              <li><%= link_to "投票邀请", invitations_url(:type => 1) %></li>
+            <% end %>
+            <% if params[:type].to_i == 2 %>
+              <li class='hover'><%= link_to "<span>活动邀请</span>", invitations_url(:type => 2) %></li>
+            <% else %>
+              <li><%= link_to "活动邀请", invitations_url(:type => 2) %></li>
+            <% end %>
+            <% if params[:type].to_i == 3 %>
+              <li class='hover'><%= link_to "<span>工会邀请</span>", invitations_url(:type => 3) %></li>
+            <% else %>
+              <li><%= link_to "工会邀请", invitations_url(:type => 3) %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% @invitations.each do |invitation| %>
+          <% if invitation.instance_of? PollInvitation %>
+            <%= render :partial => 'poll_invitation', :object => invitation %>
+          <% elsif invitation.instance_of? Participation %>
+            <%= render :partial => 'event_invitation', :object => invitation %>
+          <% elsif invitation.instance_of? Membership %>
+            <%= render :partial => 'guild_invitation', :object => invitation %>
+          <% end %>
+        <% end %>      
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+
+<%= will_paginate @invitations %>

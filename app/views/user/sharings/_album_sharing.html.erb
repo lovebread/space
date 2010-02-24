@@ -1,0 +1,23 @@
+<% album = album_sharing.shareable %>
+<div class="feed-list feed-share">
+  <%= dig_link album_sharing %>
+  <div class="feed-header">
+    <div class="right">
+      <%= ftime album_sharing.created_at %><br/>
+      首次分享人：<%= avatar album.first_sharer, :with => '27px', :height => '27px' %>
+    </div>
+    <h3><%= album_link album, :popup => true %></h3>
+    <p class="con">
+      <%= album_cover album %>
+      <%= truncate album_sharing.reason, :length => 100, :omission => '...' %>
+    </p>
+    <div class="feeds">
+      <%= link_to_function "评论", "Iyxzone.Comment.toggleBox('sharing', #{album_sharing.id})" %>(<%= album_sharing.comments_count %>) | 
+      <%= facebox_link "我也分享", new_sharing_url(:shareable_type => 'Album', :shareable_id => album.id) %><span>(<%= album.sharings_count %>)</span> | 
+      <%= link_to "更多分享", sharings_url(:id => album.first_sharer.id) %>
+    </div>
+  </div>
+</div>
+<div id="sharing_comment_box_<%= album_sharing.id %>" style="display:none">
+  <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => album_sharing, :recipient => nil} %>
+</div>

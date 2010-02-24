@@ -1,0 +1,6 @@
+<tr id='news_<%= news_item.id %>'>
+  <td class='title'><div><%= link_to news_item.title, news_url(news_item) %></div></td>
+  <td class="time"><%= ftime news_item.created_at %></td>
+  <td class="icon"><%= link_to '', {:action => :edit, :id => news_item.id}, :class => "icon-active icon-active-edit" %></td>
+  <td class="icon"><%= link_to "", {:action => :destroy, :id => news_item.id}, :confirm => '你确定要删除这篇新闻?', :class => 'icon-active' %></td>
+</tr>

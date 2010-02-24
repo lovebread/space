@@ -1,0 +1,26 @@
+<li>
+  <div class="picbox01-wide">
+    <div class="new"></div>
+    <div class="img">
+      <table cellpadding="0"><tr><td>
+        <%= album_cover album_item, :class => 'imgbox01', :width => '75px', :height => '86px' %>
+      </td></tr></table>
+    </div>
+    <div class="info">
+      <h4><%= album_link album_item %>共<span><%= album_item.photos_count %></span>张</h4>
+      <p><%= ftime2 album_item.created_at %>更新</p>
+      <ul>
+        <% album_item.photos[0..2].each do |p| %>
+          <li><%= photo_link p, :class => 'imgbox01', :width => '50px', :height => '50px' %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <p class="link">
+    <% if album_item.poster == current_user %>
+    <% if album_item.class.name != 'AvatarAlbum' %>
+      <%= facebox_link '编辑相册', edit_personal_album_url(album_item) %> | <%= facebox_link '删除相册', confirm_destroy_personal_album_url(album_item) %> 
+    <% end %>
+    <% end %>
+  </p>
+</li>

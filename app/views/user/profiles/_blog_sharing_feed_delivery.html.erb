@@ -1,0 +1,17 @@
+<% delivery = blog_sharing_feed_delivery %>
+<% sharing = delivery.feed_item.originator %>
+<% blog = sharing.shareable %>
+<div class='feed-list-box'>
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="feed-icon icon-blog"></div>
+  <% if delivery.is_deleteable_by? current_user %>
+    <%= link_to_remote '', :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => 'icon-active'} %>
+  <% end %>
+  <p><%= profile_link sharing.poster%>分享了<%= profile_link blog.poster %>的日志<%= blog_link blog, :class => 'shine'%></p>
+  <p class='gray'>
+		<%= truncate blog.content, :length => 80, :omission => '...' %>
+	</p>
+  <p class='gray'><%= ftime delivery.created_at %><%= link_to_function '评论', "Iyxzone.Comment.showForm('blog', #{blog.id}, null)" %></p>
+	<%= render :partial => 'user/comments/folded_comment_box', :locals => {:commentable => blog, :recipient => blog.poster} %>
+</div>
+</div>

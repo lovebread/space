@@ -1,0 +1,35 @@
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h3>编辑照片</h3>
+</div>
+
+<% form_remote_for :photo, :url => guild_photo_url(@photo), :method => :put do |f| %>
+<div class='formcontent'>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="name">照片描述：</label></div>
+    <div class="fldvalue">
+      <%= f.text_area 'notation' %>
+    </div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="des">所属专辑：</label></div>
+    <div class="fldvalue">
+      <%= f.label @album.title %> 
+    </div>
+  </div>
+  <% if current_user == @user %>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="des">专辑封面：</label></div>
+    <div class="fldvalue">
+      <%= check_box_tag 'cover', 1, @photo.is_cover? %>设置为工会封面
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <span class="button"><span><button type="submit">完成</button></span></span>
+    <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+  </td></tr></table>
+</div>
+<% end %>

@@ -1,0 +1,25 @@
+<tr id='topic_<%= topic.id %>'>
+  <td class='abstract'>
+    <div class='title'><%= topic_link topic%></div>
+    <span class='forum-tiny'><%= topic.posts_count%>条回复</span>
+    <div class='content'><%= truncate topic.content, 40 %></div>
+  </td>
+  <td class='reply'>
+    <% if topic.last_post %>
+      <%= distance_of_time_in_words_to_now topic.last_post.created_at %> ago by<br/><%= profile_link topic.last_post.poster %>
+    <% else %>
+      N/A
+    <% end %>
+  </td>
+  <td class='operation'>
+    <% if @is_moderator %>
+      <%= facebox_confirm '删除', forum_topic_url(@forum, topic), {:msg => '你确定吗', :method => :delete} %><br/>
+      <% if topic.top %>
+        <%= facebox_confirm '解除置顶', toggle_forum_topic_url(@forum, topic, :top => 0), {:msg => '你确定吗', :method => :put} %>
+      <% else %>
+        <%= facebox_confirm '置顶', toggle_forum_topic_url(@forum, topic, :top => 1), {:msg => '你确定吗', :method => :put} %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>
+

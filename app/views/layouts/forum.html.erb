@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <%= stylesheet_link_tag "forum" %>
+  <%= stylesheet_link_tag 'facebox' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'iyxzone' %>
+  <%= javascript_include_tag 'facebox' %>
+	<%= javascript_include_tag 'forum' %>
+  <%= javascript_include_tag 'nicEdit' %>
+</head>
+<body>
+  <div id="container">
+    <div id='containter'>
+　　  <div id='header'>
+        <%= render :partial => 'layouts/user_menus' %>
+      </div>
+      <div id="left">
+        <%= yield :left %>
+      </div>
+　    <div id="middle">
+        <% if flash[:notice] %>
+          <div class='yellow-info'><%= flash[:notice] %></div>
+        <% end -%>
+        <% if flash[:error] %>
+          <div class='red-error'><%= flash[:error] %></div>
+        <% end -%>
+        <%= yield %>
+　　  </div>
+    </div>
+　　<div id="footer">
+     <!-- Dayday3 Group: xiahong gao, xin xie -->
+　　</div>
+</div>
+</body>
+

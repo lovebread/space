@@ -1,0 +1,8 @@
+    <%= text_field_tag 'search', '输入游戏角色的名字', :onclick => "this.clear();", :class => 'ipt' %>
+    <%= observe_field :search,
+                  :complete  => "facebox.watchClickEvents();",
+                  :update    => "members",
+                  :frequency => 1,
+                  :url       => search_guild_memberships_url(@guild),
+                  :with      => "'key=' + $('search').value + '&type=#{params[:type]}'",
+                  :method    => :get %>

@@ -1,0 +1,84 @@
+<%= javascript_include_tag 'status' %>
+<% subject = get_subject @user %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+		<% if @user == current_user %>
+			<h1 class="app-status">状态</h1>
+		<% else %>
+    <div class="friend-head space s_clear">
+      <span class="left"><%= avatar @user, :class=>"imgbox01"%></span>
+      <p class="left">
+        <strong><%= @user.login %>的状态</strong><br />
+        <%= link_to '个人主页', profile_url(@user.profile), :class=>'red'%>
+      </p>
+    </div>
+		<% end %>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <ul>
+          <li class='hover'><span><%= link_to "#{subject}的状态", statuses_url(:id => @user.id) %></span></li>
+					<% if @user == current_user %>
+          <li><span><%= link_to "好友的状态", friends_statuses_url %></span></li>
+					<% end %>
+        </ul>
+      </div>
+      <% if @user == current_user %>
+      <div id="homeComposer" class="cmt-space">
+        <div class="img">
+          <div class="mcAvatar jl-mcAvatar"> 
+            <a href="#"></a>
+            <div class="picwrap"> <%= avatar @user %> </div>
+          </div>
+        </div>
+        <div class="mcContent">
+          <div class="mcPanel round02 round_r_t">
+            <div class="round_l_t">
+              <div class="round_r_b">
+                <div class="round_l_b">
+                  <div class="round_m jl-round_m"> <span class="arrow-dialog"></span>
+                    <div class="round_body s_clear">
+                      <% form_for :status, :html => {:id => 'status_form', :class => 'formcontent s_clear'} do |f| %>
+                        <%= hidden_field_tag 'home', 0 %>
+                        <div class="fldvalue">
+                          <div id="mcStatus" class="textfield02" style="width:500px;">
+                            <%= f.text_area 'content', :value => "你正在干嘛呢?", :onkeyup => "Iyxzone.limitText(this, 140, 'words_count');", :onpaste => "Iyxzone.limitText(this, 140, 'words_count');", :onclick => "this.clear();" %>
+                          </div>
+                        </div>
+                        <div class="fldbtn jl-fldbtn"> <span class="button03"><span>
+                          <button type='button' onclick="Iyxzone.Status.Builder.save(this, event)" class='confirm-button' >发布</button>
+                        </span></span> </div>
+                      <% end %>
+                      <div class="buttons home-dialog"> 
+												<span class="left" id='words_count'>0/160</span><span class='right'><%= emotion_link 'status_content', :class => 'icon-face' %></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <div class="feed-box01 list-v2">
+        <% if current_user == @user %>
+        <div class="list-v2-head">以下是您所发布过的所有状态</div>
+        <% else %>
+        <div class='list-v2-head'>以下是<%= @user.login %>所发布的所有状态</div>
+        <% end %>
+        <div id='statuses'>
+        <%= render :partial => 'status', :collection => @statuses %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+
+<% @reply_to = User.find(params[:reply_to]) unless params[:reply_to].nil?%>
+<% @status = Status.find(params[:status_id]) unless params[:status_id].nil?%>
+<% if @reply_to and @status %>
+<script type="text/javascript">
+  Iyxzone.Comment.set('status', <%= @status.id %>, '<%= @reply_to.login %>', <%= @reply_to.id %>);
+</script>
+<% end %>
+

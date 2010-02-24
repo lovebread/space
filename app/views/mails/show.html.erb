@@ -1,0 +1,31 @@
+<% content_for :left do %>
+  <%= render :partial => '/app_menu' %>
+<% end %>
+    
+<%= render :partial => 'menu' %><br/>
+
+<table class='mails'>
+  <tr>
+    <td class='prev'></td>
+    <td class='title'>
+      <strong><%= @root_mail.title %></strong><br/>
+      参与者: <%= profile_link @root_mail.sender %> 和<%= profile_link @root_mail.recipient %><br/>
+    </td>
+    <td class='next'></td>
+  </tr>
+</table>
+<table class='mails' id='mails'>
+  <%= render :partial => 'mail', :collection => @root_mail.children %>
+</table>
+<table class='mails'>
+  <tr>
+    <td class='icon'></td>
+    <td class='content'>
+      <% form_remote_tag :url => reply_mail_url(@mail, :type => params[:type]) do |f| %> 
+        <strong><%= label_tag '回复' %></strong><br/>
+        <%= text_area_tag 'mail[content]', ''%><br/>
+        <%= submit_tag 'submit' %>
+      <% end %>
+    </td>
+  </tr>
+</table>

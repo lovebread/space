@@ -1,0 +1,65 @@
+<%= stylesheet_link_tag 'test' %>
+<%= javascript_include_tag 'textboxlist' %>
+<%= javascript_include_tag 'nicEdit' %>
+<%= javascript_include_tag 'friend' %>
+<%= javascript_include_tag 'blog' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-log">日志</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "写新日志", new_blog_url %></div>
+        <ul>
+          <li><span><%= link_to "热门日志", hot_blogs_url(:id => current_user.id) %></a></span></li>
+          <li><span><%= link_to "我的日志", blogs_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "好友日志", friends_blogs_url %></span></li>
+          <li><span><%= link_to "与我相关的日志", relative_blogs_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "草稿箱", drafts_url %></span></li>
+        </ul>
+      </div>
+      <div class='appcontent01'>
+        <div id='errors'></div>
+        <div class="cons-form formcontent">
+				<% form_for :blog, :html => {:method => 'put', :id => 'blog_form'} do |f| %>
+			    <div class='rows s_clear'>
+				    <div class='fldid'><%= f.label "日志标题：" %></div>
+				    <div class='fldvalue'><div class='textfield'><%= f.text_field 'title' %></div></div>
+			    </div>
+			    <div class='rows s_clear'>
+				    <%= f.text_area 'content', :style =>"width: 100%; height: 300px;" %>
+			    </div>
+			    <div class='rows s_clear'>
+				    <div class='fldid'><%= f.label "日志类别: " %></div><div class='fldvalue'><%= f.collection_select 'game_id', current_user.games, :id, :name, {:prompt => '---'}, :class => "selector selector02"%></div>
+			    </div>
+			    <div class='rows s_clear'>
+				    <div class='fldid'><%= f.label "浏览权限: "%></div><div class='fldvalue'><%= privilege_select_tag(:blog, :class => "selector selector02") %></div>
+			    </div>
+          <div class='rows s_clear'>
+            <div class='fldid'><%= f.label "点名相关好友" %></div>
+            <div class='fldvalue'>
+              <%= render :partial => 'user/friend_tags/control_panel', :locals => {:taggable => @blog} %>
+            </div>
+          </div>
+          <div class='rows s_clear'>
+		        <div class='fldid'>&nbsp;</div>
+		        <div class='fldvalue'>
+              <span class="button03 w-l"><span><%= button_to_function "保存", "Iyxzone.Blog.Builder.updateBlog(#{@blog.id}, event);", :class => "confirm-button" %></span></span>
+              <span class="button03 w-l"><span><%= button_to_function "保存为草稿", "Iyxzone.Blog.Builder.updateDraft(#{@blog.id}, event);", :class => "confirm-button" %></span></span>
+            </div>
+		      </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+
+<% tagged_user_ids = '[' + @blog.tags.map(&:tagged_user_id).join(',') + ']' %>
+<% tag_ids = '[' + @blog.tags.map(&:id).join(',') + ']' %>
+<% user_ids = '[' + @blog.relative_users.map{|u| "'#{u.login}'"}.join(',') + ']' %>
+<%= javascript_tag "
+  Iyxzone.Blog.Builder.editor = new nicEditor({iconsPath: '/images/nicEditorIcons.gif'}).panelInstance('blog_content'); 
+  Iyxzone.Blog.Builder.tagBuilder = new Iyxzone.Friend.Tagger(5, #{tagged_user_ids}, #{tag_ids}, #{user_ids}, 'toggle_button', 'friend_login', 'friend_list', 'friend-wrap', 'friend_items', 'game_selector', 'confirm_btn', 'cancel_btn', '#{form_authenticity_token}');
+" %>
+

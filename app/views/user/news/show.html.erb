@@ -1,0 +1,16 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"<div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-news">每日十闻</h1>
+    <div class="box02 canvas_int space20">
+      <div class="tab tab01">
+        <%= render :partial => "columns" %>
+      </div>
+      <%= render :partial => 'show_news' %>
+    </div></div>
+</div></div></div></div>
+<% @reply_to = User.find_by_id(params[:reply_to]) %>
+<% unless @reply_to.nil? %>
+  <%= javascript_tag "
+  Iyxzone.Comment.set('news', #{@news.id}, '#{@reply_to.login}', #{@reply_to.id});
+  "%>
+<% end %>

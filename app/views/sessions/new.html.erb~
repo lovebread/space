@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>网游交友SNS</title>
+
+  <%= stylesheet_link_tag 'common' %>
+  <%= stylesheet_link_tag 'welcome' %>
+  <%= stylesheet_link_tag 'facebox' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'facebox' %>
+  
+</head>
+
+
+
+<body class="body_bg01">
+
+	<div class="welcome-box">
+
+			<div class="top_link">
+
+	<%= link_to '注册', signup_url %> |
+	<%= link_to '登录', login_url %> | 
+ 	<%= link_to_function "加入收藏", "bookmark()" %> |
+ 	<%= link_to_function "设为主页", "homepage()" %> |
+ 	<%= link_to '关于我们'%>
+					
+        </div>
+
+        <div class="welcome">
+
+					<div class="login-box">
+
+							<div class="logo png">
+
+									欢迎您！这里是您的互动家园！
+
+                </div>
+
+                <form action="">
+
+									<div class="rows">
+
+											<div class="fldid"><label for="mail">电子邮箱：</label></div>
+
+                        <div class="fldvalue">
+
+													<div class="textfield"><input id="mail" /></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="rows">
+
+											<div class="fldid"><label for="password">密码：</label></div>
+
+                        <div class="fldvalue">
+
+													<div class="textfield"><input id="password" type="password" /></div>
+
+                        </div>
+
+                        <a class="pass blue" href="#">忘记密码？</a>
+
+                    </div>
+
+                    <div class="rows">
+
+											<div class="fldid">&nbsp;</div>
+
+                        <div class="fldis"><input id="auto" type="checkbox" value="yes" /><label for="auto" class="blue">下次自动登录</label></div>
+
+                    </div>
+
+                    <div class="btn-rows">
+
+											<div class="fldid">&nbsp;</div>
+
+                        <div class="fldvalue"><input type="submit" class="login png" value=""/></div>
+
+                    </div>
+
+                    <div class="sperator"></div>
+
+                    <div class="rows">
+
+											<div class="fldid">&nbsp;</div>
+
+                        <div class="fldvalue"><span class="red">网络游戏玩家的集中营，就差你了！</span></div>
+
+                    </div>
+
+                    <div class="btn-rows">
+
+											<div class="fldid">&nbsp;</div>
+
+                        <div class="fldvalue"><a class="regist png" href="#"></a></div>
+
+                    </div>
+
+                    <div class="sperator"></div>
+
+                    <div class="rows">
+
+											<div class="fldid">&nbsp;</div>
+
+                        <div class="fldvalue">
+
+													<div class="textfield"><input value="搜索游戏或游戏达人"/></div>
+
+                        </div>
+
+                        <input type="submit" class="gobtn" value="" />
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="right">
+
+							<p><a href="#"><img class="png" src="images/banner/img01.png" alt="" /></a></p>
+
+                <p class="later">
+
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="618" height="252" id="~hero" align="middle">
+
+						<param name="allowScriptAccess" value="sameDomain" />
+
+						<param name="movie" value="swf/~hero.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="swf/~hero.swf" quality="high" bgcolor="#ffffff" width="618" height="252" name="~hero" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+
+
+
+					</object>
+
+				</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="footer">
+
+			<p>Copyright &copy; 1998-2009 Tencent. All Rights Reserved</p>
+
+        <p><a href="#">网游公司 版权所有</a></p>
+
+    </div>
+
+</body>
+
+</html>
+
+
+<% content_for :left do %>
+  <% form_tag sessions_url do %>
+    <p>name:<%= text_field_tag 'email', nil, :size => 15 %></p>
+    <p>password:<%= password_field_tag 'password', nil, :size => 15 %></p>
+    <p>remember me: <%= check_box_tag 'remember_me' %></p>
+    <p><%= submit_tag 'login' %></p>
+  <% end %>
+  <%= link_to 'forgot password?', forgot_password_url %> | 
+  <%= link_to 'register', signup_url %>
+<% end %>
+
+Main Body!!

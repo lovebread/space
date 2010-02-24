@@ -1,0 +1,17 @@
+<% delivery = video_sharing_feed_delivery %>
+<% sharing = delivery.feed_item.originator %>
+<% video = sharing.shareable %>
+
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="img left">
+		<div class="imgbox01"><%= avatar sharing.poster %></div>
+	</div>
+  <div class="jl-list-con jl-cutline"><%= profile_link sharing.poster %> 分享了 <%= profile_link video.poster %> 的视频 <%= video_link video, :class => "shine"%>
+  <%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %>
+    <p class="gray jl-con s_clear" id='video_<%= video.id %>'> <%= image_tag video.thumbnail_url, :onclick => "Iyxzone.Video.play(#{video.id}, '#{video.embed_html}');" %></p> 
+		<p class="gray"><%= ftime video.created_at %> <%= link_to_function "评论", "Iyxzone.Comment.showForm('sharing', #{sharing.id}, null)", :class => "gray" %></p>
+	  <%= render :partial => 'user/comments/folded_comment_box', :locals => {:commentable => sharing, :recipient => nil} %>
+	</div>
+</div>
+</div>

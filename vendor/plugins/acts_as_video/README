@@ -1,0 +1,30 @@
+ActsAsVideo
+===========
+
+增加视频支持，目前支持的视频类型只有3种，youku, tudou 和 ku6
+
+
+Example
+=======
+
+比如
+
+class Video < ActiveRecord::Base
+
+	acts_as_video
+
+end
+
+然后在view里，
+
+得到截图url: @video.thumbnail_url
+
+得到视频url: @video.embed_html
+
+TODO
+====
+
+土豆的视频url解析还不完全
+土豆和ku6无法获得截图
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

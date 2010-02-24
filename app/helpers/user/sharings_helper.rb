@@ -1,0 +1,2 @@
+module User::SharingsHelper
+end

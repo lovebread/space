@@ -1,0 +1,14 @@
+<ul id='members'>
+<% memberships.each do |membership| %>
+  <% character = membership.character %>
+  <% user = membership.user %>
+  <li id='<%= "guild_invitation_#{membership.id}" %>' >
+    <%= avatar user, :class => 'imgbox01' %>
+    <p>
+      <%= profile_link user, :class => 'blk' %>
+      <span class='red blk'> <%= membership.character.name %></span>
+      <%= link_to '<span>发站内信</span>', new_mail_url(:recipient_id => user.id), :class => "blk gray02" %>
+    </p>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,19 @@
+<% content_for :left do %>
+  <%= render :partial => '/app_menu' %>
+<% end %>
+  
+<div>
+  <%= link_to "通知", notifications_url %> |
+  <%= link_to "请求", requests_url %> |
+  <%= link_to "邀请", invitations_url %>
+</div>
+
+<% if current_user.poke_deliveries.count != 0 %>
+  <%= link_to '删除所有的招呼,慎用', destroy_all_pokes_url, :method => :delete%><br/>
+<% end %>
+
+<div>
+<%= render :partial => 'poke_delivery', :collection => @deliveries %>
+</div>
+
+<%= will_paginate @deliveries %>

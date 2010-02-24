@@ -1,0 +1,14 @@
+<% delivery = event_feed_delivery %>
+<% event = delivery.feed_item.originator %>
+<div class="feed-list-box">
+<div class='feed-list' id='feed_delivery_<%= delivery.id %>'>
+	<div class="img left">
+		<div class="imgbox01"><%= avatar event.poster %></div>
+	</div>
+  <div class="jl-list-con jl-cutline"><%= profile_link event.poster %>组织了活动<%= event_link event, :class => "shine" %>
+	<% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %><% end %> 
+	<p class='gray jl-con'><strong>游戏分类：<%= event.game.name %></strong></p>
+	<p class="gray"><%= ftime delivery.created_at %></p>
+	</div>
+</div>
+</div>

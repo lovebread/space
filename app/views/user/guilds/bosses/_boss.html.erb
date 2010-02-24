@@ -1,0 +1,8 @@
+<div class='boss_rule_div_rows'>
+<%= link_to_function '编辑', "Iyxzone.GuildRule.Editor.editBossRule(#{@guild.id})" %>
+<%= link_to_function '新增', "Iyxzone.GuildRule.Editor.addBossRule(#{@guild.id})" %>
+<br>
+<% @guild.bosses.each do |boss| %>
+	<%= boss.name -%> <%= boss.reward %><br>
+<% end %>
+</div>

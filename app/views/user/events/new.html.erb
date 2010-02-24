@@ -1,0 +1,78 @@
+<%= javascript_include_tag 'game' %>
+<%= javascript_include_tag 'event' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-ploy">活动</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "新建活动", new_event_url, :class => 'icon-add-table' %>
+        </div>
+        <ul>
+          <li><span><%= link_to "热门活动", hot_events_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "最近活动", recent_events_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "我的活动", events_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "朋友的活动", friends_events_url %></span></li>
+        </ul>
+      </div>
+      <div class="appcontent01">
+        <h3>新建活动</h3>
+        <div class="cons-form formcontent">
+          <% form_for :event, :html => {:id => 'event_form'} do |f| %>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">活动标题：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= f.text_field :title %></div>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">工会活动：</label></div>
+              <div class="fldvalue">
+                <%= check_box_tag 'is_guild_event', 1, false, :onchange => "Iyxzone.Event.Builder.checkGuild(this)" %>
+                <span id='event_guild_selector' style="display:none">
+                  所属工会
+                  <%= collection_select :event, :guild_id, current_user.privileged_guilds, :id, :name, {:prompt => '---'}, {:onchange => "Iyxzone.Event.Builder.guildOnChange(this.value)"} %>
+                </span>
+              </div>
+            </div>
+            <div class='rows s_clear'>
+              <div class='fldid'><label for='name'>游戏角色：</label></div>
+              <div class='fldvalue'>
+                <%= collection_select :event, :character_id, current_user.characters, :id, :name, {:prompt => '---'} %>
+              </div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">开始时间：</label></div>
+              <div class="fldvalue"><%= calendar_date_select :event, :start_time %></div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">结束时间：</label></div>
+              <div class="fldvalue"><%= calendar_date_select :event, :end_time %></div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">任务描述：</label></div>
+              <div class="fldvalue"><%= f.text_area :description %></div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label for="name">谁可以加入：</label></div>
+              <div class="fldvalue"><%= privilege_select_tag :event %></div>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid">&nbsp;</div>
+              <div class="fldvalue">
+                <span class="button"><span><button onclick="Iyxzone.Event.Builder.save(event);">提交</button></span></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+  document.observe('dom:loaded', function(){
+    Iyxzone.Event.Builder.reset();
+  });
+" %>

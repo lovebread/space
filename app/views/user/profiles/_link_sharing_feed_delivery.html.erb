@@ -1,0 +1,12 @@
+<% delivery = link_sharing_feed_delivery %>
+<% sharing = delivery.feed_item.originator %>
+<% link = sharing.shareable %>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class='feed-icon icon-share'></div>
+	<%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html => {:class => "icon-active"} %>
+  <p><%= profile_link link.poster %> 分享了连接 <%= link_to link.url, :class => "shine" %></p>
+	<p class="gray"><%= ftime delivery.created_at %> <%= link_to_function "回复", "Iyxzone.Comment.showForm('sharing', #{sharing.id}, null);", :class => "gray"%></p>
+	<%= render :partial => "user/comments/folded_comment_box", :locals => {:commentable => sharing, :recipient => nil} %>
+</div>
+</div>

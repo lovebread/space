@@ -1,0 +1,15 @@
+<% blog = blog_item2 %>
+<div class="feed-img-list">
+  <div class='feed-list eval-list'>
+			<%= dig_link blog %>
+    <div class='feed-header'>
+      <%= facebox_link '分享', new_sharing_url(:shareable_type => 'Blog', :shareable_id => blog.id), :class => 'right love-btn' %>
+      <h3><%= blog_link blog %></h3>
+      <p><%= profile_link blog.poster, :class => "shine"%> <%= ftime blog.created_at %></p>
+    </div>
+    <div class='feeds'>
+      <p><%= blog_content blog, :length => 20, :omission => '...' %></p>
+    </div>
+    <div class='feeds'><%= link_to "阅读(#{blog.viewings_count})", blog_url(blog) %> | <%= link_to "评论(#{blog.comments_count})", blog_url(blog) %> | <%= facebox_link "分享(#{blog.sharings_count})", new_sharing_url(:shareable_type => 'Blog', :shareable_id => blog.id)%></div>
+  </div>
+</div>

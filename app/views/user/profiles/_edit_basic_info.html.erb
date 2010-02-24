@@ -1,0 +1,43 @@
+<% region = @profile.region %>
+<% city = @profile.city %>
+<div class="edit-toggle space edit">
+  <h3 class="s_clear"><strong class="left">基本信息</strong><%= link_to_function '取消', "Iyxzone.Profile.Editor.cancelEditBasicInfo();", :class => "right" %></h3>
+  <div class="formcontent con con2">
+    <% form_for :profile, :html => {:id => 'basic_info_form'} do |f| %>
+      <div class="item space">
+        <div class="rows s_clear">
+          <div class="fldid"><label>昵称：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left"><%= f.text_field 'login', :onblur => "Iyxzone.Profile.Editor.isLoginValid();" %></div>
+          </div>
+          <span class='red' id='login_error'></span>
+        </div>
+        <div class="rows s_clear">
+          <div class="fldid"><label>生日：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left"><%= calendar_date_select :profile, :birthday, :popup => 'force', :time => false, :year_range => 40.years.ago..10.years.ago %></div>
+          </div>
+          <span class='red' id='birthday_error'></span>
+        </div>
+        <div class="rows s_clear">
+          <div class="fldid"><label>省份：</label></div>
+          <div class="fldvalue">
+            <%= collection_select :profile, :region_id, Region.all, :id, :name, {:prompt => '---'} %> - 
+            <%= collection_select :profile, :city_id, region.nil? ? [] : region.cities, :id, :name, {:promtp => '---'} %> -
+            <%= collection_select :profile, :district_id, city.nil? ? [] : city.districts, :id, :name, {:promtp => '---'} %>
+          </div>
+          <span class='red' id='region_error'></span>
+        </div>
+      </div>
+      <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span><%= button_to_function '保存', "Iyxzone.Profile.Editor.updateBasicInfo(#{@profile.id}, this, event);" %></span></span>
+          <span class="button button-gray"><span><%= button_to_function "取消", "Iyxzone.Profile.Editor.cancelEditBasicInfo();" %></span></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_tag "Iyxzone.Profile.Editor.setRegionSelector('profile_region_id', 'profile_city_id', 'profile_district_id');" %>

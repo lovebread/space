@@ -1,0 +1,41 @@
+<% content_for :left do %>
+  <%= render :partial => '/app_menu' %><br/>
+  <div class='blog-right-bar'>
+    <div class='part'>
+      <h3>日志分类: </h3>
+      <% game_options = [['全部', nil]] %>
+      <% @user.games.each {|g| game_options << [g.name, g.id] } %>
+      <%= select_tag '', options_for_select(game_options, params[:game_id].to_i), :onchange => "window.location.href = '#{hot_blogs_url(:id => @user.id)}&game_id='+this.value;" %> 
+    </div>
+  </div>
+<% end %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-log">日志</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "写新日志", new_blog_url %></div>
+        <ul>
+          <% subject = get_subject @user %>
+          <li><span><%= link_to "热门日志", hot_blogs_url(:id => @user.id) %></a></span></li>
+          <li><span><%= link_to "最新日志", recent_blogs_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "#{subject}的日志", blogs_url(:id => @user.id) %></span></li>
+        <% if @user == current_user %>
+          <li><span><%= link_to "好友日志", friends_blogs_url %></span></li>
+        <% end %>
+          <li><span><%= link_to "与#{subject}相关的日志", relative_blogs_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "草稿箱", drafts_url %></span></li>
+        </ul>
+      </div>
+      <div class="feed-box01">
+        <div class="path-box">
+          <label>游戏"<%= game_link @game %>"</label>
+          <span>所有日志</span>
+        </div>
+        <%= render :partial => 'user/blogs/blog_item2', :collection => @blogs %>
+        <%= will_paginate @blogs %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

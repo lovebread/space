@@ -1,0 +1,15 @@
+CounterWithRawSql
+=================
+
+这个插件的主要功能是避开更新计数器时引发的callback（比如after_create等），
+
+比如user.increment :invitations_count会出发user的after_create
+
+但是如果使用这个插件，就不会有callback被调用
+
+Example
+=======
+
+user.raw_increment :invitations_count
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

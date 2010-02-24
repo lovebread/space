@@ -1,0 +1,14 @@
+<% video = tag.video %>
+<% if home_page %>
+<% link = "#{link_to_function video.title, "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}');window.open('/videos/#{video.id}');"}" %>
+<% else %>
+<% link = "#{link_to_function video.title, "window.open('/videos/#{video.id}');"}" %>
+<% end %>
+<li>
+  <div class="feed-message">
+    <% if home_page %>
+    <%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+    <% end %>
+    <%= profile_link tag.poster %> 在视频 <%= link %> 里标记了你
+  </div>
+</li>

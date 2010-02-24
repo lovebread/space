@@ -1,0 +1,92 @@
+<% @games = Game.all(:order => 'pinyin ASC') %>
+<div class="edit-toggle space edit">
+  <h3 class="s_clear">
+    <strong class="left">游戏角色信息</strong>
+    <%= link_to_function "取消", "Iyxzone.Profile.Editor.cancelEditCharacters(#{@profile.id})", :class => 'right' %>
+  </h3>
+  <div class="formcontent con con2">
+    <% form_for :profile, :html => {:id => 'characters_form'} do |f| %>
+      <div class="item space" id='user_characters'>
+        <% @profile.user.characters.each do |character| %>
+          <% fields_for "profile[existing_characters][]", character do |c| %>
+            <div id='existing_character_<%= character.id %>'>
+              <div class="rows s_clear">
+                <div class="fldid"><label>名字：</label></div>
+                <div class="fldvalue">
+                  <div class="textfield"><%= c.text_field :name, :onblur => "Iyxzone.Profile.Editor.isCharacterNameValid(#{character.id}, 0)" %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_name_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>等级：</label></div>
+                <div class="fldvalue">
+                  <div class="textfield"><%= c.text_field :level, :onblur => "Iyxzone.Profile.Editor.isCharacterLevelValid(#{character.id}, 0)" %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_level_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>游戏：</label></div>
+                <div class="fldvalue">
+                  <div><%= c.collection_select :game_id, @games, :id, :name, {:prompt => '---'} %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_game_id_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>服务区：</label></div>
+                <div class="fldvalue">
+                  <div><%= c.collection_select :area_id, character.game.no_areas ? [] : character.game.areas, :id, :name, {:prompt => '---'} %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_area_id_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>服务器：</label></div>
+                <div class="fldvalue">
+                  <div><%= c.collection_select :server_id, character.game.no_areas ? character.game.servers : character.area.servers, :id, :name, {:prompt => '---'} %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_server_id_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>种族：</label></div>
+                <div class="fldvalue">
+                  <div><%= c.collection_select :race_id, character.game.races, :id, :name, {:prompt => '---'} %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_race_id_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>职业：</label></div>
+                <div class="fldvalue">
+                  <div><%= c.collection_select :profession_id, character.game.professions, :id, :name, {:prompt => '---'} %></div>
+                </div>
+                <span class='red' id='existing_character_<%= character.id %>_profession_id_error'></span>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label>正在玩：</label></div>
+                <div class="fldvalue">
+                  <div><%= c.check_box :playing %></div>
+                </div>
+              </div>
+            <% end %>
+            <p class='foot s_clear'>
+              <%= link_to_function "删除角色", "Iyxzone.Profile.Editor.removeCharacter(#{character.id}, 0, this)", :class => 'right red' %>
+            </p>
+          </div>
+          <%= javascript_tag "Iyxzone.Profile.Editor.addGameSelector(#{array_or_string_for_javascript @games.map(&:pinyin)}, #{character.id}, 0, #{character.game.to_json(:include => [:servers, :areas, :races, :professions])}.game);" %>
+        <% end %>
+      </div>
+      <div id='new_character_loading'></div>
+      <p class="foot s_clear"><%= link_to_function '增加新角色', "Iyxzone.Profile.Editor.newCharacter(#{@profile.id});", :class => "left red" %></p>
+      <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span>
+            <%= button_to_function '完成', "Iyxzone.Profile.Editor.updateCharacters(#{@profile.id}, '#{form_authenticity_token}', this, event)" %>
+          </span></span>
+          <span class="button button-gray"><span>
+            <%= button_to_function '取消', "Iyxzone.Profile.Editor.cancelEditCharacters(event)" %>
+          </span></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

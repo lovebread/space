@@ -1,0 +1,93 @@
+<%= stylesheet_link_tag 'test' %>
+<%= javascript_include_tag 'textboxlist' %>
+<%= javascript_include_tag 'game' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body canvas_wrap s_clear">
+    <div class="canvas_m">
+      <div class="canvas_c">
+        <div class="box02 canvas_con">
+          <div class="formComposer">
+            <h3 class="game">你想玩什么样的游戏?</h3>
+            <div class="formcontent">
+              <div class="rows s_clear">
+                <div class="fldid">&nbsp;</div>
+                <div class="fldvalue">
+                  <%= text_field_tag 'tags', '', :size => 50, :id => 'game_tags' %>
+                </div>
+                <div class="fldbtn">
+                  <span class="button"><span><button type="reset" onclick="Iyxzone.Game.Suggestor.suggest(this)">推荐</button></span></span>
+                  <%= link_to_function "高级", "Iyxzone.Game.Suggestor.toggleAdvancedOptions();" %>
+                </div>
+              </div>
+              <div class="rows s_clear" id="advanced_options" style="display:none">
+                <div class="fldid">比较新的游戏</div>
+                <div class="fldvalue"><%= check_box_tag 'new_game' %></div>
+              </div>
+            </div>
+            <div class="multibox">
+              <div class="title">
+                <b>关键词</b>
+              </div>
+              <div class="keybtn-box s_clear">
+                <% @game_tags.each do |tag| %>
+                  <%= link_to_function "<span>#{tag.name}</span>", "Iyxzone.Game.Suggestor.addTag('#{tag.name}')", :class => "mbutton" %>
+                <% end %>
+              </div>
+            </div>
+            <div class="multibox" id='game_suggestion_area'>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="rightsidebar" class="canvas_r">
+      <div class="multibox">
+        <div class="title">
+          <%= facebox_link "更多", game_attentions_url %>
+          <b>我关注</b>
+        </div>
+        <div class="chart-list chart-list01 menu-list">
+          <ul id='my_attentions'>
+            <% @interested_games.each_with_index do |g, i| %>
+              <li><%= game_link g %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="multibox">
+        <div class="title">
+          <%= facebox_link "更多", hot_games_url %>
+          <b>关注榜</b>
+        </div>
+        <div class="chart-list chart-list01 menu-list">
+          <ul>
+            <% @game_list.each_with_index do |g, i| %>
+              <li><%= game_link g %></li>
+            <% end %>
+          </ul>
+        </div> 
+      </div>
+      <% unless @beta_games.blank? %>
+      <div class="multibox">
+        <div class="title">
+          <%= link_to "更多", beta_games_url %>
+          <b>近期测试</b>
+        </div>
+        <div class="chart-list menu-list">
+          <ul>
+            <% @beta_list.each_with_index do |g, i| %>
+              <li><%= game_link g %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div></div>
+</div></div></div></div>
+<div id='log'></div>
+
+<%= javascript_tag "
+  Iyxzone.Game.Suggestor.tagList = new TextBoxList('game_tags', {onBoxDispose: Iyxzone.Game.Suggestor.removeTag});
+" %>

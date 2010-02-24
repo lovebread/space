@@ -1,0 +1,243 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-lock">隐私设置</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <ul>
+          <li><span><%= link_to '个人主页', edit_privacy_setting_url(:type => 0) %></span></li>
+          <li><span><%= link_to '操作', edit_privacy_setting_url(:type => 1) %></span></li>
+          <li><span><%= link_to '站外搜索', edit_privacy_setting_url(:type => 2) %></span></li>
+          <li class='hover'><span><%= link_to '邮件提醒', edit_mail_setting_url(:type => 6) %></span></li>
+        </ul>
+      </div>
+      <div class="box02 appcontent04">
+        <div class="path-box">
+        </div>
+        <div class="privacy-form formcontent">
+				<h3>我们将会把在17gaming上和您相关的事件通知您。</h3>
+				<h3>每个应用程序拥有它自己的通知设置。点击复选框来改变相应应用程序的设置。</h3>
+				<h3>发送电子邮件通知到：<%= current_user.email %></h3><br/>
+				<% form_for :setting, :url => mail_setting_url, :html => {:method => :put} do |f| %>
+				<h3>基本设定</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'mail_me' %>给我发消息</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'request_to_be_friend' %>将我添加为朋友</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'confirm_friend' %>同意我为朋友</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'birthday' %>生日快到了</div>
+				</div>
+				<h3>状态</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_status' %>对我的状态发表评论</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_status_after_me' %>在我之后对同一状态发表的评论</div>
+				</div>
+				<h3>留言版</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_profile' %>在我留言版上留言</div>
+				</div>
+				<h3>招呼</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'poke_me' %>对我打招呼</div>
+				</div>
+				<h3>博客</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'tag_me_in_blog' %>在一篇博客中圈了我</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_blog' %>评论我的博客</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_blog_after_me' %>在我之后对同一篇博客进行评论</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_blog_contains_me' %>评论标记了我的博客</div>
+				</div>
+				<h3>照片</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'tag_me_in_photo' %>在一张照片中圈出了我</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'tag_my_photo' %>在我的照片上圈人</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_photo' %>评论我的照片</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_album' %>评论我的相册</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_photo_contains_me' %>评论我所在的照片</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_photo_contains_me' %>评论我所在的照片</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_photo_after_me' %>在我之后对同一张照片进行评论</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_album_after_me' %>在我之后对同一本相册进行评论</div>
+				</div>
+				<h3>视频</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'tag_me_in_video' %>在一个视频中标记了我</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_video' %>评论我的视频</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_video_contains_me' %>评论我被标记的视频</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_video_after_me' %>在我之后对同一个视频进行评论</div>
+				</div>
+				<h3>活动</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'invite_me_to_event' %>邀请我参加活动</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'change_event' %>参加的活动更改时间</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'cancel_event' %>取消活动</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'request_to_attend_my_event' %>请求加入我组织的活动</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_event' %>在我组织的活动的留言板上留言</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_event_after_me' %>在活动留言版上回复我的留言</div>
+				</div>
+				<h3>工会</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'change_name_of_guild' %>改变工会的名字</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'invite_me_to_guild' %>邀请我参加工会</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'promotion_to_veteran' %>晋升我为长老</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'request_to_attend_my_guild' %>请求加入我作为会长的工会</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'reply_my_post' %>在讨论区里回复我的帖子</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_guild_after_me' %>在工会的留言板上给我留言</div>
+				</div>
+				<h3>投票</h3>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'invite_me_to_poll' %>邀请我参加投票</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'poll_expire' %>投票结束</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_my_poll' %>评论我的投票</div>
+				</div>
+				<div class='rows s_clear'>
+					<div class='fldid'><label for='addfriend'></label></div>
+					<div class='fldstatus fldstatus-lock'></div>
+					<div class='fldvalue'> <%= f.check_box 'comment_same_poll_after_me' %>在我之后对同一投票进行评论</div>
+				</div>
+        <div class="buttons s_clear">
+          <div class="fldid">&nbsp;</div>
+          <div class="fldstatus fldstatus-none"></div>
+          <div class="fldvalue">
+            <span class="button"><span><button id='setting_submit' type="submit">保存修改</button></span></span>
+            <span class="button button-gray"><span><%= link_to "取消", privacy_setting_url,:type=>'reset' %></span></span>
+          </div>
+        </div>
+				<% end %>
+			</div>
+		</div>
+	</div></div></div>
+</div></div></div></div>

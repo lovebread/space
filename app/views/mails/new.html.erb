@@ -1,0 +1,97 @@
+<%= stylesheet_link_tag 'test' %>
+<%= javascript_include_tag 'textboxlist' %>
+<%= javascript_include_tag 'mail' %>
+<%= javascript_include_tag 'friend' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+  <h1 class="big-mygame">站内信</h1>
+  <div class="box02 canvas_int">
+		<div class="tab tab01">
+      <ul>
+				<li><span><%= link_to "收件箱", mails_url(:type => 1) %></span></li>
+        <li><span><%= link_to "发件箱", mails_url(:type => 0) %></span></li>
+        <li class="nobg"><%= link_to "写站内信", new_mail_url %></li>
+			</ul>
+    </div>
+		<div class="appcontent01">
+			<h3>写站内信</h3>
+      <div class="inbox-form formcontent">
+			<% form_for :mail, :url => mails_url, :html => {:id => 'mail_form'}  do |f| %>
+				<div class="rows s_clear">
+					<div class="fldid"><%= f.label '收件人：' %></div>
+          <div class="fldvalue">
+						<div class="selector" id='recipients'>
+              <%= link_to_function "", :id => 'toggle_button' %>
+            </div>
+          </div>
+
+    <div id='friend_list' style="display:none"></div>
+    <div id="friend_table" class="box05" style="display:none">
+      <div class="title01">
+        <div class="right">
+          <select name="" id='game_selector' >
+            <option value='all'>全部好友</option>
+            <% current_user.games.each do |game| %>
+              <option value=<%= game.id %>><%= game.name %></option>
+            <% end %>
+          </select>
+        </div>
+        <h1>选择你的好友</h1>
+      </div>
+      <div class="checkgroup" id='friend_items'></div>
+      <div class="buttons s_clear">
+        <table class="center" cellpadding="0"><tr>
+          <td>
+            <span class="button"><span><button onclick="" id="confirm_btn">确定</button></span></span>
+          </td>
+          <td>
+            <span class='button'><span><button onclick="" id='cancel_btn'>取消</button></span></span>
+          </td>
+        </tr></table>
+      </div>
+    </div>
+
+        </div>
+        <div class='drop-menu' id='recipients_list' style="display:none"></div>
+        <div class="rows s_clear">
+					<div class="fldid"><%= f.label '标题：' %></div>
+          <div class="fldvalue">
+						<div class="textfield"><%= f.text_field 'title' %></div>
+          </div>
+        </div>
+        <div class="emptions s_clear">
+					<div class="fldid">&nbsp;</div>
+          <div class="fldvalue">
+						<%= emotion_link 'mail_content' %>
+          </div>
+        </div>
+        <div class="rows s_clear">
+					<div class="fldid"><%= f.label '内容：' %></div>
+          <div class="fldvalue"><%= f.text_area 'content' %></div>
+        </div>
+        <div class="rows s_clear">
+					<div class="fldid">&nbsp;</div>
+          <div class="fldvalue">
+						<span class="button"><span><button onclick="Iyxzone.Mail.Builder.deliver(this);">发送</button></span></span>
+            <span class="button button-gray"><span><button type="reset">取消</button></span></span>
+					</div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+  Iyxzone.Mail.Builder.recipientBuilder = new Iyxzone.Friend.Tagger([],[],[],'toggle_button', 'recipients', 'friend_list', 'friend_table', 'friend_items', 'game_selector', 'confirm_btn', 'cancel_btn', null);
+" %>
+
+<% unless @recipient.blank? %>
+<script type="text/javascript">
+  $('mail_recipients').value = '<%= @recipient.login %>';
+  $('mail_recipients').disabled = true;     
+</script>
+<% end %>
+

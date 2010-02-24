@@ -1,0 +1,35 @@
+one:
+  id: 1
+  type: 'AvatarAlbum'
+  owner_id: 1
+  poster_id: 1
+  privilege: 2
+
+two:
+  id: 2
+  type: 'AvatarAlbum'
+  owner_id: 2
+  poster_id: 2
+  privilege: 2
+
+three:
+  id: 3
+  type: 'AvatarAlbum'
+  owner_id: 3
+  poster_id: 3
+  privilege: 2
+  
+four:
+  id: 4
+  type: 'AvatarAlbum'
+  owner_id: 4
+  poster_id: 4
+  privilege: 2
+
+five:
+  id: 5
+  type: 'AvatarAlbum'
+  owner_id: 5
+  poster_id: 5
+  privilege: 2
+

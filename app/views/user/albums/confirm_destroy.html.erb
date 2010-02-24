@@ -1,0 +1,37 @@
+<p class="z-h s_clear">
+  <strong class='left'>删除相册</strong>
+  <%= link_to_function '', "facebox.close();", :class => 'icon2-close right' %>
+</p>
+
+<div class="z-con">
+  <% form_remote_for :album, :url => personal_album_url(@album), :method => :delete do |f| %>
+    <div class='formcontent'>
+      <div class="rows s_clear">
+        <div class='fldid'></div>
+        <div class="fldvalue">
+        <% if @album.photos_count == 0 or current_user.albums_count == 2 %>
+          你确实是否要删除这个相册吗
+        <% else %>
+          如果确定删除，请选择专辑中的照片如何处理：
+        <% end %>
+        </div>
+      </div>
+      <div class="rows s_clear">
+        <div class='fldid'></div>
+        <div class="fldvalue">
+        <% if @album.photos_count == 0 or current_user.albums_count == 2 %>
+        <% else %>
+          <%= radio_button_tag 'migration', 0, true %>将照片一起删除<br/>
+          <%= radio_button_tag 'migration', 1, false %>将照片转移到<%= collection_select :album, :id, current_user.albums.delete_if {|a| a == @album}, :id, :title %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="z-submit s_clear space">
+      <table class="center" cellpadding="0"><tr><td>
+        <span class="button"><span><button type="submit">完成</button></span></span>
+        <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+      </td></tr></table>
+    </div>
+  <% end %>
+</div>

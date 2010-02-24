@@ -1,0 +1,30 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+        <div class="round_m"><div class="round_body">
+
+<h1 class="big-cons">公会</h1>
+<div class="box02 canvas_int">
+	<div class="tab tab01">
+		<% subject = get_subject @user %>
+		<ul>
+			<li><span><%= link_to "热门工会", hot_guilds_url(:id => @user.id) %></span></li>
+			<li><span><%= link_to '最新工会', recent_guilds_url(:id => @user.id) %></span></li>
+			<li><span><%= link_to "#{subject}的工会", guilds_url(:id => @user.id) %></span></li>
+      <% if @user == current_user %>
+			<li><span><%= link_to "好友工会", friends_guilds_url %></span></li>
+		  <% end %>
+    </ul>
+		<div class='right'>
+			<%= link_to "新工会", new_guild_url %>
+		</div>
+  </div>
+	<div class="piclist-rows">
+    <div class='path-box'>
+      <label>游戏"<%= game_link @game %>"</label>
+      <span>工会</span>
+    </div>
+		<%= render :partial => 'user/guilds/guild_items', :object => @guilds %>
+  </div>
+</div>
+
+</div></div>
+</div></div></div></div>

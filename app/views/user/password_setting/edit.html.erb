@@ -1,0 +1,49 @@
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+    <div class="round_m"><div class="round_body">
+    <h1 class="app-lock">密码设置</h1>
+      <div class="box02 canvas_int">
+				<div class='notes'>
+				<h4><strong>安全密码设置提示</strong></h4>
+				<h4>请使用英文字母加数字或符号的组合密码。</h4>
+				<h4>请不要使用你的个人信息作为密码的内容。如生日、手机号码等。</h4>
+				<h4>请不要使用与登录邮箱相同的密码。</h4>
+				<h4>建议每隔一段时间更新一次帐号的密码。</h4>
+				</div>
+
+<% form_tag password_setting_url, :method => 'put' do %>
+<div class='form-con' style='height:350px'>
+<div class='rows s_clear space'>
+  <div class='f-id'><%= label_tag '', '原来的密码：'%></div>
+  <div class='f-value'><%= password_field_tag 'old_password', @old_password %></div>
+</div>
+<div class='rows s_clear space'>
+  <div class='f-id'><%= label_tag '', '新的密码: '%></div>
+  <div class='f-value'><%= password_field_tag 'new_password', @new_password %></div>
+</div>
+<div class='rows s_clear space'>
+  <div class='f-id'><%= label_tag '', '重复新的密码: '%></div>
+  <div class='f-value'><%= password_field_tag 'confirmation', @confirmation%></div>
+</div>
+<div class='rows s_clear space'>
+	<div class='f-id'><%= label_tag '', '验证码：' %></div>
+  <div class='f-value'><%= text_field_tag 'validation_text', params[:validation_text], :size => 4 %></div>
+</div>
+<div class='rows s_clear space'>
+	<div class='f-id'>&nbsp;</div>
+	<div class='f-value'><%= validation_image %></div>
+</div>
+<div class='rows s_clear space20'>
+	<div class='f-id'>&nbsp;</div>
+	<div class='f-value'>
+		<span class='button rows'><span>
+		<button type="submit">确定</button>
+		</span></span>
+	</div>
+</div>
+</div>
+<% end %>
+
+</div>
+</div></div>
+</div></div></div></div>

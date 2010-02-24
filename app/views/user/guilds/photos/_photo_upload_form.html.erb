@@ -1,0 +1,6 @@
+<% form_tag guild_photos_url(:album_id => album.id), :multipart => true do %>
+	<% fields_for "photo", GuildPhoto.new do |form| %>
+		<%= form.file_field :uploaded_data %>
+		<%= link_to_function "delete", "$(this).up('.photo').remove();" %>
+	<% end %>
+<% end %>

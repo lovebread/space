@@ -1,0 +1,21 @@
+<div id='new_boss_<%= params[:id] %>'>
+            <% fields_for "guild[new_bosses][#{params[:id]}]", @boss do |r| %>
+            <div class="rows s_clear" id='new_boss_<%= params[:id] %>'>
+              <div class="fldid"><label>名字：</label></div>
+              <div class="fldvalue">
+                <div class="textfield left w-l"><%= r.text_field :name, :onblur => "Iyxzone.Guild.Editor.isBossNameValid(#{params[:id]}, 1)" %></div>
+              </div>
+              <span class='red' id='new_boss_<%= params[:id] %>_name_error'></span>
+            </div>
+            <div class="rows s_clear" id='new_boss_<%= params[:id] %>'>
+              <div class="fldid"><label>奖励：</label></div>
+              <div class="fldvalue">
+                <div class="textfield left w-l"><%= r.text_field :reward, :onblur => "Iyxzone.Guild.Editor.isBossRewardValid(#{params[:id]}, 1)" %></div>
+              </div>
+              <span class='red' id='new_boss_<%= params[:id] %>_reward_error'></span>
+            </div>
+            <% end %>
+<p class='foot s_clear'>
+              <%= link_to_function "删除角色", "Iyxzone.Guild.Editor.removeBoss(#{params[:id]}, 1, this)", :class => 'right red' %>
+            </p>
+          </div>

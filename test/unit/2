@@ -1,0 +1,166 @@
+require 'test_helper'
+
+class NoticeTest < ActiveSupport::TestCase
+
+  def setup
+    @user1 = User.find(1)  
+    @user2 = User.find(2)
+    @user3 = User.find(3)
+    @user4 = User.find(4)
+  end
+
+  test "没有接受者" do
+    n = Notice.create(:user_id => nil)
+    assert_equal n.errors.on_base, "没有接受者"
+  end
+
+  test "没有产生通知的资源" do
+    n = Notice.create(:user_id => 2, :producer_id => nil, :producer_type => 'FriendTag')
+    assert_equal n.errors.on_base, "没有产生通知的资源"
+  
+    n = Notice.create(:user_id => 2, :producer_id => 1, :producer_type => nil)
+    assert_equal n.errors.on_base, "没有产生通知的资源"
+  end
+
+  test "产生通知的资源不存在" do
+    n = Notice.create(:user_id => 2, :producer_id => 2, :producer_type => 'FriendTag')
+    assert_equal n.errors.on_base, "产生通知的资源不存在"
+  end
+
+  test "对没有标记的博客发表评论" do
+    setup_blog
+
+    # user2对自己发标评论
+    c = @b1.comments.create(:poster_id => 2, :content => 'user2', :recipient_id => 2)
+    assert_equal Notice.count, 0
+
+    # user1对user2发表评论
+    c = @b1.comments.create(:poster_id => 1, :content => 'user1', :recipient_id => 2)
+    @user2.reload
+    assert_equal @user2.notices_count, 1
+    assert_equal @user2.unread_notices_count, 1
+    
+    # user1对自己的评论发表评论
+    c = @b1.comments.create(:poster_id => 1, :content => 'user1', :recipient_id => 1)
+    @user1.reload
+    @user2.reload
+    assert_equal @user1.notices_count, 0
+    assert_equal @user1.unread_notices_count, 0
+    assert_equal @user2.notices_count, 2
+    assert_equal @user2.unread_notices_count, 2
+
+    # user2回复user1的评论 
+    c = @b1.comments.create(:poster_id => 2, :content => 'user2', :recipient_id => 1)
+    @user1.reload
+    @user2.reload
+    assert_equal @user2.notices_count, 2
+    assert_equal @user2.unread_notices_count, 2
+    assert_equal @user1.notices_count, 1
+    assert_equal @user1.unread_notices_count, 1
+
+    # user3回复user1的评论
+    c = @b1.comments.create(:poster_id => 3, :content => 'user3', :recipient_id => 1)
+    @user1.reload
+    @user2.reload
+    @user3.reload
+    assert_equal @user2.notices_count, 3
+    assert_equal @user2.unread_notices_count, 3
+    assert_equal @user1.notices_count, 2
+    assert_equal @user1.unread_notices_count, 2
+    assert_equal @user3.notices_count, 0
+    assert_equal @user3.unread_notices_count, 0
+  end
+
+  test "对视频发表评论" do
+    setup_blog
+
+    # user2对自己发标评论
+    c = @b2.comments.create(:poster_id => 2, :content => 'user2', :recipient_id => 2)
+    @user1.reload
+    assert_equal @user1.notices_count, 1
+    assert_equal @user1.unread_notices_count, 1
+
+    # user3对user2发表评论
+    c = @b2.comments.create(:poster_id => 3, :content => 'user1', :recipient_id => 2)
+    @user1.reload
+    @user2.reload
+    assert_equal @user1.notices_count, 2
+    assert_equal @user1.unread_notices_count, 2
+    assert_equal @user2.notices_count, 1
+    assert_equal @user2.unread_notices_count, 1
+    
+    # user3对自己的评论发表评论
+    c = @b2.comments.create(:poster_id => 3, :content => 'user1', :recipient_id => 3)
+    @user1.reload
+    @user2.reload
+    assert_equal @user1.notices_count, 3
+    assert_equal @user1.unread_notices_count, 3
+    assert_equal @user2.notices_count, 2
+    assert_equal @user2.unread_notices_count, 2
+
+    # user2回复user3的评论 
+    c = @b2.comments.create(:poster_id => 2, :content => 'user2', :recipient_id => 3)
+    @user1.reload
+    @user2.reload
+    @user3.reload
+    assert_equal @user1.notices_count, 4
+    assert_equal @user1.unread_notices_count, 4
+    assert_equal @user2.notices_count, 2
+    assert_equal @user2.unread_notices_count, 2
+    assert_equal @user3.notices_count, 1
+    assert_equal @user3.unread_notices_count, 1
+
+    # user1回复user3的评论
+    c = @b1.comments.create(:poster_id => 3, :content => 'user3', :recipient_id => 1)
+    @user1.reload
+    @user2.reload
+    @user3.reload
+    assert_equal @user2.notices_count, 3
+    assert_equal @user2.unread_notices_count, 3
+    assert_equal @user1.notices_count, 2
+    assert_equal @user1.unread_notices_count, 2
+    assert_equal @user3.notices_count, 0
+    assert_equal @user3.unread_notices_count, 0 
+  end
+
+  test "对状态发表评论" do
+  end
+
+  test "对投票发表评论" do
+  end
+
+  test "对分享发表评论" do
+  end
+
+  test "对头像相册，头像发表评论" do
+  end
+
+  test "对个人相册，个人照片发表评论" do
+  end
+
+  test "对工会相册，工会照片发表评论" do
+  end
+
+  test "对活动相册，活动照片发表评论" do
+  end
+
+  test "个人留言版上留言" do
+  end
+
+  test "活动留言版上留言" do
+  end
+
+  test "工会留言版上留言" do
+  end
+
+  test "游戏留言版上留言" do
+  end
+
+protected
+
+  def setup_blog
+    @b1 = Blog.create({:game_id => 1, :poster_id => 2, :draft => false, :title => 't', :content => 'c', :privilege => 1})
+    @b2 = Blog.create({:game_id => 1, :poster_id => 2, :draft => false, :title => 't', :content => 'c', :friend_tags => [1], :privilege => 1}) 
+  end
+
+end

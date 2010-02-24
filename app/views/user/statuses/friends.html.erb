@@ -1,0 +1,23 @@
+<%= javascript_include_tag 'status' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+		<h1 class="app-status">状态</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <ul>
+          <li><span><%= link_to "我的状态", statuses_url(:id => current_user.id) %></span></li>
+          <li class='hover'><span><%= link_to "好友的状态", friends_statuses_url %></span></li>
+        </ul>
+      </div>
+      <% if @statuses.blank? %>
+        <div class='gray'>你的好友最近都中了沉默</div>
+      <% else %>
+      <div class="piclist-rows">
+        <%= render :partial => 'status', :collection => @statuses %>
+      </div>
+      <%= will_paginate @statuses %>
+      <% end %>
+    </div>
+  </div></div>
+</div></div></div></div>

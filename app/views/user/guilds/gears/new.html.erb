@@ -1,0 +1,22 @@
+<div id='new_gear_<%= params[:id] %>'>
+            <% fields_for "guild[new_gears][#{params[:id]}]", @gear do |r| %>
+            <div class="rows s_clear" id='gear_<%= params[:id] %>'>
+              <div class="fldid"><label>名字：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= r.text_field :name, :onblur => "Iyxzone.Guild.Editor.isGearNameValid(#{params[:id]}, 1)" %></div>
+              </div>
+              <span class='red' id='new_gear_<%= params[:id] %>_name_error'></span>
+            </div>
+            <div class="rows s_clear" id='gear_<%= params[:id] %>'>
+              <div class="fldid"><label>花费：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= r.text_field :cost, :onblur => "Iyxzone.Guild.Editor.isGearCostValid(#{params[:id]}, 1)" %></div>
+              </div>
+              <span class='red' id='new_gear_<%= params[:id] %>_cost_error'></span>
+            </div>
+            <% end %>
+            <p class='foot s_clear'>
+              <%= link_to_function "删除装备", "Iyxzone.Guild.Editor.removeGear(#{params[:id]}, 1, this)", :class => 'right red' %> 
+            </p> 
+          </div>
+

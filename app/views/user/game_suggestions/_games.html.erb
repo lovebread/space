@@ -1,0 +1,48 @@
+<div class="title">
+  <b>推荐游戏</b>
+</div>
+              
+<table class="data-table01 game-table" cellpadding="0">
+  <tr>
+    <th>游戏图片</th>
+    <th>游戏名称</th>
+    <th>公测时间</th>
+    <th>玩家评价</th>
+    <th>关注</th>
+  </tr>
+  <% games.each do |g| %>
+  <tr>
+    <td class="img"><img class="imgbox01" src="images/photo/photo11.png" alt="" /></td>
+    <td class="name"><%= game_link g %>
+      <% if g.official_web.blank? %>
+        (暂无官网)
+      <% else %>
+        (<%= link_to "官网", g.official_web, :popup => true %>)
+      <% end %>
+		</td>
+    <td class="time">
+			<% if g.sale_date.blank? %>
+				没有公布
+			<% else %>
+				<%= g.sale_date %>
+			<% end %>
+		</td>
+    <td align="center">
+      <% if g.average_rating == 0 %>
+        还没人打分
+      <% else %>
+        <span class="star-<%= g.average_rating.to_i %>"></span>
+      <% end %>
+    </td>
+    <td class="attention">
+      <% attention = current_user.game_attentions.find_by_game_id(g.id) %>
+      <% if !attention.blank? %>
+        <span id='game_attention_<%= g.id %>'><%= link_to_remote "取消关注", :url => game_attention_url(g, attention, :at => 0), :method => :delete %></span>
+      <% else %>
+			  <span id='game_attention_<%= g.id %>'><%= link_to_remote "关注", :url => game_attentions_url(g, :at => 0) %></span>
+		  <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate games, :renderer => "RemoteLinkRenderer", :remote => @remote %>

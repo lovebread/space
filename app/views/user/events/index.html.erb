@@ -1,0 +1,60 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-ploy">活动</h1>
+    <div class="box02 canvas_int">
+	    <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "新建活动", new_event_url, :class => 'icon-add-table' %>
+        </div>
+		    <ul>
+			    <li><span><%= link_to "热门活动", hot_events_url %></span></li>
+          <% if @user == current_user %>
+			    <li class='hover'><span><%= link_to "我的活动", events_url(:id => @user.id) %></span></li>
+          <% else %>
+          <li><span><%= link_to '我的活动', events_url(:id => @user.id) %></span></li>
+          <% end %>
+			    <li><span><%= link_to "朋友的活动", friends_events_url %></span></li>
+		    </ul>
+      </div>
+	    <div class="nav-link">
+        <ul class="s_clear">
+          <li class='hover'><%= link_to "<span>#{get_subject @user}发起的(#{@user.events_count})</span>", events_url(:id => @user.id) %></li>
+          <li><%= link_to "<span>#{get_subject @user}要参加的(#{@user.upcoming_events_count})</span>", upcoming_events_url(:id => @user.id) %></li>
+          <li><%= link_to "<span>#{get_subject @user}参加过的(#{@user.past_events_count})</span>", participated_events_url(:id => @user.id) %></li>
+        </ul>
+      </div>
+      <div class="piclist-rows">
+        <% if @user.events_count != 0 %>
+          <table cellpadding="0" cellspacing="0">
+            <% @events.each do |event| %>
+            <tr>
+              <td>
+                <div class="imgwrap">
+                  <%= album_cover_image event.album, :class => 'imgbox01' %>
+                </div>
+                <div class="data jl-data">
+                  <p><%= event_link event, :class => 'shine' %></p>
+                  <p>地点：<%= server_location event.game_server %></p>
+                  <p>时间：<%= ftime event.start_time %> 到 <%= ftime event.end_time %></p>
+                  <p><span>
+                    <%= link_to "邀请更多人", new_event_invitation_url(event) %> | <%= facebox_confirm "放所有人鸽子", event_url(event), {:msg => '你确定要放所有人鸽子?', :method => :delete } %>
+                  </span></p>
+                </div>
+              </td>
+              <td class="party-num">
+                <a href="#"><%= event.participants_count %>人参加</a>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        <% else %>
+          <% if @user == current_user %>
+            <div class='gray'>你还没有发起任何活动，赶紧<%= link_to '发起', new_event_url %>吧!</div>
+          <% else %>
+            <div class='gray'><%= get_subject @user %>没有发起任何活动，一个无趣的人</div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

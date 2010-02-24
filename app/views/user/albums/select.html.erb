@@ -1,0 +1,24 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-photo">选择照片专辑</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right">
+          <%= link_to "上传照片", select_personal_albums_url %>
+          <%= facebox_link "新建相册", new_personal_album_url %>
+        </div>
+        <ul>
+          <li><span><%= link_to "热门照片", hot_personal_photos_url(:id => current_user.id) %></span></li>
+          <!--<li><span><%= link_to '最新相册', recent_personal_albums_url(:id => current_user.id) %></span></li>-->
+          <li class='hover'><span><%= link_to "我的相册", personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to '好友相册', friends_personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "圈了我的照片", relative_personal_photos_url(:id => current_user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="box02 appcontent01">
+        <p> 请选择照片专辑 <%= collection_select :album, :id, @albums, :id, :title, {:prompt => '---'} %> 或者 <%= facebox_link "新建专辑", new_personal_album_url(:show => 'select') %> </p>
+        <p><%= button_to_function "下一步", "if(!$('album_id').value){error('请选择一个相册');}else{ window.location.href = '#{new_personal_photo_url}?album_id=' + $('album_id').value;}" %></p>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

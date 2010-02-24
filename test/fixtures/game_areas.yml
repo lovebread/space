@@ -1,0 +1,11 @@
+one:
+  id: 1
+  name: '1区'
+  game_id: 1
+  servers_count: 2
+
+two:
+  id: 2
+  name: '2区'
+  game_id: 1
+  servers_count: 1

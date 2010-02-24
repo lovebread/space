@@ -1,0 +1,5 @@
+<ul>
+<% auto_complete_friends.each do |f| %>
+	<li style="list-style-type:none;" id=<%= f.id %> profile_id=<%= f.profile.id %>><a href='#'><%= f.login %></a></li>
+<% end %>
+</ul>

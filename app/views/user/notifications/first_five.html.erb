@@ -1,0 +1,11 @@
+<% if @notifications.blank? %>
+	<dt></dt><dd>没有任何未读的消息</dd>
+<% else %>
+	<% @notifications.each do |notification| %>
+		<dt class="rows"><span class="<%= notification_icon notification %>"></span></dt>
+			<dd>
+				<%= notification.data %>
+				<span class='gray'> <%= ftime notification.created_at %> </span>
+			</dd>
+	<% end %>
+<% end %>

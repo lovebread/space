@@ -1,0 +1,9 @@
+<li id='friend_suggestion_<%= friend_suggestion.id %>' suggestion_id=<%= friend_suggestion.id %>>
+<% f = friend_suggestion.suggested_friend %>
+<div class="middle"><div class="middle-center"><div class="center"><%= avatar f, :size => :medium, :class => "imgbox01" %></div></div></div>
+<span> <%= profile_link f %></span>
+<p class="btns">
+	<%= facebox_link '', new_friend_request_url(:friend_id => f.id), :class => "icon-active icon-active-add" %>
+	<%= link_to_function '', "Iyxzone.Friend.Suggestor.newSuggestion(#{friend_suggestion.id}, '#{form_authenticity_token}')", :class => 'icon-active icon-active-del' %>
+</p>
+</li>

@@ -1,0 +1,106 @@
+<%= stylesheet_link_tag 'test' %>
+<%= stylesheet_link_tag 'cropper' %>
+<%= javascript_include_tag 'textboxlist' %>
+<%= javascript_include_tag 'friend' %>
+<%= javascript_include_tag 'cropper' %>
+<%= javascript_include_tag 'photo' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-photo">照片</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right">
+          <% if @participation and @participation.is_authorized? %>
+          <%= link_to "上传照片", new_event_photo_url(:album_id => @album.id) %>
+          <% end %>
+        </div>
+        <ul>
+          <% subject = get_subject @user %>
+          <li><span><%= link_to "热门照片", hot_personal_photos_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "我的相册", personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to '好友相册', friends_personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "圈了我的照片", relative_personal_photos_url(:id => current_user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="box02 pic-box">
+        <div class="img-container-main s_clear">
+          <div class="img-container-wrap">
+            <div class="img-container">
+              <div class="path-box">
+                <ul>
+                  <li><%= facebox_link "分享", new_sharing_url(:shareable_type => 'Photo', :shareable_id => @photo.id) %></li>
+                  <li><%= dig_link @photo %></li>
+                  <% if @participation and @participation.is_authorized? %>
+                    <li><%= link_to_function "标记", "tagger.start();" %></li>
+                  <% end %>
+                  <% if @event.poster == current_user %>
+                    <li class="icon-photo"><%= link_to '编辑', edit_event_photo_url(@photo), :rel => 'facebox' %>
+                    <li class="icon-del" ><%= facebox_confirm '删除', event_photo_url(@photo), {:method => :delete, :msg => '你确定要删除吗?'} %></li>
+                  <% end %>
+                </ul>
+                <label>工会"<%= event_link @event %>"</label>
+                <span><%= album_link @album %></span><span>照片</span>
+              </div>
+              <div class="img-main">
+                <div class="imgwrap">
+                  <table cellpadding="0">
+                    <tr>
+                      <th><%= image_tag @photo.public_filename, :id => "photo_#{@photo.id}" %></th>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="pic-desc">
+                <h4>
+                  <% if @user == current_user %>
+                    <%= in_place_text_field :span, @photo, :notation, true, event_photo_url(@photo), {}, {:empty_text => '点击增加照片描述', :parameter_name => 'photo[notation]', :rows => 2, :cols => 70} %>
+                  <% else %>
+                    <%= @photo.notation %>
+                  <% end %>
+                </h4>
+                <div class="pic-flag s_clear">
+                  <ul id='photo_tags'></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="album">
+            <% if @album.photos_count > 5 %>
+            <div class="btn upbtn" onclick="slide.prev();"></div>
+            <% end %>
+            <div class="small-imgs">
+              <div class="imgList" id='frames'>
+                <% window_size = (@album.photos_count > 5)? 5 : @album.photos_count %>
+                <% window_size.times do |i| %>
+                  <div class="img"></div>
+                <% end %>
+              </div>
+            </div>
+            <% if @album.photos_count > 5 %>
+            <div class="btn downbtn" onclick="slide.next()"></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="foot">
+        <div class="feed-list">
+          <h4>评论(<%= @photo.comments_count %>)</h4>
+          <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @photo, :recipient => @user} %>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div></div>
+</div></div></div></div>
+
+<%= render :partial => 'user/photo_tags/control_panel', :locals => {:photo => @photo} %>
+
+<% photo_ids = array_or_string_for_javascript @album.photos.map(&:id) %>
+<% urls = array_or_string_for_javascript @album.photos.map {|p| p.public_filename(:medium)} %>
+<%= javascript_tag "
+  slide = new Iyxzone.Photo.Slide('event_photo', #{photo_ids}, #{urls}, #{window_size}, $('frames').childElements(), #{@photo.id});
+  tagger = new Iyxzone.Photo.Tagger('event_photo', #{@photo.id}, 'control_panel', 'confirm_btn', 'cancel_btn', #{@tags}, 'photo_tags', #{@user == current_user ? 1 : 0}, 'tag_content', 'toggle_button', 'friend_login', 'friend_list', 'friend_table', 'friend_items', 'game_selector', '#{form_authenticity_token}', {});
+"%>
+                              

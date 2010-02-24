@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网游交友SNS</title>
+  <%= stylesheet_link_tag 'common' %>
+  <%= stylesheet_link_tag 'welcome' %>
+  <%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag 'swfobject' %>
+</head>
+
+<body class="body_bg01">
+	<div class="welcome-box">
+		<div id="navbar">
+			<div id='navwrap'>
+				<div id='navmid'>
+					<a href="#" class="logo-top logo-v2 png" title="一起游戏"></a>
+					<p class="top_link right">
+					<%= link_to_function "设为主页", "homepage()" %> |
+					<%= link_to_function "加入收藏", "bookmark()" %> |
+					<%= link_to '反映建议' %> | 
+					<%= link_to '关于我们'%>
+					</p>
+				</div>
+			</div>
+    </div>
+    <div class="welcome">
+			<div class="login-box">
+        <div class="r-m">
+          <% unless flash[:error].nil? %>
+            <div><%= flash[:error] %></div>
+          <% end %>
+        <% form_tag sessions_url do %>
+					<div class="rows">
+						<div class="fldid"><%= label_tag 'email', '电子邮箱：' %></div>
+            <div class="fldvalue">
+						  <div class="textfield"><%= text_field_tag 'email', nil %></div>
+            </div>
+          </div>
+          <div class="rows">
+						<div class="fldid"><%= label_tag 'password', '密码：' %></div>
+            <div class="fldvalue">
+							<div class="textfield"><%= password_field_tag 'password', nil %></div>
+            </div>
+            <%= link_to '忘记密码？', forgot_password_url %>
+          </div>
+          <div class="rows">
+						<div class="fldid">&nbsp;</div>
+            <div class="fldis"><%= check_box_tag 'remember_me', 1, true %><%= label_tag 'auto', '下次自动登录', :class => "blue" %></div>
+          </div>
+          <div class="btn-rows">
+						<div class="fldid">&nbsp;</div>
+            <div class="fldvalue"><%= submit_tag '', :class => "loginbtn png" %></div>
+          </div>
+				<% end %>
+        <div class="sperator"></div>
+        <div class="rows">
+					<div class="fldid">&nbsp;</div>
+          <div class="fldvalue"><span class="red">网络游戏玩家的聚集地，就差你了！</span></div>
+        </div>
+        <div class="btn-rows">
+					<div class="fldid">&nbsp;</div>
+          <div class="fldvalue"><%= link_to '', signup_url, :class => 'registbtn png' %></div>
+        </div>
+        <div class="sperator"></div>
+        <div class="rows">
+          <div class="fldid">&nbsp;</div>
+					<% form_tag search_users_url do %>
+						<div class="fldvalue">
+						<div class="textfield"><%= text_field_tag 'key', "搜搜您的好友吧", :onfocus => "this.clear()" %></div>
+						</div>
+						<input type="submit" class="gobtn" value="" />
+					<% end %>
+        </div>
+      </div>
+      <span class="r-b"></span>
+    </div>
+
+            <div class="right">
+            	<div class="slogon-box">
+                    <p><img src="images/welcome/logo-index.png" alt="一起游戏" /></p>
+										<p><%= link_to '<img src="images/welcome/reg-btn.png" alt="马上加入一起游戏"/>', signup_url, :title=>'注册一起游戏网帐号', :alt=>"马上加入一起游戏"%></p>
+                    <div class="slogon">
+                    <p>一起游戏网(17gaming)是让网络游戏玩家分享游戏心情，共享心得体验,重拾昔日情意的社交平台。</p>
+                    <p>我们期待您的加入，与我们共建网络游戏玩家的精神家园。</p>
+                    </div>
+                </div>
+                <p class="later">
+					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="618" height="252" id="~hero" align="middle">
+						<param name="allowScriptAccess" value="sameDomain" />
+						<param name="movie" value="swf/~hero.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="swf/~hero.swf" quality="high" bgcolor="#ffffff" width="618" height="252" name="~hero" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+
+					</object>
+				</p>
+            </div>
+        </div>
+
+<div id="footer">
+	<p>Copyright &copy; 1998-2009 Tencent. All Rights Reserved</p>
+    <p><a href="#">网游公司 版权所有</a></p>
+</div>
+
+</body>
+
+</html>
+
+

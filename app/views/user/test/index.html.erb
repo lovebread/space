@@ -1,0 +1,45 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <%= stylesheet_link_tag 'textboxlist' %>
+  <%= stylesheet_link_tag 'home' %>
+  <%= stylesheet_link_tag 'common' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'textboxlist' %>
+</head>
+
+<body>
+
+<div class="selector selector03 select-toggle s_clear">
+                                              <a href="#" class="toggle" style=""></a>
+                                              <ul class="friend-select-list s_clear">
+                                              <li><a href="#"><span>高侠鸿<em class="x"></em></span></a></li>
+                                              <li><a href="#"><span>高侠鸿<em class="x"></em></span></a></li>
+                                              <li><a href="#"><span>高侠鸿<em class="x"></em></span></a></li>
+                                              <li><a href="#"><span>高侠鸿<em class="x"></em></span></a></li>
+                                              <li><a href="#"><span>高侠鸿<em class="x"></em></span></a></li>
+                                              <li><a href="#"><span>高侠鸿<em class="x"></em></span></a></li>
+                                              <li>
+                                                <input name="" type="text">
+                                              </li>
+                                            </ul>
+</div>
+<br/><br/><br/>
+<div class="selector selector03 select-toggle s_clear">
+<a href="#" class="toggle" style=""></a>
+<div id='tags'></div>
+</div>
+</body>
+
+<%= javascript_tag "
+  t = new TextBoxList('tags', {holderClassName: 'friend-select-list s_clear', bitClassName: '', }); 
+  t.add('gaoxh', 'gaoxh');
+  t.add('mili', 'mili');
+  t.add('gaoxh', 'gaoxh');
+  t.add('mili', 'mili');
+  t.add('gaoxh', 'gaoxh');
+  t.add('mili', 'mili');
+  t.add('gaoxh', 'gaoxh');
+  t.add('mili', 'mili');
+" %>
+</html>

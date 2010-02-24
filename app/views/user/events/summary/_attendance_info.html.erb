@@ -1,0 +1,31 @@
+<% attendances.each do |character_id, info| %>
+<% character = @event.characters.find(character_id) %>
+<tr class="jl-cutline" id='character_<%= character_id %>'>
+  <td>
+    <%= avatar character.user, {:class => 'imgbox01'}, {:class => 'left'} %>
+    <p class="left">
+      <%= profile_link character.user, :class => 'blk' %>
+      <span class="red blk"><%= character.name %></span>
+    </p>
+  </td>
+  <td>
+    迟到<%= check_box_tag "late_#{character.id}", 1, info[:late], :onclick => "Iyxzone.Event.Summary.Attendance.lateOnchange(#{character.id})" %>
+  </td>
+  <td>
+    <div class="op">
+      <div class='percent'>
+        <%= link_to_function '<span class="icon-minus"></span>', "Iyxzone.Event.Summary.Attendance.decCompleteness(#{character.id})", :class => 'left' %>
+        <span class="percent01 left w-l">
+          <span id = "completeness_<%= character.id %>_bar" class="green" style="width:<%= info[:completeness] %>%">
+          </span>
+        </span>
+        <strong id = "completeness_<%= character.id %>_number"><%= info[:completeness] %>%</strong>
+        <%= link_to_function '<span class="icon-plus"></span>', "Iyxzone.Event.Summary.Attendance.incCompleteness(#{character.id})", :class => 'left' %>
+      </div>
+    </div>
+  </td>
+  <td>
+    <%= link_to_function '', "Iyxzone.Event.Summary.Attendance.remove(#{character_id})", :class => "icon-active" %>
+  </td>
+</tr>
+<% end %>

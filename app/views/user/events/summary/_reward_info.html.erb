@@ -1,0 +1,27 @@
+<% rewards.each do |reward| %>
+  <% character_id = reward[:character_id] %>
+  <% rule_id = reward[:rule_id] %>
+  <% character = GameCharacter.find(character_id) %>
+  <tr class="jl-cutline">
+    <td class="tl">
+      <div style="position:relative;text-align:left">
+        <%= avatar_image character.user, :class => 'w-l', :align => 'absmiddle', :size => :small %><span><strong><%= character.name %></strong></span>
+      </div>
+    </td>
+    <% if rule_id.blank? %>
+      <td>
+        <a class="member-toggle"><span><strong>点击选择原因</strong></span></a>
+        <div style="position:absolute;left:0;top:40px;display:none" class="drop-box">
+                                                    <a href="#" class="member-toggle"><img alt="" src="images/photo/photo16.png" class="w-l" align="absmiddle"/><span><strong>披头士</strong></span></a></div>
+
+                                                    </div>
+      </td>
+      <td></td>
+    <% else %>
+      <% rule = GameRule.find(rule_id) %>
+      <td><%= rule.reason %></td>
+      <td><%= rule.outcome %></td>
+    <% end %>
+    <td><%= link_to_function '', "Iyxzone.Event.Summary.Boss.remove(#{character_id}, #{rule_id}, this)", :class => "icon-active" %></td>
+  </tr>
+<% end %>

@@ -1,0 +1,22 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="<%= @application.icon_class %>"><%= @application.name %></h1>
+    <div class="box02 canvas_int space20">
+      <div class="detail-blog">
+        <div class="detail-blog-head jl-cutline s_clear">
+          <p class="left">
+            <strong><%= @application.name %></strong>
+          </p>
+        </div>
+        <div class="con">
+          <%= @application.about %>
+        </div>
+        <div class="detail-blog-foot s_clear">
+          <p class=" jl-cutline"></p>
+          <p class="red"><span class="w-l">评论(<%= @application.comments_count %>)</span></p>
+          <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @application, :recipient => nil} %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

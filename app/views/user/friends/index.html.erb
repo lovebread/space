@@ -1,0 +1,71 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-friend">好友</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+			  <div class="right"><%= link_to "激请好友加入" %></div>
+        <ul>
+          <li class="hover"><span><%= link_to '好友管理', friends_url %></span></li>
+          <li><span><%= link_to '寻找好友', friend_suggestions_url %></span></li>
+          <li><span><%= link_to '好友印象', friend_impressions_url %></span></li>
+        </ul>
+      </div>
+      <div class="friend-box">
+        <div class="friend-wrap s_clear">
+          <div class="friend-menu menu-bg-list">
+            <ul>
+              <% if params[:term].to_i == 0 %>
+                <li class='current'>
+              <% else %>
+                <li>
+              <% end %>
+              <%= link_to "所有好友", friends_url %></li>
+              <li>游戏分类</li>
+						  <% current_user.games.each do |g| %>
+						    <% if g.id == params[:game_id].to_i %>
+							  	<li class='current'>
+							  <% else %>
+								  <li>
+							  <% end %>
+							  <%= link_to g.name, friends_url(:term => 1, :game_id => g.id) %></li>
+						  <% end %>
+              <% unless current_user.participated_guilds_count == 0 and current_user.guilds_count == 0%>
+						    <li><h3>工会</h3></li>
+						    <% current_user.all_guilds.each do |g| %>
+						      <% if g.id == params[:guild_id].to_i %>
+                    <li class='current'>
+                  <% else %>
+                    <li>
+                  <% end %>
+							    <%= link_to g.name, friends_url(:term => 2, :guild_id => g.id) %></li>
+						    <% end %>
+              <% end %>
+            </ul>
+          </div>
+          <div class="friend-list">
+					  <div class="friend-content">
+              <div class="friend-list-header">
+							  <div class="right">
+								  <div class="textfield">
+									  <%= text_field_tag 'search', params[:key] %>
+									  <%= observe_field :search,
+										  							  :complete  => "facebox.watchClickEvents();",
+											  						  :update    => "friends",
+												  						:frequency => 1,
+													  					:url       => search_friends_url(current_user),
+														  				:with      => "'key='+$('search').value",
+															  			:method    => :get  %>
+								  </div>
+                </div>
+							  所有好友(共<%= current_user.friends_count %>个)
+              </div>
+              <div class="friend-list-body s_clear" id='friends'>
+						    <%= render :partial => 'friends', :object => @friends %>
+						  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

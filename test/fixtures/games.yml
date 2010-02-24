@@ -1,0 +1,42 @@
+one:
+  id: 1
+  name: '魔兽争霸'
+  pinyin: 'moshouzhengba'
+  no_areas: false
+  no_races: false
+  no_professions: false
+  areas_count: 2
+  servers_count: 3 
+  races_count: 1
+  professions_count: 1
+
+two:
+  id: 2
+  name: '石器时代'
+  pinyin: 'shiqishidai'
+  no_areas: true
+  no_races: false
+  no_professions: false
+  servers_count: 2
+  races_count: 1
+  professions_count: 1
+
+three:
+  id: 3
+  name: 'wow'
+  pinyin: 'wow'
+  no_areas: true
+  no_races: true
+  no_professions: false
+  servers_count: 1
+  professions_count: 1
+
+four:
+  id: 4
+  name: 'sb'
+  pinyin: 'sb'
+  no_areas: true
+  no_races: false
+  no_professions: true
+  servers_count: 1
+  races_count: 1

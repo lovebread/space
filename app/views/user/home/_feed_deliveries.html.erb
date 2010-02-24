@@ -1,0 +1,5 @@
+<% group_deliveries(feed_deliveries).each do |time, deliveries| %> 
+	<% deliveries.each do |f| %>
+    <%= render :layout => "#{f.feed_item.originator.class.base_class.name.underscore}_feed_delivery", :object => f, :locals => {:with_comments => false}%>
+	<% end %>
+<% end %>

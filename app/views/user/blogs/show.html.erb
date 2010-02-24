@@ -1,0 +1,81 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+	<% if @user==current_user %>
+    <h1 class="app-log">日志</h1>
+	<% else %>
+    <div class="friend-head space s_clear">
+      <span class="left"><%= avatar @user, :class=>"imgbox01"%></span>
+      <p class="left">
+        <strong><%= @user.login %>的日志</strong><br />
+        <%= link_to '个人主页', profile_url(@user.profile), :class=>'red'%>
+      </p>
+    </div>
+	<% end %>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "写新日志", new_blog_url %></div>
+				<ul>
+					<% subject = get_subject @user %>
+					<li><span><%= link_to "热门日志", hot_blogs_url(:id => @user.id) %></span></li>
+					<li class='hover'><span><%= link_to "#{subject}的日志", blogs_url(:id => @user.id) %></span></li>
+					<li><span><%= link_to "与#{subject}的相关日志", relative_blogs_url(:id => @user.id) %></span></li>
+					<% if @user == current_user %>
+						<li><span><%= link_to "好友日志", friends_blogs_url %></span></li>
+						<li><span><%= link_to "草稿箱", drafts_url %></span></li>
+					<% end %>
+				</ul>
+			</div>
+      <div class="path-box">
+				<div class="left">
+				<%= "共#{@user.blogs.count}篇博客" %>
+				<%= link_to '上一篇', blog_url(@blog.prev) %> |
+				<%= link_to '下一篇', blog_url(@blog.next) %> <br/>
+				</div>
+      </div>
+		
+<div class='detail-blog'>
+  <div class='detail-blog-head jl-cutline s_clear'>
+	<p class="left">
+    <strong style="width: 75%;"><%= @blog.title %></strong> <span class='gray'><%= ftime @blog.created_at %></span>
+	</p>
+	<p class="right">
+      <% if @user == current_user %>
+      <%= link_to "<span class='icon2-edit'></span>编辑", edit_blog_url(@blog), :class=>"red" %>
+      <%= facebox_confirm "<span class='icon2-close'></span>删除", blog_url(@blog), {:msg => '你确定要删除这篇博客吗', :method => :delete}, :class=>"red w-l" %>
+      <% end %>
+      <%= facebox_link "分享", new_sharing_url(:shareable_type => 'Blog', :shareable_id => @blog.id), :class => 'share-btn' %>
+	</p> 
+  </div>
+  <div class='con'>
+    <%= @blog.content %>
+  </div>
+  <div class="detail-blog-foot" id='friend_tags'>
+	<p class="jl-cutline">
+		<% if @blog.tags.size == 0 %>
+			这篇日志跟任何人都无关
+		<% else %>
+			这篇日志有关的人: <%= @blog.tags.map { |t| profile_link t.tagged_user }.join(',') %>
+		<% end %>
+	</p>
+  </div>
+</div>
+
+      <div class="foot cmt-space">
+        <div class="feed-list">
+          <p class="s_clear red">评论(<%= @blog.comments_count %>)
+					<%=link_to_remote '赞', :url => digs_url("dig[diggable_type]" => @blog.class.base_class.to_s, "dig[diggable_id]" => @blog), :html => {:id=> "digging_#{@blog.class.to_s.underscore}_#{@blog.id}", :class => "red"}%>(已经被<span id="dig_<%=@blog.class.to_s.underscore%>_<%=@blog.id%>" class='gray'><%= @blog.digs_count %></span>人赞过)
+					</p>
+					<%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @blog, :recipient => @blog.poster} %>
+				</div>
+			</div>
+
+</div>
+</div></div>
+</div></div></div></div>
+
+<% @reply_to =  User.find_by_id(params[:reply_to]) %>
+<% unless @reply_to.nil? %>
+<%= javascript_tag "
+  Iyxzone.Comment.set('blog', #{@blog.id}, '#{@reply_to.login}', #{@reply_to.id});
+" %>
+<% end %>

@@ -1,0 +1,8 @@
+<div class="gear_rule_rows">
+<% form_for :gear, :html => {:id => 'add_gear_form'} do |f| %>
+	<%= f.text_field 'name' -%>
+	<%= f.text_field 'cost' %>
+  <%= button_to_function "保存", "Iyxzone.GuildRule.Editor.createGearRule(#{@guild.id}, this)" %>
+  <%= link_to_function "取消", "Iyxzone.GuildRule.Editor.cancelEditGearRule()" %>
+<% end %>
+</div>

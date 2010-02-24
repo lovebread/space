@@ -1,0 +1,35 @@
+<p class="z-h s_clear">
+  <strong class='left'>编辑照片</strong>
+  <%= link_to_function '', "facebox.close();", :class => "icon2-close right" %>
+</div>
+
+<div class='z-con'>
+  <% form_remote_for :photo, :url => personal_photo_url(@photo), :method => :put do |f| %>
+  <div class='formcontent'>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="name">照片描述：</label></div>
+      <div class="fldvalue"> 
+        <%= f.text_area 'notation' %>
+      </div>
+    </div>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="name">所属专辑：</label></div>
+      <div class="fldvalue"> 
+        <%= collection_select :photo, :album_id, current_user.albums, :id, :title %>
+      </div>
+    </div>
+    <div class="rows s_clear">
+      <div class="fldid"><label for="name">专辑封面：</label></div>
+      <div class="fldvalue"> 
+        <%= check_box_tag 'cover', 1, @photo.is_cover? %>设置为封面
+      </div>
+    </div>
+  </div>
+  <div class="z-submit s_clear space">
+    <table class="center" cellpadding="0"><tr><td>
+      <span class="button"><span><button type="submit">完成</button></span></span>
+      <span class="button button-gray"><span><button type="button" onclick="facebox.close()">取消</button></span></span>
+    </td></tr></table>
+  </div>
+  <% end %>
+</div>

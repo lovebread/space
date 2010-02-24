@@ -1,0 +1,12 @@
+<% if rateable.ratings_count != 0 %>
+<div class="star-ratings-block s_clear">
+  <% rateable.average_rating.to_i.times do |i| %>
+    <a class="lit" href="javascript:void(0)"></a>
+  <% end %>
+  <% (Rating::Maximum - rateable.average_rating.to_i).times do |i| %>
+    <a style="background-position: 0 0" href="javascript:void(0)"></a>
+  <% end %>
+</div>
+<% else %>
+没人打分
+<% end %>

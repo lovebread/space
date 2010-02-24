@@ -1,0 +1,8 @@
+<% bosses.each do |boss_id, value| %>
+  <% boss = @event.guild.bosses.find(boss_id) %>
+  <tr class="jl-cutline" id='boss_<%= boss_id %>'>
+    <td class="tl"><%= boss.name %></td>
+    <td><%= boss.reward %></td>
+    <td><%= link_to_function '', "Iyxzone.Event.Summary.Boss.remove(#{boss_id})", :class => "icon-active" %></td>
+  </tr>
+<% end %>

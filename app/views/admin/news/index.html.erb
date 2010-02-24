@@ -1,0 +1,29 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-news">管理新闻</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "发表新闻", :action => :new %></div>
+        <ul>
+          <li class="hover"><span><%= link_to "新闻列表", :action => :new%></span></li>
+        </ul>
+      </div>
+      <div class="appcontent05">
+        <div class="myblog">
+          <% if @news_list.length == 0 %>
+            <h4 class='gray'>还没有新闻呢，赶紧<%= link_to '写一篇', :action => :new %>?</h4>
+          <% else %>
+            <h4 class='gray'>共<%= @news_list.length %>篇新闻</h4>
+            <div class='myblog-table'>
+              <table cellpadding="0">
+                <%= render :partial => 'news_item', :collection => @news_list %>
+              </table>
+            </div>
+            <%= will_paginate @news_list %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div></div>
+</div></div></div></div>

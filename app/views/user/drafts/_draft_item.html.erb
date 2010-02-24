@@ -1,0 +1,8 @@
+<tr id='draft_<%= draft_item.id %>'>
+  <td class="title"><div><%= link_to draft_item.title, edit_draft_url(draft_item) %></div></td>
+  <td class="time"><%= ftime draft_item.created_at %></td>
+  <% if @user == current_user %>
+  <td class="icon"><%= link_to '', edit_draft_url(draft_item), :class => "icon-active icon-active-edit" %></td>
+  <td class="icon"><%= link_to_remote '', draft_url(draft_item), :class => "icon-active", :method => :delete %></td>
+  <% end %>
+</tr>

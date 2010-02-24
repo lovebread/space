@@ -1,0 +1,12 @@
+<div class='fby'>
+  <h3> 应用: </h3>
+  <div id='menus'>
+    <li><%= link_to "日志", blogs_url(:id => current_user.id) %></li>
+    <li><%= link_to "视频", videos_url(:id => current_user.id) %></li>
+    <li><%= link_to "照片", personal_albums_url(:id => current_user.id) %></li>
+    <li><%= link_to "状态", statuses_url(:id => current_user.id) %></li>
+    <li><%= link_to "活动", events_url(:id => current_user.id) %></li>
+    <li><%= link_to "投票", polls_url(:id => current_user.id) %></li>
+    <li><%= link_to "工会", guilds_url(:id => current_user.id) %></li>
+  </div>
+</div>

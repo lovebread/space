@@ -1,0 +1,16 @@
+<div class="guild_rule_rows">
+<% form_for @guild, :html => {:id => 'basic_rule_form'} do |f| %>
+		<% f.fields_for :guild_rules do |gr| %>
+			<div id="guild_basic_rule_rows">
+				<%= gr.text_field 'reason' -%>
+				<%= gr.text_field 'outcome' -%>
+				<% unless gr.object.new_record? %>
+					<%= gr.check_box '_delete' %>
+				  <%= gr.label '_delete', '删除' %>
+				<% end %>
+			</div>
+		<% end %>
+  <%= button_to_function '保存', "Iyxzone.GuildRule.Editor.updateBasicRule(#{@guild.id}, this, #{@guild.guild_rules.size})" %>
+  <%= link_to_function "取消", "Iyxzone.GuildRule.Editor.cancelEditBasicRule()" %>
+<% end %>
+</div>

@@ -1,0 +1,100 @@
+<%= javascript_include_tag 'poll' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-vote">投票</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "创建新投票", new_poll_url %></div> 
+        <ul>
+          <li><span><%= link_to "热门投票", hot_polls_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "#{get_subject current_user}的投票", polls_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "朋友的投票", friends_polls_url(:id => current_user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="appcontent05">
+        <h3>发起新投票</h3>
+        <%= error_messages_for :poll, :header_message => '以下原因导致没法保存', :message => nil %>
+        <div class="vote-form formcontent">
+          <% form_for :poll, :html => {:id => 'poll_form'} do |f| %>
+            <div class="form-rows form-sperator">
+              <div class="rows s_clear">
+                <div class="fldid"><label for="subject">投票主题：</label></div>
+                <div class="fldvalue">
+                  <div class="textfield"><%= f.text_field 'name' %></div>
+                </div>
+                <%= link_to_function "增加投票描述", "Iyxzone.Poll.Builder.toggleDescriptionInput();", :class=>"fldstats fldsatus-add" %>
+              </div>
+              <div class="rows s_clear" id='description' style='display:none'>
+                <div class="fldid"><label for="subject">投票描述：</label></div>
+                <div class="fldvalue">
+                  <%= f.text_area 'description', :rows => 7%>
+                </div>
+              </div>
+            </div>
+            <div class="form-rows form-sperator">
+            <div id='poll_answers'>
+            <% 1.upto(10) do %>
+              <%= render :partial => 'answer_input', :object => PollAnswer.new %>
+            <% end %>
+            </div>
+              <div class="rows s_clear">
+                <div class="fldid">&nbsp;</div>
+                <%= link_to_function '添加选项' do |page|
+                  page.insert_html :bottom, :poll_answers, :partial => 'answer_input', :object => PollAnswer.new
+                  page << "Iyxzone.Poll.Builder.incrementMaxSelector()"
+                end %>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid">&nbsp;</div>
+                <div class="fldvalue"><%= link_to_function '增加选项说明', "Iyxzone.Poll.Builder.toggleExplanation();" %>&nbsp;&nbsp;&nbsp;&nbsp;<span class="gray">其他人只有在投票后才可以看到此说明</span></div>
+              </div>
+              <div class='rows s_clear' id='explanation' style="display:none">
+                <div class='fldid'><%= f.label '选项说明' %></div>
+                <div class='fldvalue'><%= f.text_area 'explanation', :rows => 7 %></div>
+              </div>
+            </div>
+            <div class="form-rows">
+              <div class="rows s_clear">
+                <div class="fldid"><label class="gray" for="one">选项类别</label></div>
+                <div class="fldrd"><%= f.radio_button 'max_multiple', 1, :id => 'max1', :onclick => "Iyxzone.Poll.Builder.hideMaxMultiple();" %></div>
+                <div class='fldrdvalue'>单选</div>
+                <div class="fldrd"><%= f.radio_button 'max_multiple', 2, :id => 'max2', :onclick => "Iyxzone.Poll.Builder.showMaxMultiple();" %></div>
+                <div class='fldrdvalue'>多选</div>
+                <div class='fldrd' style="display:none" id='max_multiple_select'><%= max_multiple_select_tag %></div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label class="gray" for="one">游戏分类</label></div>
+                <div class='fldvalue'><%= f.collection_select :game_id, current_user.games, :id, :name, {:prompt => '---'} %></div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><%= link_to_function "高级选项", "Iyxzone.Poll.Builder.toggleAdvancedOptions()" %></div>
+              </div>
+              <div id='advanced_options' style="display:none">
+              <div class="rows s_clear">
+                <div class="fldid"><label class="gray" for="one">投票限制</label></div>
+                <div class="fldrd"><%= f.radio_button 'privilege', 1, :id => 'poll_privilege' %></div>
+                <div class='fldrdvalue'>所有人</div>
+                <div class="fldrd"><%= f.radio_button 'privilege', 2, :id => 'poll_privilege' %></div>
+                <div class='fldrdvalue'>仅好友</div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid"><label class="gray" for="one">截止日期</label></div>
+                <div class="fldrd"><%= f.radio_button 'no_deadline', true, :onclick => "Iyxzone.Poll.Builder.hideEndDate();" %></div>
+                <div class='fldrdvalue'>无截止时间</div>
+                <div class="fldrd"><%= f.radio_button 'no_deadline', false, :onclick => "Iyxzone.Poll.Builder.showEndDate();" %></div>
+                <div class='fldrdvalue'>有截止时间</div>
+                <div class='fldvalue' style="display:none" id='deadline_select'><%= calendar_date_select :poll, :deadline %></div>
+              </div>
+              </div>
+              <div class="rows s_clear">
+                <div class="fldid">&nbsp;</div>
+                <div class="fldbtn"><span class="button"><span><%= button_to_function "发起投票", "Iyxzone.Poll.Builder.save()" %></span></span></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

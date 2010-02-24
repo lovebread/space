@@ -1,0 +1,36 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+	<% if @user==current_user %>
+		<h1 class="big-cons">游戏</h1>
+	<% else %>
+    <div class="friend-head space s_clear">
+      <span class="left"><%= avatar @user, :class=>"imgbox01"%></span>
+      <p class="left">
+        <strong><%= @user.login %>的游戏</strong><br />
+        <%= link_to '个人主页', profile_url(@user.profile), :class=>'red'%>
+      </p>
+    </div>
+	<% end %>
+    <div class="box02 canvas_int">
+	    <div class="tab tab01">
+		    <ul>
+			    <li class='hover'><span><%= link_to "热门游戏", sexy_games_url(:id => @user.id) %></span></li>
+	  		  <li><span><%= link_to "我的游戏", games_url(:id => @user.id) %></span></li>
+					<% if @user == current_user%>
+			    <li><span><%= link_to "好友的游戏", friends_games_url %></span></li>
+					<% end %>
+		    </ul>
+      </div>
+	    <div class="piclist-rows">
+        <div class='nav-link'>
+          <ul class="s_clear">
+            <li><%= link_to "<span>一周最火游戏榜</span>", sexy_games_url %></li>
+            <li><%= link_to "<span>一周关注游戏榜</span>", hot_games_url %></li>
+            <li class='hover'><%= link_to "<span>要内测的游戏</span>", beta_games_url %></li>
+          </ul>
+        </div>
+		    <%= render :partial => 'game_items', :object => @games %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

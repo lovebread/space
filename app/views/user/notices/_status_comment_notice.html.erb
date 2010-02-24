@@ -1,0 +1,23 @@
+<% status = comment.commentable %>
+<% if status.poster.statuses_count % 10 == 0 %>
+	<% page = (status.poster.statuses_count / 10) %>
+<% else %>
+	<% page = (status.poster.statuses_count / 10) + 1%>
+<% end %>
+<% if home_page %>
+<% link = "#{link_to_function truncate(status.content, :length => 20, :omission => '...'), "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}'); window.open('/statuses?id=#{status.poster_id}&page=#{page}&status_id=#{status.id}&reply_to=#{comment.poster_id}');"}" %>
+<% else %>
+<% link = "#{link_to_function truncate(status.content, :length => 20, :omission => '...'), "window.open('/statuses?id=#{status.poster_id}&page=#{page}&status_id=#{status.id}&reply_to=#{comment.poster_id}');"}" %>
+<% end %>
+<li>
+	<div class="feed-message">
+    <% if home_page %>
+		<%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+    <% end %>
+		<% if notice.data == 'comment' %>
+			<%= profile_link comment.poster %> 评论了你的状态 <%= link %>
+		<% elsif notice.data == 'reply' %>
+			<%= profile_link comment.poster %> 在状态 <%= link %> 回复了你
+		<% end %> 		
+	</div>
+</li>

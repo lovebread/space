@@ -1,0 +1,8 @@
+<div class="boss_rule_rows">
+<% form_for :boss, :html => {:id => 'add_boss_form'} do |f| %>
+	<%= f.text_field 'name' -%>
+	<%= f.text_field 'reward' %>
+  <%= button_to_function "保存", "Iyxzone.GuildRule.Editor.createBossRule(#{@guild.id}, this)" %>
+  <%= link_to_function "取消", "Iyxzone.GuildRule.Editor.cancelEditBossRule()" %>
+<% end %>
+</div>

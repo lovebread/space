@@ -1,0 +1,48 @@
+<%= stylesheet_link_tag "tag_cloud" %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-friend">好友</h1>
+      <div class="box02 canvas_int">
+        <div class="tab tab01">
+          <ul>
+            <li><span><%= link_to '好友管理', friends_url %></span></li>
+            <li><span><%= link_to '寻找好友', friend_suggestions_url %></span></li>
+            <li class="hover"><span><%= link_to '好友印象', friend_impressions_url %></span></li>
+          </ul>
+        </div>
+        <div class="friend-table table01">
+          <table cellpadding="0">
+            <% @friends.each do |f| %>
+              <% tagged = f.profile.tagged_by? current_user %>
+              <tr>
+                <th class="img"><%= avatar f, :class => 'imgbox01' %></th>
+                <td>
+                  <h4><%= profile_link f %></h4>
+                  <% unless tagged %>
+                    <p>暂无印象评价</p>
+                  <% else %>
+                    <div class="i-show02 s_clear space">
+                    <% f.profile.tag_list.each{|tag| %>
+                      <a class="i-s-<%=rand(4)%>"><strong><%=tag%></strong><span></span></a>
+										<% } %>
+										</div>
+                  <% end %>
+                </td>
+                <th class="remark">
+                  <% unless tagged %>
+                    <%= link_to "去#{get_subject f}的主页评价", profile_url(f.profile) %>
+                  <% else %>
+                    <a class="gray" href="#">已评价</a>
+                  <% end %>
+                </th>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+				<div class='s_clear'>
+        <%= will_paginate @friends %>
+				</div>
+      </div>
+    </div></div>
+  </div></div></div></div>
+</div>

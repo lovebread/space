@@ -1,0 +1,4 @@
+module User::PhotoTagsHelper
+
+
+end

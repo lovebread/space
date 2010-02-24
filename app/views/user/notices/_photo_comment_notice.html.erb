@@ -1,0 +1,20 @@
+<% photo = comment.commentable %>
+<% if home_page %>
+<% link = "#{link_to_function "照片", "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}'); window.open('/#{photo.class.to_s.underscore}s/#{photo.id}?reply_to=#{comment.poster_id}');"}" %>
+<% else %>
+<% link = "#{link_to_function "照片", "window.open('/#{photo.class.to_s.underscore}s/#{photo.id}?reply_to=#{comment.poster_id}');"}" %>
+<% end %>
+<li>
+	<div class="feed-message">
+    <% if home_page %>
+		<%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+		<% end %>
+    <% if notice.data == 'comment' %>
+			<%= profile_link comment.poster %> 评论了你的 <%= link %>
+		<% elsif notice.data == 'reply' %>
+			<%= profile_link comment.poster %> 在 <%= link %> 中回复了你
+		<% elsif notice.data == 'tag' %>
+			<%= profile_link comment.poster %> 评论了和你有关的 <%= link %>
+		<% end %> 		
+	</div>
+</li>

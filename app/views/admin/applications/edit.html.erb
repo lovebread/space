@@ -1,0 +1,24 @@
+<%= javascript_include_tag "nicEdit" %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <div class="canvas-status"></div>
+    <h1 class="<%= @application.icon_class %>"><%= @application.name %></h1>
+    <div class="box02 canvas_int">
+      <div class="app-list-box">
+        <div class="app-header">
+          <%= @application.name %>
+        </div>
+        <% form_for :application, :url => admin_application_url(@application), :html => {:method => :put} do |f| %>
+          <%= f.text_field :icon_class %>
+          <%= f.text_area :about, :style => "width: 100%" %>
+          <%= f.submit '更新' %>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+  new nicEditor({iconsPath: '/images/nicEditorIcons.gif'}).panelInstance('application_about', {token: '#{form_authenticity_token}'});   
+" %>

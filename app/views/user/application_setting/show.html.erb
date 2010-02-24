@@ -1,0 +1,22 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <div class="canvas-status"></div>
+    <h1 class="app-setting">应用设置</h1>
+    <div class="box02 canvas_int">
+      <div class="app-list-box">
+        <div class="app-header">
+          共有 <%= @applications.count %> 个应用
+        </div>
+        <% @applications.each_with_index do |app, i| %>
+        <div class="app-list">
+          <div class="link">
+            <%= facebox_link "设置", edit_application_setting_url(:type => i) %>
+            <%= link_to "关于", application_url(app) %>
+          </div>
+          <h2 class="<%= app.icon_class %>"><%= app.name %></h2>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

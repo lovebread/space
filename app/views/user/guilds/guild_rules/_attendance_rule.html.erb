@@ -1,0 +1,7 @@
+<div class="guild_rule_dis_rows">
+<%= link_to_function '(编辑)', "Iyxzone.GuildRule.Editor.editAttendanceRule(#{@guild.id})" %>
+<br>
+<% @guild.attendance_rules.each do |rule|%>
+	<%= rule.reason -%>  <%= rule.outcome %><br>
+<% end %>
+</div>

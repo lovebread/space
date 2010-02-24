@@ -1,0 +1,23 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-vote">投票</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right"><%= link_to "新投票", new_poll_url %></a></div>
+        <ul>
+          <li><span><%= link_to "热门投票", hot_polls_url %></span></li>
+          <li><span><%= link_to "我的投票", polls_url(:id => current_user.id) %></span></li>
+          <li class='hover'><span><%= link_to "朋友的投票", friends_polls_url(:id => current_user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="vote-box">
+        <% if @polls.total_entries != 0 %>
+          <%= render :partial => 'poll_items', :object => @polls %>
+          <%= will_paginate @polls %>
+        <% else %>
+          <div class='gray'>你的好友都有问题，没发起过任何投票</div>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

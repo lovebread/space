@@ -1,0 +1,52 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <div class="friend-head space s_clear">
+      <span class="left"><%= album_cover_image @guild.album, :class => "imgbox01" %></span>
+      <p class="left">
+        <strong>会员管理</strong><br/>
+        <%= guild_link @guild, :class => 'red' %>
+      </p>
+    </div>
+    <div class="box02 canvas_int space">
+      <div class="rows s_clear"></div>
+      <div class="tab tab01">
+        <ul>
+        <% if params[:type].to_i == 0 %>
+          <li class='hover'><span><%= link_to "所有会员", guild_memberships_url(@guild, :type => 0) %></span></li>
+        <% else %>
+          <li><span><%= link_to "所有会员", guild_memberships_url(@guild, :type => 0) %></span></li>
+        <% end %>
+        <% if params[:type].to_i == 1 %>
+          <li class='hover'><span><%= link_to "被邀请", guild_memberships_url(@guild, :type => 1) %></span></li>
+        <% else %>
+          <li><span><%= link_to "被邀请", guild_memberships_url(@guild, :type => 1) %></span></li>
+        <% end %>
+        <% if params[:type].to_i == 2 %> 
+          <li class='hover'><span><%= link_to "请求加入", guild_memberships_url(@guild, :type => 2) %></span></li>
+        <% else %>
+          <li><span><%= link_to "请求加入", guild_memberships_url(@guild, :type => 2) %></span></li>
+        <% end %>
+        </ul>
+      </div>
+      <div class="friend-box">
+        <div class="appcontent01">
+          <div class="friend-invite-head">
+            <% if params[:type].to_i == 0 %>
+            <strong class="gray w-xl">共有<%= @guild.people_count - 1%>位会员</strong>
+            <% elsif params[:type].to_i == 1 %>
+            <strong class="gray w-xl">共有<%= @guild.invitations_count %>个邀请</strong>
+            <% elsif params[:type].to_i == 2 %>
+            <strong class="gray w-xl">共有<%= @guild.requests_count %>个请求</strong>
+            <% end %>
+            <strong class="green">搜索会员：</strong> <%= render :partial => 'search' %>
+          </div>
+          <div class="friend-list">
+            <div class="friend-list-body s_clear">
+              <%= render :partial => 'members', :locals => {:memberships => @memberships} %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

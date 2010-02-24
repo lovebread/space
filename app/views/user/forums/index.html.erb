@@ -1,0 +1,36 @@
+<% content_for :left do %>
+  
+<% end %>
+
+<h2>Forums</h2>
+
+<table id='forums'>
+  <tr>
+    <th class='name'>Forum name</th>
+    <th class='topic'>Last topic</th>
+    <th class='topic'>Topics</th>
+    <th class='post'>Posts</th>
+  </tr>
+  <% @forums.each do |forum| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td class='name'>
+      <div class='forumname'>
+        <%= link_to forum.name, forum_topics_url(forum) %>
+      </div>
+      <div class="forfumdescription">
+        <%= forum.description %>
+      </div>
+    </td>
+    <td class='topic'>
+      <% if forum.last_post %>
+        by <%= link_to_user forum.last_post.user %><br/>
+        <span class='forum-tiny'><%= distance_of_time_in_words_to_now forum.last_post.created_at %> ago</span>  
+      <% else %>
+        N/A
+      <% end %>
+    </td>
+    <td class='topic'><%= forum.topics_count %></td>
+    <td class='post'><%= forum.posts_count %></td>
+  </tr>
+  <% end %>
+</table>

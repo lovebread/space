@@ -1,0 +1,27 @@
+<dl class='menu-op space20'>
+  <dt>操作</dt>
+  <% if @role.blank? %>
+    <% if @guild.is_requestable_by? current_user %>
+		<dd class='subtitle'>你还没加入这个工会里，是否 <%= facebox_link '加入', new_guild_request_url(@guild, :show => 1) %></dd>
+    <% else %>
+    <dd class='subtitle'>你没有游戏角色可以加入这个工会</dd>
+    <% end %>
+  <% elsif @role.is_president? %>
+    <dd><%= link_to '邀请更多人', new_guild_invitation_url(@guild) %></dd>
+    <dd><%= link_to '创建活动', new_event_url(:guild_id => @guild.id) %></dd>
+    <dd><%= link_to '人事任命', guild_memberships_url(@guild) %></dd>
+    <dd><%= link_to '编辑规则', edit_rules_guild_url(@guild) %></dd>
+    <dd><%= link_to '上传图片', new_guild_photo_url(:album_id => @guild.album.id) %></dd>
+    <dd><%= link_to '逛逛论坛', forum_url(@guild.forum) %></dd>
+  <% elsif @role.is_veteran? %>
+		<dd><%= link_to '创建活动', new_event_url(:guild_id => @guild.id) %></dd>
+    <dd><%= link_to '上传图片', new_guild_photo_url(:album_id => @guild.album.id) %></dd>
+    <dd><%= link_to '查看规则', {:controller => 'user/guilds', :action => 'edit_rules'} %></dd>
+    <dd><%= link_to '到论坛去看看', forum_url(@guild.forum) %></dd>
+    <dd><%= link_to '发信给会长', new_mail_url(:recipient_id => @guild.president_id) %></dd>
+  <% elsif @membership.is_member? %>
+    <dd><%= link_to '逛逛论坛', forum_url(@guild.forum) %></dd>
+    <dd><%= link_to '查看规则', {:controller => 'user/guilds', :action => 'edit_rules'} %></dd>
+    <dd><%= link_to '发信给会长', new_mail_url(:recipient_id => @guild.president_id) %></dd>
+  <% end %>
+</dl>

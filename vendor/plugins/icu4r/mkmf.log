@@ -1,0 +1,27 @@
+have_library: checking for u_init_3_8() in -licui18n... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I.  -D_FILE_OFFSET_BITS=64  -Wall conftest.c  -L. -L/usr/lib -licuuc -licui18n -licudata -lstdc++      -lruby1.8-static -licui18n  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/lib/ruby/1.8/mkmf.rb:266: warning: Insecure world writable dir /usr/local/bin in PATH, mode 040777
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘u_init_3_8’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))u_init_3_8; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I.  -D_FILE_OFFSET_BITS=64  -Wall conftest.c  -L. -L/usr/lib -licuuc -licui18n -licudata -lstdc++      -lruby1.8-static -licui18n  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: warning: implicit declaration of function ‘u_init_3_8’
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { u_init_3_8(); return 0; }
+/* end */
+
+--------------------
+

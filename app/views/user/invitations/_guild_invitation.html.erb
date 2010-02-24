@@ -1,0 +1,15 @@
+<% guild = guild_invitation.guild %>
+<% invitation = guild_invitation %>
+<div class="request-box" id='guild_invitation_<%= invitation.id %>'>
+  <h4><span> <%= ftime invitation.created_at %> </span>活动</h4>
+  <div class="request-list s_clear">
+    <div class="img"><%= avatar invitation.guild.presdient %> </div>
+    <div class="info">
+      <p> <%= profile_link invitation.guild.president %> 邀请你加入他的活动 <%= guild_link invitation.guild %>, 是否同意？</p>
+      <div class="buttons" id='guild_invitation_option_<%= invitation.id %>'>
+        <%= link_to_remote '<span>接受</span>', :url => accept_guild_invitation_url(invitation.guild, invitation, :show => 2), :method => :put, :html => {:class => "button"} %>
+        <%= link_to_remote '<span>拒绝</span>', :url => decline_guild_invitation_url(invitation.guild, invitation, :show => 2), :method => :put, :html => {:class => "button button-gray"} %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<%= javascript_include_tag 'invitation' %>
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <div class="friend-head space s_clear">
+      <span class="left"><%= album_cover_image @guild.album, :class => "imgbox01" %></span>
+      <p class="left">
+        <strong>工会邀请</strong><br/>
+        <%= guild_link @guild, :class => 'red' %>的主页
+      </p>
+    </div>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "新建工会", new_guild_url, :class => 'icon-add-table' %>
+        </div>
+        <ul>
+          <li><span><%= link_to "热门工会", hot_guilds_url %></span></li>
+          <li><span><%= link_to "我的工会", guilds_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "朋友的工会", friends_guilds_url %></span></li>
+        </ul>
+      </div>
+      <div class="friend-box">
+        <div class="appcontent01">
+          <div class="path-box">
+            <label>工会"<%= guild_link @guild %>"</label>
+            <span>邀请好友</span>
+          </div><br/>
+          <div class="friend-invite-head">
+            <strong class="green">搜索好友的游戏角色：</strong> 
+            <%= text_field_tag 'search', '输入游戏角色的名字', :class => 'ipt', :onclick => "this.clear();" %>
+            <%= observe_field :search,
+                    :complete  => "Iyxzone.Invitation.Builder.reset();",
+                    :update    => "invitations",
+                    :frequency => 1,
+                    :url       => search_guild_invitations_url(@guild),
+                    :with      => "'key='+$('search').value",
+                    :method    => :get  %>
+          </div>
+          <div class="friend-invite-list">
+          <% if @characters.blank? %>
+              你的好友没有可以参加该工会的游戏角色
+          <% else %>
+            <div id='invitations'><%= render :partial => 'characters' %></div>
+            <div class="rows s_clear">
+              <%= button_to_function '', "Iyxzone.Invitation.Builder.submit($('invitation_form'))", :class => "button05 png" %>
+            </div>
+          <% end %>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+<% form_tag guild_invitations_url(@guild), :id => 'invitation_form' do %>
+<% end %>

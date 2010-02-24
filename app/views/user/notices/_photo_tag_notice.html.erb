@@ -1,0 +1,19 @@
+<% photo = tag.photo %>
+<% album = photo.album %>
+<% if home_page%>
+<% link = "#{link_to_function album.title, "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}');window.open('/#{photo.class.to_s.underscore}s/#{photo.id}');"}" %>
+<% else %>
+<% link = "#{link_to_function album.title, "window.open('/#{photo.class.to_s.underscore}s/#{photo.id}');"}" %>
+<% end %>
+<li>
+  <div class="feed-message">
+    <% if home_page%>
+    <%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+    <% end %>
+    <% if current_user.id == tag.tagged_user_id %>
+      <%= profile_link tag.poster %> 在相册 <%= link %> 里标记了你
+    <% elsif current_user.id == album.poster_id %>
+      <%= profile_link tag.poster %> 在相册 <%= link %> 里标记了<%= profile_link tag.tagged_user %>
+    <% end %>
+  </div>
+</li>

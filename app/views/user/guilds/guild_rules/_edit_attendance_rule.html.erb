@@ -1,0 +1,12 @@
+<div class="guild_rule_rows">
+<% form_for @guild, :html => {:id => 'attendance_rule_form'} do |f| %>
+		<% f.fields_for :attendance_rules do |gr| %>
+			<div id="guild_basic_rule_rows">
+				<%= gr.text_field 'reason', :disabled => 'disabled'-%>
+				<%= gr.text_field 'outcome' %>
+			</div>
+		<% end %>
+  <%= button_to_function '保存', "Iyxzone.GuildRule.Editor.updateAttendanceRule(#{@guild.id}, this, #{@guild.guild_rules.size})" %>
+  <%= link_to_function "取消", "Iyxzone.GuildRule.Editor.cancelEditAttendanceRule()" %>
+<% end %>
+</div>

@@ -1,0 +1,41 @@
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h1>新建专辑</h1>
+</div>
+
+<div id='errors'></div>
+<% form_remote_for :album, :url => personal_albums_url(:show => params[:show]) do |f| %>
+<div class='formcontent'>
+  <div class="rows s_clear">
+<div class="fldid"><label for="name">专辑名称：</label></div>
+    <div class="fldvalue">
+      <div class="textfield"><%= f.text_field 'title' %></div>
+    </div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="des">专辑描述：</label></div>
+    <div class="fldvalue">
+      <%= f.text_area 'description' %>
+    </div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="des">游戏分类：</label></div>
+    <div class="fldvalue">
+      <%= f.collection_select :game_id, current_user.games, :id, :name, {:prompt => '---'} %>
+    </div>
+  </div>
+  <div>
+    <div class="fldid"><label for="search">谁可以浏览：</label></div>
+    <div class="fldvalue">
+      <%= privilege_select_tag(:album) %>
+    </div>
+  </div>
+</div>
+<div class="buttons s_clear">
+  <table class="center" cellpadding="0"><tr><td>
+    <span class="button"><span><button type="submit">完成</button></span></span>
+    <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+  </td></tr></table>
+</div>
+<% end %>
+

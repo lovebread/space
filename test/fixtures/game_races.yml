@@ -1,0 +1,14 @@
+one:
+  id: 1
+  name: 'r1'
+  game_id: 1
+
+two:
+  id: 2
+  name: 'r2'
+  game_id: 2
+
+three:
+  id: 3
+  name: 'r3'
+  game_id: 4

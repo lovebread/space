@@ -1,0 +1,9 @@
+<tr id='blog_<%= blog_item.id %>'>
+  <td class="title"><div><%= blog_link blog_item %></div></td>
+  <td class="time"><%= ftime blog_item.created_at %></td>
+  <% if @user == current_user %>
+  <td class="icon"><%= link_to '', edit_blog_url(blog_item), :class => "icon-active icon-active-edit" %></td>
+  <td class="icon"><%= facebox_confirm "", blog_url(blog_item), {:msg => '你确定要删除这篇博客吗', :method => :delete}, {:class => 'icon-active'} %></td>
+  <% end %>
+  <td class="right"><%= facebox_link "分享", new_sharing_url(:shareable_type => 'Blog', :shareable_id => blog_item.id, :id => current_user.id), {:class => "share-btn"}%></td>
+</tr> 

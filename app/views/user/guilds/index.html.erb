@@ -1,0 +1,37 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-cons">公会</h1>
+    <div class="box02 canvas_int">
+	    <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "新建工会", new_guild_url, :class => "icon-add-table" %>
+        </div>
+		  <% subject = get_subject @user %>
+		    <ul>
+			    <li><span><%= link_to "热门工会", hot_guilds_url %></span></li>
+          <% if @user == current_user %>
+			    <li class='hover'><span><%= link_to "我的工会", guilds_url(:id => @user.id) %></span></li>
+          <% else %>
+          <li><span><%= link_to "我的工会", guilds_url(:id => @user.id) %></span></li>
+          <% end %>
+			    <li><span><%= link_to "好友工会", friends_guilds_url %></span></li>
+		    </ul>
+      </div>
+	    <div class="piclist-rows">
+        <div class='nav-link'>
+          <ul class='s_clear'>
+            <li class='hover'><%= link_to "<span>#{subject}发起的(#{@user.guilds_count})</span>", guilds_url(:id => @user.id) %></li>
+            <li><%= link_to "<span>#{subject}参加的(#{@user.participated_guilds_count})</span>", participated_guilds_url(:id => @user.id) %></li>
+          </ul>
+        </div>
+        <% if @guilds.total_entries != 0 %>
+		      <%= render :partial => 'user/guilds/guild_items', :object => @guilds %>
+        <% elsif @user == current_user %>
+          <div class='gray'>你还没创建任何工会，赶紧<%= link_to "创建一个", new_guild_url %>吧</div>
+        <% else %>
+          <div class='gray'><%= subject %>是个懒虫</div>
+        <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

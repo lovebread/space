@@ -1,0 +1,18 @@
+<table class='recv-mail'>
+  <% sent_mails.each_with_index do |mail, i| %>
+    <% recipient = mail.recipient %>
+    <tr>
+      <td class='checkbox'><%= check_box_tag "select_mail_#{mail.id}", "#{mail.id}-#{mail.read_by_recipient}" %></td>
+      <td class='icon'><%= avatar recipient %></td>
+      <td class='name'>
+        <%= profile_link recipient %><br/>
+        <span class='recv-mail-tiny'><%= ftime mail.created_at %></span>
+      </td>
+      <td class='title'>
+        <%= mail_link mail, 'sent' %><br/>
+        <span class='mail-content-truncate'><%= mail.content %></span>
+      </td>
+      <td class='operation'><%= link_to_remote 'x', :url => mail_url(mail, :type => 0), :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>

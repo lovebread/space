@@ -1,0 +1,36 @@
+<div class="edit-toggle space">
+  <h3 class="s_clear">
+    <strong class="left">联系信息</strong>
+    <% if profile.user == current_user %>
+      <%= link_to_function '<span class="icon-active icon-active-edit w-l"></span>编辑', "Iyxzone.Profile.Editor.editContactInfo(#{profile.id})", :class => 'right red' %>
+    <% end %>
+  </h3>
+  <div class="formcontent con con2">
+    <div class="item space">
+    <% if setting.email_viewable_by? current_user %>
+      <div class="rows s_clear">
+        <div class="fldid"><label>邮件：</label></div>
+        <div class="fldvalue"><%= profile.user.email %></div>
+      </div>
+    <% end %>
+    <% if setting.qq_viewable_by? current_user %>
+      <div class="rows s_clear">
+        <div class="fldid"><label>QQ号码：</label></div>
+        <div class="fldvalue"><%= profile.qq %></div>
+      </div>
+    <% end %>
+    <% if setting.phone_viewable_by? current_user %>
+      <div class="rows s_clear">
+        <div class="fldid"><label>电话：</label></div>
+        <div class="fldvalue"><%= profile.phone %></div>
+      </div>
+    <% end %>
+    <% if setting.website_viewable_by? current_user %>
+      <div class="rows s_clear">
+        <div class="fldid"><label>个人网页：</label></div>
+        <div class="fldvalue"><%= profile.website %></div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,302 @@
+#header {
+    width:1000px;
+    height:50px;
+    margin:0 auto;
+}
+#container {
+    width:1000px;
+    margin:0 auto;
+} 
+#footer {
+    width:1000px;
+    height:60px;
+    margin:0 auto;
+    text-align: center;
+}       
+#left {
+    width:200px;
+    height:600px;
+    float:left;
+}
+#middle {
+    width:780px;
+    height:800px;
+    float:left;
+    margin-left:20px;
+}
+
+.fb2 {
+padding: 5px;
+color: #FFFFFF;
+background: #3B5998;
+}
+
+.fb2 a {
+color:#FFFFFF;
+text-decoration: none;
+outline-style: none;
+padding: 5px;
+font-size:16px;
+}
+
+
+
+.fb2 {
+padding: 5px;
+color: #FFFFFF;
+background: #3B5998;
+}
+
+.fb2 a {
+color:#FFFFFF;
+text-decoration: none;
+outline-style: none;
+padding: 5px;
+font-size:16px;
+}
+
+.fb2 a:hover {
+background: #6D84B4;
+padding: 5px;
+text-decoration: none;
+font-weight: bold;
+}
+
+.fby {
+width:200px;
+border:1px solid #eee;
+}
+
+.fby-tiny {
+font-size:9px;
+color; #777;
+}
+
+.fby .subtitle {
+font-size: 11px;
+color: #777;
+padding-left: 5px;
+}
+
+.fby a {
+color: #3B5998;
+border-bottom:1px thin #ccc;
+font-weight: 12px;
+}
+
+.fby li:hover {
+background: #d8dfea;
+text-decoration: none;
+font-size:11px;
+font-weight: normal;
+margin-left: 2px;
+margin-right: 2px;
+padding: 3px 0px;
+}
+
+
+.fby a {
+color: #3B5998;
+border-bottom:1px thin #ccc;
+font-weight: 12px;
+}
+
+.fby li:hover {
+background: #d8dfea;
+text-decoration: none;
+font-size:11px;
+font-weight: normal;
+margin-left: 2px;
+margin-right: 2px;
+padding: 3px 0px;
+}
+
+.fby li img {
+width: 15px;
+}
+
+.fby H3 {
+font-size:11px;
+color:#3B5998;
+background:#d8dfea;
+border-top: 1px solid #3B5998;
+padding: 3px 10px;
+margin: 0px;
+}
+
+.fby H3:hover {
+background:#cfd7e4;
+border-top: 1px solid #3B5998;
+}
+
+.fby li {
+font-size:11px;
+font-weight: normal;
+margin-left: 5px;
+padding: 3px 0px;
+list-style:none;
+border-bottom:1px solid #ccc;
+}
+
+.fby img {
+border:0;
+}
+
+.fby .icon {
+float:left;
+width: 190px;
+padding: 5px;
+}
+
+.fby .icon img {
+border: 0px;
+width: 50px;
+float:left;
+}
+
+.fby .view-all{
+text-align:right;
+margin-right: 2px;
+margin-bottom: 2px;
+}
+
+.confirm-button{
+  color:white;
+  font: bold 84%'trebuchet ms',helvetica,sans-serif;
+  background-color: #005eac;
+  height: 30px;
+}
+
+.cancel-button{
+  color:black;
+  font: bold 84%'trebuchet ms',helvetica,sans-serif;
+  background-color: #f0f0f0;
+  height: 30px;
+}
+
+.blog-right-bar {
+width: 180px;
+padding: 10px;
+background: #f0f5f8;
+border: 1px solid #cee1ee;
+}   
+    
+.blog-right-bar .part {
+width: 180px;
+border-bottom: 1px solid #cee1ee;
+padding-bottom: 5px;
+}
+
+div.autocomplete {
+  position:absolute;
+  width:250px;
+  max-height: 500px;
+  overflow: auto;
+  background-color:white;
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+}
+div.autocomplete ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+}
+div.autocomplete ul li.selected { background-color: #ffb;}
+div.autocomplete ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  height:32px;
+  cursor:pointer;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+.inplaceeditor-empty {
+    font-style: italic;
+    color: #999;
+}
+
+.visitors {
+width: 200px;
+border:1px solid #eee;
+}
+
+.visitors .view-all {
+text-align:right;
+font-size:14px;
+text-decoration:none;
+margin-right: 10px;
+margin-bottom: 5px;
+}
+
+.visitors h3 {
+font-size:11px;
+color:#3B5998;
+background:#d8dfea;
+border-top: 1px solid #3B5998;
+padding: 3px 10px;
+margin: 0px;
+}
+
+.visitors .record {
+width: 55px;
+padding: 5px;
+padding-bottom: 10px;
+padding-top: 10px;
+}
+
+.visitors .subtitle {
+font-size: 11px;
+color: #777;
+padding: 5px;
+}
+
+.visitors .record img{
+width: 45px;
+border: 0px;
+}
+
+  .css1 { font-size: 1.0em; }
+
+  .css2 { font-size: 1.2em; }
+
+  .css3 { font-size: 1.4em; }
+
+  .css4 { font-size: 1.6em; }

@@ -1,0 +1,9 @@
+if params[:show].to_i == 0
+  page << "facebox.close(); $('event_status_#{@event.id}').innerHTML = '#{@invitation.to_s}';$('reply_event_#{@event.id}').innerHTML = '(#{link_to '更改', edit_event_participation_url(@event, @invitation), :rel => 'facebox'})';facebox.watchClickEvents();"
+elsif params[:show].to_i == 1
+  flash[:notice] = "成功提交"
+  page.redirect_to event_url(@event)
+elsif params[:show].to_i == 2
+  page << "$('event_invitation_operation_#{@invitation.id}').innerHTML = '#{@invitation.to_s}';"
+end
+

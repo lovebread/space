@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td class="id">公司：</td>
+    <td class="value"><%= @game.company %></td>
+  </tr>
+  <tr>
+    <td class="id">发行：</td>
+    <td class="value"><%= ftime2 @game.sale_date %></td>
+  </tr>
+  <tr>
+    <td class='id'></td>
+    <td><%= facebox_link "分享", new_sharing_url(:shareable_type => 'Game', :shareable_id => @game.id, :id => @game.id), :class => 'share-btn' %> </td>
+  </tr>
+  <tr>
+    <td class="id">玩家打分：</td>
+	</tr>
+</table>
+<div id='game_<%= @game.id %>_rating_form'>
+<% if !@game.is_rateable_by? current_user %>
+  <%= render :partial => 'user/ratings/show', :locals => {:rateable => @game} %>
+<% else %>
+  你还没打分，可以打分:
+  <%= render :partial => 'user/ratings/new', :locals => {:rateable => @game} %>
+<% end %>
+</div>

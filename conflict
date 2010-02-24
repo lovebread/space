@@ -1,0 +1,17 @@
+diff --cc db/schema.rb
+index 559fcca,4932e03..0000000
+mode 100755,100644..100755
+--- a/db/schema.rb
++++ b/db/schema.rb
+@@@ -9,7 -9,7 +9,11 @@@
+  #
+  # It's strongly recommended to check this file into your version control system.
+  
+++<<<<<<< HEAD:db/schema.rb
+ +ActiveRecord::Schema.define(:version => 20091225083001) do
+++=======
++ ActiveRecord::Schema.define(:version => 20091228153258) do
+++>>>>>>> 7a68fab45f826b66df22822adf0f9229c42a3058:db/schema.rb
+  
+    create_table "albums", :force => true do |t|
+      t.string   "type"

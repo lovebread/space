@@ -1,0 +1,16 @@
+
+<h3>Boss计分</h3>
+<% if @guild.president_id == current_user.id %>
+	<%= link_to_function '(编辑)', "Iyxzone.Guild.Editor.editBossRule(#{@guild.id})" %>
+<% end %>
+<div id='boss_rule'>
+<% render :partial => 'boss_rule' %>
+</div>
+
+<h3>装备计分</h3>
+<% if @guild.president_id == current_user.id %>
+	<%= link_to_function '(编辑)', "Iyxzone.Guild.Editor.editGearRule(#{@guild.id})" %>
+<% end %>
+<div id='gear_rule'>
+<% render :partial => 'gear_rule' %>
+</div>

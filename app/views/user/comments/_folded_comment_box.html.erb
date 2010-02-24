@@ -1,0 +1,41 @@
+<!--
+parameters:
+  commentable: 
+  recipient: default recipient of comment. this value can be null
+-->   
+
+<% type = commentable.class.to_s.underscore %>
+<div id='<%= type %>_comments_<%= commentable.id %>'>
+  <% if commentable.comments_count >= 3 %>
+    <% c = commentable.comments.first %>
+		<%= render :partial => "user/comments/comment", :object => c %>
+    <div class="box04 comment-box">
+      <%= link_to_function "显示更多", "Iyxzone.Comment.more('#{type}', #{commentable.id}, this);" %>共<%=commentable.comments_count%>条评论
+    </div>
+    <% c = commentable.comments.last %>
+		<%= render :partial => "user/comments/comment", :object => c %>
+	<% else %>
+		<%= render :partial => "user/comments/comment", :collection => commentable.comments %>
+	<% end %>
+</div>
+
+<div class="box04 comment-box" id= "add_<%=type%>_comment_<%=commentable.id%>">
+  <%= text_area_tag 'add-comment', '添加评论...', :id => "add_#{type}_comment_#{commentable.id}", :class => "textarea txt-add-comment", :onclick => "Iyxzone.Comment.showForm('#{type}', #{commentable.id}, null)" %>
+</div>
+
+<div class="box04 cmt-box s_clear" id='<%= type %>_comment_<%= commentable.id %>' style="display:none">
+	<div class="img"><%= avatar current_user, :size => :small %></div>
+	<div class="con">
+    <% form_remote_for :comment, :html => {:id => "#{type}_comment_form_#{commentable.id}"} do |f| %>
+			<%= hidden_field_tag 'comment[commentable_id]', commentable.id %>
+			<%= hidden_field_tag 'comment[commentable_type]', commentable.class.base_class.to_s %>
+			<%= hidden_field_tag 'comment[recipient_id]', recipient.nil? ? nil : recipient.id, :id => "#{type}_comment_recipient_#{commentable.id}" %>
+        <%= f.text_area 'content', :class=>'textarea', :id => "#{type}_comment_content_#{commentable.id}" %>
+      <div class="submit s_clear">
+				<span class="button button-gray"><span><button onclick='Iyxzone.Comment.hideForm("<%=type%>",<%=commentable.id%>, event)'>取消</button></span></span>
+        <span class="button w-l"><span><button type="submit" onclick='Iyxzone.Comment.save( "<%=type%>", <%= commentable.id %>, this, event)'>发布</button></span></span>
+        <span class="left"><%= emotion_link "#{type}_comment_content_#{commentable.id}", :class => "icon-face" %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="edit-toggle space edit">
+  <h3 class="s_clear"><strong class="left">联系信息</strong><%= link_to_function '取消', "Iyxzone.Profile.Editor.cancelEditContactInfo();", :class => "right" %></h3>
+  <div class="formcontent con con2">
+    <% form_for :profile, :html => {:id => 'contact_info_form'} do |f| %>
+      <div class="item space">
+        <div class="rows s_clear">
+          <div class="fldid"><label>QQ号码：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left"><%= f.text_field 'qq', :onblur => "Iyxzone.Profile.Editor.isQQValid()" %></div>
+            <span class='red' id='qq_error'></span>
+          </div>
+          <div class="tip-pop s_clear">
+            <%= facebox_link '', edit_privacy_setting_url(:type => 3), :class => "fldstatus fldstatus-lock" %>
+            <div class="round05 round_r_t tip-dialog">
+              <div class="round_l_t">
+                <div class="round_r_b">
+                  <div class="round_l_b">
+                    <div class="round_m">
+                      <span class="arrow-tip"></span>
+                      <div class="round_body">你可以通过隐私设置自己掌握信息安全，想给谁看就给谁看。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rows s_clear">
+          <div class="fldid"><label>电话：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left"><%= f.text_field 'phone', :onblur => "Iyxzone.Profile.Editor.isPhoneValid()" %></div>
+            <span class='red' id='phone_error'></span>
+          </div>
+          <%= facebox_link '', edit_privacy_setting_url(:type => 4), :class => "fldstatus fldstatus-lock" %>
+        </div>
+        <div class="rows s_clear">
+          <div class="fldid"><label>个人网页：</label></div>
+          <div class="fldvalue">
+            <div class="textfield left"><%= f.text_field 'website', :onblur => "Iyxzone.Profile.Editor.isUrlValid()" %></div>
+            <span class='red' id='url_error'></span>
+          </div>
+          <%= facebox_link '', edit_privacy_setting_url(:type => 5), :class => "fldstatus fldstatus-lock" %>
+        </div>
+        <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span><%= button_to_function '保存', "Iyxzone.Profile.Editor.updateContactInfo(#{@profile.id}, this, event);" %></span></span>
+          <span class="button button-gray"><span><%= button_to_function "取消", "Iyxzone.Profile.Editor.cancelEditContactInfo();" %></span></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<%= javascript_include_tag "game" %>
+<%= javascript_include_tag "rating" %>
+<%= javascript_include_tag 'video' %>
+
+<% content_for :left do %>
+<div class="mcAvatar">
+  <a href="#"></a>
+  <div class="picwrap">
+    <div class="middle"><div class="middle-center"><div class="center">
+		</div></div></div>
+	</div>
+</div>
+<div class="info-list">
+	<%= render :partial => 'game_info' %>
+</div>
+<% end %>
+
+<% content_for :right do %>
+
+<div class="multibox">
+	<div class="title"><b id='tag_cloud_head'>
+		<% if @can_tag %>
+			你对这个游戏的印象是
+		<% else %>
+			玩家印象
+		<% end %>
+	</b></div>
+	<div id='tag_cloud'>
+  <% if @can_tag %>
+		<div class='rows s_clear'>
+    <%= render :partial => 'user/games/tags/game_tag', :locals => {:game => @game} %>
+    <% form_remote_for :tag, :url => game_tags_url(@game) do |f| %>
+			<p class='space'>都不贴切？自己想个</p>
+      <div class='textfield04 left space'><%= text_field_tag 'tag_name', '' %></div>
+      <div class="fldbtn left space"><span class="button04"><span><button id='tag_submit' type="submit">评价</button></span></span></div>
+    <% end %>
+		</div>
+  <% else %>
+    <%= render :partial => 'user/games/tags/tag_cloud', :locals => {:game => @game} %>
+  <% end %>
+  </div>
+</div>
+
+	<%= render :partial => 'game_events' %>
+	<%= render :partial => 'game_guilds' %>
+<% end %>
+
+<div class='box02 canvas_con'>
+
+
+<div class="multibox">
+	<div class="title"><%= link_to '更多', game_albums_url(@game) %><b>相关相册</b></div>
+	<div class="piclist s_clear">
+    <% @albums.each do |album| %>
+        <div class="picitem">
+          <div class="picbox01">
+            <a class="btn" href="#"></a>
+            <div class="picwrap">
+              <table cellpadding="0">
+                <tr><td><%= album_cover album, :class => 'imgbox01' %></td></tr>
+              </table>     
+            </div>
+          </div>
+          <p><b><%= album_link album %></b></p>
+          <% if album.uploaded_at.blank? %>
+            <p>于 <span><%= ftime album.created_at %></span> 创建</p>
+          <% else %>
+            <p>于 <span><%= ftime album.uploaded_at %></span> 更新</p>
+          <% end %>
+      </div>  
+    <% end %> 
+  </div>
+</div>
+
+<div class="multibox">
+	<div class="title"><%= link_to '更多', game_blogs_url(@game) %><b>相关博客</b></div>
+	<% @blogs.each do |blog| %>
+    <div class="diary-box">
+      <div class="diary-header">
+        <p><%= blog_link blog %> <%= ftime blog.created_at %> <%= blog.digs_count %>人顶了</p>
+      </div>
+      <p> <%= truncate blog.content, :length => 80, :omission => '...' %> </p>
+    </div>
+  <% end %>
+</div>
+
+<div class='multibox'>
+  <div class='title'><b>新鲜事</b></div>
+  <div class="feed-wrap" id='feed_list'>
+    <%= render :partial => 'feed_deliveries', :object => @feed_deliveries %>
+  </div>
+	<div class="s_clear"></div>
+		<div class="round04 round_r_t jl-read-more space s_clear">
+			<div class="round_l_t">
+        <div class="round_r_b">
+          <div class="round_l_b">
+            <div class="round_m">
+              <div class="round_body" id="more_feed">
+								<% if @feed_deliveries.size < @first_fetch_size %>
+									<div class='jl-more'>没有更多了...</div>
+								<% else %>
+									<%= link_to_function "更多新鲜事", "Iyxzone.Game.Feeder.moreFeeds(#{@game.id});", :class => "jl-more"%>
+								<% end %>
+              </div>
+						</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<%= render :partial => 'user/wall_messages/wall_form', :locals => {:wall => @game, :recipient => nil, :with_comments => false} %>
+
+<div class="feed-box" id='comments'>
+  <%= javascript_tag "Iyxzone.WallMessage.fetch('Game', #{@game.id});" %>
+</div>
+
+</div>
+
+<% unless @reply_to.blank? %>
+<%= javascript_tag "Iyxzone.Wall.set('#{@reply_to.login}', #{@reply_to.id});" %>
+<% end %>

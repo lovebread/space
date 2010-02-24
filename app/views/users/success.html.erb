@@ -1,0 +1,41 @@
+<div class="regist-box">
+  <div class="regist-content">
+    <% if params[:show].to_i == 0 %>
+    <div class="logo logo-mail png">
+      <div class="status" id='account_status'>邮件已发送到<%= @user.email %></div>
+    </div>
+    <% end %>
+    <div class="help">
+      <% if params[:show].to_i == 0 %>
+      <h1>注册成功，请立即激活帐户</h1>
+      <% elsif params[:show].to_i == 1 %>
+      <h1>你还没激活帐号，请立即激活帐号</h1>
+      <% end %>
+    </div>
+    <div class="sperator-wrap">
+      <div class="sperator-main s_clear">
+        <div class="regist-half">
+          <div class="regist-prompt">
+            <p class="btn"><%= link_to "用#{email_box @user.email}邮箱激活", email_login_url(@user.email), :popup => true, :class => "active-main-btn png" %></p>
+            <p>激活邮件已发送至<br /><b><%= @user.email %></b>，请点击里面的激活链接激活帐户</p>
+          </div>
+        </div>
+        <div class="regist-half">
+          <div class="regist-prompt">
+            <p class="btn"><%= link_to '我要自己手动激活', email_login_url(@user.email), :popup => true, :class => "active-btn png" %></p>
+            <p>用<%= @user.email %> 向<b><%= "iyxzonehelp@ixyzone.com" %></b>发送一封标题为“我要激活”的邮件，过几分钟即可直接从<%= link_to '首页', login_url, :class => 'red' %>登陆。</p>
+          </div>
+        </div>
+      </div>
+      <div class="sperator"></div>
+    </div>
+    <div class="answer-box">
+      <h3>未收到激活邮件？</h3>
+      <ul class="lister01">
+        <li>在垃圾邮件目录里找找，或<%= link_to_remote "重发激活邮件", :url => "/resend_activation_mail?email=#{@user.email}", :html => {:class => 'red'} %></li>
+        <li>联系客服 15021113626 (大爷我的手机)</li>
+      </ul>
+    </div>
+  </div>
+  <div class='b'>&nbsp</div>
+</div>

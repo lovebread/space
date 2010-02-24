@@ -1,0 +1,28 @@
+<ul class='friend-man s_clear'>
+<% @friends.each do |f| %>
+	<li id='friend_<%= f.id %>' onmouseover="this.className='bg'" onmouseout="this.className=''">
+		<div class="card">
+				<% if @user == current_user %>
+					<%= facebox_confirm_with_validation '', friend_url(f), {:method => :delete, :msg => "你确定要和他解除好友关系吗?"}, :class=>"icon-active right" %> 
+				<% end %>
+			<div class="img">
+				<div class="middle"><div class="middle-center"><div class="center">
+					<%= avatar f, :class => 'imgbox01' %>
+				</div></div></div>
+			</div>
+			<div class="info member s_clear">
+				<h4><%= profile_link f %></h4>
+          <% unless current_user.has_friend? f %>
+					  <span class="red nowrapspace20"><%= facebox_link "加为好友", new_friend_request_url(:friend_id => @user.id) %></span>
+          <% end %>
+			</div>
+    </div>
+  </li>
+<% end %>
+</ul>
+
+<% if @remote %>
+  <%= will_paginate friends, :renderer => 'RemoteLinkRenderer', :remote => @remote %>
+<% else %>
+  <%= will_paginate friends %>
+<% end %>

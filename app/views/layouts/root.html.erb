@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一起游戏网欢迎您</title>
+  <%= stylesheet_link_tag 'common' %>
+  <%= stylesheet_link_tag 'home' %>
+  <%= stylesheet_link_tag 'welcome' %>
+  <%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag 'iyxzone' %>
+  <%= javascript_include_tag 'game' %>
+  <%= javascript_include_tag 'facebox' %>
+  <%= javascript_include_tag 'register' %>
+  <%= javascript_include_tag 'event.simulate' %>
+</head>
+
+<body class="body_bg01">
+	<div class="welcome-box">
+    <div id="navbar">
+      <div id="navwrap">
+        <div id="navmid">
+          <a href="#" class="logo-top logo-v2 png" title="一起游戏"></a>
+          <p class="top_link right">
+            <a href="#">设为首页</a>　|　<a href="#">反映建议</a>　|　<a href="#">加入收藏</a>　|　<a href="#">关于我们</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  <%= yield %>
+  </div>
+</div>
+    
+<div id="footer">
+	<p>Copyright &copy; 1998-2009 Tencent. All Rights Reserved</p>
+    <p><a href="#">网游公司 版权所有</a></p>
+</div>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,10 @@
+<div class="rows s_clear">
+<% fields_for "poll[answers][]", answer_input do |f| %>
+  <div class="fldid"><label>候选项：</label></div>
+  <div class="fldvalue">
+    <div class="textfield"><%= f.text_field :description %></div>
+  </div>
+  <%= link_to_function "", "Iyxzone.Poll.Builder.removeAnswer(this);", :class => "fldstatus fldstatus-red-del" %>
+<% end %>
+</div>
+

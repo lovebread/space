@@ -1,0 +1,5 @@
+<ul>
+  <% @friends.each do |friend| %>
+    <li style="list-style-type:none;" id=<%= friend.id %> profile_id=<%= friend.profile.id %>><a href='#'><%= friend.login %></a></li>
+  <% end %>
+</ul>

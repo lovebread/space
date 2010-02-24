@@ -1,0 +1,35 @@
+<% if @user == current_user %>
+<div class="formcontent">
+  <table class="title"><tr><td><h3 class="icon-sinker">操作</h3></td></tr></table>
+  <div class="rows s_clear">
+    <div class="fldid"><%= facebox_link '编辑活动', edit_event_url(@event) %></div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><%= link_to '邀请更多人', new_event_invitation_url(@event) %></div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><%= link_to '上传图片', new_event_photo_url(:album_id => @album) %></div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><%= facebox_confirm '放所有人鸽子', event_url(@event), {:msg => '你确定要取消这次活动吗?', :method => :delete} %></div>
+  </div>
+</div>
+<% elsif @event.has_participant? current_user %>
+  <div class="rows s_clear">
+    <div class="fldid"><%= link_to '给组织者发信', new_mail_url(:recipient_id => @event.poster_id) %></div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><%= link_to '上传图片', new_event_photo_url(:album_id => @album) %></div>
+  </div>
+<% else %>
+  <% code = @event.is_requestable_by?(current_user).to_i %>
+  <% if code > 0 %>
+    <table class="title"><tr><td><h3 class="icon-sinker">发送 <%= facebox_link '请求', new_event_request_url(@event, :show => 1) %> 加入该活动？</h3></td></tr></table>
+  <% elsif code == 0 %>
+    只有他的好友可以参加，<%= link_to '加他为好友', new_friend_request_url(:friend_id => @user.id), :rel => 'facebox' %> 
+  <% elsif code == -1 %>
+    你没有在该游戏、服务器的游戏角色
+  <% elsif code == -2 %>
+    只有该工会的会员才能参加, 去工会 <%= guild_link @event.guild %> 看看
+  <% end %>
+<% end %>

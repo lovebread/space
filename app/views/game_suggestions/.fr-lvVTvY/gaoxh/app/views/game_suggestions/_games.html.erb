@@ -1,0 +1,40 @@
+<div class="title">
+  <b>推荐游戏</b>
+</div>
+              
+<table class="data-table01 game-table" cellpadding="0">
+  <tr>
+    <th>游戏图片</th>
+    <th>游戏名称</th>
+    <th>官网</th>
+    <th>玩家评价</th>
+    <th>关注</th>
+  </tr>
+  <% games.each do |g| %>
+  <tr>
+    <td class="img"><img class="imgbox01" src="images/photo/photo11.png" alt="" /></td>
+    <td class="name"><%= game_link g %></td>
+    <td class="time">
+      <% if g.official_web.blank? %>
+        暂无官网
+      <% else %>
+        <%= link_to "官网", g.official_web, :popup => true %>
+      <% end %>
+    <td class="comment">
+      <% if g.average_rating == 0 %>
+        还没人打分
+      <% else %>
+        <%= g.average_rating %>
+      <% end %>
+    </td>
+    <td class="attention">
+      <% if current_user.interested_in_game? g %>
+        已关注
+      <% else %>
+			  <span id='game_attention_<%= g.id %>'><%= link_to_remote "关注", :url => game_attentions_url(:game_id => g.id) %></span>
+		  <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate games, :renderer => "RemoteLinkRenderer", :remote => @remote %>

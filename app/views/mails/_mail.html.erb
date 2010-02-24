@@ -1,0 +1,11 @@
+<% sender = mail.sender %>
+    <tr>
+      <td class='icon'>
+        <%= avatar sender %>
+        <%= profile_link sender %><br/>
+        <span class='mail-tiny'><%= ftime mail.created_at %></span>
+      </td>
+      <td class='content'><%= mail.content %></td>
+      <td class='blank'></td>
+    </tr>
+

@@ -1,0 +1,17 @@
+<% delivery = profile_feed_delivery %>
+<% profile = delivery.feed_item.originator %>
+<% modified = delivery.feed_item.data[:modified].map { |m| link_to m, edit_profile_url(profile), :class => "shine" }.join(',')%>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="s-img left">
+		<div class="imgbox01"><%= avatar profile.user %></div>
+	</div>
+	<div class="jl-list-con jl-cutline"><%= profile_link profile.user %>更改了<%= modified %>
+	<% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :class => "icon-active" %><% end %> 
+	<p class="gray"><%= ftime delivery.created_at %> <%= link_to_function "回复", "Iyxzone.Comment.showForm('profile', #{profile.id}, null);", :class => "gray"%></p>
+  <% if with_comments %>
+	  <%= render :partial => "user/comments/folded_comment_box", :locals => {:commentable => profile , :recipient => profile.user} %>
+  <% end %>
+	</div>
+</div>
+</div>

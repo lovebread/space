@@ -1,0 +1,3 @@
+page.insert_html :top, :comments, :partial => 'wall_message', :object => @message
+page.visual_effect :blind_down, "comment_#{@message.id}"
+page << "$('comment_content').clear();"

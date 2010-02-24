@@ -1,0 +1,13 @@
+<% subject = get_subject @user %>
+
+<%= link_to "热门相片", hot_personal_photos_url(:id => @user.id) %> |
+<%= link_to "最新相册", recent_personal_albums_url(:id => @user.id) %> |
+<%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %> |
+<% if @user == current_user %>
+  <%= link_to "好友相册" %> |
+<% end %>
+<%= link_to "#{subject}的相关相片", relative_personal_photos_url(:id => @user.id) %> |
+<% if @user == current_user %>
+  <%= link_to "上传照片", new_personal_photo_url(:album_id => @album.id) %> |
+  <%= link_to "新专辑", new_personal_album_url, :rel => 'facebox' %>
+<% end %>

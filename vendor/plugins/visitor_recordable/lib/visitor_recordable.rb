@@ -1,0 +1,6 @@
+# VisitorRecordable
+module VisitorRecordable
+
+  
+
+end

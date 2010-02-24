@@ -1,0 +1,60 @@
+<% salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--高侠鸿--") %>
+one:
+  id: 1
+  login: '高侠鸿'
+  email: 'gaoxh04@gmail.com'
+  gender: 'male'
+  pinyin: 'gaoxiahong'
+  salt: <%= salt %>
+  crypted_password: <%= User.encrypt('111111', salt) %>
+  friends_count: 2
+  albums_count: 1
+
+<% salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--明非--") %>
+two:
+  id: 2
+  login: '明非'
+  email: 'mingfei@gmail.com'
+  gender: 'male'
+  pinyin: 'mingfei'
+  salt: <%= salt %>
+  crypted_password: <%= User.encrypt('111111', salt) %>
+  friends_count: 1
+  albums_count: 1
+
+<% salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--谢心--") %>
+three:
+  id: 3
+  login: '谢心'
+  email: 'xiexin@gmail.com'
+  gender: 'male'
+  pinyin: 'xiexin'
+  salt: <%= salt %>
+  crypted_password: <%= User.encrypt('111111', salt) %>
+  friends_count: 1
+  albums_count: 1
+
+<% salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--民好--") %>
+four:
+  id: 4
+  login: '民好'
+  email: 'minhao@gmail.com'
+  gender: 'male'
+  pinyin: 'minhao'
+  salt: <%= salt %>
+  crypted_password: <%= User.encrypt('111111', salt) %>
+  friends_count: 0
+  albums_count: 1
+
+<% salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--民好--") %>
+five:
+  id: 5
+  login: '米粒'
+  email: 'mili@gmail.com'
+  gender: 'female'
+  pinyin: 'mili'
+  salt: <%= salt %>
+  crypted_password: <%= User.encrypt('111111', salt) %>
+  friends_count: 0
+  albums_count: 1
+

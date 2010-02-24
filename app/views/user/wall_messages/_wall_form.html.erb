@@ -1,0 +1,25 @@
+<!--
+  parameters:
+    wall: 留言版的拥有者，可以是event, 或者guild或者profile
+    recipient: 默认的收到回复的人
+-->
+<% type = wall.class.to_s.underscore %>
+<div class="bookbox">
+  <h3><label for="book">留言板</label>(共<%= wall.comments_count %>条留言)</h3>
+  <div class="formcontent s_clear">
+    <% form_for :comment, :html => {:id => 'wall_message_form'} do |f| %>
+      <%= hidden_field_tag 'comment[commentable_type]', wall.class.name %>
+      <%= hidden_field_tag 'comment[commentable_id]', wall.id %>
+      <%= hidden_field_tag 'comment[recipient_id]', recipient.nil? ? nil : recipient.id %>
+      <div class="rows">
+        <div class="textarea-wrap"><div class="textarea-wide">
+          <%= f.text_area 'content', :class => 'textarea' %>
+        </div></div>
+      </div>
+      <div class="buttons">
+      <span class="button"><span><button type='button' onclick="Iyxzone.WallMessage.save('<%= type %>', <%= wall.id %>, this);" >发布</button></span></span>
+        <%= emotion_link 'comment_content', :class=>'icon-face' %>
+      </div>
+    <% end %>
+  </div>
+</div>

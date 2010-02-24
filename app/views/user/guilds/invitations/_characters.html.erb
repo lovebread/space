@@ -1,0 +1,11 @@
+<ul>
+              <% @characters.each do |character| %>
+              <li>
+                <a onclick="Iyxzone.Invitation.Builder.onClick(this, <%= character.id %>, <%= character.user_id %>);">
+                  <%= avatar_image character.user, :class => 'imgbox01' %>
+                  <strong><%= character.user.login %><span class='red'><%= character.name %></span></strong>
+                </a>
+              </li>
+              <% end %>
+            </ul>
+

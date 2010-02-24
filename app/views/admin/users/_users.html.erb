@@ -1,0 +1,38 @@
+<table cellpadding="0">
+  <% unless @users.blank? %>
+  <% @users.each do |user| %>
+  <tr id='user_<%= user.id %>'>
+    <td><div><%= profile_link user %></div></td>
+    <td><%= user.email %></td>
+    <td>
+      <% if user.active? %>
+        <%= "已经激活" %>
+      <% else %>
+        <%= link_to '激活', activate_admin_user_url(user), :method => :put %>
+      <% end %>
+    </td>
+    <td>
+      <% if user == current_user %>
+        <%= "本人" %>
+      <% else %>
+        <% if user.enabled == 1%>
+          <%= link_to_remote 'disable', :url => disable_admin_user_url(user), :method => :put %>
+        <% else %>
+          <%= link_to_remote 'enable', :url => enable_admin_user_url(user), :method => :put %>
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% if user == current_user %>
+        <%= "本人" %>
+      <% else %>
+        <%= facebox_confirm '删除', admin_user_url(user), {:msg => '确定要删除这个用户吗?', :method => :delete} %>
+      <% end %>
+    </td>
+  </tr> 
+  <% end %>
+  <% else %>
+    <div class='gray'>没有这样的用户</div>
+  <% end %>
+</table>
+<%= will_paginate @users, :renderer => "RemoteLinkRenderer", :remote => @remote %>

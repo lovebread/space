@@ -1,0 +1,10 @@
+<div class="rows s_clear">
+<% fields_for "guild[new_rules][]", new_rule do |r| %>
+  <div><label>原因: </label></div>
+  <div><%= r.text_field :reason %></div>
+  <div><label>赏罚: </label></div>
+  <div><%= r.text_field :outcome %></div>
+  <%= link_to_function "x", "Iyxzone.Guild.Editor.removeNewRule(this);", :class => "fldstatus fldstatus-red-del" %>
+<% end %>
+</div>
+

@@ -1,0 +1,45 @@
+<div class="edit-toggle space edit">
+  <h3 class="s_clear"><strong class="left">其他规则</strong><%= link_to_function "取消", "Iyxzone.Guild.Editor.cancelEditBasicRules(#{@guild.id})", :class => 'right' %></h3>
+  <div class="formcontent con con2">
+    <% form_for :guild, :html => {:id => 'basic_rules_form'} do |f| %>
+      <div class="item space" id='basic_rules'>
+        <% @guild.basic_rules.each do |rule| %>
+          <div id='existing_rule_<%= rule.id %>'>
+            <% fields_for "guild[existing_rules][]", rule do |r| %>
+            <div class="rows s_clear">
+              <div class="fldid"><label>原因：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= r.text_field :reason, :onblur => "Iyxzone.Guild.Editor.isRuleReasonValid(#{rule.id}, 0)" %></div>
+              </div>
+              <span class='red' id='existing_rule_<%= rule.id %>_reason_error' ></span>
+            </div>
+            <div class="rows s_clear">
+              <div class="fldid"><label>赏罚：</label></div>
+              <div class="fldvalue">
+                <div class="textfield"><%= r.text_field :outcome, :onblur => "Iyxzone.Guild.Editor.isRuleOutcomeValid(#{rule.id}, 0)" %></div>
+              </div>
+              <span class='red' id='existing_rule_<%= rule.id %>_outcome_error' ></span>
+            </div>
+            <% end %>
+            <p class='foot s_clear'>
+              <%= link_to_function "删除角色", "Iyxzone.Guild.Editor.removeBasicRule(#{rule.id}, 0, this)", :class => 'right red' %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      <p class="foot s_clear"><%= link_to_function '增加新的规则', "Iyxzone.Guild.Editor.newBasicRule(#{@guild.id});", :class => "left red" %></p>
+      <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span>
+            <%= button_to_function '完成', "Iyxzone.Guild.Editor.updateBasicRules(#{@guild.id}, event)" %>
+          </span></span>
+          <span class="button button-gray"><span>
+            <%= button_to_function '取消', "Iyxzone.Guild.Editor.cancelEditBasicRules()" %>             
+          </span></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

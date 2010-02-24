@@ -1,0 +1,20 @@
+<p class="z-h">将<%= @recipient.login %>加为好友？</p>
+
+<div class="z-con">
+  <p class="z-w">此请求需经 <%= @recipient.login %> 验证，你们才能成为好友。</p>
+  <%= avatar_image @recipient, :class => "imgbox01 left" %>
+  <% form_remote_for :request, :url => friend_requests_url do |f| %>
+  <%= hidden_field_tag 'request[friend_id]', @recipient.id %>
+  <div class="left">
+    <span class="blk tip01">验证信息</span>
+    <%= f.text_area 'data' %>
+  </div>
+  <div class="rows"></div>
+  <div class="z-submit s_clear space">
+    <div class="buttons">
+      <span class="button"><span><button type="submit">发送</button></span></span>
+      <span class="button button-gray"><span><button type="reset" onclick="facebox.close();">取消</button></span></span>
+    </div>
+  </div>
+  <% end %>
+</div>

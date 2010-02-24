@@ -1,0 +1,18 @@
+<div class='title01'>
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h3>回复这个邀请</h3>
+</div>
+
+<div class='formcontent'>
+  <div class="rows s_clear">
+    <div class="fldvalue">
+      <%= radio_button :invitation, :status, 1, :onclick => "new Ajax.Request('#{accept_event_invitation_url(@event, @invitation, :show => 1, :authenticity_token => form_authenticity_token )}', {method: 'put'});" %><%= label_tag '', '接受' %>
+    </div>          
+  </div>
+  <div class="rows s_clear">
+    <div class="fldvalue">
+      <%= radio_button :invitation, :status, 3, :onclick => "if(confirm('你确定吗?')){new Ajax.Request('#{decline_event_invitation_url(@event, @invitation, :show => 1, :authenticity_token => form_authenticity_token)}', {method: 'delete'});}" %><%= label_tag '', '决绝' %>
+    </div>
+  </div>
+</div>
+

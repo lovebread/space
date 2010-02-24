@@ -1,0 +1,37 @@
+one:
+  id: 1
+  name: '服务器1'
+  area_id: 1
+  game_id: 1
+
+two:
+  id: 2
+  name: '服务器2'
+  area_id: 1
+  game_id: 1
+  
+three:
+  id: 3
+  name: '服务器3'
+  area_id: 2
+  game_id: 1
+
+four:
+  id: 4
+  name: '服务器1'
+  game_id: 2
+
+five:
+  id: 5
+  name: '服务器2'
+  game_id: 2
+
+six: 
+  id: 6
+  name: 'ss'
+  game_id: 3
+
+seven:
+  id: 7
+  name: 'ssss'
+  game_id: 4

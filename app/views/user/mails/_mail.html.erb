@@ -1,0 +1,11 @@
+<% sender = mail.sender %>
+    <tr class="jl-cutline">
+      <td class='icon' width='60'>
+        <%= avatar sender, :class=>"imgbox01"%>
+			</td>
+      <td width='150' valign='top'><%= profile_link sender %>
+        <span class='gray blk'><%= ftime mail.created_at %></span>
+      </td>
+      <td class='top'><%= mail.content %></td>
+    </tr>
+

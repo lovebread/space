@@ -1,0 +1,2 @@
+module User::MailsHelper
+end

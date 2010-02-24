@@ -1,0 +1,12 @@
+.pagination {
+  text-align: center;
+  background: white;
+  /* self-clearing method: */ }
+  .pagination a, .pagination span {
+    padding: .5em;
+    float: left;
+    margin-right: 1px; }
+  .pagination span.disabled {display:none}
+  .pagination span.current {font-weight: bold;border-color:#fff;font-weight:bold;color:#25700D}
+  .pagination a {text-decoration: none;border:1px #E7F0E0 solid;color:#7E7F80}
+    .pagination a:hover, .pagination a:focus {color:#D63200;}

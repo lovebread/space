@@ -1,0 +1,78 @@
+.body_bg01{background:url(../images/skin/bg01.png) no-repeat center top}
+.top_link{line-height:39px;text-align:right;color:#fff;overflow:hidden}
+
+.login-box .logo,.regist-box .logo{padding:39px 0 0 101px;height:66px;background:url(../images/welcome/logo.png) no-repeat left top;color:#BF3A00}
+.login-box .logo-mail,.regist-box .logo-mail{background:url(../images/welcome/logo-mail.png) no-repeat}
+
+.login-box .rows,.regist-box .rows{height:26px;line-height:26px;overflow:hidden}
+.login-box .btn-rows,.regist-box .btn-rows{height:36px;overflow:hidden}
+.login-box label,.regist-box label{font-size:14px;font-weight:bold;line-height:27px}
+.login-box label.simple,.regist-box label.simple{font-size:12px;font-weight:normal}
+
+.welcome-box{width:972px;margin:0 auto;}
+.welcome-box02{width:950px;margin:0 auto;}
+.welcome{margin-top:41px;height:546px;overflow:hidden}
+.welcome .login-box{float:left;padding:19px 7px 19px 17px;width:313px;height:100%;background:url(../images/welcome/loginBg01.png) no-repeat left top;}
+.welcome .right{margin-top:3px;width:618px;}
+.welcome .right p.later{margin-top:17px;}
+
+.login-box .logo{margin-left:3px;}
+.login-box .rows,.login-box .btn-rows{padding:8px 0;}
+.login-box .sperator{margin:12px 15px 12px 3px;}
+
+.login-box .fldid{float:left;width:75px;text-align:right;overflow:hidden}
+.login-box .fldvalue,.login-box .fldis{float:left;}
+.login-box .fldis input{float:left;margin:7px 5px 0 5px;_margin:6px 0 0;height:14px;display:block;}
+* +html .login-box .fldis input{margin-top:6px;}
+
+.login-box .textfield{width:160px}
+.login-box a.pass{margin-left:3px;_margin:0;}
+.login-box .gobtn{margin:3px 0 0 10px;_margin-left:7px;}
+
+.regist-box,.regist-box .b{width:672px;background:url(../images/welcome/registBg01.png) no-repeat;}
+.regist-box{margin:13px auto 0;color:#7E7F80}
+.regist-box .b{ background-position:0 bottom;}
+.regist-box .regist-content{padding:20px;}
+.regist-box .logo .status{padding-left:24px;line-height:29px; background:url(../images/icons/statusIcons.gif) no-repeat left 3px;}
+.regist-box .help{padding-left:101px;_height:1px;line-height:22px;position:relative;}
+.regist-box .help .prompt{width:75px;position:absolute;left:19px;top:0;height:22px;line-height:normal;font-weight:bold;font-size:16px;overflow:hidden;color:#BF3A00}
+.regist-box .help h1{color:#BF3A00}
+.regist-box label{color:#0A3100}
+.regist-box .formcontent{padding:6px 0;}
+.regist-box .rows,.regist-box .btn-rows{padding:5px 0;}
+.regist-box .formcontent .fldid{width:195px;}
+.regist-box .formcontent .fldvalue label,.regist-box .formcontent .fldrdvalue label{font-weight:normal;}
+.regist-box .textfield{width:260px}
+.regist-box select{color:#000;}
+.regist-box label.gray{white-space:nowrap;color:#7E7F80}
+.regist-box .regist-half{float:left;width:50%;}
+.regist-box .regist-half .regist-prompt{padding:18px 55px 18px 65px;}
+.regist-box .regist-prompt{line-height:23px;}
+.regist-box .regist-prompt p.btn{margin-bottom:15px;}
+.regist-box .answer-box{padding:22px 43px;line-height:21px;}
+.regist-box .answer-box ul{padding-left:32px;}
+.regist-box .answer-box h3{padding-left:21px;background:url(../images/icons/statusIcons.gif) no-repeat left -60px;color:#25700D}
+
+#footer{width:972px;margin:0 auto;padding:15px 0;}
+
+/*box-v2*/
+.box-v2 .t,.box-v2 .b{position:relative}
+.box-v2 .t,.box-v2 .b,.box-v2 .t span,.box-v2 .b span{background:url(../images/skin/boxv2.png) no-repeat}
+.box-v2 .t span,.box-v2 .b span{position:absolute;right:0;width:20px;display:block}
+.box-v2 .t{background-position:0 0;height:25px}
+.box-v2 .t span{background-position:right 0;height:25px}
+.box-v2 .b{background-position:0 bottom;height:30px}
+.box-v2 .b span{background-position:right bottom;bottom:0;height:30px;}
+
+.box-v2 .t strong{position:absolute;left:15px;top:6px;display:block;background:url(../images/skin/boxv2-title.png) no-repeat}
+.get-pws{width:53px;height:13px;background-position:0 0;}
+.box-v2 .m{border-left:1px solid #bdd6ad;border-right:1px solid #bdd6ad;background:#f8fcf6;}
+
+/*±íµ¥v2*/
+.form-con{padding:30px 0;margin:0 auto;width:85%;line-height:22px}
+.m .foot{line-height:22px}
+.form-con .f-id{width:180px;float:left;margin-right:5px;overflow:hidden;text-align:right;white-space:nowrap;word-break:keep-all;}
+.form-con .f-id label{font-size:14px;font-weight:bold;line-height:28px;}
+.form-con .f-value{float:left;margin-right:5px;}
+.form-con input{border:1px solid #BDD6AD;height:24px;line-height:24px;padding:0 5px;width:260px;}
+.form-con .f-stat{float:left;padding-left:16px;margin-right:5px;height:26px;background:url(../images/icons/statusIcons.gif) no-repeat}

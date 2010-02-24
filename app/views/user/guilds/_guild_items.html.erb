@@ -1,0 +1,33 @@
+<table class="table01" cellpadding="0" cellspacing="1">
+  <% guild_items.each do |guild| %>
+  <% membership = guild.memberships.find_by_user_id(current_user.id) %>
+  <tr>
+    <td>
+      <div class="imgwrap">
+        <%= album_cover guild.album, :size => :medium %>
+      </div>
+      <div class="data">
+        <p><%= label_tag '', '会长：' %><span><%= profile_link guild.president %></span></p>
+        <p><%= label_tag '', '名称：' %><span><%= guild_link guild %></span></p>
+        <p><%= label_tag '', '游戏：' %><span><%= guild.game.name %></span></p>
+        <p><%= label_tag '', '会员数：' %><span><%= guild.people_count %></span></p>
+        <p><%= label_tag '', '创建于：' %><span><%= ftime guild.created_at %></span></p>
+        <p><%= label_tag '', '你的状态：' %><span><%= show_membership_info membership, guild %></span></p>
+      </div>
+      <div class='operations'>
+        <li><%= link_to '查看会员', guild_memberships_url(guild) %></li>
+        <% if current_user == guild.president %>
+        <li><%= link_to '邀请更多人', new_guild_invitation_url(guild) %></li>
+        <li><%= link_to '编辑工会', edit_guild_url(guild) %></li>
+        <% end %> 
+      </div>
+    </td>
+  </tr>
+  <% end %> 
+</table>
+
+<% if @remote %>
+  <%= will_paginate guild_items, :renderer => :RemoteLinkRenderer, :remote => @remote %>
+<% else %>
+  <%= will_paginate guild_items %>
+<% end %>

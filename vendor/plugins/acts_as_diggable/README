@@ -1,0 +1,19 @@
+ActsAsDiggable
+=================
+
+很简单的插件，只封装了一个接口: digged_by? 
+
+Example
+=======
+
+class Blog < ActiveRecord::Base
+
+	acts_as_diggable 
+
+end
+
+如果要查看该博客是否已经被某人dig了：
+
+blog.digged_by? user
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

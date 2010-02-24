@@ -1,0 +1,72 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-photo">照片</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right">
+          <% if @membership and (@membership.is_president? or @membership.is_veteran?) %>
+            <%= link_to "上传照片", new_guild_photo_url(:album_id => @album.id) %>
+          <% end %>
+        </div>
+        <ul>
+          <% subject = get_subject @user %>
+          <li><span><%= link_to "热门照片", hot_personal_photos_url(:id => current_user.id) %></span></li>
+          <!-- <li><span><%= link_to '最新照片', recent_personal_albums_url(:id => current_user.id) %></span></li> -->
+          <li><span><%= link_to "我的相册", guild_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to '好友相册', friends_personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "圈了我的照片", relative_personal_photos_url(:id => current_user.id) %></span></li>
+        </ul>       
+      </div>
+      <div class="box02 pic-box">
+        <div class="path-box">
+          <label>工会"<%= guild_link @guild %>"</label>
+          <span>相册</span>
+        </div>
+        <div class="piclist s_clear">
+        <% if @photos.total_entries != 0 %>
+        <ul>
+        <% @photos.each do |p| %>                         
+          <li>
+            <div class="img">
+              <div class="middle"><div class="middle-center"><div class="center">
+                <%= photo_link p, :class => 'imgbox01' %>
+              </div></div></div>
+            </div>
+            <% if @membership and @membership.is_president? %>
+            <p>
+              <%= facebox_link "编辑", edit_guild_photo_url(p) %> | <%= facebox_confirm '删除', guild_photo_url(p), {:msg => '你确定要删除这张图片吗', :method => 'delete'} %>
+              
+            </p>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+        <%= will_paginate @photos %>
+        <% else %>
+        <div class='gray'>还没有图片</div>
+        <% end %>
+        </div>
+      </div>
+      <div class="pic-desc">
+        <% if @membership and @membership.is_president? %>
+          <%= in_place_text_field :span, @album, :description, true, guild_album_url(@album), {}, {:empty_text => '点击添加相册描述', :parameter_name => 'album[description]', :rows => 2, :cols => 90}, {} %>
+        <% else %>
+          <%= @album.description %>
+        <% end %>
+        <p class="albumTime">
+          <% unless @album.uploaded_at.blank? %>
+            <span class="time-update"><%= ftime @album.uploaded_at %>更新</span><br/>
+          <% end %>
+          <span class="time-create"><%= ftime @album.created_at %>创建</span>
+        </p>
+      </div>
+      <div class="foot">
+        <div class="feed-list">
+          <h4>评论(<%= @album.comments_count %>)</h4>
+          <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @album, :recipient => @user} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</div></div></div></div>

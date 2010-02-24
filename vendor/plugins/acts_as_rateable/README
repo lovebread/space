@@ -1,0 +1,31 @@
+ActsAsRateable
+==============
+
+github上的那个acts_as_rateable过于煞笔，没办法，只能自己弄个了，其实功能很简单，就是能让用户对某个玩意进行打分
+
+
+Example
+=======
+
+当然用户需要对游戏进行打分，
+
+class Game < ActiveRecord::Base
+
+	acts_as_rateable
+
+end
+
+如果想得到平均得分：
+game.average_rating
+
+进行打分
+game.create_ratings(:user_id => user_id, :rating => rating)
+如果该玩家已经打分过了，则更新原来的打分
+
+查看某人的打分
+game.find_rating_by_user(user)
+
+是否打过分
+game.rated_by_user?(user)
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

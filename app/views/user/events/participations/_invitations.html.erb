@@ -1,0 +1,14 @@
+<% invitations.each do |invitation| %>
+<div class='friend' id='invitation_<%= invitation.id %>'>
+  <%= avatar invitation.participant %>
+  <div class='user-link'>
+    <%= profile_link invitation.participant %><br/>
+    <span class='friend-tiny'>
+      <%= "邀请发送于#{ftime invitation.created_at }" %>
+    </span>
+  </div>
+  <div class='operation'>
+    <%= link_to '发站内信', new_mail_url(:recipient_id => invitation.participant_id) %>
+  </div> 
+</div>
+<% end %>

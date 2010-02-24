@@ -1,0 +1,28 @@
+<div class="edit-toggle space">
+  <h3 class="s_clear">
+    <strong class="left">基本信息</strong>
+    <% if profile.user == current_user %>
+      <%= link_to_function '<span class="icon-active icon-active-edit w-l"></span>编辑', "Iyxzone.Profile.Editor.editBasicInfo(#{profile.id})", :class => 'right red' %>
+    <% end %>
+  </h3>
+  <div class="formcontent con con2">
+    <div class="item space">
+      <div class="rows s_clear">
+        <div class="fldid"><label>昵称：</label></div>
+        <div class="fldvalue"><%= profile.login %></div>
+      </div>
+      <div class="rows s_clear">
+        <div class="fldid"><label>性别：</label></div>
+        <div class="fldvalue"><%= gender profile.user %></div>
+      </div>
+      <div class="rows s_clear">
+        <div class="fldid"><label>生日：</label></div>
+        <div class="fldvalue"><%= ftime2 profile.birthday %></div>
+      </div>
+      <div class="rows s_clear">
+        <div class="fldid"><label>地址：</label></div>
+        <div class="fldvalue"><%= profile.region.name unless profile.region.nil?%> <%= profile.city.name unless profile.city.nil?%> <%= profile.district.name unless profile.district.nil? %></div>
+      </div>
+    </div>
+  </div>
+</div>

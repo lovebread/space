@@ -1,0 +1,8 @@
+if params[:show].to_i == 0
+	page << "$('guild_status_#{@guild.id}').innerHTML = '你已经请求加入工会了，请耐心等待';"
+	page << "$('reply_guild_#{@guild.id}').innerHTML = '';"
+	page << "facebox.close();" 	
+elsif params[:show].to_i == 1
+	flash[:notice] = '提交成功'
+	page.redirect_to guild_url(@guild)
+end

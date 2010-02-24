@@ -1,0 +1,12 @@
+<% participations.each do |participation| %>
+  <% participant = participation.participant %>
+  <div class='friend' id='<%= "participation_#{participation.id}" %>'>
+    <%= avatar participant %>
+    <div class='user-link' >
+      <%= profile_link participant %><br/>
+    </div>
+    <div class='operation'>
+      <%= facebox_confirm 'x', event_participation_url(@event, participation), {:method => :delete, :msg => '你确定要删除吗?'} %>
+    </div>
+  </div>
+<% end %>

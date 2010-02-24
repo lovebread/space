@@ -1,0 +1,24 @@
+<% delivery = status_feed_delivery %>
+<% status = delivery.feed_item.originator %>
+<div class="feed-list-box">
+<div class="feed-list" id='feed_delivery_<%= delivery.id %>'>
+	<div class="img left">
+		<div class="imgbox01"><%= avatar status.poster %></div>
+	</div>
+  <div class="jl-list-con jl-cutline"><%= profile_link status.poster %> <span>更新了状态</span>
+	<% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html =>{:class => "icon-active"} %><% end %> 
+    <div class="round02 round_r_t s-dialog">
+      <div class="round_l_t">
+        <div class="round_r_b">
+          <div class="round_l_b">
+            <div class="round_m jl-round_m"> <span class="arrow-dialog"></span>
+							<div class="round_body"> <%= status.content %> </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="gray"><%= ftime status.created_at %></p>
+	</div>
+</div>
+</div>

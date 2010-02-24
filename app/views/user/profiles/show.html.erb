@@ -1,0 +1,198 @@
+<%= stylesheet_link_tag 'tag_cloud' %>
+<%= stylesheet_link_tag 'test' %>
+<%= javascript_include_tag 'chinese_region' %>
+<%= javascript_include_tag 'profile' %>
+<%= javascript_include_tag 'video' %>
+
+<% content_for :left do %>
+	<div class="mcAvatar">
+	  <div class="picwrap">
+			<div class="middle"><div class="middle-center"><div class="center" id='avatar'>
+				<%= avatar_image @user, :size => :large, :width => '100px', :height => '112px' %>
+			</div></div></div>
+	  </div>
+	</div>
+	<div class="avatarbox">
+		<%= render :partial => 'operations' %>
+	</div>
+	<div class="profile-list menu-icon-list">
+		<%= render :partial => 'menu' %>
+	</div>
+<% end %>
+
+<% content_for :right do %>
+<div class="multibox">
+	<div class="title">
+    <% if @user == current_user %>
+		<%= link_to "更多", edit_profile_url(@profile) %>
+		<% end %>
+    <b>游戏人物资料</b>
+  </div>
+  <table class="data-table jl-data-table" cellpadding='0'>
+		<tr>
+			<th class='name'>游戏名称</th>
+      <th class='id'>玩家昵称</th>
+      <th class='level'>等级</th>
+    </tr>
+		<% @user.characters.each do |c| %>
+    <tr>
+			<td class='name'><%= game_link c.game %></td>
+      <td class='id'><%= c.name %></td>
+      <td class='level'><%= c.level %></td>
+    </tr>
+		<% end %>
+  </table>
+</div>
+
+<div class='multibox'>
+	<div class='title' id='tag_cloud_head'>
+	<% if @user == current_user %>
+		<b>大家对你的印象是</b>
+	<% elsif @profile.is_taggable_by? current_user %>
+		<b class='space'>你对TA的印象是</b>
+	<% else %>
+		<b>好友印象</b>
+	<% end %>
+	</div>
+  <div id='tag_cloud'>
+  <% if @user == current_user %>
+    <%= render :partial => 'user/profiles/tags/tag_cloud', :locals => {:profile => @profile} %>
+  <% elsif @profile.is_taggable_by? current_user %>
+    <%= render :partial => 'user/profiles/tags/profile_tag', :locals => {:profile => @profile} %>
+    <% form_remote_for :tag, :url => profile_tags_url(@profile) do |f| %>
+      <p class='space'>都不贴切？自己想个</p>
+      <div class='textfield04 left space'><%= text_field_tag 'tag_name', ''%></div>
+      <div class="fldbtn left space"><span class="button04"><span><button id='tag_submit' type="submit">评价</button></span></span></div>
+    <% end %>
+  <% else %>
+    <%= render :partial => 'user/profiles/tags/tag_cloud', :locals => {:profile => @profile} %>
+  <% end %>
+  </div>
+</div>
+
+<div class="multibox rows">
+  <div class="title">
+    <%= facebox_link "更多", profile_viewings_url(@profile) %>
+    <b>最近来访</b>
+  </div>
+  <div class="photolist-box">
+    <ul class="collection s_clear">
+      <% @profile.viewings.each do |r| %>
+        <li>
+          <div class="middle"><div class="middle-center"><div class="center"><a href="#"><%= avatar r.viewer, :class => 'imgbox01' %></a></div></div></div>
+          <p><%= profile_link r.viewer %></p>
+          <p class="btns"></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% end %>
+
+<div class="box02 canvas_con">
+	<div class='multibox'>
+	<div class='tipbar space'>
+	<% if @user != current_user and @profile.about_me.blank? %>
+		<span>这家伙很懒，什么都没说...</span>
+	<% else %>
+		<%= in_place_text_field :span, @profile, :about_me, @user == current_user, profile_url(@profile), {}, {:empty_text => '介绍下自己?', :rows => 2, :cols => 71}, {} %>
+	<% end %>
+	</div>
+	</div>
+
+<div class="multibox">
+	<div class="title"><%=link_to '全部相册', personal_albums_url(:id => @user.id) %><b>最近照片</b></div>
+  <div class="piclist s_clear">
+	<% unless @albums.blank? %>
+		<% @albums.each do |album| %>
+				<div class="picitem">
+					<div class="picbox01">
+						<a class="btn" href="#"></a>
+						<div class="picwrap">
+							<table cellpadding="0">
+								<tr><td><%= album_cover album, :class => 'imgbox01' %></td></tr>
+							</table>          
+						</div>
+					</div>
+					<p><b><%= album_link album %></b></p>
+					<% if album.uploaded_at.blank? %>
+						<p>于 <span><%= ftime album.created_at %></span> 创建</p>
+					<% else %>
+						<p>于 <span><%= ftime album.uploaded_at %></span> 更新</p>
+					<% end %>
+      </div>	
+		<% end %>	
+	<% else %>
+		<% if @user==current_user %>
+			还没更新照片赶紧去<%= link_to '弄一个', personal_albums_url(:id=>@user.id)%>吧
+		<% else %>
+			这家伙没更新照片
+		<% end %>
+	<% end %>
+	</div>
+</div>
+
+<div class="multibox">
+	<div class="title"><b>最近日志</b>
+    <%= link_to "全部日志", blogs_url(:id => @user.id) %>
+	</div>
+	<% unless @blogs.blank? %>
+	<% @blogs.each do |blog| %>
+		<div class="diary-box">
+			<div class="diary-header">
+				<%= blog_link blog,:class=>'shine' %> <%= ftime blog.created_at %>
+			</div>
+			<p> <%= blog_content blog, :length => 80, :omission => '...' %> </p>
+		</div>
+	<% end %>
+	<% end %>
+</div>
+
+<div class='multibox'>
+	<div class='title'><b>新鲜事</b></div>
+	<% unless @feed_deliveries.blank? %>
+	<div class='feed-box'>
+		<div class="home-wrap">
+			<div id ='feed_list'>
+			<%= render :partial => 'feed_deliveries', :object => @feed_deliveries %>
+			</div>
+			<div class="s_clear"></div>
+				<div class="round04 round_r_t jl-read-more space s_clear">
+          <div class="round_l_t">
+            <div class="round_r_b">
+              <div class="round_l_b">
+                <div class="round_m">
+                  <div class="round_body" id="more_feed">
+										<% if @feed_deliveries.size < @first_fetch_size %>
+											<div class='jl-more'>没有更多了...</div>
+										<% else %>
+											<%= link_to_function "更多新鲜事", "Iyxzone.Profile.Feeder.moreFeeds(#{@profile.id});", :class => "jl-more"%>
+										<% end %>
+                  </div>
+								</div>
+              </div>
+            </div>
+          </div>
+        </div>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+<% if @setting.leave_wall_message_viewable_by? current_user %>
+  <%= render :layout => 'user/wall_messages/wall_form', :locals => {:wall => @profile, :recipient => @profile.user} %>
+<% end %>
+<% if @setting.wall_viewable_by? current_user %>
+  <div class='feed-box' id='comments'>
+    <%= javascript_tag "Iyxzone.WallMessage.fetch('Profile', #{@profile.id})" %>
+  </div>
+<% end %>
+
+</div>
+
+<% unless @reply_to.nil? %>
+<%= javascript_tag "
+	Iyxzone.Wall.set('#{@reply_to.login}', #{@reply_to.id})
+" %>
+<% end %>

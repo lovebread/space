@@ -1,0 +1,87 @@
+<div class="rows s_clear"></div>
+<div class="tab tab01">
+  <ul>
+    <li class="hover"><span><%= link_to "装备获得", event_summary_url(@event, :step => 3) %></span></li>
+  </ul>
+</div>
+<div class="appcontent01 formcontent">
+  <div class="rows s_clear">
+    <div class="fldid">获得的装备</div>
+    <div class="fldvalue">
+      <div class="selector" style="width:200px">
+        <%= link_to_function '', :onclick => "Iyxzone.Event.Summary.Gear.selectGears();" %>
+        <input />
+        <div id="friend-wrap" class="drop-wrap" style="display:none"> 
+          <iframe src="" frameborder="0"></iframe>
+          <div class="wrap-bg"></div>
+          <div class="con">
+            <div class="head s_clear">
+              <h4 class="left"><span>获得的装备</span></h4>
+            </div>
+            <ul class="checkboxes rows s_clear">
+              <% @event.guild.gears.each do |g| %>
+                <li><span><%= check_box_tag '', 1, false, :gear_id => g.id %><%= "#{g.name}-#{g.cost}" %></span></li>
+              <% end %>
+            </ul>
+            <div class="foot rows">
+              <span class="button"><span><%= button_to_function "确定", "Iyxzone.Event.Summary.Gear.resetGears()" %></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <table class="act-member-list space" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <td class="tl" style="border-right:0;width: 300px;">获得的装备</td>
+        <td style="border-left:0;border-right:0;">分值</td>
+        <td class="tl" style="border-left:0;width:120px">获得人</td>
+        <td style="border-left:0;width:80px"></td>
+      </tr>
+    </thead>
+    <tbody id='gears'>
+      <%= render :partial => 'gear_info', :locals => {:gears => session[:event_summary][:gears]} %>
+    </tbody>
+    <tbody>
+      <tr>
+        <td>
+          <div class="textfield" id='new_gear'><input value="点击添加新的装备名字" onclick="Iyxzone.Event.Summary.Gear.newGear()" /></div>
+          <div id='new_gear_name' style="display:none">
+            <div class='textfield'><%= text_field_tag 'gear[name]', '', :onclick => "this.clear()" %></div>
+          </div>
+        </td>
+        <td>
+          <div id='new_gear_cost' style='display:none'>
+            <div class='textfield' style="width: 60px; margin: 0 auto;"><%= text_field_tag 'gear[cost]', '', :onclick => "this.clear()" %></div>
+          </div>
+        </td>
+        <td></td>
+        <td>
+          <div id='new_gear_submit' style='display:none'>
+            <%= button_to_function '创建', "Iyxzone.Event.Summary.Gear.createGear(this)" %>
+            <%= link_to_function '取消', "Iyxzone.Event.Summary.Gear.cancelGear(this)" %>
+          </div>
+        </td>
+      </tr> 
+    </tbody>
+    <tfoot>
+      <td colspan="3">
+        <span class="button w-l"><span><button type="submit" onclick="Iyxzone.Event.Summary.Gear.prev()">上一步</button></span></span>
+        <span class="button w-l"><span><button type="submit" onclick="Iyxzone.Event.Summary.Gear.next()">下一步</button></span></span>
+      </td>
+    </tfoot>
+  </table>
+</div>
+
+<% if @gear_ids.blank? %>
+<%= javascript_tag "
+  Iyxzone.Event.Summary.Gear.load(#{@event.id}, #{@event.guild_id}, '#{form_authenticity_token}', [], [], []);
+  Iyxzone.Event.Summary.Gear.reset(); 
+" %>
+<% else %>
+<%= javascript_tag "
+  Iyxzone.Event.Summary.Gear.load(#{@event.id}, #{@event.guild_id}, '#{form_authenticity_token}', #{array_or_string_for_javascript @gear_ids}, #{array_or_string_for_javascript @gear_costs}, #{array_or_string_for_javascript @recipient_ids});
+  Iyxzone.Event.Summary.Gear.reset(); 
+" %>
+<% end %>

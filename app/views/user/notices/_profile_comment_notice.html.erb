@@ -1,0 +1,18 @@
+<% profile = comment.commentable %>
+<% if home_page %>
+<% link = "#{link_to_function "留言版", "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}'); window.open('/profiles/#{profile.id}?reply_to=#{comment.poster_id}');"}" %>
+<% else %>
+<% link = "#{link_to_function "留言版", "window.open('/profiles/#{profile.id}?reply_to=#{comment.poster_id}');"}" %>
+<% end %>
+<li>
+	<div class="feed-message">
+    <% if home_page %>
+		<%= link_to_function '', "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}')", :class => 'icon-active' %>
+		<% end %>
+    <% if notice.data == 'comment' %>
+			<%= profile_link comment.poster %> 在你的 <%= link %> 上留言了
+		<% elsif notice.data == 'reply' %>
+			<%= profile_link comment.poster %> 在 <%= profile_link profile.user %> 的 <%= link %>  上回复了你
+		<% end %> 		
+	</div>
+</li>

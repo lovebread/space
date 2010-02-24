@@ -1,0 +1,56 @@
+<%= javascript_include_tag 'forum' %>
+
+<div>
+	<%= forum_link @forum %> -> <%= topic_link @topic %>
+</div>
+
+<div class='subject'>
+  <h3><%= @topic.subject %></h3>
+</div>
+
+<table class='posts' id="posts">
+  <tr class='odd' id='topic_<%= @topic.id %>'>
+    <td class='author'>
+      <%= avatar @topic.poster %><br/>
+      <%= profile_link @topic.poster %><br/>
+      <span class='forum-tiny'>
+        <%= ftime @topic.created_at %><br/>
+        <%= link_to '发站内信', new_mail_url(:recipient_id => @topic.poster_id) %><br/>
+        <%= link_to_function '回复', "Iyxzone.Forum.setPost();" %>
+      </span>
+    </td>
+    <td class='post'><%= @topic.content %></td>
+  </tr>
+  <% @posts.each do |post| %>
+    <tr class="<%= cycle('even','odd') %>" id='post_<%= post.id %>'>
+      <td class="author">
+        <%= avatar post.poster %><br/>
+        <%= profile_link post.poster %><br/>
+        <span class='forum-tiny'>
+          <%= ftime post.created_at %><br/>
+          <%= link_to '发站内信', new_mail_url(:recipient_id => post.poster_id) %><br/>
+          <%= link_to_function '回复', "Iyxzone.Forum.setPost(#{post.floor}, '#{post.poster.login}');" %>
+        </span>
+      </td>
+      <td class="post"><%= post.content %><span class='forum-tiny'><%= post.floor %>楼</span></td>
+      <% if @is_moderator %>
+        <td class='delete'>
+					<%= facebox_confirm 'x', forum_topic_post_url(@forum, @topic, post), {:msg => '你确定吗', :method => :delete} %>
+				</td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @posts %>
+
+<div id='new_post' class='new-post'>
+<%= error_messages_for :post, :header_message => '以下原因导致保存失败', :message => nil %>
+<% form_for :post, :url => forum_topic_posts_url(@forum, @topic), :html => {:onsubmit => "return Iyxzone.Forum.validatePost()"} do |f| %>
+  <div class='content'><%= f.text_area :content %></div><br/>
+  <%= f.submit '提交', :class => 'confirm-button' %>
+<% end %>
+</div>
+
+<%= javascript_tag "Iyxzone.Forum.editor = new nicEditor({iconsPath:'/images/nicEditorIcons.gif'}).panelInstance('post_content');" %>
+

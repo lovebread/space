@@ -1,0 +1,45 @@
+<div class="edit-toggle space edit">
+  <h3 class="s_clear"><strong class="left">BOSS</strong><%= link_to_function "取消", "Iyxzone.Guild.Editor.cancelEditBosses(#{@guild.id})", :class => 'right' %></h3>
+  <div class="formcontent con con2">
+    <% form_for :guild, :html => {:id => 'bosses_form'} do |f| %>
+      <div class="item space" id='guild_bosses'>
+        <% @guild.bosses.each do |boss| %>
+          <div id='existing_boss_<%= boss.id %>'>
+            <% fields_for "guild[existing_bosses][]", boss do |r| %>
+            <div class="rows s_clear" id='existing_boss_<%= boss.id %>'>
+              <div class="fldid"><label>名字：</label></div>
+              <div class="fldvalue">
+                <div class="textfield left w-l"><%= r.text_field :name, :onblur => "Iyxzone.Guild.Editor.isBossNameValid(#{boss.id}, 0)" %></div>
+              </div>
+              <span class='red' id='existing_boss_<%= boss.id %>_name_error'></span>
+            </div>
+            <div class="rows s_clear" id='existing_boss_<%= boss.id %>'>
+              <div class="fldid"><label>奖励：</label></div>
+              <div class="fldvalue">
+                <div class="textfield left w-l"><%= r.text_field :reward, :onblur => "Iyxzone.Guild.Editor.isBossRewardValid(#{boss.id}, 0)" %></div>
+              </div>
+              <span class='red' id='existing_boss_<%= boss.id %>_reward_error'></span>
+            </div>
+            <% end %>
+            <p class='foot s_clear'>
+              <%= link_to_function "删除角色", "Iyxzone.Guild.Editor.removeBoss(#{boss.id}, 0, this)", :class => 'right red' %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      <p class="foot s_clear"><%= link_to_function '增加新的Boss', "Iyxzone.Guild.Editor.newBoss(#{@guild.id});", :class => "left red" %></p>
+      <div class="rows s_clear space">
+        <div class="fldid">&nbsp;</div>
+        <div class="fldvalue">
+          <span class="button"><span>
+            <%= button_to_function '完成', "Iyxzone.Guild.Editor.updateBosses(#{@guild.id}, event)" %>
+          </span></span>
+          <span class="button button-gray"><span>
+            <%= button_to_function '取消', "Iyxzone.Guild.Editor.cancelEditBosses()" %>
+          </span></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

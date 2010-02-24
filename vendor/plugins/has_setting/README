@@ -1,0 +1,33 @@
+HasSetting
+==========
+
+用位数组的数据结构来保存用户的设置信息，和preference_fu类似，不过preference_fu只支持每个user有这样的一个位数组，
+这个插件允许每个用户可以有多个位数组
+
+Example
+=======
+
+比如你想为用户增加一系列关于应用的设置，如下：
+
+application_setting:
+	emit_blog_feed	0 or 1 #是否接受别人的博客新鲜事
+	recv_blog_feed　0 or 1 #是否产生博客新鲜事
+
+在你的user table里，增加
+t.integer :application_setting
+
+在model user里，
+class User < ActiveRecord::Base
+	has_setting :application_setting
+end
+如果你准备保存到别的列里，可以用 has_setting :application_setting, :attribute => your_column
+
+然后在app/model/下增加一个文件 application_setting.rb，里面定义：
+class ApplicationSetting < ActiveRecord::Base
+	acts_as_setting :bits => 1, # 每项用１位存储，因为这里只需要存０和１
+									:keys => ['emit_blog_feed', 'recv_blog_feed'],　#设置的名字
+									:defaults => [1, 1] #这些设置的默认值
+end
+这些东西写在这里是为了让接口清晰点
+
+Copyright (c) 2009 [高侠鸿], released under the MIT license

@@ -1,0 +1,30 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-photo">照片</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right">
+          <% if @participation and @participation.is_authorized? %>
+          <%= link_to "上传照片", new_event_photo_url(:album_id => @album.id) %>
+          <% end %>
+        </div>
+        <ul>
+          <li><span><%= link_to "热门照片", hot_personal_photos_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "我的相册", personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to '好友相册', friends_personal_albums_url(:id => current_user.id) %></span></li>
+          <li><span><%= link_to "圈了我的照片", relative_personal_photos_url(:id => current_user.id) %></span></li>
+        </ul>
+      </div>
+      <div class="box02 appcontent02">
+        <div class='path-box'>
+          <label>活动"<%= event_link @event %>"</label>
+          <span>上传照片</span>
+        </div>
+        <%= swfupload_head %>
+        <div class='photo-upload-box'>
+          <%= swfupload :controller => 'user/events/photos', :action => 'create', :album_id => @album.id %>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

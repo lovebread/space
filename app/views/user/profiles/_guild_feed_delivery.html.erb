@@ -1,0 +1,10 @@
+<% delivery = guild_feed_delivery %>
+<% guild = delivery.feed_item.originator %>
+<div class='feed-list-box'>
+<div class='feed-list' id='feed_delivery_<%= delivery.id %>'>
+  <div class="feed-icon icon-cons"></div>
+  <% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html=> {:class=>'icon-active'} %><% end %>
+  <p><%= profile_link guild.president %> 创建了工会 <%= guild_link guild %> </p>
+	<p class='gray'><%=ftime delivery.created_at%></p>
+</div>
+</div>

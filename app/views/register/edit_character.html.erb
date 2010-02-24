@@ -1,0 +1,58 @@
+<% rating = @rating %>
+<% game_areas = @game.no_areas ? [] : @game.areas %>
+<% game_servers = @game.no_areas ? @game.servers : @character.area.servers %>
+<% game_professions = @game.professions %>
+<% game_races = @game.races %>
+<% form_remote_for :character, :html => {:id => 'character_info_form'} do |f| %>
+  <%= f.label '人物昵称: ' %>
+  <%= f.text_field :name, :size => 10 %><br/>
+  <a id='character_name_info'></a>
+  <%= f.label '级别: ' %>
+  <%= f.text_field :level, :size => 10 %><br/>
+  <a id='character_level_info'></a>
+	<%= f.label '游戏: ' %>
+  <%= collection_select :character, :game_id, @games, :id, :name, {:prompt => '---'} %><br/>
+  <a id='character_game_info'></a>
+  <div id='tips'><%= link_to_function "提示", "tip(\"由于游戏数量庞大，很多游戏已经停服，我们没有把所有游戏统计完成。这个游戏的资料就还不完全，请您在
+左边的意见／建议中告诉我们您所在游戏的所在服务器，我们会以最快速度为您添加。对您带来得不便，我们道歉。\");" %></div>
+  <%= f.label '请给这款游戏打分' %>  
+  <div id='star-ratings-block'>
+<ul class='star-rating'>
+    <div id='current_rate'><li class='current-rating' style='width:<%= (rating * 30).to_i -%>px;'>
+          Currently <%= rating %>/5 Stars.
+    </li></div>
+    <li>
+        <%= link_to_function( "1", "Iyxzone.Register.Manager.setupRating(1)" ,:class => 'one-star', :name => '1 star out of 5') %>
+    </li>
+    <li>
+        <%= link_to_function( "2", "Iyxzone.Register.Manager.setupRating(2)" ,:class => 'two-star', :name => '2 star out of 5') %>
+    </li>
+    <li>
+        <%= link_to_function( "3", "Iyxzone.Register.Manager.setupRating(3)" ,:class => 'three-star', :name => '3 star out of 5') %>
+    </li>
+    <li>
+        <%= link_to_function( "4", "Iyxzone.Register.Manager.setupRating(4)" ,:class => 'four-star', :name => '4 star out of 5') %>
+    </li>
+    <li>
+        <%= link_to_function( "5", "Iyxzone.Register.Manager.setupRating(5)" ,:class => 'five-star', :name => '5 star out of 5') %>
+    </li>
+</ul>
+    </div>
+    <div id='star_value'><%= hidden_field_tag('game_rate', rating)%></div>
+	<%= f.label '区域: ' %>
+	<%= collection_select :character, :area_id, game_areas, :id, :name, {:prompt => '---'} %><br/>
+  <a id='character_area_info'></a>
+	<%= f.label '服务器: '%>
+	<%= collection_select :character, :server_id, game_servers, :id, :name, {:prompt => '---'} %><br/>
+  <a id='character_server_info'></a>
+  <%= f.label '种族: '%>
+  <%= collection_select :character, :race_id, game_races, :id, :name, {:prompt => '---'} %><br/>
+  <a id='character_race_info'></a>
+	<%= f.label '职业: '%>
+  <%= collection_select :character, :profession_id, game_professions, :id, :name, {:prompt => '---'} %><br/>
+  <a id='character_profession_info'></a>
+  <%= f.label '正在玩: '%>
+  <%= f.check_box 'playing', {}, 1 %><br/>
+	<%= button_to_function '更新', "Iyxzone.Register.Manager.updateCharacter(#{@id})" %>
+  <%= link_to_function '取消', "Iyxzone.Register.Manager.cancelEditCharacter(#{@id})" %>
+<% end %>

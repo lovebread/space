@@ -1,0 +1,143 @@
+<%= javascript_include_tag 'photo' %>
+<%= javascript_include_tag 'home' %>
+<%= javascript_include_tag 'friend_suggestor' %>
+<%= javascript_include_tag 'status' %>
+<%= javascript_include_tag 'video' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body canvas_wrap s_clear">
+		<div class="canvas_m">
+			<div class="canvas_c">
+				<div class="box02 canvas_con">
+					<div id="homeComposer">
+						<div class="img">
+							<div class="mcAvatar jl-mcAvatar">
+								<a href="#"></a>
+                <div class="picwrap">
+										<%= avatar current_user, :class => "imgbox01" %>
+                </div>
+              </div>
+            </div>
+            <div class="mcContent">
+							<div class="mcPanel round02 round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+								<div class="round_m jl-round_m"><span class="arrow-dialog"></span><div class="round_body s_clear">
+									<% form_remote_for :status, :html => {:id => 'status_form', :class => "formcontent s_clear"} do |f| %>
+                  <%= hidden_field_tag 'home', 1 %>
+                  <div class="fldvalue">
+										<div id="mcStatus" class="textfield02"><%= f.text_area :content %></div>
+                  </div>
+                  <div class="fldbtn jl-fldbtn">
+										<span class="button03"><span><button type='submit' onclick="Iyxzone.Status.Builder.save(this, event)">发布</button></span></span>
+                  </div>
+                  <% end %>
+									<div class='buttons home-dialog'>
+                  <span class='left' id='latest_status'>
+										<% unless current_user.latest_status.nil? %>
+											<%= time_ago_in_chinese current_user.latest_status.created_at %> : <%= truncate current_user.latest_status.content, :length => 10, :omission => '...' %>
+										<% end %>
+									</span>
+										<span class="right"><%= emotion_link 'status_content', :class => 'icon-face' %></span>
+                  </div>
+                </div></div>
+              </div></div></div></div>
+            </div>
+          </div>
+          <div class="feed-message-box" id='my_notices'>
+						在读取...
+          </div>
+					<div class="feed-box">
+						<div class="tab tab01">
+							<ul id='feed_menu'>
+								<li class='hover'><span><%= link_to_function "新鲜事", "Iyxzone.Home.Feeder.showFeeds();" %></span></li>
+								<li><span><%= link_to_function "状态", "Iyxzone.Home.Feeder.showFeeds(0);" %></span></li>
+								<li><span><%= link_to_function "日志", "Iyxzone.Home.Feeder.showFeeds(1);" %></span></li>
+								<li><span><%= link_to_function "照片", "Iyxzone.Home.Feeder.showFeeds(2);" %></span></li>
+								<li><span><%= link_to_function "视频", "Iyxzone.Home.Feeder.showFeeds(3);" %></span></li>
+								<li><span><%= link_to_function "分享", "Iyxzone.Home.Feeder.showFeeds(4);" %></span></li>
+              </ul>
+            </div>
+            <div class="feed-wrap">
+							<div id="feed_list">
+							<%= render :partial => 'feed_deliveries', :object => @feed_deliveries %>
+							</div>
+							<div class="s_clear"></div>
+								<div class="round04 round_r_t jl-read-more space s_clear">
+                  <div class="round_l_t">
+                    <div class="round_r_b">
+                      <div class="round_l_b">
+                        <div class="round_m">
+                          <div class="round_body" id="more_feed">
+													<% if @feed_deliveries.size < @first_fetch_size %>
+														<div class='jl-more'>没有更多了...</div>
+													<% else %>
+														<%= link_to_function "更多新鲜事", "Iyxzone.Home.Feeder.moreFeeds();", :class => "jl-more"%>
+													<% end %>
+                          </div>
+												</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+						</div>
+							<!-- feedwrap end-->
+            </div>
+          </div>
+				</div>
+			</div>
+    <div id="rightsidebar" class="canvas_r">
+			<% if current_user.requests_count != 0 or current_user.invitations_count != 0 or current_user.poke_deliveries_count != 0 %>	
+			<div class="multibox">
+				<div class="title">
+					<b>请求</b>
+        </div>
+        <div class="request menu-icon-list01">
+					<ul>
+						<% if current_user.requests_count != 0 %>
+							<li class="icon-add"><span><%= link_to current_user.requests_count, requests_url %></span> 个请求</li>
+						<% end %>
+						<% if current_user.invitations_count != 0 %>
+							<li class='icon-add'><span><%= link_to current_user.invitations_count, invitations_url %></span> 个邀请</li>
+            <% end %>
+						<% if current_user.poke_deliveries_count != 0 %>
+							<li class='icon-invite'><%= link_to "<span>#{current_user.poke_deliveries.count}</span>", pokes_url %>个招呼</li>
+						<% end %>
+					</ul>
+        </div>
+      </div>
+			<% end %>
+      <% if current_user.profile.viewings_count != 0 %> 
+      <div class="multibox">
+				<div class="title">
+          <%= facebox_link "更多", profile_viewings_url(current_user.profile) %>
+					<b>最近来访</b>
+        </div>
+        <div class="photolist-box">
+					<ul class="collection s_clear">
+						<% current_user.profile.viewings.each do |r| %>
+              <li>
+								<div class="middle"><div class="middle-center"><div class="center"><%= avatar r.viewer, :class => 'imgbox01' %></div></div></div>
+								<p><%= profile_link r.viewer %></p>
+              </li>
+						<% end %>
+          </ul>
+        </div>
+      </div>
+      <% end %>
+      <div class="multibox">
+				<div class="title">
+					<%= link_to "更多", friend_suggestions_url %>
+					<b>你可能认识</b>
+        </div>
+        <div class="photolist-box">
+					<ul class="collection s_clear" id='friend_suggestions'>
+						<%= render :partial => 'user/friend_suggestions/friend_suggestion', :collection => @friend_suggestions %>
+          </ul>
+        </div>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>
+
+<%= javascript_tag "
+	Iyxzone.Home.NoticeManager.fetch('#{first_ten_notices_url}');
+"%>

@@ -1,0 +1,70 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+	<div class="round_m"><div class="round_body">
+	<% if @user==current_user %>
+    <h1 class="app-photo">照片</h1>
+	<% else %>
+    <div class="friend-head space s_clear">
+      <span class="left"><%= avatar @user, :class=>"imgbox01"%></span>
+      <p class="left">
+        <strong><%= @user.login %>的照片</strong><br />
+        <%= link_to '个人主页', profile_url(@user.profile), :class=>'red'%>
+      </p>
+    </div>
+	<% end %>
+		<div class="box02 canvas_int">
+			<div class="tab tab01">
+				<% if @user == current_user %>
+				<div class="right">
+					<%= link_to "上传照片", select_personal_albums_url(:id => @user.id) %>
+					<%= link_to "新建相册", new_personal_album_url, :rel => 'facebox' %>
+        </div>
+				<% end %>
+        <ul>
+					<% subject = get_subject @user %>
+          <li class='hover'><span><%= link_to "热门照片", hot_personal_photos_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "圈了#{subject}的照片", relative_personal_photos_url(:id => @user.id) %></span></li>
+					<% if @user == current_user %>
+						<li><span><%= link_to '好友相册', friends_personal_albums_url(:id => @user.id) %></span></li>
+					<% end %>
+        </ul>				
+			</div>
+      <div class='piclist-rows'>
+        <div class="nav-link">
+          <ul class="s_clear">
+            <li class='hover'><%= link_to "<span>人气最高</span>", hot_personal_photos_url(:id => @user.id) %></li>
+            <li><%= link_to "<span>最新创建</span>", recent_personal_albums_url(:id => @user.id) %></li>
+          </ul>
+        </div>
+        <% if @photos.blank? %>
+          <div class='gray'>没人上传图片阿，你赶紧上传吧</div>
+        <% else %>
+        <table class="big" cellpadding="0" cellspacing="1">
+          <% @photos.each do |photo| %>
+          <tr>
+            <td>
+              <div class="imgwrap">
+                <%= photo_link photo, :size => :large, :class => 'imgbox01' %>
+              </div>
+              <div class="data">
+                <h3><%= profile_link photo.poster %> 上传</h3>
+                <p>创建于 <%= ftime photo.created_at %></p>
+                <p class="link">
+                  <%= link_to '查看相片', eval("#{photo.class.name.underscore}_url(photo)") %> | 
+                  <%= link_to '查看相册', eval("#{photo.album.class.name.underscore}_url(photo.album)") %>
+                </p>
+              </div>
+							<td align="right">
+							<%= dig_link photo %>
+							</td>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+        <%= will_paginate @photos %>
+        <% end %>
+      </div>
+    </div>
+	</div></div>
+</div></div></div></div>
+

@@ -1,0 +1,19 @@
+<% unless notifications.blank? %>
+<div class='inform-box'>
+  <h4><%= title %></h4>
+  <table class="inform-list" cellpadding="0">
+  <% notifications.each do |n| %>
+    <tr id='notification_<%= n.id %>'>
+      <th><span class="<%= notification_icon n %>"></span></th>
+      <td class='jl-cutline'>
+        <%= n.data %>
+        <span><%= ftime n.created_at %></span>
+      </td>
+      <td class="close jl-cutline">
+        <%= link_to_remote 'x', :url => notification_url(n), :method => :delete, :class => "icon-active" %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+<% end %>

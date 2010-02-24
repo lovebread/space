@@ -1,0 +1,28 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-log">用户</h1>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class='right'>
+          <%= text_field_tag 'search', params[:key] %>
+          <%= observe_field :search,
+                            :complete  => "facebox.watchClickEvents();",
+                            :update    => "users",
+                            :frequency => 1,
+                            :url       => search_admin_users_url,
+                            :with      => "'key='+$('search').value",
+                            :method    => :get  %>
+        </div>
+      </div>
+      <div class="appcontent05">
+        <div class="myblog">
+          <h4 class="gray">共<%= User.count %>个用户</h4>
+          <div class="myblog-table" id='users'>
+            <%= render :partial => 'users', :object => @users %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>
+

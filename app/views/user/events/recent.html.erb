@@ -1,0 +1,31 @@
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+    <h1 class="app-ploy">活动</h1>
+    <div class="box02 canvas_int">
+	    <div class="tab tab01">
+        <div class="icon">
+          <%= link_to "新建活动", new_event_url, :class => 'icon-add-table' %>
+        </div>
+		    <ul>
+			    <li class='hover'><span><%= link_to "热门活动", hot_events_url(:id => current_user.id) %></span></li>
+			    <li><span><%= link_to "我的活动", events_url(:id => current_user.id) %></span></li>
+			    <li><span><%= link_to "朋友的活动", friends_events_url %></span></li>
+		    </ul>
+      </div>
+      <div class="piclist-rows" id='events'>
+        <div class="nav-link">
+          <ul class="s_clear">
+            <li><%= link_to "<span>人气最高</span>", hot_events_url %></li>
+            <li class='hover'><%= link_to "<span>最新创建</span>", recent_events_url %></li>
+          </ul>
+        </div>
+      <% if @events.total_entries != 0 %>
+	      <%= render :partial => 'event_items', :object => @events %>
+        <%= will_paginate @events %>
+      <% else %>
+        <div class='gray'>最近大家都很懒，你赶紧<%= link_to '创建一个', new_event_url %>吧</div>
+      <% end %>
+      </div>
+    </div>
+  </div></div>
+</div></div></div></div>

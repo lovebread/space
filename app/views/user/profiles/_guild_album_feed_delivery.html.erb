@@ -1,0 +1,47 @@
+<% delivery = guild_album_feed_delivery %>
+<% album = delivery.feed_item.originator %>
+<% guild = album.guild %>
+<% photos = Photo.find(delivery.feed_item.data[:ids]) %>
+<% poster = User.find(delivery.feed_item.data[:poster_id]) %>
+
+<div class="feed-list" id='delivery_<%= delivery.id %>'>
+	<div class="feed-icon icon-photo"></div>
+	<p><%= profile_link album.poster %> <span>更新了<%=photos.count%>张照片至工会</span> <%= guild_link guild %></p>
+  <div class="feed-pic s_clear">
+		<div class="img">
+			<%= avatar album.poster %>
+		</div>
+		<div class="pics">
+		  <div>
+      <% if photos.count >= 4 %>
+        <%= link_to_function '上一张', "Iyxzone.Photo.SlideManager.get(#{delivery.id}).prev();" %>
+      <% end %>
+			</div>
+			<div>
+				<ul id='frames_<%= delivery.id %>'>
+					<% window_size = (photos.count > 4)? 4 : photos.count %>
+					<% window_size.times do |i| %>
+						<li id='frame_<%= i %>'></li>
+					<% end %>
+				</ul>
+			</div>
+			<div>
+				<% if photos.count >= 4 %>
+				  <%= link_to_function '下一张', "Iyxzone.Photo.SlideManager.get(#{delivery.id}).next();" %>
+				<% end %>
+			</div>
+		</div>
+		<p><%= ftime delivery.created_at %> <%= link_to_function "回复", "Iyxzone.Comment.showForm('guild_album', #{album.id}, null);" %></p>
+	</div>
+  <% if with_comments %>
+	<%= render :partial => 'user/comments/folded_comment_box', :locals => {:commentable => album, :recipient => album.poster} %>
+  <% end %>
+	<div><% if delivery.is_deleteable_by? current_user %><%= link_to_remote "x", :url => feed_delivery_url(delivery), :method => :delete %><% end %></div> 
+</div>
+
+<% photo_ids = array_or_string_for_javascript photos.map(&:id) %>
+<% urls = array_or_string_for_javascript photos.map {|p| p.public_filename(:medium)} %>
+<%= javascript_tag "
+  Iyxzone.Photo.SlideManager.set(#{delivery.id}, new PhotoSlide('guild_photo', #{photo_ids}, #{urls}, #{window_size}, $('frames_#{delivery.id}').childElements(), #{photos[(window_size/2).to_i].id}));
+" %>
+

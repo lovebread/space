@@ -1,0 +1,15 @@
+<%= javascript_include_tag 'forum' %>
+
+<h2>New Topic</h2>
+
+<%= error_messages_for :topic, :header_message => '以下原因导致无法保存', :message => nil %>
+
+<% form_for :topic, :url => forum_topics_url(@forum), :html => {:onsubmit => "return Iyxzone.Forum.validateTopic();"} do |f| -%>
+  <%= f.label '' 'subject:' %>
+  <%= f.text_field :subject, :size => 40 %><br/>
+  <%= f.label '' 'content:' %>
+  <%= f.text_area 'content', :rows => 8, :cols => 60 %><br/>
+  <%= f.submit 'Save' %>
+<% end -%>
+
+<%= javascript_tag "Iyxzone.Forum.editor = new nicEditor({iconsPath:'/images/nicEditorIcons.gif'}).panelInstance('topic_content');" %>

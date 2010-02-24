@@ -1,0 +1,9 @@
+<div class='fby'>
+  <h3>分类: <%= link_to_function 'fold', "$('side_icon').toggle();if(this.innerHTML == 'fold') this.update('unfold'); else this.update('fold');", :class => 'hide-all'%></h3>
+  <div id='side_icon'>
+    <li><%= link_to '修改密码', edit_password_setting_url %></li>
+    <li><%= link_to '删除帐户' %></li>
+    <li><%= link_to '邮件设置', edit_mail_setting_url %></li>
+  </div>
+</div>
+

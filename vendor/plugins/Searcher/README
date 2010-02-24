@@ -1,0 +1,23 @@
+Searcher
+========
+
+A simple and lightweight 'search' method for ActiveRecord::Base models that will search text/string-based columns for 
+a specified critieria.
+
+Example
+=======
+
+MyModel.search('some text')
+
+You may also add normal ActiveRecord.find options, e.g.:
+MyModel.search('some text', :limit => 20)
+
+You may specify which columns get searched in your ActiveRecord model
+by specifying +seacher_column+ or +seacher_columns+, e.g.:
+class Foo < ActiveRecord::Base
+    searcher_column :col1, :col2
+end
+
+
+
+Copyright (c) 2009 Michael Behan aka Jabberwock, licensed under BSD.

@@ -1,0 +1,124 @@
+<%= stylesheet_link_tag 'test' %>
+<%= stylesheet_link_tag 'cropper' %>
+<%= javascript_include_tag 'textboxlist' %>
+<%= javascript_include_tag 'friend' %>
+<%= javascript_include_tag 'cropper' %>
+<%= javascript_include_tag 'photo' %>
+
+<div id="canvas" class="round_r_t"><div class="round_l_t"><div class="round_r_b"><div class="round_l_b">
+  <div class="round_m"><div class="round_body">
+	<% if @user==current_user %>
+    <h1 class="app-photo">照片</h1>
+	<% else %>
+    <div class="friend-head space s_clear">
+      <span class="left"><%= avatar @user, :class=>"imgbox01"%></span>
+      <p class="left">
+        <strong><%= @user.login %>的照片</strong><br />
+        <%= link_to '个人主页', profile_url(@user.profile), :class=>'red'%>
+      </p>
+    </div>
+	<% end %>
+    <div class="box02 canvas_int">
+      <div class="tab tab01">
+        <div class="right">
+          <%= link_to "上传照片", select_personal_albums_url %>
+          <%= facebox_link "新建相册", new_personal_album_url %>
+        </div>
+        <ul>
+          <% subject = get_subject @user %>
+          <li><span><%= link_to "热门照片", hot_personal_photos_url(:id => @user.id) %></span></li>
+          <li class='hover'><span><%= link_to "#{subject}的相册", personal_albums_url(:id => @user.id) %></span></li>
+          <li><span><%= link_to "圈了#{subject}的照片", relative_personal_photos_url(:id => @user.id) %></span></li>
+          <% if @user == current_user %>
+            <li><span><%= link_to '好友相册', friends_personal_albums_url(:id => @user.id) %></span></li>
+          <% end %>
+        </ul>       
+      </div>
+      <div class="pic-box">
+        <div class="img-container-main s_clear">
+          <div class="img-container-wrap">
+            <div class="img-container">
+              <div class="path-box">
+                <label>
+                  <% if @user == current_user %>
+                    我的相册
+                  <% else %>
+                    <%= @user.login %>的相册
+                  <% end %>
+                </label>
+                <label><%= album_link @album %></label><span>查看照片</span>
+              </div>
+              <div class="img-main">
+                <div class="imgwrap box05">
+                  <div class="photo-op">
+										<% if relationship == 'owner' or relationship == 'friend' %>
+										<span class="photo-op-mark"></span>
+										<%= link_to_function "圈人", "tagger.start()" %> | 
+										<% end %>
+										<% if @user == current_user %>
+										<span class="photo-op-edit"></span>
+                    <%= facebox_link '编辑', edit_personal_photo_url(@photo) %> | 
+										<span class="photo-op-del"></span>
+                    <%= facebox_confirm '删除', personal_photo_url(@photo), {:method => :delete, :msg => '你确定要删除吗?'} %> |
+										<% end %>
+										<span class="photo-op-share" ></span>
+										<%= facebox_link "分享", new_sharing_url(:shareable_type => 'Photo', :shareable_id => @photo.id) %> |
+										<span class="photo-op-praise" ></span>
+										<%=link_to_remote '赞', :url => digs_url("dig[diggable_type]" => @photo.class.base_class.to_s, "dig[diggable_id]" => @photo), :html => {:id=> "digging_#{@photo.class.to_s.underscore}_#{@photo.id}", :class => "red"}%>(已经被<span id="dig_<%=@photo.class.to_s.underscore%>_<%=@photo.id%>" class='gray'><%= @photo.digs_count %></span>人赞过)
+									</div>
+                  <p><%= resize_image @photo, :id => "photo_#{@photo.id}" %></p>
+									<div class="pic-desc s_clear">
+										<h4 class="box06">
+										<% if @user == current_user %>
+											<%= in_place_text_field :span, @photo, :notation, true, personal_photo_url(@photo), {}, {:empty_text => '点击增加照片描述', :parameter_name => 'photo[notation]', :rows => 2, :cols => 70} %>
+										<% else %>
+											<%= @photo.notation %>
+										<% end %>
+										</h4>
+										<ul class="mark-list s_clear" id='photo_tags'>
+										</ul>
+										<div class="rows"></div> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+          <div class="album">
+						<span class="num">一共<%= @album.photos_count %>张</span>
+						<div class="btn upbtn" id="up_btn"></div>
+            <div class="small-imgs">
+              <div class="imgList" id='frames'>
+                <% 7.times do |i| %>
+                  <div class="img"></div>
+                <% end %>
+              </div>
+            </div>
+						<div class="btn downbtn" id="down_btn"></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot cmt-space">
+        <div class="feed-list">
+          <p class="s_clear red">评论(<%= @photo.comments_count %>)
+					</p>
+          <%= render :partial => 'user/comments/comment_box', :locals => {:commentable => @photo, :recipient => @user} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</div></div></div></div>
+
+<%= render :partial => 'user/photo_tags/control_panel', :locals => {:photo => @photo} %>
+
+<% photo_ids = array_or_string_for_javascript @album.photos.map(&:id) %>
+<% urls = array_or_string_for_javascript @album.photos.map {|p| p.public_filename(:medium)} %>
+<%= javascript_tag "
+  slide = new Iyxzone.Photo.Slide('personal_photo', #{@photo.id}, #{photo_ids}, #{urls}, $('frames').childElements(), $('down_btn'), $('up_btn'));
+  tagger = new Iyxzone.Photo.Tagger('personal_photo', #{@photo.id}, 'control_panel', 'confirm_btn', 'cancel_btn', #{@tags}, 'photo_tags', #{@user == current_user ? 1 : 0}, 'tag_content', 'toggle_button', 'friend_login', 'friend_list', 'friend-wrap', 'friend_items', 'game_selector', '#{form_authenticity_token}', {});
+"%>
+<% unless @reply_to.blank? %>
+<%= javascript_tag "
+	Iyxzone.Comment.set('personal_photo', #{@photo.id}, '#{@reply_to.login}', #{@reply_to.id});
+" %>
+<% end %>

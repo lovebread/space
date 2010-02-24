@@ -1,0 +1,12 @@
+<% delivery = participation_feed_delivery %>
+<% participation = delivery.feed_item.originator %>
+<div class='feed-list-box'>
+<div class='feed-list' id='feed_delivery_<%= delivery.id %>'>
+	<div class="s-img left">
+		<div class="imgbox01"><%= avatar participation.participant, :size => "small" %></div>
+	</div>
+  <div class='jl-list-con jl-cotline'><%= profile_link participation.participant %> 参加了活动 <%= event_link participation.event, :class=>'shine'%>
+  <% if delivery.is_deleteable_by? current_user %><%= link_to_remote "", :url => feed_delivery_url(delivery), :method => :delete, :html=> {:class=>'icon-active'} %><% end %> 
+	</div>
+</div>
+</div>

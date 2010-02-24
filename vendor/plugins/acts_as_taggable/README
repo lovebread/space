@@ -1,0 +1,22 @@
+ActsAsTaggable
+==============
+
+增加标签功能
+
+Example
+=======
+
+比如每个游戏都有很多标签
+
+class Game < ActiveRecord::Base
+
+	acts_as_taggable
+
+end
+
+需要找到所有
+
+Example goes here.
+
+
+Copyright (c) 2009 [name of plugin creator], released under the MIT license

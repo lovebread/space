@@ -1,0 +1,8 @@
+<div class='header'>
+	<h3>回复这个邀请</h3>
+</div>
+
+<div class='content'>
+  <%= radio_button :invitation, :status, 1, :onclick => "new Ajax.Request('#{accept_guild_invitation_url(@guild, @invitation, :show => 1, :authenticity_token => form_authenticity_token )}', {method: 'put'});" %><%= label_tag '', '接受' %><br/>
+  <%= radio_button :invitation, :status, 2, :onclick => "new Ajax.Request('#{decline_guild_invitation_url(@guild, @invitation, :show => 1, :authenticity_token => form_authenticity_token)}', {method: 'delete'});" %><%= label_tag '', '拒绝' %><br/>
+</div>

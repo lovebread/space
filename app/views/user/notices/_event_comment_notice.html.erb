@@ -1,0 +1,17 @@
+<% event = comment.commentable %>
+<% if home_page %>
+<% link = "#{link_to_function event.title, "Iyxzone.Home.NoticeManager.read(#{notice.id}, '#{form_authenticity_token}'); window.open('/events/#{event.id}?reply_to=#{comment.poster_id}');"}" %>
+<% else %>
+<% link = "#{link_to_function event.title, "window.open('/events/#{event.id}?reply_to=#{comment.poster_id}"}" %>
+<li>
+	<div class="feed-message">
+    <% if home_page %>
+		<%= link_to_function '', "Iyxzome.Home.NoticeManager.read(#{notice.id}w, '#{form_authenticity_token}')", :class => 'icon-active' %>
+    <% end %>
+		<% if notice.data == 'comment' %>
+			<%= profile_link comment.poster %> 在活动 <%= link %> 上留言了
+		<% elsif notice.data == 'reply' %>
+			<%= profile_link comment.poster %> 在活动 <%= link %> 中回复了你
+		<% end %> 		
+	</div>
+</li>

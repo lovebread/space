@@ -1,0 +1,14 @@
+  <table>
+    <tr>
+      <td class='id'><strong>会长: </strong></td>
+      <td class='value'><%= profile_link @guild.president %></td>
+    </tr>
+    <tr>
+      <td class="id">成立：</td>
+      <td class="value"><%= ftime2 @guild.created_at %></td>
+    </tr>
+    <tr>
+      <td class="id">游戏：</td>
+      <td class="value"><%= game_link @guild.game %></td>
+    </tr>
+  </table>

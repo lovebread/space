@@ -1,0 +1,23 @@
+<% gears.each do |gear_id, info| %>
+<% gear = @event.guild.gears.find(gear_id) %>
+<tr class="jl-cutline" id='gear_<%= gear_id %>'>
+  <td class="tl"><%= gear.name %></td>
+  <td><%= gear.cost %></td>
+  <td>
+    <div style="position:relative;text-align:left">
+      <% if !info[:recipient_id].blank? %>
+        <% recipient = User.find(info[:recipient_id]) %>
+        <a class='member-toggle' id='gear_recipient_<%= gear_id %>' onclick='Iyxzone.Event.Summary.Gear.showRecipients(<%= gear_id %>)'><%= avatar_image recipient, :class => 'w-l', :align => 'absmiddle', :size => :small %><span><strong><%= recipient.login %></strong></span></a>
+      <% else %>
+        <a class='member-toggle' id='gear_recipient_<%= gear_id %>' onclick='Iyxzone.Event.Summary.Gear.showRecipients(<%= gear_id %>)'><span><strong>点击选择获得者</strong></span></a>
+      <% end %>
+      <div style="position:absolute;left:0;top:40px;display:none" class="drop-box" id='gear_recipients_<%= gear.id %>'>
+      <% @participants.each do |r| %>
+        <a class='member-toggle' onclick='Iyxzone.Event.Summary.Gear.selectRecipient(<%= gear.id %>, <%= r.id %>, this)'><%= avatar_image r, :class => "w-l" , :align => "absmiddle", :size => :small %><span><strong><%= r.login %></strong></span></a>
+      <% end %>
+      </div>
+    </div>
+  </td>
+  <td><%= link_to_function '', "Iyxzone.Event.Summary.Gear.remove(#{gear_id})", :class => "icon-active" %></td> 
+</tr>
+<% end %>

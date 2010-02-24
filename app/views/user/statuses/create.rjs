@@ -1,0 +1,8 @@
+if params[:home].to_i == 1
+  page.replace_html "latest_status", :inline => "<%= time_ago_in_chinese current_user.latest_status.created_at %> : <span id='latest_status_content'><%= truncate current_user.latest_status.content, :length => 10, :omission => '...' %></span>"
+  page.visual_effect :highlight, 'latest_status', :duration => 2
+  page << "$('status_content').clear();"
+else
+  page.insert_html :top, 'statuses', :partial => 'status', :object => @status
+  page << "facebox.watchClickEvent($('delete_status_#{@status.id}'));$('status_content').value = '';"
+end

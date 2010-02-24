@@ -1,0 +1,109 @@
+<%= javascript_include_tag 'photo_slide' %>
+<%= javascript_include_tag 'guild' %>
+
+<% content_for :left do %>
+<div class="mcAvatar">
+  <a href="#"></a>
+  <div class="picwrap">
+    <div class="middle"><div class="middle-center"><div class="center">
+			<%= album_cover_image @album %>
+		</div></div></div>
+	</div>
+</div>
+<div class="info-list">
+	<%= render :partial => 'guild_info' %>
+  <%= render :partial => 'guild_menu' %>
+</div>
+<% end %>
+
+<% content_for :right do %>
+<% if @memberships.count != 0 %>
+  <%= render :partial => 'my_memberships' %>
+<% end %>
+	<%= render :partial => 'guild_topics' %>
+	<%= render :partial => 'guild_events' %>
+<% end %>
+
+<div class="box02 canvas_con">
+  
+  <div class="big-head space">
+    <span class="left"><img src="images/photo/photo04.png" /></span>
+    <p class="left">
+      <strong><%= @guild.name %>公会</strong>
+    </p>
+  </div>
+  <div class="rows"></div>
+  <div class="multibox space20">
+    <div class="title"><b>描述</b></div>
+    <div class="feed-box">
+      <%= in_place_text_field :span, @guild, :description, @user == current_user, guild_url(@guild), {}, {:empty_text => '介绍下工会?', :rows => 2, :cols => 80}, {} %>
+    </div>
+  </div>
+
+  <div class="multibox">
+	  <div class="title"><%= link_to '更多', guild_album_url(@album) %><b>照片</b></div>
+    <div class="photolist-big-box">
+		  <ul class="collection s_clear">
+		  <% @album.photos[0..4].each do |p| %>
+			  <li>
+				  <div class="middle"><div class="middle-center"><div class="center"><%= photo_link p, :class => 'imgbox02' %></a></div></div></div>
+			  </li>
+		  <% end %>
+		  </ul>
+	  </div>
+  </div>
+
+  <div class="multibox">
+	  <div class="title"><%= link_to "更多(#{@guild.people_count})", guild_memberships_url(@guild, :type => 0) %><b>会员</b></div>
+    <div class="photolist-box">
+		  <ul class="collection s_clear">
+		  <% @guild.people[0..6].each do |m| %>
+			  <li>
+				  <div class="middle"><div class="middle-center"><div class="center"><%= avatar m, :class => 'imgbox01' %></div></div></div>
+          <p><%= profile_link m %></p>
+        </li>
+		  <% end %>
+      </ul>
+    </div>
+  </div>
+
+	<div class='multibox'>
+		<div class='title'><b>新鲜事</b></div>
+		<div class="feed-wrap" id='feed_list'>
+			<%= render :partial => 'feed_deliveries', :object => @feed_deliveries %>
+		</div>
+		<div class="s_clear"></div>
+			<div class="round04 round_r_t jl-read-more space s_clear">
+				<div class="round_l_t">
+					<div class="round_r_b">
+						<div class="round_l_b">
+							<div class="round_m">
+								<div class="round_body" id="more_feed">
+								<% if @feed_deliveries.size < @first_fetch_size %>
+									<div class='jl-more'>没有更多了...</div>
+								<% else %>
+									<%= link_to_function "更多新鲜事", "Iyxzone.Guild.Feeder.moreFeeds(#{@guild.id});", :class => "jl-more"%>
+								<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+  <% if @role and (@role.is_president? or @role.is_authorized?) %>
+    <%= render :partial => 'user/wall_messages/wall_form', :locals => {:wall => @guild, :recipient => @guild.president, :with_comments => false} %>
+  <% end %>
+
+  <div class="feed-box" id='comments'>
+    <%= javascript_tag "Iyxzone.WallMessage.fetch('Guild', #{@guild.id}); " %>
+  </div>
+
+</div>
+
+<% unless @reply_to.blank? %>
+<%= javascript_tag "
+  Iyxzone.Wall.set('#{@reply_to.login}', #{@reply_to.id})
+" %>
+<% end %>

@@ -1,0 +1,17 @@
+<% subject = get_subject @user %>
+<ul class='op s_clear'>
+<% if @user == current_user %>
+	<li><%= facebox_link "<span class='i-avatar'></span>修改头像", new_avatar_url(:album => 0) %></li>
+<% elsif @user.has_friend? current_user %>
+  <li><%= link_to "<span class='i-mail'></span>发站内信", new_mail_url(:recipient_id => @user.id) %></li>
+  <li><%= link_to_function "<span class='i-msg'></span>给#{subject}留言", "window.scrollTo(0, $('comment_content').positionedOffset().top - 20);$('comment_content').focus();" %></li>
+  <li><%= link_to "<span class='i-hello'></span>打个招呼", new_poke_url(:id => @user.id), :rel => 'facebox' %></li>
+<% else %>
+  <li><%= link_to "<span class='i-mail'></span>发站内信", new_mail_url(:recipient_id => @user.id) %></li>
+  <% if @setting.wall_viewable_by? current_user %>
+		<li><%= link_to_function "<span class='i-msg'></span>给#{subject}留言", "window.scrollTo(0, $('comment_content').positionedOffset().top - 20);$('comment_content').focus();" %></li>
+  <% end %>
+	<li><%= link_to "<span class='i-hello'></span>打个招呼", new_poke_url(:id => @user.id), :rel => 'facebox' %></li>
+  <li><%= link_to "<span class='i-friend'></span>加为好友", new_friend_request_url(:friend_id => @user.id), :rel => 'facebox' %></li>
+<% end %>
+</ul>

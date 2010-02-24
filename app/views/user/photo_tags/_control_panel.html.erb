@@ -1,0 +1,42 @@
+<div id='control_panel' class='drop-box' style="width: 160px; display:none">
+  <div class='flag-photo s_clear'>
+    <div class='con'>
+      这是谁? <br/>
+      <div class="selector selector03 select-toggle s_clear">
+        <a href="#" id='toggle_button' class='toggle'></a>
+        <%= text_field_tag 'friend[login]', '' %>
+        <div id='friend_list' class='drop-menu' style="display:none"></div>
+        <div id="friend-wrap" class="drop-wrap" style="display:none">
+          <iframe src="" frameborder="0"></iframe>
+          <div class="wrap-bg"></div>
+          <div class="con">
+            <div class="head s_clear">
+              <h4 class="left"><span>限选1人</span></h4>
+              <div class="right">
+                <select class="select" id='game_selector'>
+                  <option value="all">全部好友</option>
+                  <% current_user.games.each do |game| %>
+                    <option value=<%= game.id %>><%= game.name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <ul class="checkboxes rows s_clear" id='friend_items'>
+              <%= render :partial => 'user/photo_tags/friend_table', :locals => {:friends => current_user.friends} %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      说点什么? <br/>
+    <% form_remote_for :tag, :url => photo_tags_url(:photo_type => photo.class.name.underscore, :photo_id => photo.id), :html => {:id => 'tag_form'} do |f| %>
+      <%= f.text_area :content, :rows => 4 %>
+    </div>
+    <div class="foot s_clear">
+      <div class="buttons">
+        <span class="button w-l"><span><%= button_to_function '保存', "", :id => 'confirm_btn' %></span></span>
+        <span class="button button-gray"><span><%= button_to_function '取消', "", :id => 'cancel_btn' %></span></span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="title01">
+  <%= link_to_function '', "facebox.close();", :class => "icon-active icon-active-close" %>
+  <h1>编辑活动</h1>
+</div>
+    
+<div id='errors'></div>
+<% form_remote_for :guild, :url => guild_url(@guild), :html => {:method => 'put', :id => "guild_form"} do |f| %>  
+  <div class="rows s_clear">
+    <div class="fldid"><label for="name">工会名字：</label></div>
+    <div class="fldvalue">
+      <div class="textfield"><%= f.text_field :name %></div>
+    </div>
+  </div>
+  <div class="rows s_clear">
+    <div class="fldid"><label for="name">工会描述：</label></div>
+    <div class="fldvalue"><%= f.text_area :description %></div>
+  </div>
+  <div class="buttons s_clear">
+    <table class="center" cellpadding="0"><tr><td>
+      <span class="button"><span><button onclick="Iyxzone.Guild.Builder.update(<%= @guild.id %>, event)">完成</button></span></span>
+      <span class="button button-gray"><span><button type="button" onclick="facebox.close();">取消</button></span></span>
+    </td></tr></table>
+  </div>
+<% end %>

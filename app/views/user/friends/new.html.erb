@@ -1,0 +1,75 @@
+<% content_for :left do %>
+  <div class="mcAvatar">
+    <a href="#"></a>
+    <div class="picwrap">
+      <div class="middle"><div class="middle-center"><div class="center" id='avatar'>
+        <%= avatar @user, :size => :large %>
+      </div></div></div>
+    </div>
+  </div>
+  <div class="avatarbox">
+		<%= link_to "发站内信", new_mail_url(:recipient_id => @user.id) %>
+		<%= link_to "打招呼", new_poke_url(:id => @user.id), :rel => 'facebox' %>	
+	</div>
+  <div class="profile-list menu-icon-list">
+		<% subject = get_subject(@user) %>
+		<ul>
+			<li class='icon-share'><%= "#{@user.blogs_count} 篇日志" %></li> 
+			<li class='icon-blog'><%= "#{@user.albums_count} 个相册" %></li> 
+			<li class='icon-share'><%= "#{@user.videos_count} 个视频" %></li> 
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :right do %>
+	<div class="multibox">
+  <div class="title">
+    <%= link_to "更多", edit_profile_url(@profile) %>
+    <b>游戏人物资料</b>
+  </div>
+  <table class="data-table">
+    <tr>
+      <th>游戏名称</th>
+      <th>玩家昵称</th>
+      <th>等级</th>
+    </tr>
+    <% @user.characters.each do |c| %>
+    <tr>
+      <td><%= game_link c.game %></td>
+      <td><%= c.name %></td>
+      <td><%= c.level %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<% end %>
+
+<div class="box03 tipbar">
+<% if @profile.about_me.blank? %>
+  <span>这家伙很懒，什么都没说...</span>
+<% else %>
+	<span><%= @profile.about_me %></span>
+<% end %>
+</div>
+
+<div class="multibox">
+  <div class="title"><b></b></div>
+  <%= link_to (image_tag 'add_friend.gif', :style => "border:0px;"), new_friend_request_url(:friend_id => @user.id), :rel => 'facebox' %> 或者 <strong><%= link_to "发站内信" %></strong>
+</div>
+
+<div class="multibox">
+  <div class="title"><b>他的好友</b></div>
+  <div class="photolist-box">
+    <ul class="collection s_clear">
+      <% @user.friends[0..7].each do |p| %>
+        <li>
+          <div class="middle"><div class="middle-center"><div class="center"><%= avatar p, :class => 'imgbox01' %></div></div></div>
+          <p><%= profile_link p %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+	<div class="diary-more">
+    <%= link_to '全部好友', other_friends_url(:id => @user.id) %>
+  </div>
+</div>
